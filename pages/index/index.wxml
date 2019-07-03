@@ -1,0 +1,14 @@
+<view class="home-wrapper">
+  <view class="home-left">
+    <image src="../../images/scan.png"></image>
+    <text class="home-left-word">扫一扫</text>
+  </view>
+  <view class="home-center">
+    <input type="text" placeholder-style="color:#999;" placeholder="小鹿要飞2019春季新款"/>
+    <image src="../../images/search_btn.png"></image>
+  </view>  
+  <view class="home-right">
+    <image src="../../images/msg.png"></image>
+    <text class="home-right-word">消息</text>
+  </view>
+</view> 
