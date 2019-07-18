@@ -1,0 +1,125 @@
+<view class="user-header-wrapper" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/personal_bg.png) no-repeat; background-size: 100% 100%; background-color: #f5f5f5;">
+  <view class="user-header">
+    <image src="../../../images/use_msg.png" class="user-msg"></image>
+    <image src="../../../images/user_setting.png" class="user-setting"></image>
+  </view>
+  <view class="user-header-info">
+    <view class="user-header-info-avtar">
+      <image src="../../../images/avatar.png"></image>
+    </view>
+    <view class="user-header-compeny-info">
+      <view class="user-header-name">迪丽热巴</view>
+      <view class="user-header-compeny-name">北京雷云智链科技有限公司</view>
+    </view>
+    <view class="recharge-btn">充值</view>
+  </view>
+  <view class="user-header-operation">
+    <view class="user-header-operation-item">
+      <view class="user-header-operation-item-name">余额</view>
+      <view class="user-header-operation-item-num">0</view>
+    </view>
+    <view class="user-header-operation-item">
+      <view class="user-header-operation-item-name">优惠券</view>
+      <view class="user-header-operation-item-num">0</view>
+    </view>
+    <view class="user-header-operation-item">
+      <view class="user-header-operation-item-name">我的收藏</view>
+      <view class="user-header-operation-item-num">0</view>
+    </view>
+  </view>
+</view>
+
+<view class="user-container">
+  <view class="user-order-wrapper">
+    <view class="user-order-head">
+      <view class="user-order-head-left">
+        <view class="user-order-head-left-ver"></view>
+        <view>我的订单</view>
+      </view>
+      <view class="user-order-head-right">
+        全部订单
+        <image src="../../../images/order_go.png"></image>
+      </view>
+    </view>
+    <view class="user-order-operation">
+      <navigator class="user-order-operation-payment-made" wx:for="{{orderOperation}}" wx:key="index" url="{{item.toUrl}}"   hover-class="none">
+        <image class="{{item.orderClass}}" src="{{item.url}}"></image>
+        <view class="user-order-operation-word">{{item.orderName}}</view>
+        <view class="user-order-operation-num" wx:if="{{item.orderNum > 0}}">{{item.orderNum}}</view>
+      </navigator>
+    </view>
+    <view class="user-order-banner">
+      <image src=""></image>
+    </view>
+  </view>
+  <view class="personal-service-wrapper">
+    <view class="user-order-head">
+      <view class="user-order-head-left">
+        <view class="user-order-head-left-ver" style="background-color: #0078ff;"></view>
+        <view>个人服务</view>
+      </view>
+    </view>
+    <view class="personal-service-content">
+      <navigator class="personal-service-item" wx:for="{{personal}}" wx:key="index" url="{{item.toUrl}}" hover-class="none">
+        <image src="{{item.url}}"></image>
+        <view class="personal-service-item-word">{{item.personalName}}</view>
+      </navigator>
+    </view>
+  </view>
+  <view class="recommend-goods-wrapper">
+    <view class="recommend-goods-head">
+      <view class="recommend-goods-head-ver"></view>
+      <view class="recommend-goods-head-word">为你推荐</view>
+    </view>
+    <view class="recommend-goods-content">
+      <view class="recommend-goods-item">
+        <view class="recommend-goods-item-img">
+          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
+        </view>
+        <view class="recommend-goods-item-word">
+          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
+        </view>
+        <view class="recommend-goods-item-price">
+          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
+          <view class="recommend-goods-item-old-price">￥3614.32</view>
+        </view>
+      </view>
+      <view class="recommend-goods-item">
+        <view class="recommend-goods-item-img">
+          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
+        </view>
+        <view class="recommend-goods-item-word">
+          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
+        </view>
+        <view class="recommend-goods-item-price">
+          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
+          <view class="recommend-goods-item-old-price">￥3614.32</view>
+        </view>
+      </view>
+      <view class="recommend-goods-item">
+        <view class="recommend-goods-item-img">
+          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
+        </view>
+        <view class="recommend-goods-item-word">
+          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
+        </view>
+        <view class="recommend-goods-item-price">
+          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
+          <view class="recommend-goods-item-old-price">￥3614.32</view>
+        </view>
+      </view>
+      <view class="recommend-goods-item">
+        <view class="recommend-goods-item-img">
+          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
+        </view>
+        <view class="recommend-goods-item-word">
+          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
+        </view>
+        <view class="recommend-goods-item-price">
+          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
+          <view class="recommend-goods-item-old-price">￥3614.32</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

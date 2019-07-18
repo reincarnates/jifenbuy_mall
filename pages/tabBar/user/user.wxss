@@ -1,0 +1,366 @@
+.user-header-wrapper{
+  width: 100%;
+  height: 412rpx;
+}
+
+.user-header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 30rpx;
+  box-sizing: border-box;
+  padding-top: 20rpx;
+}
+
+.user-msg{
+  width: 42rpx;
+  height: 35rpx;
+  margin-right: 31rpx;
+}
+
+.user-setting{
+  width: 39rpx;
+  height: 39rpx;
+}
+
+.user-header-info{
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.user-header-info-avtar{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.user-header-info-avtar image{
+  width: 100%;
+  height: 100%;
+}
+
+.user-header-compeny-info{
+  width: 267rpx;
+  color: #fff;
+  padding-left: 8rpx;
+}
+
+.user-header-name{
+  font-size: 32rpx;
+}
+
+.user-header-compeny-name{
+  font-size: 26rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 25rpx;
+}
+
+.recharge-btn{
+  width: 131rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 24rpx;
+  background-color: #f20c0c;
+  margin-left: 94rpx;
+  margin-top: 30rpx;
+  letter-spacing: 25rpx;
+  padding-left: 25rpx;
+  box-sizing: border-box;
+}
+
+.user-header-operation{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 44rpx;
+}
+
+.user-header-operation-item{
+  width: 33%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.user-header-operation-item-name{
+  font-size: 26rpx;
+}
+
+.user-header-operation-item-num{
+  font-size: 32rpx;
+  margin-top: 17rpx;
+}
+
+.user-container{
+  width: 100%;
+  background-color: #f5f5f5;
+  padding: 18rpx;
+  box-sizing: border-box;
+}
+
+.user-order-wrapper{
+  width: 100%;
+  height: 428rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 5rpx 5rpx 10rpx #e0e0e0;
+  margin-bottom: 18rpx;
+  padding: 28rpx 12rpx;
+  box-sizing: border-box;
+}
+
+.user-order-head{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-order-head-left{
+  color: #333;
+  font-size: 28rpx;
+  font-family: '微软雅黑';
+  display: flex;
+  align-items: center;
+}
+
+.user-order-head-left-ver{
+  width: 6rpx;
+  height: 26rpx;
+  background-color: #f36601;
+  margin: 0 12rpx 0 18rpx;
+}
+
+.user-order-head-right{
+  color: #999;
+  font-size: 24rpx;
+}
+
+.user-order-head-right image{
+  width: 11rpx;
+  height: 17rpx;
+}
+
+.user-order-operation{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 60rpx;
+}
+
+.user-order-operation-payment-made{
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.payment-made{
+  width: 58rpx;
+  height: 52rpx;
+}
+
+.shipped-made{
+  width: 69rpx;
+  height: 55rpx;
+}
+
+.received-made{
+  width: 54rpx;
+  height: 56rpx;
+}
+
+.comment-made{
+  width: 51rpx;
+  height: 59rpx;
+}
+
+.after-sale{
+  width: 58rpx;
+  height: 54rpx;
+}
+
+.user-order-operation-word{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 33rpx;
+}
+
+.user-order-operation-num{
+  min-width: 31rpx !important;
+  width: auto !important;
+  height: 31rpx;
+  background-color: #fd4600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 31rpx;
+  font-family: tahoma,arial;
+  letter-spacing: -1rpx;
+  color: #fff;
+  font-size: 22rpx;
+  position: absolute;
+  top: -20rpx;
+  right: 20rpx;
+  padding: 2rpx; 
+}
+
+.user-order-banner{
+  width: 100%;
+  height: 132rpx;
+  background-color: #0a9fe5;
+  border-radius: 10rpx;
+  margin-top: 44rpx;
+}
+
+.user-order-banner image{
+  width: 100%;
+  height: 100%;
+}
+
+.personal-service-wrapper{
+  width: 100%;
+  /* height: 407rpx; */
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 5rpx 5rpx 10rpx #e0e0e0;
+  padding: 28rpx 12rpx;
+  box-sizing: border-box;
+}
+
+.personal-service-content{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.personal-service-item{
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 37rpx;
+}
+
+.personal-service-item image{
+  width: 72rpx;
+  height: 72rpx;
+}
+
+.personal-service-item-word{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+}
+
+.recommend-goods-wrapper{
+  width: 100%;
+}
+
+.recommend-goods-head{
+  width: 100%;
+  height: 89rpx;
+  padding-left: 24rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.recommend-goods-head-ver{
+  width: 6rpx;
+  height: 26rpx;
+  background-color: #f36601;
+  margin-right: 13px;
+}
+
+.recommend-goods-head-word{
+  font-size: 28rpx;
+  color: #333;
+}
+
+.recommend-goods-content{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recommend-goods-item{
+  width: 348rpx;
+  height: 515rpx;
+  margin-right: 18rpx;
+  margin-bottom: 18rpx;
+  box-shadow: 0 5rpx 10rpx #e0e0e0;
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.recommend-goods-item:nth-child(2n+2){
+  margin-right: 0;
+}
+
+.recommend-goods-item-img{
+  width: 100%;
+  height: 348rpx;
+}
+
+.recommend-goods-item-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.recommend-goods-item-word{
+  padding: 0 18rpx;
+  color: #333;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin-top: 17rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.recommend-goods-item-price{
+  width: 100%;
+  line-height: 20rpx;
+  margin-top: 30rpx;
+  padding-left: 18rpx;
+  box-sizing: border-box;
+  display: flex;
+}
+
+.recommend-goods-item-new-price{
+  color: #fe6601;
+  font-size: 22rpx;
+}
+
+.recommend-goods-item-new-price text{
+  font-size: 30rpx;
+}
+
+.recommend-goods-item-old-price{
+  font-size: 22rpx;
+  color: #999;
+  text-decoration: line-through;
+  margin: 5rpx 0 0 6rpx;
+}

@@ -1,0 +1,123 @@
+<view style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/business_bg.png) no-repeat; background-size: 100% 100%;">
+  <view class="business-title">商务合作</view>
+  <view class="business-brief-wrapper">
+    <view class="business-brief" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/title_bg.png) no-repeat; background-size: 100% 100%;">
+      <view class="business-brief-word">商/城/简/介</view>
+    </view>
+    <view class="business-brief-content">
+      <view class="business-brief-content2">
+        <view class="business-brief-content3" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/brief_bg.png) no-repeat; background-size: 100% 100%;">
+          <view class="business-brief-section">
+            阳光福利基于PC、微信小程序、APP端及后台管理系统，打造企业福利线上、线下全覆盖消费场景，提供办公采购、员工福利消费、节日关怀、员工激励、礼品定制......等定制化一站式企业员工福利解决方案。
+          </view>
+          <view class="business-brief-section" style="margin-top: 38rpx;">
+            平台触达海量企业单位员工，同时打通京东、网易严选等行业领先电商渠道，现诚挚邀请各界供应商加入，共建全新福利消费服务生态。
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="business-brief-wrapper">
+    <view class="business-brief" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/title_bg.png) no-repeat; background-size: 100% 100%;">
+      <view class="business-brief-word">招/商/类/型</view>
+    </view>
+      <view class="business-type-content">
+        <view class="business-type-item" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/business_type_bg.png) no-repeat; background-size: 100% 100%;">
+          <view class="business-type-item-word">产品生产厂商</view>
+        </view>
+        <view class="business-type-item" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/business_type_bg.png) no-repeat; background-size: 100% 100%;">
+          <view class="business-type-item-word">进口产品商</view>
+        </view>
+        <view class="business-type-item" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/business_type_bg.png) no-repeat; background-size: 100% 100%;">
+          <view class="business-type-item-word">产品总代理</view>
+        </view>
+      </view>
+  </view>
+  <view class="business-brief-wrapper">
+    <view class="business-brief" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/title_bg.png) no-repeat; background-size: 100% 100%;">
+      <view class="business-brief-word">入/驻/条/件</view>
+    </view>
+    <view class="business-term-content">
+      <view class="business-term-word">
+        1.产品生产厂家（不接受代理商或授权）。
+      </view>
+      <view class="business-term-word">
+        2.依照中华人民共和国法律注册并领取合法有效营业执照及其他经营许可；
+      </view>
+      <view class="business-term-word">
+        3.申请经营的商品符合国家规定标准，来源合法，资质齐全（包括但不限于符合年间期间的企业“三证合一”复印件、法定代表人、身份证、开户银行许可证、商标注册证及专利权证书、质检报告或产品质量合格证等证明原件或复印件，详见<text class="business-term-word-color">http://fuli-buy.cn/mall/business</text>）；
+      </view>
+      <view class="business-term-word">
+        4.同意并遵守阳关福利平台的相关规则。
+      </view>
+    </view>
+  </view>
+  <view class="business-brief-wrapper">
+    <view class="business-brief" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/title_bg.png) no-repeat; background-size: 100% 100%;">
+      <view class="business-brief-word">入/驻/流/程</view>
+    </view>
+    <view class="business-process-content">
+      <view class="business-process-item-wrapper">
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/shenqing.png"></image>
+          </view>
+          <view class="business-process-item-word">申请入驻</view>
+        </view>
+        <view class="business-process-ver"></view>
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/zhuce.png"></image>
+          </view>
+          <view class="business-process-item-word">注册本站账号</view>
+        </view>
+        <view class="business-process-ver"></view>
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/zizhi.png"></image>
+          </view>
+          <view class="business-process-item-word">资质证明上传</view>
+        </view>
+      </view>
+      <view class="business-process-item-wrapper3">
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/baozheng.png"></image>
+          </view>
+          <view class="business-process-item-word">缴纳保证金</view>
+        </view>
+        <view class="business-process-ver"></view>
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/qianshu.png"></image>
+          </view>
+          <view class="business-process-item-word">签署协议</view>
+        </view>
+        <view class="business-process-ver"></view>
+        <view class="business-process-item">
+          <view class="business-process-item-img">
+            <image src="../../images/dengdai.png"></image>
+          </view>
+          <view class="business-process-item-word">等候审核</view>
+        </view>
+      </view>
+      <view class="business-process-item-wrapper2">
+        <view class="business-process-seat"></view>
+        <view class="business-process-success">
+          <view class="business-process-item-img">
+            <image src="../../images/wancheng.png"></image>
+          </view>
+          <view class="business-process-item-word">完成入驻</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="business-bottom">
+    <view class="business-bottom-word">欢迎加入阳光福利大家庭！</view>
+    <view class="business-bottom-word2">
+      品质生活
+      <view>|</view>
+      阳关福利
+    </view>
+  </view>
+</view>

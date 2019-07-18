@@ -1,0 +1,100 @@
+<!-- 购物车列表 -->
+<view class="cart-wrapper">
+  <view class="cart-manage">管理</view>
+  <view class='carsList'>
+    <block wx:for="{{cardTeams}}" wx:key="key" wx:for-item="item" wx:for-index="key">
+      <view class="cart-shop">
+        <view class="cart-shop-name-wrapper row">
+          <checkbox-group class="checkbox-box" style="margin-left: 15rpx;" bindchange='checkedShopAll'>
+            <label class="checkbox checkboxHeight">
+              <checkbox checked="{{item.shopSelect}}"/>
+            </label>
+          </checkbox-group>
+          <view class="cart-shop-name">
+            {{item.shopName}}
+          </view>
+          <view class="cart-shop-enter flex-center">
+            <image src="../../../images/go_shop.png"></image>
+          </view>
+        </view>
+        <view wx:for="{{item.goods}}" wx:key="index" wx:for-item="element" wx:for-index="index" class="row c-btm-list {{element.isTouchMove ? 'touch-move-active' : ''}}">
+          <!--多选框-->
+          <!-- <view style='width:60rpx;height:60rpx;' wx:if="{{element.stock == 0}}"></view> -->
+          <checkbox-group class="checkbox-box" data-key="{{key}}" data-checkid="{{index}}" bindchange='goodsdagou'>
+            <label class="checkbox checkboxHeight">
+              <checkbox checked="{{element.selected}}"/>
+            </label>
+          </checkbox-group>
+          <!-- 商品列表 -->
+          <view class=' row btm-box' bindtap='goDetails' id="{{cardTeams.id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-key="{{key}}" data-index='{{index}}'>
+            <view class='c-cont-left'>
+              <view class='c-cont-icon'>
+                <image src='{{element.img}}' mode='aspectFit'></image>
+              </view>
+            </view>
+            <view class='c-cont-right column'>
+              <view class='c-right-top'>
+                {{element.goodsName}}
+              </view>
+              <!-- <view class="c-right-center">
+                50G
+              </view> -->
+              <view class='c-right-btm between'>
+                <view class='c-price'>
+                  <text>￥</text>
+                  <text style="font-size: 30rpx;">{{element.price}}</text>
+                </view>
+                <view class='c-shoptrolley' wx:if="{{element.stock != 0}}">
+                  <view class='c-carts-num row'>
+                    <view class='c-main' catchtap='getMain' data-key="{{key}}" data-index="{{index}}">
+                      -
+                    </view>
+                    <view class='c-num'>{{element.shopNum}}</view>
+                    <view class='c-plus' catchtap='getPlus' data-key="{{key}}" data-index="{{index}}">
+                      +
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='modal' wx:if="{{element.stock == 0}}">
+              <view class='c-cont-left'>
+                <view class='c-cont-icon'>
+                  <image src='../../images/noData.png' mode='aspectFit'></image>
+                </view>
+              </view>
+            </view>
+            <!--删除  -->
+            <view class="collection" data-index='{{index}}'>
+              移入收藏
+            </view>
+            <view class="remove" catchtap="delItem" data-index='{{index}}'>
+              删除
+            </view>
+
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
+
+<!-- 结算 -->
+<view class="c-settlement between">
+  <view class="c-settlement-left row">
+    <checkbox-group class="checkbox-box2" style="margin-left: 30rpx;" bindchange='checkedAll'>
+      <label class="checkbox checkboxHeight flex">
+        <checkbox checked="{{selectedAll}}"/>
+        <text style="font-size: 22rpx; color: #333;">全选</text>
+        <view class="total">合计：</view>
+        <view class="c-settlement-price">
+          <text>￥</text>
+          <text>{{countMoney}}</text>
+        </view>
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="c-settlement-right">
+    结算<text>(14)</text>
+  </view>
+</view>

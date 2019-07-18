@@ -1,13 +1,50 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/logs/logs"
+    "pages/tabBar/shopCart/shopCart",
+    "pages/tabBar/index/index",
+    "pages/tabBar/user/user",
+    "pages/tabBar/classification/classification",
+    "pages/de/de",
+    "pages/businessCooperation/businessCooperation",
+    "pages/components/dialog/dialog"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Mall",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#fe6601",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/index/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_select.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabBar/classification/classification",
+        "iconPath": "images/classification.png",
+        "selectedIconPath": "images/classification_select.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/tabBar/shopCart/shopCart",
+        "iconPath": "images/cart.png",
+        "selectedIconPath": "images/cart_select.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/tabBar/user/user",
+        "iconPath": "images/rule.png",
+        "selectedIconPath": "images/rule_select.png",
+        "text": "我的"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,275 @@
+/* @import "../../lib/style/font.wxss"; */
+
+.business-title{
+  text-align: center;
+  padding-top: 74rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #0f1019;
+  font-size: 48rpx;
+  font-family: 'tw';
+  font-weight: bold;
+}
+
+.business-brief-wrapper{
+  padding: 0 41rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-brief{
+  width: 555rpx;
+  height: 62rpx;
+  position: relative;
+  text-align: center;
+  margin: 54rpx auto 56rpx auto;
+}
+
+.business-brief image {
+  height: 100%;
+}
+
+.business-brief-word{
+  width: 290rpx;
+  color: #0f1019;
+  font-size: 32rpx;
+  font-family: 'tw';
+  font-weight: 600;
+  letter-spacing: 15rpx;
+  text-align: center;
+  padding: 14rpx 0 0 15rpx;
+  margin: 0 auto;
+}
+
+.business-brief-content{
+  width: 100%;
+  height: 670rpx;
+  border-width: 5rpx 6rpx;
+  border-style: solid;
+  border-color: #ab7332;
+  padding: 5rpx 10rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-brief-content2{
+  width: 100%;
+  height: 100%;
+  border-width: 3rpx 4rpx;
+  border-style: solid;
+  border-color: #ab7332;
+  padding: 18rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-brief-content3{
+  width: 100%;
+  height: 100%;
+  padding: 63rpx 20rpx 0 20rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-brief-section{
+  color: #333;
+  font-size: 28rpx;
+  font-family: 'tw';
+  text-indent: 58rpx;
+  line-height: 40rpx;
+}
+
+.business-type-content{
+  width: 100%;
+}
+
+.business-type-item{
+  width: 100%;
+  height: 85rpx;
+  margin-bottom: 18rpx;
+}
+
+.business-type-item-word{
+  text-align: center;
+  line-height: 85rpx;
+  color: #0f1019;
+  font-size: 30rpx;
+  font-family: 'tw'
+}
+
+.business-type-item:last-child{
+  margin-bottom: 0;
+}
+
+.business-term-content{
+  width: 100%;
+  /* height: 601rpx; */
+  border: 2rpx solid #ab7332;
+  border-radius: 10rpx;
+  padding: 54rpx 72rpx 0 47rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-term-word{
+  color: #0f1019;
+  font-size: 28rpx;
+  margin-bottom: 33rpx;
+  font-family: 'tw';
+  line-height: 42rpx;
+}
+
+.business-term-word-color{
+  color: #545fbd;
+  font-weight: 600;
+}
+
+.business-process-content{
+  width: 100%;
+}
+
+.business-process-item-wrapper,
+.business-process-item-wrapper3{
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 69rpx;
+}
+
+.business-process-item-wrapper3{
+  margin-bottom: 0;
+}
+
+.business-process-item{
+  width: 180rpx;
+  height: 120rpx;
+  border: 2rpx solid #ab7332;
+  border-radius: 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.business-process-item-word{
+  color: #0f1019;
+  font-size: 28rpx;
+  margin-top: 15rpx;
+  font-family: 'tw';
+}
+
+.business-process-ver{
+  width: 69rpx;
+  height: 3rpx;
+  background-color: #ab7332;
+}
+
+.business-process-item-img{
+  width: 33rpx;
+  height: 36rpx;
+}
+
+.business-process-item-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.business-process-item-wrapper2{
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-left: 84rpx;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.business-process-seat{
+  width: 77rpx;
+  height: 136rpx;
+  border-width: 0 0 3rpx 3rpx;
+  border-style: solid;
+  border-color: #ab7332;
+  border-bottom-left-radius: 10rpx;
+}
+
+.business-process-success{
+  width: 356rpx;
+  height: 133rpx;
+  border: 2rpx solid #ab7332;
+  border-radius: 10rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 69rpx;
+}
+
+.business-bottom{
+  width: 100%;
+  padding: 183rpx 0 45rpx 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #0f1019;
+  font-family: 'tw';
+}
+
+.business-bottom-word{
+  font-size: 30rpx;
+  margin-bottom: 34rpx;
+  text-align: center;
+  font-weight: 600;
+}
+
+.business-bottom-word2{
+  font-size: 26rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.business-bottom-word2 view{
+  margin: 0 20rpx;
+}
