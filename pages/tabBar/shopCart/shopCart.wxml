@@ -1,100 +1,137 @@
-<!-- 购物车列表 -->
-<view class="cart-wrapper">
-  <view class="cart-manage">管理</view>
-  <view class='carsList'>
-    <block wx:for="{{cardTeams}}" wx:key="key" wx:for-item="item" wx:for-index="key">
-      <view class="cart-shop">
-        <view class="cart-shop-name-wrapper row">
-          <checkbox-group class="checkbox-box" style="margin-left: 15rpx;" bindchange='checkedShopAll'>
-            <label class="checkbox checkboxHeight">
-              <checkbox checked="{{item.shopSelect}}"/>
-            </label>
-          </checkbox-group>
-          <view class="cart-shop-name">
-            {{item.shopName}}
-          </view>
-          <view class="cart-shop-enter flex-center">
-            <image src="../../../images/go_shop.png"></image>
-          </view>
-        </view>
-        <view wx:for="{{item.goods}}" wx:key="index" wx:for-item="element" wx:for-index="index" class="row c-btm-list {{element.isTouchMove ? 'touch-move-active' : ''}}">
-          <!--多选框-->
-          <!-- <view style='width:60rpx;height:60rpx;' wx:if="{{element.stock == 0}}"></view> -->
-          <checkbox-group class="checkbox-box" data-key="{{key}}" data-checkid="{{index}}" bindchange='goodsdagou'>
-            <label class="checkbox checkboxHeight">
-              <checkbox checked="{{element.selected}}"/>
-            </label>
-          </checkbox-group>
-          <!-- 商品列表 -->
-          <view class=' row btm-box' bindtap='goDetails' id="{{cardTeams.id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-key="{{key}}" data-index='{{index}}'>
-            <view class='c-cont-left'>
-              <view class='c-cont-icon'>
-                <image src='{{element.img}}' mode='aspectFit'></image>
-              </view>
+<view wx:if="{{cardTeams.length > 0}}">
+  <!-- 购物车列表 -->
+  <view class="cart-wrapper">
+    <view class="cart-manage" bindtap="manageClick">{{manage}}</view>
+    <view class='carsList'>
+      <block wx:for="{{cardTeams}}" wx:key="key" wx:for-item="item" wx:for-index="key">
+        <view class="cart-shop">
+          <view class="cart-shop-name-wrapper row">
+            <checkbox-group class="checkbox-box" style="margin-left: 15rpx;" bindchange='checkedShopAll' data-indes="{{key}}">
+              <label class="checkbox checkboxHeight">
+                <checkbox checked="{{ item.lengthz == item.lengths ? true : false }}" />
+              </label>
+            </checkbox-group>
+            <view class="cart-shop-name">
+              {{item.store_name}}
             </view>
-            <view class='c-cont-right column'>
-              <view class='c-right-top'>
-                {{element.goodsName}}
+            <view class="cart-shop-enter flex-center">
+              <image src="../../../images/go_shop.png"></image>
+            </view>
+          </view>
+          <view wx:for="{{item.list}}" wx:key="index" wx:for-item="element" wx:for-index="index" class="row c-btm-list {{element.isTouchMove ? 'touch-move-active' : ''}}">
+            <!--多选框-->
+            <!-- <view style='width:60rpx;height:60rpx;' wx:if="{{element.stock == 0}}"></view> -->
+            <checkbox-group class="checkbox-box" data-key="{{key}}" data-checkid="{{index}}" bindchange='goodsdagou' data-index="{{index}}" data-fuindex="{{key}}">
+              <label class="checkbox checkboxHeight">
+                <checkbox checked="{{ element.is_xuan == 1 ? true : false}}" />
+              </label>
+            </checkbox-group>
+            <!-- 商品列表 -->
+            <view class=' row btm-box' bindtap='goDetails' id="{{cardTeams.store_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-key="{{key}}" data-index='{{index}}'>
+              <view class='c-cont-left'>
+                <view class='c-cont-icon'>
+                  <image src='{{element.goods_image}}' mode='aspectFit'></image>
+                </view>
               </view>
-              <!-- <view class="c-right-center">
+              <view class='c-cont-right column'>
+                <view class='c-right-top'>
+                  {{element.goods_name}}
+                </view>
+                <!-- <view class="c-right-center">
                 50G
               </view> -->
-              <view class='c-right-btm between'>
-                <view class='c-price'>
-                  <text>￥</text>
-                  <text style="font-size: 30rpx;">{{element.price}}</text>
-                </view>
-                <view class='c-shoptrolley' wx:if="{{element.stock != 0}}">
-                  <view class='c-carts-num row'>
-                    <view class='c-main' catchtap='getMain' data-key="{{key}}" data-index="{{index}}">
-                      -
-                    </view>
-                    <view class='c-num'>{{element.shopNum}}</view>
-                    <view class='c-plus' catchtap='getPlus' data-key="{{key}}" data-index="{{index}}">
-                      +
+                <view class='c-right-btm between'>
+                  <view class='c-price'>
+                    <text>￥</text>
+                    <text style="font-size: 30rpx;">{{element.goods_price}}</text>
+                  </view>
+                  <view class='c-shoptrolley'>
+                    <view class='c-carts-num row'>
+                      <view class='c-main' catchtap='getMain' data-key="{{key}}" data-index="{{index}}">
+                        -
+                      </view>
+                      <view class='c-num'>{{element.goods_num}}</view>
+                      <view class='c-plus' catchtap='getPlus' data-key="{{key}}" data-index="{{index}}">
+                        +
+                      </view>
                     </view>
                   </view>
                 </view>
               </view>
+              <!--删除  -->
+              <view class="collection" data-key="{{key}}" data-index='{{index}}'>
+                移入收藏
+              </view>
+              <view class="remove" catchtap="delItem" data-key="{{key}}" data-index='{{index}}'>
+                删除
+              </view>
+
             </view>
-            <view class='modal' wx:if="{{element.stock == 0}}">
-              <view class='c-cont-left'>
-                <view class='c-cont-icon'>
-                  <image src='../../images/noData.png' mode='aspectFit'></image>
-                </view>
+          </view>
+        </view>
+      </block>
+      <view class="invalid-goods-wrapper">
+        <view class="invalid-goods-title between">
+          <view class="invalid-goods-title-left">
+            失效商品
+          </view>
+          <view class="invalid-goods-title-right flex-center" bindtap="clearInvalid">
+            <image src="../../../images/del_invalid.png"></image>
+            <text>清理</text>
+          </view>
+        </view>
+        <view class="invalid-goods-item flex">
+          <view class="invalid-goods-item-left">
+            <image src="http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg"></image>
+            <view class="invalid-goods-item-left-mask">暂无库存</view>
+          </view>
+          <view class="invalid-goods-item-right">
+            <view class='c-right-top' style="padding-top: 0;">
+              伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货
+            </view>
+            <view class='c-right-btm between' style="bottom: 45rpx; padding-left: 24rpx; box-sizing: border-box;">
+              <view class='c-price'>
+                <text>￥</text>
+                <text style="font-size: 30rpx;">379.00</text>
               </view>
             </view>
-            <!--删除  -->
-            <view class="collection" data-index='{{index}}'>
-              移入收藏
-            </view>
-            <view class="remove" catchtap="delItem" data-index='{{index}}'>
-              删除
-            </view>
-
           </view>
         </view>
       </view>
-    </block>
+    </view>
+  </view>
+
+  <!-- 结算 -->
+  <view class="c-settlement between">
+    <view class="c-settlement-left row">
+      <checkbox-group class="checkbox-box2" style="margin-left: 30rpx;" bindchange='checkedAll'>
+        <label class="checkbox checkboxHeight flex">
+          <checkbox checked="{{selectedAll}}" />
+          <text style="font-size: 22rpx; color: #333;">全选</text>
+          <view class="total">合计：</view>
+          <view class="c-settlement-price">
+            <text>￥</text>
+            <text>{{countMoney}}</text>
+          </view>
+        </label>
+      </checkbox-group>
+    </view>
+    <view class="c-settlement-right {{classState ? 'pointer-none' : ''}}" wx:if="{{settState}}" bindtap="jkl">
+      结算
+      <text>({{countNum}})</text>
+    </view>
+    <view class="c-settlement-operation flex" wx:if="{{oper}}">
+      <view class="c-settlement-collection">
+        移入收藏
+      </view>
+      <view class="c-settlement-delete">
+        删除
+      </view>
+    </view>
   </view>
 </view>
 
-<!-- 结算 -->
-<view class="c-settlement between">
-  <view class="c-settlement-left row">
-    <checkbox-group class="checkbox-box2" style="margin-left: 30rpx;" bindchange='checkedAll'>
-      <label class="checkbox checkboxHeight flex">
-        <checkbox checked="{{selectedAll}}"/>
-        <text style="font-size: 22rpx; color: #333;">全选</text>
-        <view class="total">合计：</view>
-        <view class="c-settlement-price">
-          <text>￥</text>
-          <text>{{countMoney}}</text>
-        </view>
-      </label>
-    </checkbox-group>
-  </view>
-  <view class="c-settlement-right">
-    结算<text>(14)</text>
-  </view>
+<view wx:else class="flex-center flex-col" style="height: 100%;">
+  <image class="not-cart-img" src="../../../images/not_cart_bg.png"></image>
+  <view class="not-cart-word">购物车空了，快去添加宝贝吧！</view>
 </view>
