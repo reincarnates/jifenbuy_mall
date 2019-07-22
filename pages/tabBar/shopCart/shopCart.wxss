@@ -80,7 +80,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 }
 
 .c-right-top {
-  height: 92rpx;
+  height: 95rpx;
   font-size: 24rpx;
   color: #333333;
   padding-top: 30rpx;
@@ -316,6 +316,10 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
 .pointer-none{
   pointer-events: none;
   opacity: .5;
+}
+
+.no-click{
+  pointer-events: none;
 }
 
 .invalid-goods-wrapper{

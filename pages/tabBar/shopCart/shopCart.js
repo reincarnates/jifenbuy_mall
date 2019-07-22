@@ -1,55 +1,3 @@
-// const list = [
-//   {
-//     shopName: '哈哈哈哈哈哈',
-//     goods:[
-//       {
-//         id: 0,
-//         img: '../../../images/avatar.png',
-//         goodsName: '韩后花痴氨基酸洗面奶洁面补税保湿 温空还有深层清洁',
-//         price: 38.8,
-//         shopNum: 1,
-//         // stock: 0
-//       },
-//       {
-//         id: 1,
-//         img: '../../../images/avatar.png',
-//         goodsName: '联想（Lenovo）ThinkPad L570 15.6英寸笔记本（i5-6200U/8G/256G SSD/win 10 home）',
-//         price: 38.8,
-//         shopNum: 1,
-//         // stock: 0
-//       },
-//     ]
-//   },
-//   {
-//     shopName: '呵呵哈哈哈h',
-//     goods: [
-//       {
-//         id: 2,
-//         img: '../../../images/avatar.png',
-//         goodsName: '韩后花痴氨基酸洗面奶洁面补税保湿 温空还有深层清洁',
-//         price: 11.8,
-//         shopNum: 3,
-//         // stock: 20
-//       },
-//       {
-//         id: 3,
-//         img: '../../../images/avatar.png',
-//         goodsName: '韩后花痴氨基酸洗面奶洁面补税保湿 温空还有深层清洁',
-//         price: 11.8,
-//         shopNum: 3,
-//         // stock: 20
-//       },
-//       {
-//         id: 4,
-//         img: '../../../images/avatar.png',
-//         goodsName: '韩后花痴氨基酸洗面奶洁面补税保湿 温空还有深层清洁',
-//         price: 11.8,
-//         shopNum: 3,
-//         // stock: 20
-//       }
-//     ]
-//   }
-// ]
 
 const list = [
   {
@@ -70,20 +18,7 @@ const list = [
         "goods_sku": "ZY3c9148d135",
         "yggc_sku": "",
         "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 2800007,
-            "goods_sku": "ZY3c9148d135",
-            "goods_id": 2800004,
-            "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
-            "goods_price": "88.00",
-            "goods_marketprice": "54.99",
-            "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
-            "goods_unit": "件",
-            "goods_storage": 1000,
-            "spu": "ZY3c9148d135"
-          }
-        ],
+        "stock": [],
         "goods_total": "88.00"
       }
     ]
@@ -239,6 +174,13 @@ Page({
     oper: false,
     classState: true,
     num: 1,
+    zonglength: 0, //总条目
+    yixuanlength: 0, //已选条目
+    invalidArr: [], //失效商品
+    invState: true,
+    isGoods: true,
+    singNum: 0, //单选下标
+    shopNum: 0, //店铺下标
   },
 
   // 购物车+
@@ -294,20 +236,22 @@ Page({
     var that = this;
 
     // 本身
-    var cardtanmess = 'cardTeams[' + e.target.dataset.fuindex + '].list[' + e.target.dataset.index + '].is_xuan'
+    var cardtanmess = 'cardTeams[' + e.target.dataset.fuindex + '].list[' + e.target.dataset.index + '].is_xuan';
     // 父级别
-    var fucardtanmess = 'cardTeams[' + e.target.dataset.fuindex + '].lengths'
+    var fucardtanmess = 'cardTeams[' + e.target.dataset.fuindex + '].lengths';
     if (that.data.cardTeams[e.target.dataset.fuindex].list[e.target.dataset.index].is_xuan == 0) {
       that.setData({
         [cardtanmess]: 1,
-        [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths + 1
+        [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths + 1,
+        yixuanlength: that.data.yixuanlength + 1
       })
     } else if (that.data.cardTeams[e.target.dataset.fuindex].list[e.target.dataset.index].is_xuan == 1) {
       that.setData({
         [cardtanmess]: 0,
-        [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths - 1
+        [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths - 1,
+        yixuanlength: that.data.yixuanlength - 1
       })
-    }
+    };
 
     var num = that.data.num;
     var cardTeams = that.data.cardTeams;
@@ -369,32 +313,63 @@ Page({
   // 全选
   checkedAll: function() {
     var that = this;
-    var selectedAll = that.data.checked_all;
-    selectedAll = !selectedAll;
+
+    // 父级别
+    if (that.data.yixuanlength != that.data.zonglength) {
+      for (var i = 0; i < that.data.cardTeams.length; i++) {
+        var fucardtanmess = 'cardTeams[' + i + '].lengths'
+        var fucardtanmezz = that.data.cardTeams[i].lengthz
+        for (var j = 0; j < that.data.cardTeams[i].list.length; j++) {
+          var cardtanmess = 'cardTeams[' + i + '].list[' + j + '].is_xuan'
+          this.setData({
+            [cardtanmess]: 1,
+            [fucardtanmess]: fucardtanmezz,
+            yixuanlength: that.data.zonglength
+          });
+        }
+      };
+    } else {
+      for (var i = 0; i < that.data.cardTeams.length; i++) {
+        var fucardtanmess = 'cardTeams[' + i + '].lengths'
+        var fucardtanmezz = that.data.cardTeams[i].lengthz
+        for (var j = 0; j < that.data.cardTeams[i].list.length; j++) {
+          var cardtanmess = 'cardTeams[' + i + '].list[' + j + '].is_xuan'
+          this.setData({
+            [cardtanmess]: 0,
+            [fucardtanmess]: 0,
+            yixuanlength: 0
+          });
+        }
+      };
+    }
+
+    // var selectedAll = that.data.checked_all;
+    // selectedAll = !selectedAll;
     var cardTeams = that.data.cardTeams;
     var arr = [];
     for (var i = 0; i < cardTeams.length; i++) {
       for (var j = 0; j < cardTeams[i].list.length; j++) {
-        cardTeams[i].list[j].is_xuan = selectedAll;
-        console.log(selectedAll);
-        if (selectedAll) {
+        // cardTeams[i].list[j].is_xuan = selectedAll;
+        // console.log('1',selectedAll);
+        if (cardTeams[i].list[j].is_xuan == 1) {
           arr.push(cardTeams[i].list[j].cart_id);
           cardTeams[i].lengths = cardTeams[i].lengthz;
           this.setData({
-            classState: false
+            classState: false,
+            checked_all: true
           });
         } else {
           arr = [];
           cardTeams[i].lengths = 0;
           this.setData({
-            classState: true
+            classState: true,
+            checked_all: false
           });
         };
       }
     };
     that.setData({
       cardTeams: cardTeams,
-      checked_all: selectedAll,
       newArr: arr
     });
     that.getTotalPrice();
@@ -402,29 +377,56 @@ Page({
   //店铺全选
   checkedShopAll: function(e) {
     var that = this;
+    var cardTeams = that.data.cardTeams;
+    var arr = [];
     // 父级别
     var fucardtanmess = 'cardTeams[' + e.target.dataset.indes + '].lengths';
     if (that.data.cardTeams[e.target.dataset.indes].lengthz == that.data.cardTeams[e.target.dataset.indes].lengths) {
+      that.setData({
+        yixuanlength: that.data.yixuanlength - that.data.cardTeams[e.target.dataset.indes].lengthz
+      })
+
       for (var i = 0; i < that.data.cardTeams[e.target.dataset.indes].lengthz; i++) {
         var cardtanmess = 'cardTeams[' + e.target.dataset.indes + '].list[' + i + '].is_xuan';
         that.setData({
           [cardtanmess]: 0
         });
       };
+
       that.setData({
-        [fucardtanmess]: 0
+        [fucardtanmess]: 0,
+        newArr: arr,
+        checked_all: false
       });
+
       that.getTotalPrice();
     } else {
+      that.setData({
+        yixuanlength: that.data.yixuanlength - that.data.cardTeams[e.target.dataset.indes].lengths + that.data.cardTeams[e.target.dataset.indes].lengthz
+      });
+
       for (var i = 0; i < that.data.cardTeams[e.target.dataset.indes].lengthz; i++) {
         var cardtanmess = 'cardTeams[' + e.target.dataset.indes + '].list[' + i + '].is_xuan';
         that.setData({
           [cardtanmess]: 1
         });
+      };
+
+      var len = that.data.cardTeams[e.target.dataset.indes].list;
+      for (var i = 0; i < len.length; i++) {
+        arr.push(len[i].cart_id);
       }
+
       that.setData({
-        [fucardtanmess]: that.data.cardTeams[e.target.dataset.indes].lengthz
-      })
+        [fucardtanmess]: that.data.cardTeams[e.target.dataset.indes].lengthz,
+        newArr: arr,
+        checked_all: true
+      });
+
+      that.setData({
+        yixuanlength: that.data.yixuanlength - that.data.cardTeams[e.target.dataset.indes].lengths + that.data.cardTeams[e.target.dataset.indes].lengthz
+      });
+
       that.getTotalPrice();
     };
   },
@@ -457,7 +459,7 @@ Page({
     var totalNum = 0;
     for (var i = 0; i < cardTeams.length; i++) {
       for (var j = 0; j < cardTeams[i].list.length; j++) {
-        if (cardTeams[i].list[j].is_xuan) {
+        if (cardTeams[i].list[j].is_xuan == 1) {
           total += cardTeams[i].list[j].goods_num * cardTeams[i].list[j].goods_price;
           totalNum += cardTeams[i].list[j].goods_num;
         }
@@ -484,8 +486,16 @@ Page({
         if (res.confirm) {
           var _index = cardTeams[key].list.indexOf(cardTeams[key].list[index]);
           cardTeams[key].list.splice(_index, 1);
+          if (cardTeams[key].list.length != 0) {
+            cardTeams[key].lengthz = cardTeams[key].list.length;
+          }
           if (cardTeams[key].list.length == 0) {
             cardTeams.splice(key, 1);
+          }
+          if (that.data.invalidArr.length == 0 && that.data.cardTeams == 0) {
+            that.setData({
+              isGoods: false
+            });
           }
           that.setData({
             cardTeams: cardTeams
@@ -495,16 +505,183 @@ Page({
       }
     })
   },
+  //操作删除
+  semDelItem: function() {
+    var _this = this;
+    if (_this.data.checked_all) {
+      wx.showModal({
+        title: '提示',
+        content: '确定删除吗？',
+        cancelText: '否',
+        confirmText: '是',
+        success: function (res) {
+          if (res.confirm) {
+            _this.setData({
+              cardTeams: [],
+              manage: '管理',
+              yixuanlength: 0
+            });
+          }
+        }
+      })
+    }
+  },
   //清理失效商品
   clearInvalid: function() {
-    console.log(1);
+    // this.setData({
+    //   invalidArr: [],
+    //   invState: false
+    // });
+    // if (this.data.invalidArr.length == 0 && this.data.cardTeams == 0) {
+    //   this.setData({
+    //     isGoods: false
+    //   });
+    // }
+    var arr = [
+      {
+        "store_name": "YGGC商城",
+        "store_id": 28,
+        "list": [
+          {
+            "cart_id": 1287,
+            "buyer_id": 1,
+            "store_id": 28,
+            "store_name": "YGGC商城",
+            "goods_id": "ecdb9f6a96",
+            "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
+            "goods_price": "264.00",
+            "goods_num": 1,
+            "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
+            "bl_id": 0,
+            "goods_sku": "ecdb9f6a96",
+            "yggc_sku": "jd_personal_1003829",
+            "goods_state": 1,
+            "stock": [
+              {
+                "goods_sku_id": 114436,
+                "goods_sku": "ecdb9f6a96",
+                "goods_id": 114436,
+                "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
+                "goods_price": "264.00",
+                "goods_marketprice": "264.00",
+                "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
+                "goods_unit": "件",
+                "goods_storage": 100,
+                "spu": "ecdb9f6a96"
+              }
+            ],
+            "goods_total": "264.00",
+            "is_xuan": 0
+          },
+          {
+            "cart_id": 1289,
+            "buyer_id": 1,
+            "store_id": 28,
+            "store_name": "YGGC商城",
+            "goods_id": "8e87427dd6",
+            "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
+            "goods_price": "379.00",
+            "goods_num": 1,
+            "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
+            "bl_id": 0,
+            "goods_sku": "8e87427dd6",
+            "yggc_sku": "jd_personal_100001736149",
+            "goods_state": 1,
+            "stock": [
+              {
+                "goods_sku_id": 44628,
+                "goods_sku": "8e87427dd6",
+                "goods_id": 44628,
+                "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
+                "goods_price": "379.00",
+                "goods_marketprice": "379.00",
+                "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
+                "goods_unit": "件",
+                "goods_storage": 100,
+                "spu": "8e87427dd6"
+              }
+            ],
+            "goods_total": "379.00",
+            "is_xuan": 0
+          },
+          {
+            "cart_id": 1312,
+            "buyer_id": 1,
+            "store_id": 28,
+            "store_name": "YGGC商城",
+            "goods_id": "1d84795745",
+            "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
+            "goods_price": "36.01",
+            "goods_num": 1,
+            "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
+            "bl_id": 0,
+            "goods_sku": "1d84795745",
+            "yggc_sku": "jd_personal_5028785",
+            "goods_state": 1,
+            "stock": [
+              {
+                "goods_sku_id": 34605,
+                "goods_sku": "1d84795745",
+                "goods_id": 34605,
+                "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
+                "goods_price": "36.01",
+                "goods_marketprice": "45.00",
+                "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
+                "goods_unit": "件",
+                "goods_storage": 100,
+                "spu": "1d84795745"
+              }
+            ],
+            "goods_total": "36.01",
+            "is_xuan": 0
+          },
+          {
+            "cart_id": 1427,
+            "buyer_id": 1,
+            "store_id": 28,
+            "store_name": "YGGC商城",
+            "goods_id": "1566474581",
+            "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
+            "goods_price": "60.20",
+            "goods_num": 1,
+            "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
+            "bl_id": 0,
+            "goods_sku": "1566474581",
+            "yggc_sku": "jd_personal_497495",
+            "goods_state": 1,
+            "stock": [
+              {
+                "goods_sku_id": 684452,
+                "goods_sku": "1566474581",
+                "goods_id": 684451,
+                "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
+                "goods_price": "60.20",
+                "goods_marketprice": "60.20",
+                "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
+                "goods_unit": "件",
+                "goods_storage": 100,
+                "spu": "1566474581"
+              }
+            ],
+            "goods_total": "60.20",
+            "is_xuan": 0
+          }
+        ],
+        "lengthz": 4,
+        "lengths": 0,
+        "errorState": false
+      }
+    ];
+    this.setData({
+      cardTeams: arr
+    });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+   
   },
 
   /**
@@ -517,14 +694,23 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function(e) {
     var that = this;
     var cardTeams = that.data.cardTeams;
     var arr = that.data.newArr;
+    var arr2 = [];
+    var arr3 = [];
+    var zlength = 0
     for (var i = 0; i < cardTeams.length; i++) {
       cardTeams[i].lengthz = cardTeams[i].list.length;
       cardTeams[i].lengths = 0;
       for (var j = 0; j < cardTeams[i].list.length; j++) {
+        if (cardTeams[i].list[j].stock.length != 0) {
+          zlength++;
+          that.setData({
+            zonglength: zlength
+          });
+        }
         that.data.cardTeamsLen.push(cardTeams[i].list.length);
         // cardTeams[i].list[j].is_xuan = false;
         if (cardTeams[i].list[j].stock.length == 0) {
@@ -532,33 +718,35 @@ Page({
         }else{
           cardTeams[i].errorState = false;
         }
-        for (var k = 0; k < cardTeams[i].list[j].stock.length; k++) {
-          if (cardTeams[i].list[j].goods_sku != cardTeams[i].list[j].stock[k].goods_sku) {
-            cardTeams[i].errorState = true;
-          }else{
-            cardTeams[i].errorState = false;
-          }
-        }
         
+        if (cardTeams[i].list[j].stock.length == 0) {
+          cardTeams[i].fstock = [];
+        }
 
         if (that.data.checked_all) {
-          cardTeams[i].list[j].is_xuan = true;
+          cardTeams[i].list[j].is_xuan = 1;
           // cardTeams[i].shopSelect = true;
           arr.push(cardTeams[i].list[j].cart_id);
         } else {
-          cardTeams[i].list[j].is_xuan = false;
+          cardTeams[i].list[j].is_xuan = 0;
           // cardTeams[i].shopSelect = false;
           arr = [];
         }
       }
-
+      
+      if (cardTeams[i].fstock != undefined) {
+        arr2.push(cardTeams[i]);
+      }else{
+        arr3.push(cardTeams[i]);
+      }
     }
 
-    console.log(cardTeams);
     that.setData({
-      cardTeams: cardTeams,
-      newArr: arr
-    })
+      cardTeams: arr3,
+      newArr: arr,
+      invalidArr: arr2,
+    });
+
     that.getTotalPrice(); //合计
   },
 
