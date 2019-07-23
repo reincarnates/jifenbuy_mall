@@ -3,7 +3,7 @@
   <view class="cart-wrapper">
     <view class="cart-manage {{ cardTeams.length == 0 ? 'no-click' : '' }}" bindtap="manageClick">{{manage}}</view>
     <view class='carsList'>
-      <block wx:for="{{cardTeams}}" wx:key="key" wx:for-item="item" wx:for-index="key">
+      <block wx:for="{{cardTeams}}" wx:key="key" wx:for-item="item" wx:for-index="key" wx:if="{{ item.list.length != 0 }}">
         <view class="cart-shop" wx:if="{{item.fstock.length == 0 ? false : true}}">
           <view class="cart-shop-name-wrapper row">
             <checkbox-group class="checkbox-box" style="margin-left: 15rpx;" bindchange='checkedShopAll' data-indes="{{key}}">

@@ -148,6 +148,42 @@ const list = [
         "goods_total": "60.20"
       }
     ]
+  },
+  {
+    "list": [
+      {
+        "cart_id": 1282,
+        "buyer_id": 1,
+        "store_id": 31,
+        "store_name": "供应商测试001",
+        "goods_id": "ZY3c9148d135",
+        "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
+        "goods_price": "88.00",
+        "goods_num": 1,
+        "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
+        "bl_id": 0,
+        "goods_sku": "ZY3c9148d135",
+        "yggc_sku": "",
+        "goods_state": 1,
+        "stock": [
+          {
+            "goods_sku_id": 2800007,
+            "goods_sku": "ZY3c9148d135",
+            "goods_id": 2800004,
+            "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
+            "goods_price": "88.00",
+            "goods_marketprice": "54.99",
+            "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
+            "goods_unit": "件",
+            "goods_storage": 1000,
+            "spu": "ZY3c9148d135"
+          }
+        ],
+        "goods_total": "88.00"
+      }
+    ],
+    "store_name": "供应商测试001",
+    "store_id": 31
   }
 ]
 
@@ -165,7 +201,6 @@ Page({
     countNum: 0,
     goodsNum: 0,
     cardTeamsLen: [],
-    listLen: [],
     selectedAll: false,
     shopSelect: false,
     manage: '管理',
@@ -179,8 +214,6 @@ Page({
     invalidArr: [], //失效商品
     invState: true,
     isGoods: true,
-    singNum: 0, //单选下标
-    shopNum: 0, //店铺下标
   },
 
   // 购物车+
@@ -243,14 +276,18 @@ Page({
       that.setData({
         [cardtanmess]: 1,
         [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths + 1,
-        yixuanlength: that.data.yixuanlength + 1
-      })
+        yixuanlength: that.data.yixuanlength + 1,
+        selectGoods: that.data.cardTeams[e.target.dataset.fuindex].list[e.target.dataset.index],
+        selectIndex: e.target.dataset.fuindex
+      });
     } else if (that.data.cardTeams[e.target.dataset.fuindex].list[e.target.dataset.index].is_xuan == 1) {
       that.setData({
         [cardtanmess]: 0,
         [fucardtanmess]: that.data.cardTeams[e.target.dataset.fuindex].lengths - 1,
-        yixuanlength: that.data.yixuanlength - 1
-      })
+        yixuanlength: that.data.yixuanlength - 1,
+        selectGoods: '',
+        selectIndex: 0
+      });
     };
 
     var num = that.data.num;
@@ -258,13 +295,9 @@ Page({
     var cardTeamsLen = that.data.cardTeamsLen;
     var index = e.currentTarget.dataset.checkid;
     var key = e.currentTarget.dataset.key;
-    // console.log(index)
     var arr = that.data.newArr;
     var selected = cardTeams[key].list[index].selected;
     cardTeams[key].list[index].selected = !selected;
-    for (var i = 0; i < cardTeams.length; i++) {
-      that.data.listLen.push(cardTeams[i].list.length);
-    }
     if (!selected) {
       arr.push(cardTeams[key].list[index].cart_id);
       this.setData({
@@ -279,17 +312,6 @@ Page({
         });
       }
     };
-    // console.log(arr.length, that.data.listLen[key]);
-    // if (arr.length == that.data.listLen[key]) {
-    //   cardTeams[key].shopSelect = true;
-    //   var _index = arr.indexOf(cardTeams[key].list[index].cart_id);
-    //   var arr2 = arr.splice(_index, 1);
-    //   arr = arr.concat(arr2);
-    //   console.log('截取', arr, _index, arr2);
-    // } else {
-    //   cardTeams[key].shopSelect = false;
-    //   console.log(arr);
-    // }
 
     if (arr.length == cardTeamsLen.length) {
       that.setData({
@@ -308,6 +330,7 @@ Page({
       cardTeams: cardTeams,
       newArr: arr
     });
+
     that.getTotalPrice();
   },
   // 全选
@@ -343,14 +366,10 @@ Page({
       };
     }
 
-    // var selectedAll = that.data.checked_all;
-    // selectedAll = !selectedAll;
     var cardTeams = that.data.cardTeams;
     var arr = [];
     for (var i = 0; i < cardTeams.length; i++) {
       for (var j = 0; j < cardTeams[i].list.length; j++) {
-        // cardTeams[i].list[j].is_xuan = selectedAll;
-        // console.log('1',selectedAll);
         if (cardTeams[i].list[j].is_xuan == 1) {
           arr.push(cardTeams[i].list[j].cart_id);
           cardTeams[i].lengths = cardTeams[i].lengthz;
@@ -372,13 +391,13 @@ Page({
       cardTeams: cardTeams,
       newArr: arr
     });
+
     that.getTotalPrice();
   },
   //店铺全选
   checkedShopAll: function(e) {
     var that = this;
     var cardTeams = that.data.cardTeams;
-    var arr = [];
     // 父级别
     var fucardtanmess = 'cardTeams[' + e.target.dataset.indes + '].lengths';
     if (that.data.cardTeams[e.target.dataset.indes].lengthz == that.data.cardTeams[e.target.dataset.indes].lengths) {
@@ -393,10 +412,17 @@ Page({
         });
       };
 
+      for (let i = 0; i < cardTeams[e.target.dataset.indes].list.length; i++) {
+        if (cardTeams[e.target.dataset.indes].list[i].is_xuan != 1) {
+          var id = cardTeams[e.target.dataset.indes].list[i].cart_id;
+          var _index = that.data.newArr.indexOf(id);
+          that.data.newArr.splice(_index, 1);
+        }
+      }
+      
       that.setData({
         [fucardtanmess]: 0,
-        newArr: arr,
-        checked_all: false
+        newArr: that.data.newArr,
       });
 
       that.getTotalPrice();
@@ -414,13 +440,12 @@ Page({
 
       var len = that.data.cardTeams[e.target.dataset.indes].list;
       for (var i = 0; i < len.length; i++) {
-        arr.push(len[i].cart_id);
+        that.data.newArr.push(len[i].cart_id);
       }
 
       that.setData({
         [fucardtanmess]: that.data.cardTeams[e.target.dataset.indes].lengthz,
-        newArr: arr,
-        checked_all: true
+        newArr: that.data.newArr,
       });
 
       that.setData({
@@ -497,8 +522,17 @@ Page({
               isGoods: false
             });
           }
+          var aasindex = 0;
+          for (var k = 0; k < cardTeams.length; k++) {
+            for (var l = 0; l < cardTeams[k].list.length; l++) {
+              aasindex++;
+              that.setData({
+                zonglength: aasindex
+              });
+            }
+          }
           that.setData({
-            cardTeams: cardTeams
+            cardTeams: cardTeams,
           });
           that.getTotalPrice();
         }
@@ -508,7 +542,10 @@ Page({
   //操作删除
   semDelItem: function() {
     var _this = this;
-    if (_this.data.checked_all) {
+    var cardTeams = this.data.cardTeams;
+    var selectIndex = this.data.selectIndex;
+    //全部选中删除
+    if (_this.data.yixuanlength == _this.data.zonglength) {
       wx.showModal({
         title: '提示',
         content: '确定删除吗？',
@@ -519,162 +556,91 @@ Page({
             _this.setData({
               cardTeams: [],
               manage: '管理',
-              yixuanlength: 0
+              yixuanlength: 0,
+              zonglength: 0,
             });
+            if (_this.data.invalidArr.length == 0) {
+              _this.setData({
+                isGoods: false
+              });
+            }
           }
         }
       })
     }
+    // //选中一个删除
+    // if (_this.data.yixuanlength == 1) {
+    //   if (_this.data.zonglength != 1) {
+    //     wx.showModal({
+    //       title: '提示',
+    //       content: '确定删除吗？',
+    //       cancelText: '否',
+    //       confirmText: '是',
+    //       success: function (res) {
+    //         if (res.confirm) {
+    //           var _index = cardTeams[selectIndex].list.indexOf(_this.data.selectGoods);
+    //           cardTeams[selectIndex].list.splice(_index, 1);
+    //           _this.setData({
+    //             cardTeams: cardTeams,
+    //             zonglength: cardTeams[selectIndex].list.length,
+    //             yixuanlength: 0
+    //           });
+    //         }
+    //       }
+    //     })
+    //   }
+    // }
+    //选中两个以上删除
+    if (_this.data.yixuanlength >= 1) {
+      if (_this.data.yixuanlength != _this.data.zonglength) {
+        wx.showModal({
+          title: '提示',
+          content: '确定删除吗？',
+          cancelText: '否',
+          confirmText: '是',
+          success: function (res) {
+            if (res.confirm) {
+              
+              for (var i = 0; i < cardTeams.length; i++) {
+                for (var j = cardTeams[i].list.length; j > 0; j--) {
+                  if (cardTeams[i].list[j-1].is_xuan == 1) {
+                    var _index = cardTeams[i].list.indexOf(cardTeams[i].list[j - 1]);
+                    cardTeams[i].list.splice(_index, 1);
+                    _this.setData({
+                      cardTeams: cardTeams,
+                    });
+                    
+                    console.log(cardTeams);
+                    var aasindex = 0;
+                    for (var k = 0; k < cardTeams.length; k++) {
+                      for (var l = 0; l < cardTeams[k].list.length; l++) {
+                        aasindex++;
+                        _this.setData({
+                          zonglength: aasindex,
+                          yixuanlength: 0
+                        });
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        })
+      }
+    }
   },
   //清理失效商品
   clearInvalid: function() {
-    // this.setData({
-    //   invalidArr: [],
-    //   invState: false
-    // });
-    // if (this.data.invalidArr.length == 0 && this.data.cardTeams == 0) {
-    //   this.setData({
-    //     isGoods: false
-    //   });
-    // }
-    var arr = [
-      {
-        "store_name": "YGGC商城",
-        "store_id": 28,
-        "list": [
-          {
-            "cart_id": 1287,
-            "buyer_id": 1,
-            "store_id": 28,
-            "store_name": "YGGC商城",
-            "goods_id": "ecdb9f6a96",
-            "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
-            "goods_price": "264.00",
-            "goods_num": 1,
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
-            "bl_id": 0,
-            "goods_sku": "ecdb9f6a96",
-            "yggc_sku": "jd_personal_1003829",
-            "goods_state": 1,
-            "stock": [
-              {
-                "goods_sku_id": 114436,
-                "goods_sku": "ecdb9f6a96",
-                "goods_id": 114436,
-                "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
-                "goods_price": "264.00",
-                "goods_marketprice": "264.00",
-                "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
-                "goods_unit": "件",
-                "goods_storage": 100,
-                "spu": "ecdb9f6a96"
-              }
-            ],
-            "goods_total": "264.00",
-            "is_xuan": 0
-          },
-          {
-            "cart_id": 1289,
-            "buyer_id": 1,
-            "store_id": 28,
-            "store_name": "YGGC商城",
-            "goods_id": "8e87427dd6",
-            "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
-            "goods_price": "379.00",
-            "goods_num": 1,
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
-            "bl_id": 0,
-            "goods_sku": "8e87427dd6",
-            "yggc_sku": "jd_personal_100001736149",
-            "goods_state": 1,
-            "stock": [
-              {
-                "goods_sku_id": 44628,
-                "goods_sku": "8e87427dd6",
-                "goods_id": 44628,
-                "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
-                "goods_price": "379.00",
-                "goods_marketprice": "379.00",
-                "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
-                "goods_unit": "件",
-                "goods_storage": 100,
-                "spu": "8e87427dd6"
-              }
-            ],
-            "goods_total": "379.00",
-            "is_xuan": 0
-          },
-          {
-            "cart_id": 1312,
-            "buyer_id": 1,
-            "store_id": 28,
-            "store_name": "YGGC商城",
-            "goods_id": "1d84795745",
-            "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
-            "goods_price": "36.01",
-            "goods_num": 1,
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
-            "bl_id": 0,
-            "goods_sku": "1d84795745",
-            "yggc_sku": "jd_personal_5028785",
-            "goods_state": 1,
-            "stock": [
-              {
-                "goods_sku_id": 34605,
-                "goods_sku": "1d84795745",
-                "goods_id": 34605,
-                "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
-                "goods_price": "36.01",
-                "goods_marketprice": "45.00",
-                "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
-                "goods_unit": "件",
-                "goods_storage": 100,
-                "spu": "1d84795745"
-              }
-            ],
-            "goods_total": "36.01",
-            "is_xuan": 0
-          },
-          {
-            "cart_id": 1427,
-            "buyer_id": 1,
-            "store_id": 28,
-            "store_name": "YGGC商城",
-            "goods_id": "1566474581",
-            "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
-            "goods_price": "60.20",
-            "goods_num": 1,
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
-            "bl_id": 0,
-            "goods_sku": "1566474581",
-            "yggc_sku": "jd_personal_497495",
-            "goods_state": 1,
-            "stock": [
-              {
-                "goods_sku_id": 684452,
-                "goods_sku": "1566474581",
-                "goods_id": 684451,
-                "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
-                "goods_price": "60.20",
-                "goods_marketprice": "60.20",
-                "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
-                "goods_unit": "件",
-                "goods_storage": 100,
-                "spu": "1566474581"
-              }
-            ],
-            "goods_total": "60.20",
-            "is_xuan": 0
-          }
-        ],
-        "lengthz": 4,
-        "lengths": 0,
-        "errorState": false
-      }
-    ];
     this.setData({
-      cardTeams: arr
+      invalidArr: [],
+      invState: false
     });
+    if (this.data.invalidArr.length == 0 && this.data.cardTeams == 0) {
+      this.setData({
+        isGoods: false
+      });
+    }
   },
 
   /**
@@ -722,7 +688,7 @@ Page({
         if (cardTeams[i].list[j].stock.length == 0) {
           cardTeams[i].fstock = [];
         }
-
+        
         if (that.data.checked_all) {
           cardTeams[i].list[j].is_xuan = 1;
           // cardTeams[i].shopSelect = true;
@@ -733,7 +699,7 @@ Page({
           arr = [];
         }
       }
-      
+
       if (cardTeams[i].fstock != undefined) {
         arr2.push(cardTeams[i]);
       }else{

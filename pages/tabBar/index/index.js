@@ -29,12 +29,12 @@ Page({
   },
 
   scanCode() {
-    this.showDialog();
-    // wx.scanCode({
-    //   success(res) {
-    //     console.log(res)
-    //   }
-    // })
+    // this.showDialog();
+    wx.scanCode({
+      success(res) {
+        console.log(res)
+      }
+    })
     // wx.login({
     //   success(res) {
     //     console.log(res);

@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/tabBar/classification/classification",
     "pages/tabBar/shopCart/shopCart",
     "pages/tabBar/index/index",
     "pages/tabBar/user/user",
-    "pages/tabBar/classification/classification",
     "pages/de/de",
     "pages/businessCooperation/businessCooperation",
     "pages/components/dialog/dialog"

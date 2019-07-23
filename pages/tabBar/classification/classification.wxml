@@ -1,2 +1,45 @@
-<!--pages/classification/classification.wxml-->
-<text>pages/classification/classification.wxml</text>
+<view class="classification-bg">
+  <view class="home-wrapper">
+    <view class="home-left" bindtap="scanCode">
+      <image src="../../../images/classification_scan.png"></image>
+      <text class="home-left-word">扫一扫</text>
+    </view>
+    <view class="home-center">
+      <input type="text" placeholder-style="color:#999;" placeholder="小鹿要飞2019春季新款" />
+      <image src="../../../images/search_btn.png"></image>
+    </view>
+    <view class="home-right">
+      <image src="../../../images/classification_msg.png"></image>
+      <text class="home-right-word">消息</text>
+      <view class="msg-num">7</view>
+    </view>
+  </view>
+  <view class="cification-onemenu-wrapper flex">
+    <view class="cification-onemenu-left">
+      <block wx:for="{{topCategory}}" wx:key="key">
+        <view class="cification-onemenu-left-item {{ num == index ? 'cur' : '' }}" bindtap="switchTab" data-index="{{index}}" data-id="{{item.gc_id}}">
+          {{item.gc_name}}
+        </view>
+      </block>
+    </view>
+    <view class="cification-onemenu-right">
+      <block wx:for="{{categoryChild.list}}" wx:key="index">
+        <view class="cification-onemenu-right-item">
+          <view class="cification-onemenu-right-item-title">
+            {{item.gc_name}}
+          </view>
+          <view class="cification-onemenu-right-item-content">
+            <block wx:for="{{item.children}}" wx:for-item="element" wx:for-index="key" wx:key="key">
+              <view class="cification-onemenu-right-item-content-goods" data-id="{{element.gc_id}}">
+                <view class="item-goods-img">
+                  <image src="{{'http://test.fulibuy.cn'+element.gc_pic}}"></image>
+                </view>
+                <view class="item-goods-word">{{element.gc_name}}</view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
