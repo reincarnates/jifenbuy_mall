@@ -1,12 +1,15 @@
 {
   "pages": [
+    "pages/listPage/listPage",
+    "pages/search/search",
+    "pages/tabBar/index/index",
     "pages/tabBar/classification/classification",
     "pages/tabBar/shopCart/shopCart",
-    "pages/tabBar/index/index",
     "pages/tabBar/user/user",
     "pages/de/de",
     "pages/businessCooperation/businessCooperation",
-    "pages/components/dialog/dialog"
+    "pages/components/dialog/dialog",
+    "pages/searchOrder/searchOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",

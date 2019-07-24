@@ -1,0 +1,152 @@
+.search-wrapper{
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+}
+
+.search-head{
+  width: 100%;
+  height: 90rpx;
+  border-bottom: 1px solid #ddd;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-input{
+  width: 617rpx;
+  height: 60rpx;
+  background-color: #fff;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+}
+
+.search-input image{
+  width: 35rpx;
+  height: 35rpx;
+  /* margin-right: 30rpx; */
+}
+
+.search-input input{
+  width: calc(100% - 65rpx);
+  height: 60rpx;
+  padding-left: 25rpx;
+  box-sizing: border-box;
+  color: #999;
+  font-size: 24rpx;
+}
+
+.search-cancel{
+  font-size: 26rpx;
+  color: #999;
+}
+
+.search-content{
+  width: 100%;
+  height: calc(100% - 106rpx);
+  border-top-left-radius: 35rpx;
+  border-top-right-radius: 35rpx;
+  background-color: #fff;
+}
+
+.search-content-head{
+  width: 100%;
+  height: 73rpx;
+  font-size: 26rpx;
+  color: #333;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.search-content-head image{
+  width: 27rpx;
+  height: 27rpx;
+  margin-right: 12rpx;
+}
+
+.search-record{
+  width: 100%;
+  /* height: 176rpx; */
+  overflow: hidden;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.search-record-wrapper{
+  padding: 4rpx 0 0 13rpx;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.search-record-item{
+  padding: 14rpx 29rpx 13rpx 19rpx;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 22rpx;
+  margin-right: 18rpx;
+  margin-bottom: 30rpx;
+  border-radius: 30rpx;
+}
+
+.more-history{
+  color: #000;
+  font-size: 24rpx;
+  margin-top: 56rpx;
+  margin-bottom: 17rpx;
+}
+
+.more-history image{
+  width: 18rpx;
+  height: 11rpx;
+  margin-left: 13rpx;
+}
+
+.search-find-wrapper{
+  width: 100%;
+  border-top: 1rpx solid #ddd;
+  padding: 0 32rpx;
+  box-sizing: border-box;
+}
+
+.search-find-title{
+  color: #333;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}
+
+.search-find-content{
+  width: 100%;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+.search-find-item{
+  color: #666;
+  font-size: 22rpx;
+  margin: 29rpx 30rpx 0 0;
+}
+
+.search-tab-wrapper{
+  width: 100%;
+  height: 87rpx;
+  padding: 0 110rpx;
+  box-sizing: border-box;
+}
+
+.search-tab-item{
+  width: 70rpx;
+  height: 55rpx;
+  border-bottom: 3rpx solid #f5f5f5;
+  color: #000;
+  font-size: 26rpx;
+}
+
+.tabCur{
+  color: #fe6601;
+  border-color: #fe6601
+}

@@ -1,0 +1,15 @@
+<view class="list-wrapper">
+  <view class="list-head flex-sw">
+    <view class="list-head-input flex-center">
+      <input disabled="true" placeholder="小鹿要飞2019春季新款"></input>
+      <image src="../../images/list_btn.png"></image>
+    </view>
+    <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png"></image>
+  </view>
+  <view class="list-operation flex-sw">
+    <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent">综合</view>
+    <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent">销量</view>
+    <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent">价格</view>
+    <view class="list-operation-item {{currentData == 3 ? 'listCur' : ''}}" data-current="3" bindtap="checkCurrent">筛选</view>
+  </view>
+</view>

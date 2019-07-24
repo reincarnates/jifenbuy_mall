@@ -1,0 +1,22 @@
+<view class="search-wrapper">
+  <view class="search-head">
+    <view class="search-input">
+      <image src="../../images/search_page_btn.png"></image>
+      <input type="text" focus="true" placeholder="搜索全部订单" confirm-type="search" bindconfirm="search"></input>
+    </view>
+    <view class="search-cancel" bindtap="returnBack">取消</view>
+  </view>
+  <view class="search-content">
+    <view class="search-content-head flex-sw">
+      <view>历史搜索</view>
+      <image src="../../images/del_history.png"></image>
+    </view>
+    <view class="search-record flex">
+      <view class="search-record-item">iphone8 plus</view>
+      <view class="search-record-item">iphone8 plus</view>
+      <view class="search-record-item">iphone8 plus</view>
+      <view class="search-record-item">iph</view>
+      <view class="search-record-item">iphone8 plus</view>
+    </view>
+  </view>
+</view>

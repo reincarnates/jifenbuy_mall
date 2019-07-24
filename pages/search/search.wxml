@@ -1,0 +1,57 @@
+<view class="search-wrapper">
+  <view class="search-head">
+    <view class="search-input">
+      <input type="text" focus="true" placeholder="小鹿要飞2019春季新款" confirm-type="search" bindconfirm="search" bindinput="selectVal"></input>
+      <view class="flex-center" style="height: 60rpx; margin-right: 30rpx;" bindtap="searchClick">
+        <image src="../../images/search_page_btn.png" bindtap="searchClick"></image>
+      </view>
+    </view>
+    <view class="search-cancel" bindtap="returnBack">取消</view>
+  </view>
+  <view class="search-tab-wrapper flex-sw">
+    <view class="search-tab-item flex-center {{currentData == 0 ? 'tabCur' : ''}}" data-current="0" bindtap="checkCurrent">全部</view>
+    <view class="search-tab-item flex-center {{currentData == 1 ? 'tabCur' : ''}}" data-current="1" bindtap="checkCurrent">自营</view>
+    <view class="search-tab-item flex-center {{currentData == 2 ? 'tabCur' : ''}}" data-current="2" bindtap="checkCurrent">店铺</view>
+  </view>
+  <view class="search-content">
+    <view class="search-content-head flex-sw">
+      <view>历史搜索</view>
+      <image src="../../images/del_history.png"></image>
+    </view>
+    <view class="search-record" style="height: {{height + 'px'}}">
+      <view class="search-record-wrapper flex">
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iph</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iphone8 plus</view>
+        <view class="search-record-item">iph</view>
+        <view class="search-record-item">iphone8 plus</view>
+      </view>
+    </view>
+    <view class="more-history">
+      <view class="flex-center" bindtap="moreHistory" wx:if="{{isMore}}">
+        <view>更多历史记录</view>
+        <image src="../../images/more.png"></image>
+      </view>
+    </view>
+    <view class="search-find-wrapper">
+      <view class="search-find-title">搜索发现</view>
+      <view class="search-find-content flex">
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+        <view class="search-find-item">仙女上衣  外搭</view>
+      </view>
+    </view>
+  </view>
+</view>

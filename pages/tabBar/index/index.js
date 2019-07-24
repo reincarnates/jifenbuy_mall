@@ -28,6 +28,13 @@ Page({
     this.login();
   },
 
+  //跳转至搜索页
+  jumpSearch: function() {
+    wx.navigateTo({
+      url: '/pages/search/search'
+    });
+  },
+
   scanCode() {
     // this.showDialog();
     wx.scanCode({

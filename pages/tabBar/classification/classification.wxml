@@ -5,7 +5,7 @@
       <text class="home-left-word">扫一扫</text>
     </view>
     <view class="home-center">
-      <input type="text" placeholder-style="color:#999;" placeholder="小鹿要飞2019春季新款" />
+      <input type="text" placeholder-style="color:#999;" disabled="true" placeholder="小鹿要飞2019春季新款" bindtap="jumpSearch" />
       <image src="../../../images/search_btn.png"></image>
     </view>
     <view class="home-right">
@@ -30,7 +30,7 @@
           </view>
           <view class="cification-onemenu-right-item-content">
             <block wx:for="{{item.children}}" wx:for-item="element" wx:for-index="key" wx:key="key">
-              <view class="cification-onemenu-right-item-content-goods" data-id="{{element.gc_id}}">
+              <view class="cification-onemenu-right-item-content-goods" bindtap="jumpList" data-id="{{element.gc_id}}">
                 <view class="item-goods-img">
                   <image src="{{'http://test.fulibuy.cn'+element.gc_pic}}"></image>
                 </view>
