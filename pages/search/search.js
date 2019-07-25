@@ -9,6 +9,7 @@ Page({
     isMore: true,
     currentData: 0,
     searchVal: '',
+    isFocus: true,
   },
 
   /**
@@ -59,12 +60,25 @@ Page({
     wx.navigateTo({
       url: `/pages/listPage/listPage?keyWord=${e.detail.value}`
     });
+    this.setData({
+      isFocus: false
+    });
   },
 
   searchClick: function() {
     wx.navigateTo({
       url: `/pages/listPage/listPage?keyWord=${this.data.searchVal}`
     });
+    this.setData({
+      isFocus: false
+    });
+  },
+
+
+  changeDataPageA() {
+    this.setData({
+      isFocus: true
+    })
   },
 
   //返回上一级页面
@@ -109,7 +123,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**

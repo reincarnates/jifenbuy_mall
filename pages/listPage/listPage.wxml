@@ -1,15 +1,77 @@
 <view class="list-wrapper">
   <view class="list-head flex-sw">
     <view class="list-head-input flex-center">
-      <input disabled="true" placeholder="小鹿要飞2019春季新款"></input>
+      <input disabled="true" placeholder="小鹿要飞2019春季新款" value="{{keyWord}}" bindtap="returnSearch"></input>
       <image src="../../images/list_btn.png"></image>
     </view>
-    <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png"></image>
+    <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png" bindtap="changeStyle"></image>
   </view>
   <view class="list-operation flex-sw">
     <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent">综合</view>
     <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent">销量</view>
-    <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent">价格</view>
+    <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent" style="width: 82rpx; background-image: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/price_bg.png); background-repeat: no-repeat; background-position: 56rpx {{posX}};">价格</view>
     <view class="list-operation-item {{currentData == 3 ? 'listCur' : ''}}" data-current="3" bindtap="checkCurrent">筛选</view>
+  </view>
+  <view class="list-goods-wrapper">
+    <view class="list-goods" wx:if="{{isOrdinary}}">
+      <block wx:for="{{goodsList}}" wx:key="index">
+        <view class="list-goods-item flex">
+          <view class="list-goods-item-img">
+            <image lazy-load="true" src="{{item.goods_image}}"></image>
+          </view>
+          <view class="list-goods-item-info">
+            <view class="list-goods-item-info-word">
+              {{item.goods_ad_words}}
+            </view>
+            <view class="list-special">员工特价</view>
+            <view class="list-price flex">
+              <view class="list-new-price">
+                <text>￥</text>
+                <text style="font-size: 30rpx;">{{item.goods_price}}</text>
+              </view>
+              <view class="list-old-price">
+                ￥{{item.goods_price}}
+              </view>
+            </view>
+            <view class="list-shop-wrapper flex-sw">
+              <view>{{item.store_name}}</view>
+              <view>
+                <text>销量 1234</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="list-waterfall-goods-wrapper flex" wx:if="{{isWaterfall}}">
+      <block wx:for="{{waterfall}}" wx:key="index">
+        <view class="list-waterfall-goods-item">
+          <view class="list-waterfall-goods-item-img">
+            <image lazy-load="true" src="{{item.goods_image}}"></image>
+          </view>
+          <view class="list-waterfall-goods-item-content">
+            <view class="list-waterfall-goods-item-name">
+              {{item.goods_ad_words}}
+            </view>
+            <view class="list-special" style="margin-top: 34rpx;">员工特价</view>
+            <view class="list-price flex">
+              <view class="list-new-price">
+                <text>￥</text>
+                <text style="font-size: 30rpx;">{{item.goods_price}}</text>
+              </view>
+              <view class="list-old-price">
+                ￥{{item.goods_price}}
+              </view>
+            </view>
+            <view class="list-shop-wrapper flex-sw">
+              <view>{{item.store_name}}</view>
+              <view>
+                <text>销量 1234</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
   </view>
 </view>

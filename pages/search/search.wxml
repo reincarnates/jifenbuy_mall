@@ -1,9 +1,9 @@
 <view class="search-wrapper">
   <view class="search-head">
     <view class="search-input">
-      <input type="text" focus="true" placeholder="小鹿要飞2019春季新款" confirm-type="search" bindconfirm="search" bindinput="selectVal"></input>
+      <input type="text" focus="{{isFocus}}" placeholder="小鹿要飞2019春季新款" confirm-type="search" bindconfirm="search" bindinput="selectVal"></input>
       <view class="flex-center" style="height: 60rpx; margin-right: 30rpx;" bindtap="searchClick">
-        <image src="../../images/search_page_btn.png" bindtap="searchClick"></image>
+        <image src="../../images/search_page_btn.png"></image>
       </view>
     </view>
     <view class="search-cancel" bindtap="returnBack">取消</view>
