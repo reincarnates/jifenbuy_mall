@@ -105,10 +105,12 @@ Page({
       },
       success(res) {
         if (res.data.code) {
-          wx.pageScrollTo({
-            scrollTop: 0,
-            duration: 300
-          })
+          var query = wx.createSelectorQuery();
+          query.select('.cification-onemenu-right').boundingClientRect(function (rect) {
+            wx.pageScrollTo({
+              scrollTop: 0
+            })
+          }).exec();
           _this.setData({
             categoryChild: res.data.data
           });

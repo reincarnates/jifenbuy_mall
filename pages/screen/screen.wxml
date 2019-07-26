@@ -1,0 +1,33 @@
+<view class="screen-wrapper">
+  <view class="screen-price-section">
+    <view class="screen-price-section-title">价格区间</view>
+    <view class="screen-price-section-input flex">
+      <view class="screen-price-section-input-min">
+        <input type="number" placeholder="最低价"></input>
+      </view>
+      <view class="screen-price-section-input-ver"></view>
+      <view class="screen-price-section-input-max">
+        <input type="number" placeholder="最高价"></input>
+      </view>
+    </view>
+  </view>
+  <view class="screen-brand">
+    <view class="screen-brand-title">品牌</view>
+    <view class="screen-brand-content" style="height: {{brandHeight}}">
+      <view class="screen-brand-item-wrapper">
+        <block wx:for="{{brandArr}}" wx:key="index">
+          <view class="screen-brand-item" data-id="{{item.id}}">{{item.name}}</view>
+        </block>
+      </view>
+      <view class="check-all" bindtap="checkAll" wx:if="{{isShowCheck}}">查看全部</view>
+    </view>
+  </view>
+  <view class="screen-shop">
+    <view class="screen-shop-title">店铺</view>
+    <view class="screen-shop-content">
+      <block wx:for="{{store}}" wx:key="index">
+        <view class="screen-shop-item" data-val="{{item.val}}">{{item.name}}</view>
+      </block>
+    </view>
+  </view>
+</view>

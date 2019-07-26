@@ -1,16 +1,21 @@
 <view class="list-wrapper">
-  <view class="list-head flex-sw">
-    <view class="list-head-input flex-center">
-      <input disabled="true" placeholder="小鹿要飞2019春季新款" value="{{keyWord}}" bindtap="returnSearch"></input>
-      <image src="../../images/list_btn.png"></image>
+  <view class="{{floorstatus ? 'fixed' : ''}}">
+    <view class="list-head flex-sw">
+      <view class="list-head-input flex-center">
+        <input disabled="true" placeholder="小鹿要飞2019春季新款" value="{{keyWord}}" bindtap="returnSearch"></input>
+        <image src="../../images/list_btn.png"></image>
+      </view>
+      <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png" bindtap="changeStyle"></image>
     </view>
-    <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png" bindtap="changeStyle"></image>
-  </view>
-  <view class="list-operation flex-sw">
-    <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent">综合</view>
-    <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent">销量</view>
-    <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent" style="width: 82rpx; background-image: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/price_bg.png); background-repeat: no-repeat; background-position: 56rpx {{posX}};">价格</view>
-    <view class="list-operation-item {{currentData == 3 ? 'listCur' : ''}}" data-current="3" bindtap="checkCurrent">筛选</view>
+    <view class="list-operation flex-sw">
+      <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent">综合</view>
+      <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent">销量</view>
+      <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent" style="position: relative; width: 82rpx;">
+        价格
+        <text class="iconfont {{iconClass}}" style="position: absolute; top: 0; right: 0;"></text>
+      </view>
+      <view class="list-operation-item {{currentData == 3 ? 'listCur' : ''}}" data-current="3" bindtap="checkCurrent">筛选</view>
+    </view>
   </view>
   <view class="list-goods-wrapper">
     <view class="list-goods" wx:if="{{isOrdinary}}">
@@ -30,7 +35,7 @@
                 <text style="font-size: 30rpx;">{{item.goods_price}}</text>
               </view>
               <view class="list-old-price">
-                ￥{{item.goods_price}}
+                ￥{{item.goods_marketprice}}
               </view>
             </view>
             <view class="list-shop-wrapper flex-sw">
@@ -74,4 +79,8 @@
       </block>
     </view>
   </view>
+</view>
+
+<view class="goTop" bindtap="goTop" wx:if="{{floorstatus}}">
+  <image src="../../images/go_top.png"></image>
 </view>

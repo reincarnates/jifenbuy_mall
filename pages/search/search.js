@@ -130,7 +130,17 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    // 获取页面栈
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]; // 当前页
+    var prevPage = pages[pages.length - 3]; // 上一个页面
+    // 如果存在上一页
+    if (prevPage != undefined && prevPage.route == 'pages/tabBar/classification/classification') {
+      wx.navigateBack({
+        delta: 2
+      });
+    }
+    
   },
 
   /**

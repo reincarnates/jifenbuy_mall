@@ -19,17 +19,18 @@ Page({
       sort: '综合排序',
       sort2: 'asc'
     },
-    posX: '4px',
     isOrdinary: true,
     isWaterfall: false,
     changeState: 1,
+    iconClass: 'icon-shangxiajiantou',
+    floorstatus: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
+    // console.log(options);
     this.setData({
       classId: options.id,
       keyWord: options.keyWord
@@ -39,8 +40,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        // keyword: options.keyWord != undefined ? options.keyWord : '',
-        keyword: '衣服',
+        keyword: options.keyWord != undefined ? options.keyWord : '',
+        // keyword: '衣服',
         id: options.id != undefined ? options.id : '',
         page: 1,
         sort: 'asc',
@@ -54,12 +55,12 @@ Page({
       method: "POST",
       success(res) {
         _this.setData({
-          goodsList: res.data.data.goods_list,
-          waterfall: res.data.data.goods_list,
+          goodsList: _this.handleData(res.data.data.goods_list),
+          waterfall: _this.handleData(res.data.data.goods_list),
           pagecount: res.data.data.pagecount
         });
         wx.hideLoading();
-        // console.log(res.data.data);
+        // console.log(_this.data.goodsList);
       },
       fail(data) {
         wx.hideLoading();
@@ -71,6 +72,20 @@ Page({
         })
       }
     })
+  },
+
+  handleData: function(data) {
+    var arr = [];
+    for (var i = 0; i < data.length; i++) {
+      arr.push({
+        goods_image: data[i].goods_image,
+        goods_ad_words: data[i].goods_ad_words,
+        goods_price: data[i].goods_price,
+        goods_marketprice: data[i].goods_marketprice,
+        store_name: data[i].store_name,
+      });
+    }
+    return arr;
   },
 
   //获取当前滑块的index
@@ -92,7 +107,7 @@ Page({
         currentData: e.target.dataset.current
       })
     // }
-
+    _this.goTop();
     if (_index == 0) {
       _this.data.argum.sort = '综合排序';
       _this.data.argum.sort2 = '';
@@ -106,7 +121,7 @@ Page({
     if (_index == 2) {
       if (_this.data.flag == 1) {
         _this.setData({
-          posX: '-14px'
+          iconClass: 'icon-jiantou'
         });
         _this.data.argum.sort = 'price';
         _this.data.argum.sort2 = 'asc';
@@ -118,18 +133,25 @@ Page({
         _this.requestList(_this.data.argum);
         _this.data.flag = 1;
         _this.setData({
-          posX: '-30px'
+          iconClass: 'icon-jiantou-copy'
         });
       }
     }else{
       _this.setData({
-        posX: '4px'
+        iconClass: 'icon-shangxiajiantou'
       });
+    }
+
+    if (_index == 3) {
+      wx.navigateTo({
+        url: `/pages/screen/screen?keyword=${_this.data.keyWord}&classId=${_this.data.classId}`,
+      })
     }
   },
 
   //切换样式
   changeStyle: function() {
+    this.goTop();
     if (this.data.changeState == 1) {
       this.setData({
         isWaterfall: true,
@@ -151,8 +173,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        // keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
-        keyword: '衣服',
+        keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
+        // keyword: '衣服',
         id: _this.data.classId != undefined ? _this.data.classId : '',
         page: 1,
         sort: argus.sort2,
@@ -166,8 +188,8 @@ Page({
       method: "POST",
       success(res) {
         _this.setData({
-          goodsList: res.data.data.goods_list,
-          waterfall: res.data.data.goods_list,
+          goodsList: _this.handleData(res.data.data.goods_list),
+          waterfall: _this.handleData(res.data.data.goods_list),
           pagecount: res.data.data.pagecount
         });
         wx.hideLoading();
@@ -181,17 +203,49 @@ Page({
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; // 当前页
     var prevPage = pages[pages.length - 2]; // 上一个页面
-    var data = prevPage.data // 获取上一页data里的数据
     // 如果存在上一页
-    if (prevPage) {
+    if (prevPage.route == 'pages/search/search') {
       // 可以调用上一页的函数
       prevPage.changeDataPageA();
+      wx.navigateBack({
+        delta: 1
+      })
+    }else{
+      // wx.navigateBack({
+      //   delta: 1
+      // })
+      wx.navigateTo({
+        url: '/pages/search/search'
+      });
     }
-    wx.navigateBack({
-      delta: 1
-    })
+  },
+
+  // 获取滚动条当前位置
+  onPageScroll: function (e) {
+    if (e.scrollTop > 100) {
+      this.setData({
+        floorstatus: true
+      });
+    } else {
+      this.setData({
+        floorstatus: false
+      });
+    }
   },
   
+  //返回顶部
+  goTop: function() {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -224,7 +278,7 @@ Page({
     var prevPage = pages[pages.length - 2]; // 上一个页面
     var data = prevPage.data // 获取上一页data里的数据
     // 如果存在上一页
-    if (prevPage) {
+    if (prevPage.route == 'pages/search/search') {
       // 可以调用上一页的函数
       prevPage.changeDataPageA();
     }
@@ -248,8 +302,8 @@ Page({
       wx.request({
         url: 'http://tapi.fulibuy.cn/Search/searchGoods',
         data: {
-          // keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
-          keyword: '衣服',
+          keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
+          // keyword: '衣服',
           id: _this.data.classId != undefined ? _this.data.classId : '',
           page: _this.data.page,
           sort: _this.data.argum.sort2,
@@ -263,8 +317,8 @@ Page({
         method: "POST",
         success(res) {
           _this.setData({
-            goodsList: _this.data.goodsList.concat(res.data.data.goods_list),
-            waterfall: _this.data.goodsList.concat(res.data.data.goods_list)
+            goodsList: _this.data.goodsList.concat(_this.handleData(res.data.data.goods_list)),
+            waterfall: _this.data.goodsList.concat(_this.handleData(res.data.data.goods_list))
           });
           wx.hideLoading();
         }

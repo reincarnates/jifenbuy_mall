@@ -647,7 +647,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-   
+   var _this = this;
+  //  wx.request({
+  //    url: 'http://tapi.fulibuy.cn/Cart/cart',
+  //    method: 'POST',
+  //    data: {
+  //      user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
+  //      device_id: 'ffbcb5efff6aa294'
+  //    },
+  //    success(res) {
+  //      if(res.data.code) {
+  //        console.log(res);
+  //        _this.setData({
+  //          cardTeams: res.data.data.cart_list
+  //        });
+  //      }
+  //    }
+  //  })
   },
 
   /**
