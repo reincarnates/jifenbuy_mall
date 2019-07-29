@@ -16,14 +16,18 @@ Page({
     keyWord: '',
     flag: 1,
     argum: {
-      sort: '综合排序',
+      sort: '',
       sort2: 'asc'
     },
     isOrdinary: true,
     isWaterfall: false,
     changeState: 1,
     iconClass: 'icon-shangxiajiantou',
-    floorstatus: false
+    floorstatus: false,
+    minVal: '',
+    maxVal: '',
+    brandId: '',
+    source: '',
   },
 
   /**
@@ -45,10 +49,10 @@ Page({
         id: options.id != undefined ? options.id : '',
         page: 1,
         sort: 'asc',
-        sortField: '综合排序',
-        // ev: '',
-        // brandId: '',
-        // source: '',
+        sortField: '',
+        ev: _this.data.minVal + '-' + _this.data.maxVal,
+        brandId: _this.data.brandId,
+        source: _this.data.source,
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId
       },
@@ -109,7 +113,7 @@ Page({
     // }
     _this.goTop();
     if (_index == 0) {
-      _this.data.argum.sort = '综合排序';
+      _this.data.argum.sort = '';
       _this.data.argum.sort2 = '';
       _this.requestList(_this.data.argum);
     } else if (_index == 1) {
@@ -144,7 +148,7 @@ Page({
 
     if (_index == 3) {
       wx.navigateTo({
-        url: `/pages/screen/screen?keyword=${_this.data.keyWord}&classId=${_this.data.classId}`,
+        url: `/pages/screen/screen?keyWord=${_this.data.keyWord}&classId=${_this.data.classId}`,
       })
     }
   },
@@ -179,9 +183,9 @@ Page({
         page: 1,
         sort: argus.sort2,
         sortField: argus.sort,
-        // ev: '',
-        // brandId: '',
-        // source: '',
+        ev: _this.data.minVal + '-' + _this.data.maxVal,
+        brandId: _this.data.brandId,
+        source: _this.data.source,
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId
       },
@@ -308,9 +312,9 @@ Page({
           page: _this.data.page,
           sort: _this.data.argum.sort2,
           sortField: _this.data.argum.sort,
-          // ev: '',
-          // brandId: '',
-          // source: '',
+          ev: _this.data.minVal + '-' + _this.data.maxVal,
+          brandId: _this.data.brandId,
+          source: _this.data.source,
           user_token: _this.data.userToken,
           device_id: _this.data.deviceId
         },

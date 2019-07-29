@@ -17,7 +17,7 @@
       <view class="list-operation-item {{currentData == 3 ? 'listCur' : ''}}" data-current="3" bindtap="checkCurrent">筛选</view>
     </view>
   </view>
-  <view class="list-goods-wrapper">
+  <view class="list-goods-wrapper" wx:if="{{goodsList.length > 0}}">
     <view class="list-goods" wx:if="{{isOrdinary}}">
       <block wx:for="{{goodsList}}" wx:key="index">
         <view class="list-goods-item flex">
@@ -79,6 +79,14 @@
       </block>
     </view>
   </view>
+  <!-- 没有商品 -->
+  <view class="not-goods-wrapper flex-center" wx:else>
+    <image src="../../images/not_list_goods.png"></image>
+    <view class="not-goods-tips">
+      没有搜索到相关的宝贝
+    </view>
+  </view>
+  <!-- 没有商品end -->
 </view>
 
 <view class="goTop" bindtap="goTop" wx:if="{{floorstatus}}">

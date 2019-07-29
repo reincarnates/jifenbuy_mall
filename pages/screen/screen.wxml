@@ -3,20 +3,23 @@
     <view class="screen-price-section-title">价格区间</view>
     <view class="screen-price-section-input flex">
       <view class="screen-price-section-input-min">
-        <input type="number" placeholder="最低价"></input>
+        <input type="number" placeholder="最低价" value="{{minVal}}" bindinput="minEvent"></input>
       </view>
       <view class="screen-price-section-input-ver"></view>
       <view class="screen-price-section-input-max">
-        <input type="number" placeholder="最高价"></input>
+        <input type="number" placeholder="最高价" value="{{maxVal}}" bindinput="maxEvent"></input>
       </view>
     </view>
   </view>
   <view class="screen-brand">
-    <view class="screen-brand-title">品牌</view>
+    <view class="screen-brand-title flex-sw">
+      <view>品牌</view>
+      <view>{{election}}</view>
+    </view>
     <view class="screen-brand-content" style="height: {{brandHeight}}">
       <view class="screen-brand-item-wrapper">
         <block wx:for="{{brandArr}}" wx:key="index">
-          <view class="screen-brand-item" data-id="{{item.id}}">{{item.name}}</view>
+          <view class="screen-brand-item {{currentData == index ? 'brandCur' : ''}} {{currentData2 == index ? 'brandCur' : ''}}" data-current="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="checkBrand">{{item.name}}</view>
         </block>
       </view>
       <view class="check-all" bindtap="checkAll" wx:if="{{isShowCheck}}">查看全部</view>
@@ -26,8 +29,12 @@
     <view class="screen-shop-title">店铺</view>
     <view class="screen-shop-content">
       <block wx:for="{{store}}" wx:key="index">
-        <view class="screen-shop-item" data-val="{{item.val}}">{{item.name}}</view>
+        <view class="screen-shop-item {{shopCurrent == index ? 'shopCur' : ''}} {{shopCurrent2 == index ? 'shopCur' : ''}}" data-shopcur="{{index}}" data-val="{{item.val}}" bindtap="checkShop">{{item.name}}</view>
       </block>
     </view>
+  </view>
+  <view class="screen-bottom flex">
+    <view class="screen-bottom-left" bindtap="resetScreen">重置</view>
+    <view class="screen-bottom-right" bindtap="confirmScreen">确认</view>
   </view>
 </view>

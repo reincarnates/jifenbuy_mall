@@ -39,212 +39,102 @@
     </view>
   </view>
   <view class="gome-category-wrapper">
-    <view class="gome-category-item">
+    <navigator class="gome-category-item" hover-class="none" wx:for="{{specialArr}}" wx:key="{{index}}" url="{{item.nav_url}}">
       <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
+        <image src="{{'http://test.fulibuy.cn'+item.nav_pic}}"></image>
       </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
-    <view class="gome-category-item">
-      <view class="gome-category-item-img">
-        <image src="../../../images/fuli_mall.png"></image>
-      </view>
-      <view class="gome-category-item-word">福利商城</view>
-    </view>
+      <view class="gome-category-item-word">{{item.nav_name}}</view>
+    </navigator>
   </view>
   <view class="home-pd">
-    <view class="home-banner">
-      <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/banner.png"></image>
-    </view>
-    <view class="home-goods-wrapper flex">
-      <view class="home-goods-brand">
-        <view class="home-goods-brand-title">品牌专供</view>
-        <view class="home-goods-brand-content flex">
-          <view class="home-goods-brand-item">
-            <view class="home-goods-brand-img flex-center">
-              <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/brand_img.png"></image>
-            </view>
-            <view class="home-goods-brand-name">
-              滚筒洗衣机
-            </view>
-            <view class="home-goods-brand-price">
-              ￥
-              <text>1234.00</text>
-            </view>
-          </view>
-          <view class="home-goods-brand-item">
-            <view class="home-goods-brand-img flex-center">
-              <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/brand_img.png"></image>
-            </view>
-            <view class="home-goods-brand-name">
-              滚筒洗衣机
-            </view>
-            <view class="home-goods-brand-price">
-              ￥
-              <text>1234.00</text>
+    <block wx:for="{{floorArr}}" wx:key="{{index}}">
+      <view class="home-banner" wx:if="{{item.type == 1}}">
+        <image src="{{'http://test.fulibuy.cn'+item.data1.img_url}}"></image>
+      </view>
+      <view class="home-goods-wrapper flex" wx:if="{{item.type == 2 }}">
+        <block wx:for="{{item.data2.list}}" wx:for-item="itemName" wx:for-index="idx" wx:key="{{idx}}">
+          <view class="home-goods-brand">
+            <view class="home-goods-brand-title">{{itemName.title}}</view>
+            <view class="home-goods-brand-content flex">
+              <block wx:for="{{itemName.goodsInfo}}" wx:for-item="itemName2" wx:for-index="idx2" wx:key="{{idx2}}">
+                <view class="home-goods-brand-item">
+                  <view class="home-goods-brand-img flex-center">
+                    <image src="{{itemName2.img}}"></image>
+                  </view>
+                  <view class="home-goods-brand-name">
+                    {{itemName2.title}}
+                  </view>
+                  <!-- <view class="home-goods-brand-price">
+                    ￥
+                    <text>{{itemName2.goods_price}}</text>
+                  </view> -->
+                </view>
+              </block>
             </view>
           </view>
+        </block>
+      </view>
+      <!-- 福利精选 -->
+      <view class="welfare-selection" wx:if="{{item.type == 3 }}">
+        <view class="welfare-selection-head flex-center">
+          <view class="welfare-selection-head-img flex-center">
+            <image src="../../../images/selection_left.png"></image>
+          </view>
+          <view>{{item.data3.title}}</view>
+          <view class="welfare-selection-head-img flex-center">
+            <image src="../../../images/selection_right.png"></image>
+          </view>
+        </view>
+        <view class="welfare-selection-banner">
+          <image src="{{'http://test.fulibuy.cn'+item.data3.img_url}}"></image>
+        </view>
+        <view class="welfare-selection-goods-wrapper flex-center">
+          <block wx:for="{{item.data3.list}}" wx:for-index="key" wx:for-item="element" wx:key="{{key}}">
+            <view class="welfare-selection-goods-item flex-col">
+              <view class="welfare-selection-goods-item-img flex-center">
+                <image src="{{element.img}}"></image>
+              </view>
+              <view class="welfare-selection-goods-item-price">
+                ￥
+                <text>{{element.goods_price}}</text>
+              </view>
+            </view>
+          </block>
         </view>
       </view>
-      <view class="home-goods-brand">
-        <view class="home-goods-brand-title">进口好货</view>
-        <view class="home-goods-brand-content flex">
-          <view class="home-goods-brand-item">
-            <view class="home-goods-brand-img flex-center">
-              <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/brand_img.png"></image>
-            </view>
-            <view class="home-goods-brand-name">
-              滚筒洗衣机
-            </view>
-            <view class="home-goods-brand-price">
-              ￥
-              <text>1234.00</text>
-            </view>
+      <!-- 福利精选end -->
+      <!-- 优惠专区 -->
+      <view class="preferential-zone" wx:if="{{item.type == 4 }}">
+        <view class="welfare-selection-head flex-center">
+          <view class="welfare-selection-head-img flex-center">
+            <image src="../../../images/selection_left.png"></image>
           </view>
-          <view class="home-goods-brand-item">
-            <view class="home-goods-brand-img flex-center">
-              <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/brand_img.png"></image>
-            </view>
-            <view class="home-goods-brand-name">
-              滚筒洗衣机
-            </view>
-            <view class="home-goods-brand-price">
-              ￥
-              <text>1234.00</text>
-            </view>
+          <view>优惠专区</view>
+          <view class="welfare-selection-head-img flex-center">
+            <image src="../../../images/selection_right.png"></image>
           </view>
         </view>
+        <view class="preferential-zone-content flex">
+          <block wx:for="{{item.data4.list}}" wx:for-index="index2" wx:for-item="val" wx:key="{{index2}}">
+            <view class="preferential-zone-item" data-atid="{{val.at_id}}">
+              <view class="preferential-zone-item-name">{{val.title}}</view>
+              <view class="preferential-zone-item-word">{{val.subtitle}}</view>
+              <view class="preferential-zone-item-img-wrapper flex">
+                <block wx:for="{{val.goodsInfo}}" wx:for-index="index3" wx:for-item="val2" wx:key="{{index3}}">
+                  <view class="preferential-zone-item-img flex-center">
+                    <image src="{{val2.img}}"></image>
+                  </view>
+                </block>
+              </view>
+            </view>
+          </block>
+        </view>
+        <!-- <view class="preferential-zone-banner">
+          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/zone_bg.png"></image>
+        </view> -->
       </view>
-    </view>
-    <!-- 福利精选 -->
-    <view class="welfare-selection">
-      <view class="welfare-selection-head flex-center">
-        <view class="welfare-selection-head-img flex-center">
-          <image src="../../../images/selection_left.png"></image>
-        </view>
-        <view>福利精选</view>
-        <view class="welfare-selection-head-img flex-center">
-          <image src="../../../images/selection_right.png"></image>
-        </view>
-      </view>
-      <view class="welfare-selection-banner">
-        <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/selection_bg.png"></image>
-      </view>
-      <view class="welfare-selection-goods-wrapper flex-center">
-        <view class="welfare-selection-goods-item flex-col" wx:for="{{8}}" wx:key="index">
-          <view class="welfare-selection-goods-item-img flex-center">
-            <image src="../../../images/selection_img.png"></image>
-          </view>
-          <view class="welfare-selection-goods-item-price">
-            ￥
-            <text>1234.00</text>
-          </view>
-        </view>
-      </view>
-    </view>
-    <!-- 福利精选end -->
-    <!-- 优惠专区 -->
-    <view class="preferential-zone">
-      <view class="welfare-selection-head flex-center">
-        <view class="welfare-selection-head-img flex-center">
-          <image src="../../../images/selection_left.png"></image>
-        </view>
-        <view>优惠专区</view>
-        <view class="welfare-selection-head-img flex-center">
-          <image src="../../../images/selection_right.png"></image>
-        </view>
-      </view>
-      <view class="preferential-zone-content flex">
-        <view class="preferential-zone-item">
-          <view class="preferential-zone-item-name">口碑精品</view>
-          <view class="preferential-zone-item-word">高评价  高质量</view>
-          <view class="preferential-zone-item-img-wrapper flex">
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-          </view>
-        </view>
-        <view class="preferential-zone-item">
-          <view class="preferential-zone-item-name">人气榜</view>
-          <view class="preferential-zone-item-word">高评价  高质量</view>
-          <view class="preferential-zone-item-img-wrapper flex">
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-          </view>
-        </view>
-        <view class="preferential-zone-item">
-          <view class="preferential-zone-item-name">拼团钜惠</view>
-          <view class="preferential-zone-item-word">高评价  高质量</view>
-          <view class="preferential-zone-item-img-wrapper flex">
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-          </view>
-        </view>
-        <view class="preferential-zone-item">
-          <view class="preferential-zone-item-name">达人囤货</view>
-          <view class="preferential-zone-item-word">高评价  高质量</view>
-          <view class="preferential-zone-item-img-wrapper flex">
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-            <view class="preferential-zone-item-img flex-center">
-              <image src="../../../images/zone_img.png"></image>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class="preferential-zone-banner">
-        <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/zone_bg.png"></image>
-      </view>
-    </view>
-    <!-- 优惠专区end -->
+      <!-- 优惠专区end -->
+    </block>
     <!-- 猜你喜欢 -->
     <view class="guess-you-like">
       <view class="welfare-selection-head flex-center">
@@ -260,32 +150,30 @@
         </view>
       </view>
       <view class="guess-you-like-content flex">
-        <view class="guess-you-like-item" wx:for="{{likeNum}}" wx:key="index">
-          <view class="guess-you-like-item-img">
-            <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/like_img.png"></image>
-          </view>
-          <view class="guess-you-like-item-name">
-            花印（日本原装进口）男士透亮 赋活洁面乳130g（深层清洁 ....花印（日本原装进口）
-          </view>
-          <view class="guess-you-like-item-price flex">
-            <view class="guess-you-like-item-new-price">
-              ￥<text>3644.32</text>
+        <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
+          <view class="guess-you-like-item" wx:for="{{guessLikeArr}}" wx:key="index" data-id="{{item.goods_id}}">
+            <view class="guess-you-like-item-img">
+              <image src="{{item.goods_image}}"></image>
             </view>
-            <view class="guess-you-like-item-old-price">
-              ￥3614.32
+            <view class="guess-you-like-item-name">
+              {{item.goods_name}}
+            </view>
+            <view class="guess-you-like-item-price flex">
+              <view class="guess-you-like-item-new-price">
+                ￥
+                <text>{{item.goods_price}}</text>
+              </view>
+              <view class="guess-you-like-item-old-price">
+                ￥{{item.goods_marketprice}}
+              </view>
             </view>
           </view>
-        </view>
+        </block>
       </view>
     </view>
     <!-- 猜你喜欢end -->
   </view>
 </view>
 
-<dialog id='dialog' 
-      title='登录提示' 
-      content='小程序需要您的授权才能提供更好的服务哦' 
-      confirmText='知道了'
-      bind:confirmEvent='confirmEvent'
-      bind:bindGetUserInfo='bindGetUserInfo'>
+<dialog id='dialog' title='登录提示' content='小程序需要您的授权才能提供更好的服务哦' confirmText='知道了' bind:confirmEvent='confirmEvent' bind:bindGetUserInfo='bindGetUserInfo'>
 </dialog>

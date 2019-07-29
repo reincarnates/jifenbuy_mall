@@ -215,3 +215,25 @@
   width: 60rpx;
   height: 60rpx;
 }
+
+.not-goods-wrapper{
+  width: 100%;
+  background-color: #fff;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  padding: 0 12rpx;
+  box-sizing: border-box;
+  color: #666;
+  font-size: 24rpx;
+  flex-direction: column;
+}
+
+.not-goods-wrapper image{
+  width: 471rpx;
+  height: 300rpx;
+  margin-top: 200rpx;
+}
+
+.not-goods-tips{
+  margin-top: 50rpx;
+}
