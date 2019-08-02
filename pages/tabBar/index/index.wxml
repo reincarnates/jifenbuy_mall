@@ -151,7 +151,7 @@
       </view>
       <view class="guess-you-like-content flex">
         <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
-          <view class="guess-you-like-item" wx:for="{{guessLikeArr}}" wx:key="index" data-id="{{item.goods_id}}">
+          <view class="guess-you-like-item" data-id="{{item.goods_id}}">
             <view class="guess-you-like-item-img">
               <image src="{{item.goods_image}}"></image>
             </view>

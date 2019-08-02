@@ -10,6 +10,7 @@ Page({
     specialArr: [], //专题数组
     floorArr: [], //楼层数组
     guessLikeArr: [], //推荐
+    page: 1, //页数
   },
   onLoad: function () {
     var _this = this;
@@ -116,20 +117,27 @@ Page({
   
   onReachBottom: function () {
     var _this = this;
-    //wx.showNavigationBarLoading() //在标题栏中显示加载
+    _this.data.page++;
     wx.showLoading({ title: '加载中' });
-    // wx.request({
-    //   url: '',
-    // })
-    //模拟加载
-    setTimeout(function () {
-      // complete
-      _this.setData({
-        likeNum: _this.data.likeNum + 5
-      });
-      //wx.hideNavigationBarLoading() //完成停止加载
-      wx.hideLoading();
-      wx.stopPullDownRefresh() //停止下拉刷新
-    }, 1000);
+    //推荐
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/index/guessLike',
+      method: 'POST',
+      data: {
+        device_id: _this.data.deviceId,
+        user_token: _this.data.userToken,
+        page: _this.data.page,
+        per_page: '10'
+      },
+      success(res) {
+        if (res.data.code) {
+          _this.setData({
+            guessLikeArr: _this.data.guessLikeArr.concat(res.data.data.list)
+          });
+          wx.hideLoading();
+          console.log(_this.data.guessLikeArr);
+        }
+      }
+    });
   },
 })

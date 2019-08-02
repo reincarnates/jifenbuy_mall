@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/goodsDetail/goodsDetail",
     "pages/tabBar/index/index",
     "pages/screen/screen",
     "pages/tabBar/shopCart/shopCart",

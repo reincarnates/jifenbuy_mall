@@ -19,7 +19,7 @@
   </view>
   <view class="list-goods-wrapper" wx:if="{{goodsList.length > 0}}">
     <view class="list-goods" wx:if="{{isOrdinary}}">
-      <block wx:for="{{goodsList}}" wx:key="index">
+      <navigator url="/pages/goodsDetail/goodsDetail" hover-class="none" wx:for="{{goodsList}}" wx:key="index">
         <view class="list-goods-item flex">
           <view class="list-goods-item-img">
             <image lazy-load="true" src="{{item.goods_image}}"></image>
@@ -46,7 +46,7 @@
             </view>
           </view>
         </view>
-      </block>
+      </navigator>
     </view>
     <view class="list-waterfall-goods-wrapper flex" wx:if="{{isWaterfall}}">
       <block wx:for="{{waterfall}}" wx:key="index">

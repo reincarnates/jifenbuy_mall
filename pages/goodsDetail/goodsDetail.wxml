@@ -1,0 +1,259 @@
+<scroll-view scroll-y="true" style='height:{{winHeight}}px; padding-bottom: 90rpx; box-sizing: border-box;' bindscroll='scroll' scroll-with-animation="true" scroll-into-view="{{toView}}" scroll-top="{{returnHeight}}">
+  <view class="custom flex_center" style="margin-top:{{statusBarHeight}}px">
+    <view class="goods-img">
+      <swiper class="goods-img" indicator-dots="true" circular="true" duration="1000" indicator-color="#b6b4b4" indicator-active-color="#fe9701">
+        <block wx:for="{{goodsImg}}" wx:key="*this">
+          <swiper-item>
+            <image src="{{item}}"></image>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+
+  <view class="goods-attr-content">
+    <view class="goods-attr-name-wrapper">
+      <view class="goods-attr-name">
+        {{goodsName}}
+      </view>
+      <view class="flex" style="margin-top: 22rpx; align-items: center;">
+        <view class="goods-attr-price">
+          ￥
+          <text>{{goodsPrice}}</text>
+        </view>
+        <text class="goods-attr-discount">折扣{{goodsDiscount}}%</text>
+      </view>
+      <view class="flex-sw">
+        <view class="goods-attr-old-price">￥{{goodsMarketprice}}</view>
+        <view class="goods-attr-sales">销量 {{goodsSalenum}}</view>
+      </view>
+    </view>
+    <view class="goods-coupon-wrapper">
+      <view class="goods-coupon flex-sw" bindtap="alertCoupon">
+        <view class="goods-coupon-left">
+          <view style="margin-left: 2rpx;">优惠券</view>
+        </view>
+        <view class="goods-coupon-right flex-sw">
+          <view class="goods-coupon-right-item"></view>
+          <view class="goods-coupon-right-item"></view>
+          <view class="goods-coupon-right-item"></view>
+        </view>
+      </view>
+      <view class="goods-delivery flex-sw">
+        <view class="goods-delivery-left">
+          <text style="margin-left: 2rpx;">配送：全国有货</text>
+          <text style="color: #fe9901; margin-left: 25rpx;">免运费</text>
+        </view>
+        <!-- <view class="goods-coupon-right flex-sw">
+          <view class="goods-coupon-right-item"></view>
+          <view class="goods-coupon-right-item"></view>
+          <view class="goods-coupon-right-item"></view>
+        </view> -->
+      </view>
+    </view>
+    <view class="goods-check-params flex-sw" bindtap="checkParams">
+      <view class="goods-check-params-left">
+        <text>选择参数</text>
+        <text style="color: #333;" wx:for="{{goodsParams}}" wx:key="{{index}}">{{item}}</text>
+      </view>
+      <view class="goods-coupon-right flex-sw">
+        <view class="goods-coupon-right-item"></view>
+        <view class="goods-coupon-right-item"></view>
+        <view class="goods-coupon-right-item"></view>
+      </view>
+    </view>
+    <view id="mao1" style="height: 90rpx;" wx:if="{{isComment}}"></view>
+    <view class="goods-comment-wrapper">
+      <view class="goods-comment-head flex-sw">
+        <view class="goods-comment-head-left">评价</view>
+        <view class="goods-comment-head-right">查看全部
+          <text>></text>
+        </view>
+      </view>
+      <view class="goods-comment-operation flex">
+        <view class="goods-comment-btn">全部(20)</view>
+        <view class="goods-comment-btn">好评(20)</view>
+        <view class="goods-comment-btn">有图(20)</view>
+        <view class="goods-comment-btn">追评(20)</view>
+        <view class="goods-comment-btn">中评(20)</view>
+        <view class="goods-comment-btn">差评(20)</view>
+      </view>
+      <view class="goods-comment">
+        <view class="goods-comment-item flex">
+          <view class="goods-comment-item-avtar"></view>
+          <view class="goods-comment-item-right">
+            <view class="goods-comment-item-username">迪丽热巴</view>
+            <view class="goods-comment-item-content">
+              非常满意这个系列！在淘宝找了一圈，还是选择这子，面料 很厚实，颜色图案也很漂亮，尺寸正好。家人都比较满迪非常满意这个系列！在淘宝找了一圈，还是选择这子，面料 很厚实，颜色图案也很漂亮，尺寸正好。家人都比较满迪
+            </view>
+          </view>
+        </view>
+        <view class="goods-comment-item flex">
+          <view class="goods-comment-item-avtar"></view>
+          <view class="goods-comment-item-right">
+            <view class="goods-comment-item-username">迪丽热巴</view>
+            <view class="goods-comment-item-content">
+              非常满意这个系列！在淘宝找了一圈，还是选择这子，面料 很厚实，颜色图案也很漂亮，尺寸正好。家人都比较满迪非常满意这个系列！在淘宝找了一圈，还是选择这子，面料 很厚实，颜色图案也很漂亮，尺寸正好。家人都比较满迪
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view id="mao2" style="height: 130rpx;" wx:if="{{isDetail}}"></view>
+    <view>
+      <view class="goods-detail">
+        宝贝详情
+      </view>
+      <import src="../../wxParse/wxParse.wxml"/>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <!-- <image style="width: 100%;" src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/goods_detail.png" mode='widthFix'></image> -->
+    </view>
+
+  </view>
+
+  <view class="goods-head flex" style="background: {{bgColor}}; top: {{statusBarHeight}}px">
+    <view class="goods-return" style="font-size: 60rpx; background: {{bgReturnColor}}; color: {{textColor}}" bindtap="returnUp">{{returnPage}}</view>
+    <view class="float-column-wrapper flex-sw" wx:if="{{columState}}">
+      <view class="float-column-item flex-center {{currentData == 0 ? 'columnCur' : ''}}" data-current="0" bindtap="checkCurrent">宝贝</view>
+      <view class="float-column-item flex-center {{currentData == 1 ? 'columnCur' : ''}}" data-current="1" bindtap="checkCurrent">评价</view>
+      <view class="float-column-item flex-center {{currentData == 2 ? 'columnCur' : ''}}" data-current="2" bindtap="checkCurrent">详情</view>
+    </view>
+  </view>
+  <view class="size" wx:if="{{columState}}" style="height: {{statusBarHeight}}px"></view>
+</scroll-view>
+<view class="detail-top" wx:if="{{goTop}}" bindtap="goTop">
+  <image src="../../images/go_top.png"></image>
+</view>
+
+
+<!-- 操作 -->
+<view class="goods-operation-wrapper flex">
+  <view class="goods-operation-left flex">
+    <view class="goods-operation-left-item flex-center">
+      <view class="goods-operation-left-item-img">
+        <image src="../../images/shop_icon.png"></image>
+      </view>
+      <view class="goods-operation-left-item-word">店铺</view>
+    </view>
+    <view class="goods-operation-left-item flex-center">
+      <view class="goods-operation-left-item-img" style="width: 37rpx; height: 31rpx;">
+        <image src="../../images/service_icon.png"></image>
+      </view>
+      <view class="goods-operation-left-item-word">客服</view>
+    </view>
+    <view class="goods-operation-left-item flex-center">
+      <view class="goods-operation-left-item-img" style="width: 35rpx; height: 33rpx;">
+        <image src="../../images/collection.png"></image>
+      </view>
+      <view class="goods-operation-left-item-word">收藏</view>
+    </view>
+  </view>
+  <view class="goods-operation-right flex">
+    <view class="goods-operation-plus-shopcart">加入购物车</view>
+    <view class="buy-immediately">立即购买</view>
+  </view>
+</view>
+<!-- 操作end -->
+
+<!-- 优惠券 -->
+<view class="goods-coupon-mask-wrapper" wx:if="{{isCoupon}}" bindtap="closeCoupon"></view>
+<view class="goods-coupon-mask" style="bottom: {{maskHeight}};">
+  <view class="goods-coupon-mask-title">优惠券</view>
+  <view class="goods-coupon-mask-content">
+    <view class="goods-coupon-mask-content-title">领取优惠券</view>
+    <view class="goods-coupon-mask-content-item-warpper">
+      <view class="goods-coupon-mask-content-item flex">
+        <view class="goods-coupon-mask-content-item-left flex-center" style="background-image: url(../../images/coupon_left.png)">
+          <view class="goods-coupon-mask-price">
+            <text>￥</text>
+            <text style="font-size: 60rpx;">200</text>
+          </view>
+          <view class="goods-coupon-mask-limit">满999可用</view>
+        </view>
+        <view class="goods-coupon-mask-content-item-right" style="background-image: url(../../images/coupon_right.png)">
+          <view class="goods-coupon-mask-use-condition">限运动类商品使用</view>
+          <view class="goods-coupon-mask-receive">
+            <view class="goods-coupon-mask-receive-btn">点击领取</view>
+          </view>
+          <view class="goods-coupon-mask-validity">有效期：2019.04.01-2019.09.03</view>
+        </view>
+      </view>
+    </view>
+    <view class="not-coupon flex-center">
+      <image src="../../images/not_coupon.png"></image>
+      <view class="not-coupon-word">您还没有优惠券哦</view>
+    </view>
+    <text decode="true" class="complete-btn" bindtap="completeCoupon">完&nbsp;&nbsp;&nbsp;成</text>
+  </view>
+</view>
+<!-- 优惠券end -->
+
+<!-- 选择参数 -->
+<view class="check-params-mask-wrapper" wx:if="{{isParams}}" bindtap="closeParams"></view>
+<view class="check-params-mask" style="bottom: {{params}};">
+  <view class="check-params-mask-head flex-sw">
+    <view class="check-params-mask-head-left flex">
+      <view class="check-params-mask-head-img">
+        <image src="{{goodsImage}}"></image>
+      </view>
+      <view class="check-params-mask-head-word">
+        <view class="check-params-mask-head-price">
+          <text>￥</text>
+          <text style="font-size: 36rpx;">{{paramsPrice}}</text>
+        </view>
+        <view class="check-word flex" wx:if="{{goodsStorage != ''}}">
+          <view style="margin-right: 15rpx;">
+            库存
+          </view>
+          <view>
+            {{goodsStorage}}
+          </view>
+        </view>
+        <view class="check-word flex">
+          <view style="margin-right: 15rpx;">{{checkWord}}</view>
+          <view class="flex">
+            <view style="margin-right: 10rpx;" wx:for="{{goodsClass}}" wx:key="index">
+              {{item}}
+            </view>
+          </view>
+          <!-- <view style="margin-right: 15rpx;">{{checkWord}}</view>
+          <view class="flex">
+            <text wx:for="{{goodsClass}}" wx:key="index">
+              {{item}}
+            </text>
+          </view> -->
+        </view>
+      </view>
+    </view>
+    <view class="check-params-mask-close flex-center" bindtap="closeParams">
+      <image src="../../images/close_params.png"></image>
+    </view>
+  </view>
+  <view class="check-params-mask-content">
+    <view class="check-params-mask-attr" wx:for="{{specName}}" wx:key="{{index}}">
+      <view class="check-params-mask-attr-title">{{item}}</view>
+      <view class="check-params-mask-attr-option flex" wx:for="{{specValue}}" wx:for-index="key" wx:for-item="element" wx:key="{{key}}">
+        <block wx:for="{{element}}" wx:for-index="key2" wx:for-item="element2" wx:key="{{key2}}">
+          <view class="check-params-mask-attr-option-item {{currentId == element2.id ? 'curParams' : ''}}" wx:if="{{index == key}}" data-id="{{element2.id}}" data-index="{{key2}}" bindtap="checkParams">{{element2.id}}{{element2.val}}</view>
+        </block>
+      </view>
+    </view>
+    <view class="check-params-mask-number flex-sw">
+      <view class="check-params-mask-left">数量</view>
+      <view class="check-params-mask-right flex">
+        <view class="reduce flex-center" bindtap="reduce">
+          <image src="../../images/reduce.png"></image>
+        </view>
+        <input type="number" class="number" value="{{goodsNumber}}"></input>
+        <view class="plus flex-center" bindtap="plus">
+          <image src="../../images/plus.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="check-params-mask-operation flex">
+    <view class="plus-shopcart">加入购物车</view>
+    <view class="check-buy-immediately">立即购买</view>
+  </view>
+</view>
+<!-- 选择参数end -->
