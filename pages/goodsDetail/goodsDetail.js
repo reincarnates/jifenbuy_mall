@@ -26,7 +26,7 @@ Page({
     isComment: false,
     isDetail: false,
     goodsNumber: 0,
-    params: '0',
+    params: '-100%',
     isParams: false,
     goodsName: '', //商品名称
     goodsPrice: '', //商品现价
@@ -39,11 +39,11 @@ Page({
     specValue: [], //商品参数内容
     skuData: [], //根据所选参数显示对应内容
     paramsPrice: '', //参数价格
-    currentId: -1,
-    currentId2: [],
     checkWord: '请选择',
     goodsClass: '',
     goodsStorage: '', //商品库存
+    pinjie: [], //创建串对象
+    ispinjie: true, //是否已经创建
   },
 
   /**
@@ -63,7 +63,7 @@ Page({
         server: 'is_wx'
       },
       success(res) {
-        if(res.data.code) {
+        if (res.data.code) {
           console.log(res.data.data);
           var a = [];
           var res = res.data.data;
@@ -72,6 +72,13 @@ Page({
             a.push(item.goods_image);
             _this.setData({
               goodsImg: a,
+            });
+          });
+
+          //循环处理参数内容，增加is_xuan
+          res.spec_value_ar.forEach((element, key) => {
+            element.forEach((item, index) => {
+              item.is_xuan = false;
             });
           });
 
@@ -92,7 +99,7 @@ Page({
           // console.log(_this.data.skuData);
           // var article = res.mobile_body;
           // WxParse.wxParse('article', 'html', article, _this, 5);
-          
+
         }
         wx.hideLoading();
       }
@@ -268,12 +275,92 @@ Page({
   },
 
   //弹出选择参数页面
-  checkParams: function () {
+  checkParams: function (e) {
+    console.log(e)
     var _this = this;
+    _this.newdobj()
     _this.setData({
       params: '0',
       isParams: true
     });
+
+    var pinjiein = 'pinjie[' + e.target.dataset.fuji + '].id';
+    _this.setData({
+      [pinjiein]: _this.data.specValue[e.target.dataset.fuji][e.target.dataset.index].id
+    })
+    var str = ''
+    for (var o = 0; o < _this.data.pinjie.length; o++) {
+      if (o == 0) {
+        0
+        if (_this.data.pinjie[0].id == null || _this.data.pinjie[0].id == "" || _this.data.pinjie[0].id == undefined) {
+
+        } else {
+          str += _this.data.pinjie[0].id + "-"
+        }
+      } else {
+        if (_this.data.pinjie[o].id == null || _this.data.pinjie[o].id == "" || _this.data.pinjie[o].id == undefined) {
+
+        } else {
+          str += _this.data.pinjie[o].id + "-"
+        }
+
+      }
+    }
+    // console.log(str.substring(0, str.length - 1))
+
+    var checkStr = str.substring(0, str.length - 1);
+    _this.data.skuData.forEach(item => {
+      if (checkStr == item.spec_compose) {
+        console.log(item);
+        _this.setData({
+          goodsImage: item.goods_image,
+          paramsPrice: item.goods_price,
+          goodsClass: item.goods_spec,
+          checkWord: '已选择',
+          goodsStorage: item.goods_storage + item.goods_unit
+        });
+      }
+    });
+
+    // console.log(_this.data.specValue[0][0])
+    for (var i = 0; i < _this.data.specValue[e.target.dataset.fuji].length; i++) {
+      var delzhuangtai = 'specValue[' + e.target.dataset.fuji + '].[' + i + '].is_xuan';
+      _this.setData({
+        [delzhuangtai]: false
+      })
+    }
+    var iszhuangtai = 'specValue[' + e.target.dataset.fuji + '].[' + e.target.dataset.index + '].is_xuan';
+    _this.setData({
+      [iszhuangtai]: true
+    });
+
+    // console.log(_this.data.pinjie)
+  },
+
+  // 为id串添加对象
+  newdobj: function () {
+    var that = this
+    if (that.data.ispinjie) {
+      for (var i = 0; i < that.data.specValue.length; i++) {
+        var nopin = that.data.pinjie;
+        var pin = {}
+        for (var r = 0; r < that.data.specValue[i].length; r++) {
+          // if (that.data.specValue[i][r].is_xuan == true) {
+          //   nopin.id = that.data.specValue[i][r].id;
+          // } else {
+          //   nopin.id = "";
+          // }
+          pin.id = "";
+        }
+        nopin.push(pin)
+      }
+      that.setData({
+        pinjie: nopin
+      })
+    }
+    that.setData({
+      ispinjie: false
+    })
   },
 
   //关闭选择参数页面
@@ -302,31 +389,6 @@ Page({
     _this.data.goodsNumber++;
     _this.setData({
       goodsNumber: _this.data.goodsNumber
-    });
-  },
-
-  //选择商品参数
-  checkParams: function(e) {
-    const _this = this;
-    var _index = e.currentTarget.dataset.id;
-    _this.setData({
-      currentId: _index
-    });
-    _this.data.currentId2 += _index + '-';
-    var checkStr = _this.data.currentId2.substring(0, _this.data.currentId2.length - 1);
-    _this.data.skuData.forEach(item => {
-      // console.log(item.spec_compose);
-      // console.log(11111, checkStr);
-      if (checkStr == item.spec_compose) {
-        console.log(item);
-        _this.setData({
-          goodsImage: item.goods_image,
-          paramsPrice: item.goods_price,
-          goodsClass: item.goods_spec,
-          checkWord: '已选择',
-          goodsStorage: item.goods_storage + item.goods_unit
-        });
-      }
     });
   },
 

@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/goodsDetail/goodsDetail",
     "pages/tabBar/index/index",
+    "pages/listPage/listPage",
+    "pages/goodsDetail/goodsDetail",
     "pages/screen/screen",
     "pages/tabBar/shopCart/shopCart",
     "pages/tabBar/classification/classification",
-    "pages/listPage/listPage",
     "pages/search/search",
     "pages/tabBar/user/user",
     "pages/de/de",

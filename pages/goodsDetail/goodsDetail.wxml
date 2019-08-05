@@ -21,7 +21,7 @@
           ￥
           <text>{{goodsPrice}}</text>
         </view>
-        <text class="goods-attr-discount">折扣{{goodsDiscount}}%</text>
+        <text class="goods-attr-discount">优惠率{{goodsDiscount}}%</text>
       </view>
       <view class="flex-sw">
         <view class="goods-attr-old-price">￥{{goodsMarketprice}}</view>
@@ -104,8 +104,8 @@
       <view class="goods-detail">
         宝贝详情
       </view>
-      <import src="../../wxParse/wxParse.wxml"/>
-      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+      <import src="../../wxParse/wxParse.wxml" />
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
       <!-- <image style="width: 100%;" src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/goods_detail.png" mode='widthFix'></image> -->
     </view>
 
@@ -197,31 +197,33 @@
         <image src="{{goodsImage}}"></image>
       </view>
       <view class="check-params-mask-head-word">
-        <view class="check-params-mask-head-price">
-          <text>￥</text>
-          <text style="font-size: 36rpx;">{{paramsPrice}}</text>
-        </view>
-        <view class="check-word flex" wx:if="{{goodsStorage != ''}}">
-          <view style="margin-right: 15rpx;">
-            库存
+        <view style="position: absolute; bottom: 0;">
+          <view class="check-params-mask-head-price">
+            <text>￥</text>
+            <text style="font-size: 36rpx;">{{paramsPrice}}</text>
           </view>
-          <view>
-            {{goodsStorage}}
-          </view>
-        </view>
-        <view class="check-word flex">
-          <view style="margin-right: 15rpx;">{{checkWord}}</view>
-          <view class="flex">
-            <view style="margin-right: 10rpx;" wx:for="{{goodsClass}}" wx:key="index">
-              {{item}}
+          <view class="check-word flex" wx:if="{{goodsStorage != ''}}">
+            <view style="margin-right: 15rpx;">
+              库存
+            </view>
+            <view>
+              {{goodsStorage}}
             </view>
           </view>
-          <!-- <view style="margin-right: 15rpx;">{{checkWord}}</view>
+          <view class="check-word flex">
+            <view style="margin-right: 15rpx;">{{checkWord}}</view>
+            <view class="flex">
+              <view style="margin-right: 6rpx;" wx:for="{{goodsClass}}" wx:key="index">
+                {{item}}
+              </view>
+            </view>
+            <!-- <view style="margin-right: 15rpx;">{{checkWord}}</view>
           <view class="flex">
             <text wx:for="{{goodsClass}}" wx:key="index">
               {{item}}
             </text>
           </view> -->
+          </view>
         </view>
       </view>
     </view>
@@ -234,7 +236,7 @@
       <view class="check-params-mask-attr-title">{{item}}</view>
       <view class="check-params-mask-attr-option flex" wx:for="{{specValue}}" wx:for-index="key" wx:for-item="element" wx:key="{{key}}">
         <block wx:for="{{element}}" wx:for-index="key2" wx:for-item="element2" wx:key="{{key2}}">
-          <view class="check-params-mask-attr-option-item {{currentId == element2.id ? 'curParams' : ''}}" wx:if="{{index == key}}" data-id="{{element2.id}}" data-index="{{key2}}" bindtap="checkParams">{{element2.id}}{{element2.val}}</view>
+          <view class="check-params-mask-attr-option-item {{element2.is_xuan ? 'curParams' : ''}}" wx:if="{{index == key}}" data-id="{{element2.id}}" data-fuji='{{index}}' data-index="{{key2}}" bindtap="checkParams">{{element2.val}}</view>
         </block>
       </view>
     </view>

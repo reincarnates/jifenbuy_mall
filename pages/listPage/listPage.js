@@ -28,6 +28,10 @@ Page({
     maxVal: '',
     brandId: '',
     source: '',
+    rate: 'icon-jiantou-copy', //优惠率
+    rateFlag: 1,
+    volumeFlag: 1,
+    volume: 'icon-jiantou-copy', //销量
   },
 
   /**
@@ -44,8 +48,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        keyword: options.keyWord != undefined ? options.keyWord : '',
-        // keyword: '衣服',
+        // keyword: options.keyWord != undefined ? options.keyWord : '',
+        keyword: '衣服',
         id: options.id != undefined ? options.id : '',
         page: 1,
         sort: 'asc',
@@ -58,6 +62,15 @@ Page({
       },
       method: "POST",
       success(res) {
+        res.data.data.goods_list.forEach((item, index) => {
+          if (item.source == '') {
+            item.source = '市场价';
+          } else if (item.source == 'jd') {
+            item.source = '京东价';
+          } else if (item.source == 'wyyx') {
+            item.source = '严选价';
+          }
+        });
         _this.setData({
           goodsList: _this.handleData(res.data.data.goods_list),
           waterfall: _this.handleData(res.data.data.goods_list),
@@ -87,6 +100,7 @@ Page({
         goods_price: data[i].goods_price,
         goods_marketprice: data[i].goods_marketprice,
         store_name: data[i].store_name,
+        source: data[i].source,
       });
     }
     return arr;
@@ -113,13 +127,41 @@ Page({
     // }
     _this.goTop();
     if (_index == 0) {
-      _this.data.argum.sort = '';
-      _this.data.argum.sort2 = '';
-      _this.requestList(_this.data.argum);
+      if (_this.data.rateFlag == 1) {
+        _this.setData({
+          rate: 'icon-jiantou'
+        });
+        _this.data.argum.sort = '';
+        _this.data.argum.sort2 = '';
+        _this.requestList(_this.data.argum);
+        _this.data.rateFlag = 2;
+      } else {
+        _this.setData({
+          rate: 'icon-jiantou-copy'
+        });
+        _this.data.argum.sort = '';
+        _this.data.argum.sort2 = '';
+        _this.requestList(_this.data.argum);
+        _this.data.rateFlag = 1;
+      }
     } else if (_index == 1) {
-      _this.data.argum.sort = 'salenum';
-      _this.data.argum.sort2 = '';
-      _this.requestList(_this.data.argum);
+      if (_this.data.volumeFlag == 1) {
+        _this.setData({
+          volume: 'icon-jiantou'
+        });
+        _this.data.argum.sort = 'salenum';
+        _this.data.argum.sort2 = '';
+        _this.requestList(_this.data.argum);
+        _this.data.volumeFlag = 2;
+      } else {
+        _this.setData({
+          volume: 'icon-jiantou-copy'
+        });
+        _this.data.argum.sort = 'salenum';
+        _this.data.argum.sort2 = '';
+        _this.requestList(_this.data.argum);
+        _this.data.volumeFlag = 1;
+      }
     }
 
     if (_index == 2) {
@@ -177,8 +219,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
-        // keyword: '衣服',
+        // keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
+        keyword: '衣服',
         id: _this.data.classId != undefined ? _this.data.classId : '',
         page: 1,
         sort: argus.sort2,
@@ -191,6 +233,15 @@ Page({
       },
       method: "POST",
       success(res) {
+        res.data.data.goods_list.forEach((item, index) => {
+          if (item.source == '') {
+            item.source = '市场价';
+          } else if (item.source == 'jd') {
+            item.source = '京东价';
+          } else if (item.source == 'wyyx') {
+            item.source = '严选价';
+          }
+        });
         _this.setData({
           goodsList: _this.handleData(res.data.data.goods_list),
           waterfall: _this.handleData(res.data.data.goods_list),
@@ -320,6 +371,15 @@ Page({
         },
         method: "POST",
         success(res) {
+          res.data.data.goods_list.forEach((item, index) => {
+            if (item.source == '') {
+              item.source = '市场价';
+            } else if (item.source == 'jd') {
+              item.source = '京东价';
+            } else if (item.source == 'wyyx') {
+              item.source = '严选价';
+            }
+          });
           _this.setData({
             goodsList: _this.data.goodsList.concat(_this.handleData(res.data.data.goods_list)),
             waterfall: _this.data.goodsList.concat(_this.handleData(res.data.data.goods_list))

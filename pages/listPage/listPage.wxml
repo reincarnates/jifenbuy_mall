@@ -8,8 +8,14 @@
       <image style="width: 38rpx; height: 37rpx;" src="../../images/eval_style.png" bindtap="changeStyle"></image>
     </view>
     <view class="list-operation flex-sw">
-      <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent">综合</view>
-      <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent">销量</view>
+      <view class="list-operation-item {{currentData == 0 ? 'listCur' : ''}}" data-current="0" bindtap="checkCurrent" style="position: relative; width: 110rpx;">
+        优惠率
+        <text class="iconfont {{rate}}" style="position: absolute; top: 0; right: 0;"></text>
+      </view>
+      <view class="list-operation-item {{currentData == 1 ? 'listCur' : ''}}" data-current="1" bindtap="checkCurrent" style="position: relative; width: 82rpx;">
+        销量
+        <text class="iconfont {{volume}}" style="position: absolute; top: 0; right: 0;"></text>
+      </view>
       <view class="list-operation-item {{currentData == 2 ? 'listCur' : ''}}" data-current="2" bindtap="checkCurrent" style="position: relative; width: 82rpx;">
         价格
         <text class="iconfont {{iconClass}}" style="position: absolute; top: 0; right: 0;"></text>
@@ -28,22 +34,28 @@
             <view class="list-goods-item-info-word">
               {{item.goods_ad_words}}
             </view>
-            <view class="list-special">员工特价</view>
+            <!-- <view class="list-special">员工特价</view> -->
+            <view class="activity-wrapper flex" style="display: none;">
+              <view class="activity-item">新品首发</view>
+              <view class="activity-item">七夕特价</view>
+            </view>
+            <view class="flex" style="margin-top: 24rpx;">
+              <view class="shop-price-name">{{item.source}}</view>
+              <view class="shop-price">￥{{item.goods_marketprice}}</view>
+            </view>
             <view class="list-price flex">
               <view class="list-new-price">
                 <text>￥</text>
                 <text style="font-size: 30rpx;">{{item.goods_price}}</text>
               </view>
-              <view class="list-old-price">
-                ￥{{item.goods_marketprice}}
-              </view>
+              <view class="prime-rate">优惠率 {{item.goods_discount}}</view>
             </view>
-            <view class="list-shop-wrapper flex-sw">
+            <!-- <view class="list-shop-wrapper flex-sw">
               <view>{{item.store_name}}</view>
               <view>
                 <text>销量 1234</text>
               </view>
-            </view>
+            </view> -->
           </view>
         </view>
       </navigator>
@@ -58,22 +70,31 @@
             <view class="list-waterfall-goods-item-name">
               {{item.goods_ad_words}}
             </view>
-            <view class="list-special" style="margin-top: 34rpx;">员工特价</view>
+            <!-- <view class="list-special" style="margin-top: 34rpx;">员工特价</view> -->
+            <view class="activity-wrapper flex" style="display: none;">
+              <view class="activity-item">新品首发</view>
+              <view class="activity-item">七夕特价</view>
+            </view>
+            <view class="flex" style="margin-top: 24rpx;">
+              <view class="shop-price-name">{{item.source}}</view>
+              <view class="shop-price">￥{{item.goods_marketprice}}</view>
+            </view>
             <view class="list-price flex">
               <view class="list-new-price">
                 <text>￥</text>
                 <text style="font-size: 30rpx;">{{item.goods_price}}</text>
               </view>
-              <view class="list-old-price">
-                ￥{{item.goods_price}}
-              </view>
+              <view class="prime-rate">优惠率 {{item.goods_discount}}</view>
+              <!-- <view class="list-old-price">
+                ￥{{item.goods_marketprice}}
+              </view> -->
             </view>
-            <view class="list-shop-wrapper flex-sw">
+            <!-- <view class="list-shop-wrapper flex-sw">
               <view>{{item.store_name}}</view>
               <view>
                 <text>销量 1234</text>
               </view>
-            </view>
+            </view> -->
           </view>
         </view>
       </block>

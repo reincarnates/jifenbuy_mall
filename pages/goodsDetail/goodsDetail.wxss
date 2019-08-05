@@ -96,16 +96,9 @@
 }
 
 .goods-attr-discount{
-  height: 29rpx;
-  color: #fff;
+  color: #fe6601;
   font-size: 20rpx;
-  padding: 0 12rpx;
-  box-sizing: border-box;
-  background-color: #fe9901;
-  display: flex;
-  align-items: center;
-  border-radius: 4rpx;
-  margin-left: 23rpx;
+  margin-left: 30rpx;
 }
 
 .goods-attr-old-price{
@@ -539,12 +532,13 @@
   width: calc(100% - 200rpx);
   padding-left: 11rpx;
   box-sizing: border-box;
+  position: relative;
 }
 
 .check-params-mask-head-price{
   color: #fe6601;
   font-size: 24rpx;
-  margin-top: 105rpx;
+  /* margin-top: 105rpx; */
 }
 
 .check-word{
