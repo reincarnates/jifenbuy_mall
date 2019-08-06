@@ -44,12 +44,15 @@ Page({
     goodsStorage: '', //商品库存
     pinjie: [], //创建串对象
     ispinjie: true, //是否已经创建
+    cartNumber: 100, //购物车数量
+    listCount: {}, //评论类别
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     var _this = this;
     wx.showLoading({ title: '加载中' });
     wx.request({
@@ -58,13 +61,14 @@ Page({
       data: {
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId,
-        sku: '7717fbd938',
+        sku: 'ZY6ec8d9147c',
+        // sku: options.id,
         type: 'html',
         server: 'is_wx'
       },
       success(res) {
         if (res.data.code) {
-          console.log(res.data.data);
+          console.log(res.data.data.comment);
           var a = [];
           var res = res.data.data;
           a.push(res.goods_image);
@@ -94,7 +98,8 @@ Page({
             goodsImage: res.goods_image,
             skuData: res.sku_data,
             paramsPrice: res.goods_price,
-            goodsClass: res.spec_name
+            goodsClass: res.spec_name,
+            listCount: res.comment.listCount
           });
           // console.log(_this.data.skuData);
           // var article = res.mobile_body;
@@ -111,7 +116,7 @@ Page({
           winHeight: res.windowHeight
         })
       }
-    })
+    });
   },
 
   /**
@@ -276,7 +281,6 @@ Page({
 
   //弹出选择参数页面
   checkParams: function (e) {
-    console.log(e)
     var _this = this;
     _this.newdobj()
     _this.setData({
@@ -311,7 +315,7 @@ Page({
     var checkStr = str.substring(0, str.length - 1);
     _this.data.skuData.forEach(item => {
       if (checkStr == item.spec_compose) {
-        console.log(item);
+        // console.log(item);
         _this.setData({
           goodsImage: item.goods_image,
           paramsPrice: item.goods_price,

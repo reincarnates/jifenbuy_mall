@@ -32,6 +32,7 @@ Page({
     rateFlag: 1,
     volumeFlag: 1,
     volume: 'icon-jiantou-copy', //销量
+    notCart: 'none',
   },
 
   /**
@@ -48,8 +49,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        // keyword: options.keyWord != undefined ? options.keyWord : '',
-        keyword: '衣服',
+        keyword: options.keyWord != undefined ? options.keyWord : '',
+        // keyword: '衣服',
         id: options.id != undefined ? options.id : '',
         page: 1,
         sort: 'asc',
@@ -71,6 +72,13 @@ Page({
             item.source = '严选价';
           }
         });
+
+        if (res.data.data.goods_list.length == 0) {
+            _this.setData({
+              notCart: ''
+            });
+        }
+
         _this.setData({
           goodsList: _this.handleData(res.data.data.goods_list),
           waterfall: _this.handleData(res.data.data.goods_list),
@@ -101,6 +109,7 @@ Page({
         goods_marketprice: data[i].goods_marketprice,
         store_name: data[i].store_name,
         source: data[i].source,
+        spu: data[i].spu
       });
     }
     return arr;
@@ -219,8 +228,8 @@ Page({
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
-        // keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
-        keyword: '衣服',
+        keyword: _this.data.keyWord != undefined ? _this.data.keyWord : '',
+        // keyword: '衣服',
         id: _this.data.classId != undefined ? _this.data.classId : '',
         page: 1,
         sort: argus.sort2,

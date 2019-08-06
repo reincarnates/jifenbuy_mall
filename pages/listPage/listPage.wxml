@@ -25,7 +25,7 @@
   </view>
   <view class="list-goods-wrapper" wx:if="{{goodsList.length > 0}}">
     <view class="list-goods" wx:if="{{isOrdinary}}">
-      <navigator url="/pages/goodsDetail/goodsDetail" hover-class="none" wx:for="{{goodsList}}" wx:key="index">
+      <navigator wx:for="{{goodsList}}" wx:key="index" url="/pages/goodsDetail/goodsDetail?id={{item.spu}}" hover-class="none">
         <view class="list-goods-item flex">
           <view class="list-goods-item-img">
             <image lazy-load="true" src="{{item.goods_image}}"></image>
@@ -61,8 +61,8 @@
       </navigator>
     </view>
     <view class="list-waterfall-goods-wrapper flex" wx:if="{{isWaterfall}}">
-      <block wx:for="{{waterfall}}" wx:key="index">
-        <view class="list-waterfall-goods-item">
+      <navigator class="list-waterfall-goods-item" wx:for="{{waterfall}}" wx:key="index" url="/pages/goodsDetail/goodsDetail?id={{item.spu}}" hover-class="none">
+        <view>
           <view class="list-waterfall-goods-item-img">
             <image lazy-load="true" src="{{item.goods_image}}"></image>
           </view>
@@ -97,11 +97,11 @@
             </view> -->
           </view>
         </view>
-      </block>
+      </navigator>
     </view>
   </view>
   <!-- 没有商品 -->
-  <view class="not-goods-wrapper flex-center" wx:else>
+  <view class="not-goods-wrapper flex-center" style="display: {{notCart}}">
     <image src="../../images/not_list_goods.png"></image>
     <view class="not-goods-tips">
       没有搜索到相关的宝贝

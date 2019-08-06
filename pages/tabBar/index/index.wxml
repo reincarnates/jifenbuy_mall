@@ -95,8 +95,10 @@
                 <image src="{{element.img}}"></image>
               </view>
               <view class="welfare-selection-goods-item-price">
-                ￥
-                <text>{{element.goods_price}}</text>
+                ￥<text>{{element.goods_price}}</text>
+              </view>
+              <view class="welfare-selection-goods-item-shop-price">
+                {{element.source}}<text>￥{{element.goods_marketprice}}</text>
               </view>
             </view>
           </block>

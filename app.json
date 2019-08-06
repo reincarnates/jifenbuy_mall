@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/comment/comment",
+    "pages/goodsDetail/goodsDetail",
     "pages/tabBar/index/index",
     "pages/listPage/listPage",
-    "pages/goodsDetail/goodsDetail",
     "pages/screen/screen",
     "pages/tabBar/shopCart/shopCart",
     "pages/tabBar/classification/classification",

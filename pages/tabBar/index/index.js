@@ -40,6 +40,20 @@ Page({
       },
       success(res) {
         if(res.data.code) {
+          res.data.data.forEach((item, index) => {
+            if (item.type == 3) {
+              console.log(item);
+              item.data3.list.forEach((element, key) => {
+                if (element.source == '') {
+                  element.source = '市场价';
+                } else if (element.source == 'jd') {
+                  element.source = '京东价';
+                } else if (element.source == 'wyyx') {
+                  element.source = '严选价';
+                }
+              });
+            }
+          });
           _this.setData({
             floorArr: res.data.data
           });

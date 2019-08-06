@@ -51,7 +51,7 @@
         </view> -->
       </view>
     </view>
-    <view class="goods-check-params flex-sw" bindtap="checkParams">
+    <view class="goods-check-params flex-sw" bindtap="checkParams" wx:if="{{goodsParams != ''}}">
       <view class="goods-check-params-left">
         <text>选择参数</text>
         <text style="color: #333;" wx:for="{{goodsParams}}" wx:key="{{index}}">{{item}}</text>
@@ -71,12 +71,12 @@
         </view>
       </view>
       <view class="goods-comment-operation flex">
-        <view class="goods-comment-btn">全部(20)</view>
-        <view class="goods-comment-btn">好评(20)</view>
-        <view class="goods-comment-btn">有图(20)</view>
-        <view class="goods-comment-btn">追评(20)</view>
-        <view class="goods-comment-btn">中评(20)</view>
-        <view class="goods-comment-btn">差评(20)</view>
+        <view class="goods-comment-btn">全部评论({{listCount.all}})</view>
+        <view class="goods-comment-btn">好评({{listCount.good}})</view>
+        <view class="goods-comment-btn">有图({{listCount.image}})</view>
+        <view class="goods-comment-btn">追评({{listCount.eval_again}})</view>
+        <view class="goods-comment-btn">中评({{listCount.normal}})</view>
+        <!-- <view class="goods-comment-btn">差评({{listCount.bad}})</view> -->
       </view>
       <view class="goods-comment">
         <view class="goods-comment-item flex">

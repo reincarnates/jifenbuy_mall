@@ -454,12 +454,12 @@
 }
 
 .goods-operation-left{
-  width: 290rpx;
+  width: 241rpx;
   height: 98rpx;
 }
 
 .goods-operation-left-item{
-  width: 97rpx;
+  width: 121rpx;
   height: 98rpx;
   border-right: 2rpx solid #ddd;
   flex-direction: column;
@@ -472,6 +472,7 @@
 .goods-operation-left-item-img{
   width: 32rpx;
   height: 31rpx;
+  position: relative;
 }
 
 .goods-operation-left-item-img image{
@@ -486,7 +487,7 @@
 }
 
 .goods-operation-right{
-  width: calc(100% - 290rpx);
+  width: calc(100% - 241rpx);
   height: 98rpx;
 }
 
@@ -668,4 +669,30 @@
 .curParams{
   background-color: #fe9901;
   color: #fff;
+}
+
+.cart-number-tips{
+  position: absolute;
+  top: -5rpx;
+  right: -25rpx;
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #e11b15;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 32rpx;
+}
+
+.cart-number-tips-ver{
+  width: 2rpx;
+  height: 2rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 4rpx;
+}
+
+.cart-number-tips-ver:last-child{
+  margin-right: 0;
 }

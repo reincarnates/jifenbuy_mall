@@ -1,0 +1,35 @@
+<view class="comment-wrapper">
+  <view class="comment-type-wrapper">
+    <text class="comment-type-btn {{currentIndex == 0 ? 'comment-type-btn-active' : ''}}" data-index="0" bindtap="checkType">全部({{listCount.all}})</text>
+    <text class="comment-type-btn {{currentIndex == 1 ? 'comment-type-btn-active' : ''}}" data-index="1" bindtap="checkType">最新</text>
+    <text class="comment-type-btn {{currentIndex == 2 ? 'comment-type-btn-active' : ''}}" data-index="2" bindtap="checkType">好评({{listCount.good}})</text>
+    <text class="comment-type-btn {{currentIndex == 3 ? 'comment-type-btn-active' : ''}}" data-index="3" bindtap="checkType">中评({{listCount.normal}})</text>
+    <text class="comment-type-btn {{currentIndex == 4 ? 'comment-type-btn-active' : ''}}" data-index="4" bindtap="checkType">有图({{listCount.image}})</text>
+    <!-- <text class="comment-type-btn">追加(9999)</text> -->
+  </view>
+  <view class="comment-content">
+    <block wx:for="{{commentList}}" wx:key="index">
+      <view class="comment-item flex">
+        <view class="comment-item-avatar">
+          <image src="{{item.member_avatar}}"></image>
+        </view>
+        <view class="comment-item-right">
+          <view class="comment-item-username">{{item.nickname}}</view>
+          <view class="comment-item-time">{{item.geval_addtime}}</view>
+          <view class="comment-item-content">
+            {{item.geval_content}}
+          </view>
+          <view class="comment-item-img-wrapper flex">
+            <block wx:for="{{item.geval_image}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <view class="comment-item-img">
+                <image src="{{itemName}}" bindtap="previewImg" data-img="{{item.geval_image}}" data-fuindex="{{index}}" data-index="{{idx}}"></image>
+              </view>
+            </block>
+          </view>
+          <!-- <view class="comment-item-specs">{{item.geval_goodsname}}</view> -->
+        </view>
+        <!-- <view class="comment-big-img"></view> -->
+      </view>
+    </block>
+  </view>
+</view>

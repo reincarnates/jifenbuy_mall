@@ -353,7 +353,7 @@
 }
 
 .welfare-selection-goods-item{
-  width: 127rpx;
+  width: 140rpx;
   margin-right: 45rpx;
 }
 
@@ -375,12 +375,12 @@
   width: 127rpx;
   text-align: center;
   font-size: 18rpx;
-  color: #333;
-  margin: 20rpx 0 10rpx 0;
+  color: #fe6601;
+  /* margin-bottom: 10rpx; */
 }
 
 .welfare-selection-goods-item-price text{
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .preferential-zone{
@@ -523,4 +523,13 @@
   color: #999;
   text-decoration: line-through;
   margin-top: 8rpx;
+}
+
+.welfare-selection-goods-item-shop-price{
+  color: #999;
+  font-size: 20rpx;
+}
+
+.welfare-selection-goods-item-shop-price text{
+  text-decoration: line-through;
 }
