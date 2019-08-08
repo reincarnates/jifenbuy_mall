@@ -643,6 +643,17 @@ Page({
     }
   },
 
+  //允许获取手机号
+  getPhoneNumber: function(e) {
+    console.log(e);
+    var _this = this;
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.navigateTo({
+        url: `/pages/login/login`
+      });
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

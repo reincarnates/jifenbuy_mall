@@ -10,6 +10,9 @@ Page({
     deviceId: 'ffbcb5efff6aa294',
     listCount: {}, //评论类型数量
     commentList: [], //评论条数
+    goodsSku: '', //商品sku
+    page: 1, //商品页数
+    orderState: 0, //评论类型
   },
 
   /**
@@ -17,6 +20,10 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    console.log(options);
+    _this.setData({
+      goodsSku: options.sku
+    });
     wx.showLoading({ title: '加载中' });
     wx.request({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
@@ -25,6 +32,7 @@ Page({
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId,
         sku: 'ZY6ec8d9147c',
+        // sku: options.sku,
         order_state: 0,
         page: 1,
         per_page: 10
@@ -60,8 +68,14 @@ Page({
 
     if(_index == 2) {
       _this.returnType(1);
+      _this.setData({
+        orderState: 1
+      });
     } else if (_index == 4) {
       _this.returnType(2);
+      _this.setData({
+        orderState: 4
+      });
     }
   },
 
@@ -74,7 +88,8 @@ Page({
       data: {
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId,
-        sku: 'ZY6ec8d9147c',
+        // sku: 'ZY6ec8d9147c',
+        sku: _this.data.goodsSku,
         order_state: type,
         page: 1,
         per_page: 10
@@ -134,7 +149,39 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var _this = this;
+    _this.data.page++;
+    wx.showLoading({ title: '加载中' });
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
+      method: 'POST',
+      data: {
+        user_token: _this.data.userToken,
+        device_id: _this.data.deviceId,
+        sku: 'ZY6ec8d9147c',
+        // sku: options.sku,
+        order_state: _this.data.orderState,
+        page: _this.data.page,
+        per_page: 10
+      },
+      success(res) {
+        var data = res.data.data;
+        if (res.data.code) {
+          _this.setData({
+            // listCount: _this.data.listCount.concat(data.listCount),
+            commentList: _this.data.commentList.concat(data.list)
+          });
+          if (data.list.length == 0) {
+            wx.showToast({
+              title: '没有更多评论',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }
+        wx.hideLoading();
+      }
+    });
   },
 
   /**

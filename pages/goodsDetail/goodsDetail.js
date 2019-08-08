@@ -46,6 +46,7 @@ Page({
     ispinjie: true, //是否已经创建
     cartNumber: 100, //购物车数量
     listCount: {}, //评论类别
+    goodsSku: '', //商品sku
   },
 
   /**
@@ -54,6 +55,9 @@ Page({
   onLoad: function (options) {
     console.log(options);
     var _this = this;
+    _this.setData({
+      goodsSku: options.id
+    });
     wx.showLoading({ title: '加载中' });
     wx.request({
       url: 'http://tapi.fulibuy.cn/goods/goodsDetail',
@@ -61,14 +65,14 @@ Page({
       data: {
         user_token: _this.data.userToken,
         device_id: _this.data.deviceId,
-        sku: 'ZY6ec8d9147c',
-        // sku: options.id,
+        // sku: 'ZY6ec8d9147c',
+        sku: options.id,
         type: 'html',
         server: 'is_wx'
       },
       success(res) {
         if (res.data.code) {
-          console.log(res.data.data.comment);
+          // console.log(res.data.data.comment);
           var a = [];
           var res = res.data.data;
           a.push(res.goods_image);
@@ -124,6 +128,13 @@ Page({
    */
   onReady: function () {
 
+  },
+
+  //查看全部评论
+  checkAll: function() {
+    wx.navigateTo({
+      url: `/pages/comment/comment?sku=${this.data.goodsSku}`
+    });
   },
 
   scroll: function (e) {

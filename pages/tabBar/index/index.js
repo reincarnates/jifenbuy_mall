@@ -12,6 +12,11 @@ Page({
     guessLikeArr: [], //推荐
     page: 1, //页数
   },
+
+  getPhoneNumber: function(e) {
+    console.log(e);
+  },
+
   onLoad: function () {
     var _this = this;
     //专题

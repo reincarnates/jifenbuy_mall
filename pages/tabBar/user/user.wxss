@@ -364,3 +364,23 @@
   text-decoration: line-through;
   margin: 5rpx 0 0 6rpx;
 }
+
+.guide-login{
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  color: #666;
+  font-size: 30rpx;
+}
+
+.guide-login-btn{
+  width: 546rpx;
+  height: 90rpx;
+  background-color: #fe6601;
+  text-align: center;
+  line-height: 90rpx;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 45rpx;
+  margin-top: 102rpx;
+}

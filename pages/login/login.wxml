@@ -1,0 +1,42 @@
+<view class="login-wrapper">
+  <view class="login-head" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/login_bg.png) no-repeat; background-size: 100% 100%;">
+    <view style="margin-top: {{statusBarHeight}}px;">您好，</view>
+    <view>欢迎来到福利商城</view>
+    <view class="login-return" style="top: {{statusBarHeight}}px; margin-top: {{statusBarHeight2}}rpx" bindtap="returnPage">
+      <image src="../../images/login_return.png"></image>
+    </view>
+  </view>
+  <view class="login-content">
+    <view class="login-posi" style="top: -{{187 - statusBarHeight}}rpx">
+      <view class="login-phone-wrapper flex">
+        <view class="login-phone-img flex-center">
+          <image src="../../images/phone_icon.png"></image>
+        </view>
+        <input type="number" class="login-phone-input" placeholder="请输入手机号" bindinput="phoneChange"></input>
+      </view>
+      <view class="login-rule-code-wrapper flex">
+        <view class="login-rule-code-img flex-center">
+          <image src="../../images/rule_code_icon.png"></image>
+        </view>
+        <input type="number" class="login-rule-code-input" placeholder="请输入短信验证码" bindinput="codeChange"></input>
+        <view class="login-get-rule-code-wrapper flex-center">
+          <view class="login-get-rule-code" bindtap="getRuleCode">获取验证码</view>
+        </view>
+      </view>
+      <text class="login-btn" decode="true" bindtap="loginClick">登&nbsp;&nbsp;录</text>
+      <view class="wx-login-tips-wrapper flex-center">
+        <view class="wx-login-tips-line"></view>
+        <view class="wx-login-tips-word">微信授权手机号登录</view>
+        <view class="wx-login-tips-line"></view>
+      </view>
+      <view class="wx-login-wrapper">
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='wx-login'>
+          <view class="wx-login-btn">
+            <image src="../../images/wx_bg.png"></image>
+            <view style="margin-top: -24rpx;">微信</view>
+          </view>
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

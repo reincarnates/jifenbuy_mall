@@ -86,6 +86,15 @@ Page({
     ]
   },
 
+  //手机号登录
+  getPhoneNumber: function(e) {
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.navigateTo({
+        url: `/pages/login/login`
+      });
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
