@@ -20,7 +20,8 @@
         </view>
         <input type="number" class="login-rule-code-input" placeholder="请输入短信验证码" bindinput="codeChange"></input>
         <view class="login-get-rule-code-wrapper flex-center">
-          <view class="login-get-rule-code" bindtap="getRuleCode">获取验证码</view>
+          <view class="login-get-rule-code" bindtap="getRuleCode" wx:if="{{isGetCode}}">获取验证码</view>
+          <view wx:if="{{isCode}}" style="color: #fe6601; font-size: 26rpx;">{{currentTime}}s</view>
         </view>
       </view>
       <text class="login-btn" decode="true" bindtap="loginClick">登&nbsp;&nbsp;录</text>

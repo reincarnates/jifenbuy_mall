@@ -10,6 +10,10 @@ Page({
     statusBarHeight2: app.globalData.statusBarHeight,
     phoneVal: '', //手机号
     codeVal: '', //验证码
+    isCode: false,
+    isGetCode: true,
+    currentTime: 60,
+    code: '', //临时凭证
   },
 
   //手机号取值
@@ -35,40 +39,93 @@ Page({
     for (var i = 0; i < 6; i++) {
       num += Math.floor(Math.random() * 10);
     };
-    wx.request({
-      url: 'http://tapiserv.fulibuy.cn/Member/saveVerifyCode',
-      method: 'POST',
-      data: {
-        appid: 'kj234nfygfl',
-        access_token: '442c37d110cb894036fdd4e9bfcd8b12',
-        phone: _this.data.phoneVal,
-        verifyCode: num,
-        type: '1'
-      },
-      success(res) {
-        console.log(res);
+    if (_this.data.phoneVal == '') {
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      });
+    } else if (_this.data.phoneVal.length != 11) {
+      wx.showToast({
+        title: '请输入正确格式的手机号',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      _this.setData({
+        isGetCode: false,
+        isCode: true
+      });
+      _this.time();
+    }
+    
+    // wx.request({
+    //   url: 'http://tapiserv.fulibuy.cn/Member/saveVerifyCode',
+    //   method: 'POST',
+    //   data: {
+    //     appid: 'kj234nfygfl',
+    //     access_token: '1b2b074c3a2342e6031510c5e829e9c2',
+    //     phone: _this.data.phoneVal,
+    //     verifyCode: num,
+    //     type: '1'
+    //   },
+    //   success(res) {
+    //     console.log(res);
+    //   }
+    // });
+  },
+
+  //倒计时
+  time: function() {
+    var _this = this;
+    var interval = setInterval(function () {
+      _this.data.currentTime--; //每执行一次让倒计时秒数减一
+      _this.setData({
+        currentTime: _this.data.currentTime, //按钮文字变成倒计时对应秒数
+      })
+      //如果当秒数小于等于0时 停止计时器 且按钮文字变成重新发送 且按钮变成可用状态 倒计时的秒数也要恢复成默认秒数 即让获取验证码的按钮恢复到初始化状态只改变按钮文字
+      if (_this.data.currentTime <= 0) {
+        clearInterval(interval)
+        _this.setData({
+          isGetCode: true,
+          isCode: false,
+          currentTime: 60,
+        })
       }
-    })
+    }, 1000);
   },
 
   //点击登录
   loginClick: function() {
-    // wx.login({
+    wx.login({
+      success(res) {
+        console.log(res);
+      }
+    })
+    // wx.request({
+    //   url: 'http://tapiserv.fulibuy.cn/Member/loginByVerifyCode',
+    //   method: 'POST',
+    //   data: {
+    //     appid: 'kj234nfygfl',
+    //     access_token: '1b2b074c3a2342e6031510c5e829e9c2',
+    //     phone: _this.data.phoneVal,
+    //     verifyCode: num,
+    //   },
     //   success(res) {
     //     console.log(res);
     //   }
     // })
-    wx.request({
-      url: 'http://tapiserv.fulibuy.cn/Member/loginByVerifyCode',
-      method: 'POST',
-      data: {
-        appid: 'kj234nfygfl',
-        access_token: '442c37d110cb894036fdd4e9bfcd8b12',
-        phone: _this.data.phoneVal,
-        verifyCode: num,
-      },
+  },
+
+  //获取临时凭证
+  getCode: function () {
+    var _this = this;
+    wx.login({
       success(res) {
         console.log(res);
+        _this.setData({
+          code: res.code
+        });
       }
     })
   },
@@ -76,7 +133,6 @@ Page({
   //微信授权手机号登录
   getPhoneNumber: function(e) {
     var _this = this;
-    console.log(e);
     if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
       wx.showToast({
         title: '微信授权登陆失败，请使用短信验证码登录',
@@ -84,24 +140,24 @@ Page({
         duration: 2000
       });
     }else{
-      wx.login({
-        success(res) {
-          // if(res.code) {
-            wx.request({
-              url: 'http://tapiserv.fulibuy.cn/Member/programLogin',
-              method: 'POST',
-              data: {
-                appid: 'kj234nfygfl',
-                access_token: 'ea50e97f58f369f858961d8ae14999aa',
-                code: res.code,
-                encryptedData: e.detail.encryptedData,
-                iv: e.detail.iv
-              },
-              success(data) {
-                console.log(data);
-              }
-            })
-          // }
+      wx.request({
+        url: 'http://tapiserv.fulibuy.cn/Member/programLogin',
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'Accept': 'application/json;charset=UTF-8',
+        },
+        data: {
+          // appid: 'kj234nfygfl',
+          // access_token: '1b2b074c3a2342e6031510c5e829e9c2',
+          code: _this.data.code,
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv
+          // encryptedData: encodeURIComponent(e.detail.encryptedData),
+          // iv: encodeURIComponent(e.detail.iv)
+        },
+        success(data) {
+          console.log(data);
         }
       })
     }
