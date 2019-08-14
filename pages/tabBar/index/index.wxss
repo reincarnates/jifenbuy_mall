@@ -135,6 +135,7 @@
 .home-head-avatar image{
   width: 100%;
   height: 100%;
+  border-radius: 50%;
 }
 
 .home-head-user-info{
@@ -186,7 +187,7 @@
 
 .home-head-info{
   display: flex;
-  margin-right: 21px;
+  margin-right: 114rpx;
 }
 
 .gome-category-wrapper{
@@ -523,6 +524,12 @@
   color: #999;
   text-decoration: line-through;
   margin-top: 8rpx;
+}
+
+.shop-price-word{
+  font-size: 22rpx;
+  color: #999;
+  margin: 8rpx 8rpx 0;
 }
 
 .welfare-selection-goods-item-shop-price{

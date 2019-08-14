@@ -5,8 +5,6 @@ const app = getApp()
 Page({
   data: {
     likeNum: 4,
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
     specialArr: [], //专题数组
     floorArr: [], //楼层数组
     guessLikeArr: [], //推荐
@@ -19,71 +17,82 @@ Page({
 
   onLoad: function () {
     var _this = this;
-    //专题
-    wx.request({
-      url: 'http://tapi.fulibuy.cn/index/nav',
-      method: 'POST',
-      data: {
-        device_id: _this.data.deviceId,
-        user_token: _this.data.userToken
-      },
-      success(res) {
-        if(res.data.code) {
-          _this.setData({
-            specialArr: res.data.data
-          });
+    setTimeout(function() {
+      //专题
+      wx.request({
+        url: 'http://tapi.fulibuy.cn/index/nav',
+        method: 'POST',
+        data: {
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id')
+        },
+        success(res) {
+          if (res.data.code) {
+            _this.setData({
+              specialArr: res.data.data
+            });
+          }
         }
-      }
-    });
-    //楼层
-    wx.request({
-      url: 'http://tapi.fulibuy.cn/index/floor',
-      method: 'POST',
-      data: {
-        device_id: _this.data.deviceId,
-        user_token: _this.data.userToken
-      },
-      success(res) {
-        if(res.data.code) {
-          res.data.data.forEach((item, index) => {
-            if (item.type == 3) {
-              console.log(item);
-              item.data3.list.forEach((element, key) => {
-                if (element.source == '') {
-                  element.source = '市场价';
-                } else if (element.source == 'jd') {
-                  element.source = '京东价';
-                } else if (element.source == 'wyyx') {
-                  element.source = '严选价';
-                }
-              });
-            }
-          });
-          _this.setData({
-            floorArr: res.data.data
-          });
+      });
+      //楼层
+      wx.request({
+        url: 'http://tapi.fulibuy.cn/index/floor',
+        method: 'POST',
+        data: {
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id')
+        },
+        success(res) {
+          if (res.data.code) {
+            res.data.data.forEach((item, index) => {
+              if (item.type == 3) {
+                console.log(item);
+                item.data3.list.forEach((element, key) => {
+                  if (element.source == '') {
+                    element.source = '市场价';
+                  } else if (element.source == 'jd') {
+                    element.source = '京东价';
+                  } else if (element.source == 'wyyx') {
+                    element.source = '严选价';
+                  }
+                });
+              }
+            });
+            _this.setData({
+              floorArr: res.data.data
+            });
+          }
         }
-      }
-    });
-    //推荐
-    wx.request({
-      url: 'http://tapi.fulibuy.cn/index/guessLike',
-      method: 'POST',
-      data: {
-        device_id: _this.data.deviceId,
-        user_token: _this.data.userToken,
-        page: 1,
-        per_page: '10'
-      },
-      success(res) {
-        console.log(res);
-        if(res.data.code) {
-          _this.setData({
-            guessLikeArr: res.data.data.list
-          });
+      });
+      //推荐
+      wx.request({
+        url: 'http://tapi.fulibuy.cn/index/guessLike',
+        method: 'POST',
+        data: {
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id'),
+          page: 1,
+          per_page: '10'
+        },
+        success(res) {
+          console.log(res);
+          if (res.data.code) {
+            res.data.data.list.forEach(item => {
+              if (item.source == '') {
+                item.source = '市场价';
+              } else if (item.source == 'jd') {
+                item.source = '京东价';
+              } else if (item.source == 'wyyx') {
+                item.source = '严选价';
+              }
+            });
+            _this.setData({
+              guessLikeArr: res.data.data.list
+            });
+          }
         }
-      }
-    });
+      });
+    }, 1000);
   },
 
   onReady: function () {
@@ -134,6 +143,46 @@ Page({
     // })
   },
   
+  //跳转专题
+  navigatorClick: function(e) {
+    var name = e.currentTarget.dataset.name;
+    var id = e.currentTarget.dataset.bindid;
+    if (name == "福利商城") {
+      wx.navigateTo({
+        url: `/pages/special/fuliMall/fuliMall?id=${id}`
+      });
+    } else if (name == "京东商城") {
+      wx.navigateTo({
+        url: `/pages/special/jdMall/jdMall?id=${id}`
+      });
+    } else if (name == "网易严选") {
+      wx.navigateTo({
+        url: `/pages/special/wyMall/wyMall?id=${id}`
+      });
+    } else if (name == "休闲零食") {
+      wx.navigateTo({
+        url: `/pages/special/casualSnacks/casualSnacks?id=${id}`
+      });
+    } else if (name == "新品首发") {
+      wx.navigateTo({
+        url: `/pages/special/newGoods/newGoods?id=${id}`
+      });
+    } else if (name == "生鲜优选") {
+      wx.navigateTo({
+        url: `/pages/special/freshFood/freshFood?id=${id}`
+      });
+    } else if (name == "办公好物") {
+      wx.navigateTo({
+        url: `/pages/special/officeGoodies/officeGoodies?id=${id}`
+      });
+    } else if (name == "亲子家庭") {
+      wx.navigateTo({
+        url: `/pages/special/parentChildFamily/parentChildFamily?id=${id}`
+      });
+    }
+    
+  },
+
   onReachBottom: function () {
     var _this = this;
     _this.data.page++;
@@ -143,8 +192,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/index/guessLike',
       method: 'POST',
       data: {
-        device_id: _this.data.deviceId,
-        user_token: _this.data.userToken,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         page: _this.data.page,
         per_page: '10'
       },

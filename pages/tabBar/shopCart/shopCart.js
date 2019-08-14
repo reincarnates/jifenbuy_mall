@@ -187,6 +187,7 @@ const list = [
   }
 ]
 
+var storages = require('../../../lib/js/storage.js');
 // pages/shopCart/shopCart.js
 Page({
 
@@ -214,6 +215,9 @@ Page({
     invalidArr: [], //失效商品
     invState: true,
     isGoods: true,
+    isShow: false, //登录后显示
+    isLogin: true, //登录前显示
+    code: '', //临时凭证
   },
 
   // 购物车+
@@ -245,6 +249,7 @@ Page({
     })
     that.getTotalPrice();
   },
+  
   // 购物车-
   getMain: function(e) {
     var that = this;
@@ -264,6 +269,7 @@ Page({
     })
     that.getTotalPrice();
   },
+
   // 单选
   goodsdagou: function(e) {
     var that = this;
@@ -333,6 +339,7 @@ Page({
 
     that.getTotalPrice();
   },
+
   // 全选
   checkedAll: function() {
     var that = this;
@@ -394,6 +401,7 @@ Page({
 
     that.getTotalPrice();
   },
+
   //店铺全选
   checkedShopAll: function(e) {
     var that = this;
@@ -455,6 +463,7 @@ Page({
       that.getTotalPrice();
     };
   },
+  
   //管理
   manageClick: function() {
     var state = this.data.mState;
@@ -474,9 +483,11 @@ Page({
       });
     }
   },
+
   jkl: function() {
     console.log(1);
   },
+
   // 计算商品价格
   getTotalPrice() {
     var cardTeams = this.data.cardTeams;
@@ -496,6 +507,7 @@ Page({
       countNum: totalNum
     })
   },
+
   // 删除
   delItem: function(e) {
     var that = this;
@@ -539,6 +551,7 @@ Page({
       }
     })
   },
+
   //操作删除
   semDelItem: function() {
     var _this = this;
@@ -630,6 +643,7 @@ Page({
       }
     }
   },
+
   //清理失效商品
   clearInvalid: function() {
     this.setData({
@@ -643,14 +657,89 @@ Page({
     }
   },
 
+  //获取临时凭证
+  getCode: function () {
+    var _this = this;
+    wx.login({
+      success(res) {
+        _this.setData({
+          code: res.code
+        });
+      }
+    })
+  },
+
   //允许获取手机号
   getPhoneNumber: function(e) {
-    console.log(e);
     var _this = this;
-    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+    wx.checkSession({
+      success() {
+        //session_key 未过期，并且在本生命周期一直有效
+        _this.loginSuccess(e, _this.data.code);
+      },
+      fail() {
+        // session_key 已经失效，需要重新执行登录流程
+        wx.navigateTo({
+          url: `/pages/login/login`
+        });
+      }
+    })
+  },
+
+  loginSuccess: function (msg, code) {
+    var _this = this;
+    if (msg.detail.errMsg == 'getPhoneNumber:fail user deny') {
       wx.navigateTo({
         url: `/pages/login/login`
       });
+    } else {
+      //提交给服务端审核
+      wx.request({
+        url: 'http://tapiserv.fulibuy.cn/Member/programLogin',
+        method: 'POST',
+        header: {
+          'content-type': 'application/json',
+          'Accept': 'application/json;charset=UTF-8',
+        },
+        data: {
+          code: code,
+          encryptedData: msg.detail.encryptedData,
+          iv: msg.detail.iv
+        },
+        success(res) {
+          if (res.data.data.wrong == "code") {
+            wx.showToast({
+              title: '连接服务器超时，请重试！',
+              icon: 'none',
+              duration: 2000
+            });
+          } else {
+            if (res.data.data.is_visitor == false) {
+              wx.showToast({
+                title: '登陆成功',
+                icon: 'none',
+                duration: 1000
+              });
+              storages.put('userInfo', res.data.data);
+              wx.setStorage({
+                key: 'device_id',
+                data: res.data.data.device_id,
+              });
+              wx.setStorage({
+                key: 'user_token',
+                data: res.data.data.user_token,
+              });
+              _this.getLoginStatus();
+            } else {
+              wx.showToast({
+                title: '当前微信绑定的手机号未注册,请使用已注册阳光福利商城的手机号登录。',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          }
+        }
+      })
     }
   },
 
@@ -741,6 +830,22 @@ Page({
     });
 
     that.getTotalPrice(); //合计
+
+    that.getLoginStatus();
+  },
+
+  //获取登陆状态
+  getLoginStatus: function() {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    if (user != undefined) {
+      if (user.is_visitor == false && user.is_login == true) {
+        _this.setData({
+          isShow: true,
+          isLogin: false
+        });
+      }
+    }
   },
 
   /**

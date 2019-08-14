@@ -9,8 +9,6 @@ Page({
     categoryChild: '', //子类分类
     num: 0,
     topId: 0,
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
   },
 
   /**
@@ -23,8 +21,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Category/getCategoryParent',
       method: 'post',
       data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id')
       },
       success(res) {
         if(res.data.code) {
@@ -36,8 +34,8 @@ Page({
             url: 'http://tapi.fulibuy.cn/Category/getCategoryChildren',
             method: 'post',
             data: {
-              user_token: _this.data.userToken,
-              device_id: _this.data.deviceId,
+              user_token: wx.getStorageSync('user_token'),
+              device_id: wx.getStorageSync('device_id'),
               gc_id: res.data.data[0].gc_id
             },
             success(res) {
@@ -99,8 +97,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Category/getCategoryChildren',
       method: 'post',
       data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         gc_id: id
       },
       success(res) {
@@ -137,8 +135,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Category/getCategoryChildren',
       method: 'post',
       data: {
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-        device_id: 'ffbcb5efff6aa294',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         gc_id: _this.data.topId
       },
       success(res) {

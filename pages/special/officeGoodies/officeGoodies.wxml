@@ -1,0 +1,86 @@
+<scroll-view scroll-y="true" style='height:{{winHeight}}px;' bindscroll='scroll' scroll-with-animation="true" scroll-into-view="{{toView}}">
+  <view class="casualSnacks-nav" style="position: {{posVal}}">
+    <text class="casualSnacks-nav-item {{currentData == index ? 'cactive' : ''}}" wx:for="{{navName}}" wx:key="index" data-index="{{index}}" bindtap="checkCurrent" data-curid="{{item.at_id}}">{{item.at_name}}</text>
+  </view>
+  <view class="fulimall">
+    <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true" indicator-color="#fff" indicator-active-color="#f20b0b">
+      <block wx:for="{{bannerImg}}" wx:key="index">
+        <block wx:for="{{item.data8.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+          <swiper-item class="fulimall-title-img">
+            <image src="{{'http://test.fulibuy.cn'+itemName.img}}" />
+          </swiper-item>
+        </block>
+      </block>
+    </swiper>
+    <view class="office-brand-wrapper">
+      <view class="office-brand-title">大牌汇聚</view>
+      <view class="office-brand-images">
+        <block wx:for="{{brandImg.data12.brand}}" wx:key="index">
+          <view class="office-brand-images-item">
+            <image src="{{'http://test.fulibuy.cn'+item.img}}"></image>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="office-Finance-wrapper">
+      <block wx:for="{{priceBanner}}" wx:key="index">
+        <view class="office-Finance-title" id="{{'mao'+item.at_id}}">{{item.goodsName}}</view>
+        <block wx:for="{{item.data1.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+          <view class="office-Finance-banner">
+            <image src="{{'http://test.fulibuy.cn'+itemName.img}}"></image>
+          </view>
+        </block>
+      </block>
+      <view class="everyDay-wrapper">
+        <view class="everyDay-goods">
+          <block wx:for="{{priceGoods.data3.list}}" wx:key="index">
+            <navigator class="everyDay-goods-item" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+              <view class="everyDay-goods-item-img">
+                <image src="{{item.img}}"></image>
+              </view>
+              <view class="everyDay-goods-item-content">
+                <view class="everyDay-goods-item-name">
+                  {{item.title}}
+                </view>
+                <view class="everyDay-goods-item-shopprice">
+                  <text style="margin-right: 5rpx;">{{item.source}}</text>
+                  <text style="text-decoration: line-through;">￥{{item.goods_marketprice}}</text>
+                </view>
+                <view class="present-price">￥{{item.goods_price}}</view>
+              </view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </view>
+    <view class="fulimall-special">
+      <block wx:for="{{special}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+        <view class="j" id="{{'mao'+itemName.at_id}}">
+          <view class="fulimall-special-title">{{itemName.goodsName}}</view>
+          <view class="fulimall-special-content">
+            <block wx:for="{{itemName.data6.list}}" wx:key="index">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{item.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{item.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{item.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{item.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{item.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</scroll-view>

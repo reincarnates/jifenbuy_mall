@@ -24,10 +24,10 @@
       </view>
     </view>
     <view class="home-head-user-setting">
-      <view class="home-head-user-setting-item">
+      <!-- <view class="home-head-user-setting-item">
         <view class="setting-name">积分</view>
         <view class="setting-number">0</view>
-      </view>
+      </view> -->
       <view class="home-head-user-setting-item">
         <view class="setting-name">福利余额</view>
         <view class="setting-number">0</view>
@@ -39,12 +39,12 @@
     </view>
   </view>
   <view class="gome-category-wrapper">
-    <navigator class="gome-category-item" hover-class="none" wx:for="{{specialArr}}" wx:key="{{index}}" url="{{item.nav_url}}">
+    <view class="gome-category-item" wx:for="{{specialArr}}" wx:key="{{index}}" bindtap="navigatorClick" data-name="{{item.nav_name}}" data-bindid="{{item.bind_id}}">
       <view class="gome-category-item-img">
         <image src="{{'http://test.fulibuy.cn'+item.nav_pic}}"></image>
       </view>
       <view class="gome-category-item-word">{{item.nav_name}}</view>
-    </navigator>
+    </view>
   </view>
   <view class="home-pd">
     <block wx:for="{{floorArr}}" wx:key="{{index}}">
@@ -90,7 +90,7 @@
         </view>
         <view class="welfare-selection-goods-wrapper flex-center">
           <block wx:for="{{item.data3.list}}" wx:for-index="key" wx:for-item="element" wx:key="{{key}}">
-            <view class="welfare-selection-goods-item flex-col">
+            <navigator class="welfare-selection-goods-item flex-col" url="/pages/goodsDetail/goodsDetail?id={{element.goods_sku}}" hover-class="none">
               <view class="welfare-selection-goods-item-img flex-center">
                 <image src="{{element.img}}"></image>
               </view>
@@ -100,7 +100,7 @@
               <view class="welfare-selection-goods-item-shop-price">
                 {{element.source}}<text>￥{{element.goods_marketprice}}</text>
               </view>
-            </view>
+            </navigator>
           </block>
         </view>
       </view>
@@ -143,17 +143,17 @@
         <view class="welfare-selection-head-img flex-center">
           <image src="../../../images/selection_left.png"></image>
         </view>
-        <view>猜你喜欢</view>
+        <view>为你推荐</view>
         <view class="welfare-selection-head-img flex-center">
           <image src="../../../images/selection_right.png"></image>
         </view>
-        <view class="guess-more">
+        <!-- <view class="guess-more">
           <view>更多>></view>
-        </view>
+        </view> -->
       </view>
       <view class="guess-you-like-content flex">
         <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
-          <view class="guess-you-like-item" data-id="{{item.goods_id}}">
+          <navigator  class="guess-you-like-item" data-id="{{item.goods_id}}" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
             <view class="guess-you-like-item-img">
               <image src="{{item.goods_image}}"></image>
             </view>
@@ -165,17 +165,15 @@
                 ￥
                 <text>{{item.goods_price}}</text>
               </view>
+              <view class="shop-price-word">{{item.source}}</view>
               <view class="guess-you-like-item-old-price">
                 ￥{{item.goods_marketprice}}
               </view>
             </view>
-          </view>
+          </navigator>
         </block>
       </view>
     </view>
     <!-- 猜你喜欢end -->
   </view>
 </view>
-
-<dialog id='dialog' title='登录提示' content='小程序需要您的授权才能提供更好的服务哦' confirmText='知道了' bind:confirmEvent='confirmEvent' bind:bindGetUserInfo='bindGetUserInfo'>
-</dialog>

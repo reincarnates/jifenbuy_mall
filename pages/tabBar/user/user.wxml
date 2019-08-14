@@ -1,22 +1,22 @@
-<view class="user-header-wrapper" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/personal_bg.png) no-repeat; background-size: 100% 100%; background-color: #f5f5f5; display: none;">
+<view class="user-header-wrapper" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/personal_bg.png) no-repeat; background-size: 100% 100%; background-color: #f5f5f5;" wx:if="{{ isShow }}">
   <view class="user-header">
     <image src="../../../images/use_msg.png" class="user-msg"></image>
     <image src="../../../images/user_setting.png" class="user-setting"></image>
   </view>
   <view class="user-header-info">
     <view class="user-header-info-avtar">
-      <image src="../../../images/avatar.png"></image>
+      <image src="{{userInfo.member_avatar}}"></image>
     </view>
     <view class="user-header-compeny-info">
-      <view class="user-header-name">迪丽热巴</view>
-      <view class="user-header-compeny-name">北京雷云智链科技有限公司</view>
+      <view class="user-header-name">{{userInfo.nickname != '' ? userInfo.nickname : userInfo.member_truename}}</view>
+      <view class="user-header-compeny-name">{{userInfo.company_name}}</view>
     </view>
     <view class="recharge-btn">充值</view>
   </view>
   <view class="user-header-operation">
     <view class="user-header-operation-item">
       <view class="user-header-operation-item-name">余额</view>
-      <view class="user-header-operation-item-num">0</view>
+      <view class="user-header-operation-item-num">{{userInfo.balance_detail.total_available}}</view>
     </view>
     <view class="user-header-operation-item">
       <view class="user-header-operation-item-name">优惠券</view>
@@ -24,12 +24,12 @@
     </view>
     <view class="user-header-operation-item">
       <view class="user-header-operation-item-name">我的收藏</view>
-      <view class="user-header-operation-item-num">0</view>
+      <view class="user-header-operation-item-num">{{userInfo.favorit_count}}</view>
     </view>
   </view>
 </view>
 
-<view class="user-container" style="display: none;">
+<view class="user-container" wx:if="{{ isShow }}">
   <view class="user-order-wrapper">
     <view class="user-order-head">
       <view class="user-order-head-left">
@@ -42,10 +42,30 @@
       </view>
     </view>
     <view class="user-order-operation">
-      <navigator class="user-order-operation-payment-made" wx:for="{{orderOperation}}" wx:key="index" url="{{item.toUrl}}"   hover-class="none">
-        <image class="{{item.orderClass}}" src="{{item.url}}"></image>
-        <view class="user-order-operation-word">{{item.orderName}}</view>
-        <view class="user-order-operation-num" wx:if="{{item.orderNum > 0}}">{{item.orderNum}}</view>
+      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+        <image class="payment-made" src="../../../images/payment_made.png"></image>
+        <view class="user-order-operation-word">待付款</view>
+        <view class="user-order-operation-num" wx:if="{{orderNum.order_new > 0}}">{{orderNum.order_new}}</view>
+      </navigator>
+      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+        <image class="shipped-made" src="../../../images/shipped_made.png"></image>
+        <view class="user-order-operation-word">待发货</view>
+        <view class="user-order-operation-num" wx:if="{{orderNum.order_pay > 0}}">{{orderNum.order_pay}}</view>
+      </navigator>
+      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+        <image class="received-made" src="../../../images/received_made.png"></image>
+        <view class="user-order-operation-word">待收货</view>
+        <view class="user-order-operation-num" wx:if="{{orderNum.order_recive > 0}}">{{orderNum.order_recive}}</view>
+      </navigator>
+      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+        <image class="comment-made" src="../../../images/comment_made.png"></image>
+        <view class="user-order-operation-word">待收货</view>
+        <view class="user-order-operation-num" wx:if="{{orderNum.order_noeval > 0}}">{{orderNum.order_noeval}}</view>
+      </navigator>
+      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+        <image class="after-sale" src="../../../images/after_sale.png"></image>
+        <view class="user-order-operation-word">售后/退款</view>
+        <view class="user-order-operation-num" wx:if="{{orderNum.order_refund > 0}}">{{orderNum.order_refund}}</view>
       </navigator>
     </view>
     <view class="user-order-banner">
@@ -124,8 +144,10 @@
   </view>
 </view>
 
-<view class="guide-login flex-center">
+<view class="guide-login flex-center" wx:if="{{ isLogin }}">
   <view>登录阳光福利商城账号后</view>
   <view style="margin-top: 30rpx;">可查看个人中心</view>
-  <button open-type="getPhoneNumber" bindtap="asd" bindgetphonenumber="getPhoneNumber" class='guide-login-btn'>立即登录</button>
+  <button open-type="getPhoneNumber" bindtap="getCode" bindgetphonenumber="getPhoneNumber" class='guide-login-btn'>
+    立即登录
+  </button>
 </view>
