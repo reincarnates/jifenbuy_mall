@@ -14,14 +14,15 @@
     "pages/tabBar/shopCart/shopCart",
     "pages/listPage/listPage",
     "pages/goodsDetail/goodsDetail",
-    "pages/comment/comment",
+    "pages/comment/comment",   
     "pages/screen/screen",
     "pages/tabBar/classification/classification",
     "pages/search/search",
     "pages/de/de",
     "pages/businessCooperation/businessCooperation",
     "pages/components/dialog/dialog",
-    "pages/searchOrder/searchOrder"
+    "pages/searchOrder/searchOrder",
+    "pages/floorSpecial/floorSpecial"
   ],
   "window": {
     "backgroundTextStyle": "light",
