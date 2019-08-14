@@ -82,7 +82,7 @@ Page({
   },
 
   //倒计时
-  time: function () {
+  time: function() {
     var _this = this;
     var interval = setInterval(function () {
       _this.data.currentTime--; //每执行一次让倒计时秒数减一
@@ -149,7 +149,7 @@ Page({
           });
         }
       }
-    })
+    }, 1000);
   },
 
   //获取临时凭证
@@ -189,7 +189,7 @@ Page({
 
   loginSuccess: function (msg, code) {
     var _this = this;
-    if (msg.detail.errMsg == 'getPhoneNumber:fail user deny') {
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
       wx.showToast({
         title: '微信授权登陆失败，请使用短信验证码登录',
         icon: 'none',
