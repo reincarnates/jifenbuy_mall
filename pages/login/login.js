@@ -189,7 +189,7 @@ Page({
 
   loginSuccess: function (msg, code) {
     var _this = this;
-    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+    if (msg.detail.errMsg == 'getPhoneNumber:fail user deny') {
       wx.showToast({
         title: '微信授权登陆失败，请使用短信验证码登录',
         icon: 'none',
