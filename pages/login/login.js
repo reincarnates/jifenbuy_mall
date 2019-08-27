@@ -55,11 +55,6 @@ Page({
       });
       return false;
     } else {
-      _this.setData({
-        isGetCode: false,
-        isCode: true
-      });
-      _this.time();
       wx.request({
         url: 'http://tapiserv.fulibuy.cn/Member/saveWxVerifyCode',
         method: 'POST',
@@ -71,11 +66,25 @@ Page({
           type: '1'
         },
         success(res) {
-          wx.showToast({
-            title: '短信验证码已发送，请注意查收',
-            icon: 'none',
-            duration: 2000
-          });
+          if (res.data.msg == '账号不存在') {
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000
+            });
+            return false;
+          } else {
+            _this.setData({
+              isGetCode: false,
+              isCode: true
+            });
+            _this.time();
+            wx.showToast({
+              title: '短信验证码已发送，请注意查收',
+              icon: 'none',
+              duration: 2000
+            });
+          }
         }
       });
     }
@@ -114,6 +123,7 @@ Page({
         // access_token: wx.getStorageSync('accessToken'),
         phone: _this.data.phoneVal,
         verifyCode: _this.data.codeVal,
+        client: 'wx'
       },
       success(res) {
         console.log(res);
@@ -209,7 +219,8 @@ Page({
           // access_token: '1b2b074c3a2342e6031510c5e829e9c2',
           code: code,
           encryptedData: msg.detail.encryptedData,
-          iv: msg.detail.iv
+          iv: msg.detail.iv,
+          client: 'wx'
           // encryptedData: encodeURIComponent(e.detail.encryptedData),
           // iv: encodeURIComponent(e.detail.iv)
         },

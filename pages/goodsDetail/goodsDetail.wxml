@@ -1,13 +1,17 @@
 <scroll-view scroll-y="true" style='height:{{winHeight}}px; padding-bottom: 90rpx; box-sizing: border-box;' bindscroll='scroll' scroll-with-animation="true" scroll-into-view="{{toView}}" scroll-top="{{returnHeight}}">
   <view class="custom flex_center" style="margin-top:{{statusBarHeight}}px">
     <view class="goods-img">
-      <swiper class="goods-img" indicator-dots="true" circular="true" duration="1000" indicator-color="#b6b4b4" indicator-active-color="#fe9701">
+      <swiper class="goods-img" circular="true" duration="600" indicator-color="#b6b4b4" indicator-active-color="#fe9701" bindchange="swiperchange">
         <block wx:for="{{goodsImg}}" wx:key="*this">
-          <swiper-item>
+          <swiper-item item-id="{{index}}">
             <image src="{{item}}"></image>
           </swiper-item>
         </block>
       </swiper>
+      <view class="bannerIndex">
+        <text>{{swiperIndex}}/</text>
+        <text>{{goodsImg.length}}</text>
+      </view>
     </view>
   </view>
 
@@ -21,10 +25,13 @@
           ￥
           <text>{{goodsPrice}}</text>
         </view>
-        <text class="goods-attr-discount">优惠率{{goodsDiscount}}%</text>
+        <view class="goods-attr-discount">折扣{{goodsDiscount}}%</view>
       </view>
-      <view class="flex-sw">
-        <view class="goods-attr-old-price">￥{{goodsMarketprice}}</view>
+      <view class="flex-sw" style="margin-top: 10rpx;">
+        <view class="goods-attr-old-price">
+          <text style="margin-right: 5rpx;">{{source}}</text>
+          <text style="text-decoration: line-through;">￥{{goodsMarketprice}}</text>
+        </view>
         <view class="goods-attr-sales">销量 {{goodsSalenum}}</view>
       </view>
     </view>
@@ -104,8 +111,24 @@
       <view class="goods-detail">
         宝贝详情
       </view>
-      <import src="../../wxParse/wxParse.wxml" />
-      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      <view wx:if="{{bgs != ''}}">
+        <block wx:for="{{bgs}}" wx:key="index">
+          <view style="{{item+')'}}; height: {{winHeight}}px; background-size: 100% 100%;"></view>
+        </block>
+      </view>
+      <view wx:if="{{imgs != ''}}">
+        <block wx:for="{{imgs}}" wx:key="index">
+          <image src="{{item}}" mode="widthFix" style="width: 100%; outline-width:0px; vertical-align:top;"></image>
+        </block>
+      </view>
+      <view wx:if="{{imgs2 != ''}}">
+        <block wx:for="{{imgs2}}" wx:key="index">
+          <image src="{{'//' + item}}" mode="widthFix" style="width: 100%; outline-width:0px; vertical-align:top;"></image>
+        </block>
+      </view>
+      <!-- <rich-text nodes="{{nodes}}" class="detail"></rich-text> -->
+      <!-- <import src="../../wxParse/wxParse.wxml" />
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
       <!-- <image style="width: 100%;" src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/goods_detail.png" mode='widthFix'></image> -->
     </view>
 
@@ -129,34 +152,34 @@
 <!-- 操作 -->
 <view class="goods-operation-wrapper flex">
   <view class="goods-operation-left flex">
-    <view class="goods-operation-left-item flex-center">
+    <!-- <view class="goods-operation-left-item flex-center">
       <view class="goods-operation-left-item-img">
         <image src="../../images/shop_icon.png"></image>
       </view>
       <view class="goods-operation-left-item-word">店铺</view>
-    </view>
-    <view class="goods-operation-left-item flex-center">
-      <view class="goods-operation-left-item-img" style="width: 37rpx; height: 31rpx;">
-        <image src="../../images/service_icon.png"></image>
-      </view>
-      <view class="goods-operation-left-item-word">客服</view>
-    </view>
-    <view class="goods-operation-left-item flex-center">
+    </view> -->
+    <view class="goods-operation-left-item flex-center" bindtap="collect">
       <view class="goods-operation-left-item-img" style="width: 35rpx; height: 33rpx;">
-        <image src="../../images/collection.png"></image>
+        <image src="{{collectImg}}"></image>
       </view>
       <view class="goods-operation-left-item-word">收藏</view>
     </view>
+    <view class="goods-operation-left-item flex-center" bindtap="shopCartUrl">
+      <view class="goods-operation-left-item-img" style="width: 31rpx; height: 31rpx;">
+        <image src="../../images/shop_cart.png"></image>
+      </view>
+      <view class="goods-operation-left-item-word">购物车</view>
+    </view>
   </view>
   <view class="goods-operation-right flex">
-    <view class="goods-operation-plus-shopcart">加入购物车</view>
-    <view class="buy-immediately">立即购买</view>
+    <view class="goods-operation-plus-shopcart" bindtap="plusShopCart">加入购物车</view>
+    <view class="buy-immediately" bindtap="buyImdy">立即购买</view>
   </view>
 </view>
 <!-- 操作end -->
 
 <!-- 优惠券 -->
-<view class="goods-coupon-mask-wrapper" wx:if="{{isCoupon}}" bindtap="closeCoupon"></view>
+<view class="goods-coupon-mask-wrapper" wx:if="{{isCoupon}}" bindtap="closeCoupon" catchtouchmove="move"></view>
 <view class="goods-coupon-mask" style="bottom: {{maskHeight}};">
   <view class="goods-coupon-mask-title">优惠券</view>
   <view class="goods-coupon-mask-content">
@@ -189,7 +212,7 @@
 <!-- 优惠券end -->
 
 <!-- 选择参数 -->
-<view class="check-params-mask-wrapper" wx:if="{{isParams}}" bindtap="closeParams"></view>
+<view class="check-params-mask-wrapper" wx:if="{{isParams}}" bindtap="closeParams" catchtouchmove="move"></view>
 <view class="check-params-mask" style="bottom: {{params}};">
   <view class="check-params-mask-head flex-sw">
     <view class="check-params-mask-head-left flex">
@@ -211,11 +234,11 @@
             </view>
           </view>
           <view class="check-word flex">
-            <view style="margin-right: 15rpx;">{{checkWord}}</view>
+            <view style="margin-right: 8rpx; white-space: nowrap;">{{checkWord}}</view>
             <view class="flex">
-              <view style="margin-right: 6rpx;" wx:for="{{goodsClass}}" wx:key="index">
+              <block wx:for="{{goodsClass}}" wx:key="index">
                 {{item}}
-              </view>
+              </block>
             </view>
             <!-- <view style="margin-right: 15rpx;">{{checkWord}}</view>
           <view class="flex">
@@ -236,7 +259,7 @@
       <view class="check-params-mask-attr-title">{{item}}</view>
       <view class="check-params-mask-attr-option flex" wx:for="{{specValue}}" wx:for-index="key" wx:for-item="element" wx:key="{{key}}">
         <block wx:for="{{element}}" wx:for-index="key2" wx:for-item="element2" wx:key="{{key2}}">
-          <view class="check-params-mask-attr-option-item {{element2.is_xuan ? 'curParams' : ''}}" wx:if="{{index == key}}" data-id="{{element2.id}}" data-fuji='{{index}}' data-index="{{key2}}" bindtap="checkParams">{{element2.val}}</view>
+          <view class="check-params-mask-attr-option-item {{element2.is_xuan ? 'curParams' : ''}}" wx:if="{{index == key}}" data-id="{{element2.id}}" data-fuji='{{index}}' data-index="{{key2}}" bindtap="checkParams2">{{element2.val}}</view>
         </block>
       </view>
     </view>
@@ -254,8 +277,8 @@
     </view>
   </view>
   <view class="check-params-mask-operation flex">
-    <view class="plus-shopcart">加入购物车</view>
-    <view class="check-buy-immediately">立即购买</view>
+    <view class="plus-shopcart" bindtap="paramsAddCart">加入购物车</view>
+    <view class="check-buy-immediately" bindtap="buyNow">立即购买</view>
   </view>
 </view>
 <!-- 选择参数end -->

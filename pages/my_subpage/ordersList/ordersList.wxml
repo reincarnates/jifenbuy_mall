@@ -1,0 +1,71 @@
+<!-- search bar -->
+<view class="search_view flex-y-center">
+  <navigator class="searchBar flex-row flex-y-center">
+    <image src="/images/search_btn.png"></image>
+    <text>搜索全部订单</text>
+  </navigator>
+</view>
+
+<!-- segment -->
+<view class="selectBar flex-row">
+  <view class="selectItem flex-grow-1" wx:for="{{tabs}}" wx:key="unique" bindtap="tabClick" id="{{index}}">
+    <view class="selectTitle">{{item}}</view>
+  </view>
+  <view class="bottom_line" style="margin-left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px); width:{{sliderWidth}}rpx; left:{{tabLeft}};"></view>
+</view>
+
+<!-- orders list -->
+<view class="orderList-view">
+
+  <block wx:for="{{orders_list}}" wx:key="unique" wx:for-item="order">
+    <view class="orders_cell flex-col" bindtap="viewOrdersDetail" data-ordersn="{{order.order_sn}}">
+
+      <view class="storeinfo_view flex-row flex-y-center">
+        <view class="storeinfo_title flex-grow-1">{{order.store_name}}<image src="/images/order_go.png"></image></view>
+        <view class="storeinfo_state flex-grow-0">{{order.order_desc}}</view>
+      </view>
+
+      <view class="goodsinfo_view flex-col">
+        <!-- 单个商品 -->
+        <view class="single_goodsview flex-row" wx:if="{{order.order_goods.length == 1}}">
+          <image class="flex-grow-0" src="{{order.order_goods[0].goods_image}}" ></image>
+          <view class="flex-col flex-grow-1" style="margin-left:10rpx;">
+            <text class="text-more-2">{{order.order_goods[0].goods_name}}</text>
+          </view>
+        </view>
+         <!-- 多个商品 只展示图片 -->
+        <view class="multi_goodsview flex-row" wx:if="{{order.order_goods.length > 1}}">
+          <block wx:for="{{order.order_goods}}" wx:key="unique" wx:for-item="goods" wx:if="{{index<4}}">
+            <image class="flex-grow-0" src="goods.goods_image"></image>
+          </block>
+        </view>
+        <view class="order_num_price flex-grow-0">共 {{order.order_goods.length}} 件宝贝 合计: <text style="font-size: 18rpx;">¥</text><text style="font-size: 28rpx;margin-left:4rpx;">{{order.order_amount}}</text></view>
+      </view>
+
+      <!-- 0(已取消)10(默认):未付款;20:已付款;30:已发货;40:已收货;' -->
+      <!-- 因各种状态问题, 直接判断描述为“已取消”隐藏 -->
+      <view class="function_view flex-row" wx:if="{{order.order_desc != '已取消'}}" style="height: {{order.order_desc != '已取消' ? '86rpx' : '1rpx'}} ;">
+        <!-- <view class="function_container" > -->
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 30 || order.order_state == 40}}" data-title="查看物流" data-order="{{order}}">查看物流</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 20 || order.order_state == 10}}" data-title="取消订单">取消订单</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 30}}" data-title="确认收货" data-order="{{order}}">确认收货</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 10}}" data-title="去支付" data-order="{{order}}">去支付</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 40 && order.evaluation_state == false}}" data-title="评价" data-order="{{order}}">评价</view>
+          <view class="flex-center" catchtap="tapFuncwtionButton" wx:if="{{order.order_state == 40 && order.evaluation_state == true}}" data-title="查看评价" data-order="{{order}}">查看评价</view>
+        <!-- </view> -->
+      </view>
+
+    </view>
+  </block>
+
+  <!-- empty placeholder -->
+  <view class="empty_view flex-col flex-y-center" wx:if="{{orders_list.length == 0}}">
+    <image src="/images/alert_placeholder_orders.png" mode="aspectFit"></image>
+    <view class="empty_title">您还没有订单</view>
+  </view>
+
+</view>
+
+<!-- cancel reason -->
+<view class="cancel_view" catchtap="hideCancelView" wx:if="{{isShowCancelView}}" catchtouchmove="true"></view>
+<include src="/pages/my_subpage/cancelReason/cancelReason.wxml" />

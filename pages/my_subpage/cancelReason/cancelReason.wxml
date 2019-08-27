@@ -1,0 +1,23 @@
+<view class="cancel_container" style="bottom: {{cancel_bottom}};" catchtouchmove="true">
+  <view style="text-align: center;">取消订单</view>
+  <view style="color: #999; margin-top: 12rpx;">请选择取消订单的原因</view>
+  <radio-group class="radio_reason" bindchange="radioChange">
+    <label wx:for="{{cancel_reason}}" wx:key="unique" wx:for-item="reason">
+      <view class="reason_cell flex-row">
+        <view class="flex-grow-1" style="color: #333;">{{reason.reason_info}}</view>
+        <radio style='position:absolute;left:-9999px' value="{{index}}" checked="{{reason.checked}}"/>
+        <icon type="circle" size="23" color="#999" wx:if="{{!reason.checked }}"></icon>
+        <icon type="success" size="23" color="#ef6601" wx:if="{{reason.checked }}"></icon> 
+      </view>
+    </label>
+  </radio-group>
+  <view class="cancel_explain">温馨提示：
+1.订单一旦取消，限时特价、购买资格等优惠可能一并取消，不可恢复；
+2.订单所用红包、优惠券支持退回，为避免过期请尽快使用；
+3.订单一旦取消，无法恢复。
+  </view>
+  <view class="cancel_bottom_view flex-row">
+    <view class="cancel_button" bindtap="hideCancelView">暂不取消</view>
+    <view class="sure_button" bindtap="sureCancelOrders">确认取消</view>
+  </view>
+</view>

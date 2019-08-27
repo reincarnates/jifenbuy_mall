@@ -1,0 +1,234 @@
+<view class="confirm-wrapper">
+  <view class="confirm-address-wrapper" bindtap="checkAddress">
+    <view class="confirm-address-top flex">
+      <view class="confirm-address-top-img">
+        <image src="../../images/address_order.png"></image>
+      </view>
+      <view class="confirm-address-top-name">{{address.true_name}}</view>
+      <view class="confirm-address-top-phone">{{address.mob_phone}}</view>
+    </view>
+    <view class="confirm-address-bottom">
+      地址：{{address.area_info}}
+      <text style="margin-left: 6rpx;">{{address.address}}</text>
+    </view>
+  </view>
+  <block wx:for="{{orderGoods}}" wx:key="{{index}}">
+    <view class="confirm-goods-wrapper" wx:if="{{item.list.length > 1}}">
+      <view class="confirm-goods-top">
+        <view class="confirm-goods-title flex">
+          <view class="confirm-goods-title-img">
+            <image src="../../images/order_shop.png"></image>
+          </view>
+          <view class="confirm-goods-title-name">{{item.store_name}}</view>
+          <view class="confirm-goods-title-go">
+            <image src="../../images/go_shop.png"></image>
+          </view>
+        </view>
+        <view class="confirm-goods-img flex" data-index="{{index}}" bindtap="checkGoods">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <image src="{{itemName.goods_image}}"></image>
+          </block>
+          <view class="confirm-goods-core flex-center" wx:if="{{item.list.length >= 5}}">
+            <view class="confirm-goods-core-yuan flex-sw">
+              <view class="confirm-goods-core-yuan-item"></view>
+              <view class="confirm-goods-core-yuan-item"></view>
+              <view class="confirm-goods-core-yuan-item"></view>
+            </view>
+            <view class="confirm-goods-core-word">
+              共
+              <text style="margin: 0 8rpx;">5</text>件
+            </view>
+          </view>
+        </view>
+        <view class="confirm-delivery-type flex">
+          <view class="confirm-delivery-type-left">配送方式：</view>
+          <view class="confirm-delivery-type-right">{{item.freight > 0 ? '普通快递' : '快递包邮'}}</view>
+        </view>
+        <view class="confirm-order-remarks flex">
+          <view class="confirm-delivery-type-left">订单备注：</view>
+          <input class="confirm-order-remarks-input" placeholder="请输入备注"></input>
+        </view>
+      </view>
+      <view class="confirm-goods-bottom">
+        <view class="confirm-goods-price-wrapper">
+          <view class="confirm-goods-price-top flex-sw">
+            <view class="confirm-goods-price-word">商品金额</view>
+            <view class="confirm-goods-price-num">￥{{item.price}}</view>
+          </view>
+          <view class="confirm-goods-price-bottom flex-sw">
+            <view class="confirm-goods-price-word">运费</view>
+            <view class="confirm-goods-price-num">￥{{item.freight}}</view>
+          </view>
+        </view>
+        <view class="confirm-goods-payment">
+          <view>需支付：</view>
+          <view style="font-size: 30rpx; color: #fe6601; font-weight: 600;">￥{{item.total}}</view>
+        </view>
+        <view class="contact-service flex-center">
+          <image src="../../images/order_service.png"></image>
+          <view>联系客服</view>
+        </view>
+      </view>
+    </view>
+    <view class="confirm-goods-wrapper2" wx:else>
+      <view class="confirm-goods-top2">
+        <view class="confirm-goods-title flex">
+          <view class="confirm-goods-title-img">
+            <image src="../../images/order_shop.png"></image>
+          </view>
+          <view class="confirm-goods-title-name">{{item.store_name}}</view>
+          <view class="confirm-goods-title-go">
+            <image src="../../images/go_shop.png"></image>
+          </view>
+        </view>
+        <view class="confirm-single-goods flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="confirm-single-goods-img">
+              <image src="{{itemName.goods_image}}"></image>
+            </view>
+            <view class="confirm-single-goods-word">
+              <view class="confirm-single-goods-name">
+                {{itemName.goods_name}}
+              </view>
+              <view class="confirm-single-goods-price">
+                ￥{{itemName.goods_price}}
+              </view>
+            </view>
+            <view class="confirm-single-goods-num">
+              <view>数量</view>
+              <view style="font-size: 20rpx;">×{{itemName.goods_num}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="confirm-delivery-type flex">
+          <view class="confirm-delivery-type-left">配送方式：</view>
+          <view class="confirm-delivery-type-right">{{item.freight > 0 ? '普通快递' : '快递包邮'}}</view>
+        </view>
+        <view class="confirm-order-remarks flex">
+          <view class="confirm-delivery-type-left">订单备注：</view>
+          <input class="confirm-order-remarks-input" placeholder="请输入备注"></input>
+        </view>
+      </view>
+      <view class="confirm-goods-bottom">
+        <view class="confirm-goods-price-wrapper">
+          <view class="confirm-goods-price-top flex-sw">
+            <view class="confirm-goods-price-word">商品金额</view>
+            <view class="confirm-goods-price-num">￥{{item.price}}</view>
+          </view>
+          <view class="confirm-goods-price-bottom flex-sw">
+            <view class="confirm-goods-price-word">运费</view>
+            <view class="confirm-goods-price-num">￥{{item.freight}}</view>
+          </view>
+        </view>
+        <view class="confirm-goods-payment">
+          <view>需支付：</view>
+          <view style="font-size: 30rpx; color: #fe6601; font-weight: 600;">￥{{item.total}}</view>
+        </view>
+        <view class="contact-service flex-center">
+          <image src="../../images/order_service.png"></image>
+          <view>联系客服</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:for="{{orderGood}}" wx:key="index">
+    <view class="confirm-goods-wrapper2" wx:if="{{orderGood != ''}}">
+      <view class="confirm-goods-top2">
+        <view class="confirm-goods-title flex">
+          <view class="confirm-goods-title-img">
+            <image src="../../images/order_shop.png"></image>
+          </view>
+          <view class="confirm-goods-title-name">{{item.store_name}}</view>
+          <view class="confirm-goods-title-go">
+            <image src="../../images/go_shop.png"></image>
+          </view>
+        </view>
+        <view class="confirm-single-goods flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="confirm-single-goods-img">
+              <image src="{{itemName.goods_image}}"></image>
+            </view>
+            <view class="confirm-single-goods-word">
+              <view class="confirm-single-goods-name">
+                {{itemName.goods_name}}
+              </view>
+              <view class="confirm-single-goods-price">
+                ￥{{itemName.goods_price}}
+              </view>
+            </view>
+            <view class="confirm-single-goods-num">
+              <view>数量</view>
+              <view style="font-size: 20rpx;">×{{itemName.goods_num}}</view>
+            </view>
+          </block>
+        </view>
+        <view class="confirm-delivery-type flex">
+          <view class="confirm-delivery-type-left">配送方式：</view>
+          <view class="confirm-delivery-type-right">{{item.freight > 0 ? '普通快递' : '快递包邮'}}</view>
+        </view>
+        <view class="confirm-order-remarks flex">
+          <view class="confirm-delivery-type-left">订单备注：</view>
+          <input class="confirm-order-remarks-input" placeholder="请输入备注"></input>
+        </view>
+      </view>
+      <view class="confirm-goods-bottom">
+        <view class="confirm-goods-price-wrapper">
+          <view class="confirm-goods-price-top flex-sw">
+            <view class="confirm-goods-price-word">商品金额</view>
+            <view class="confirm-goods-price-num">￥{{item.list[0].price_sun}}</view>
+          </view>
+          <view class="confirm-goods-price-bottom flex-sw">
+            <view class="confirm-goods-price-word">运费</view>
+            <view class="confirm-goods-price-num">￥{{item.freight}}</view>
+          </view>
+        </view>
+        <view class="confirm-goods-payment">
+          <view>需支付：</view>
+          <view style="font-size: 30rpx; color: #fe6601; font-weight: 600;">￥{{price_num}}</view>
+        </view>
+        <view class="contact-service flex-center">
+          <image src="../../images/order_service.png"></image>
+          <view>联系客服</view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="submit-order-wrapper">
+    <view class="submit-order-price">
+      <text>合计：</text>
+      <text style="font-size: 30rpx; color: #fe6601;">￥{{price_num}}</text>
+    </view>
+    <view class="submit-order-btn">提交订单</view>
+  </view>
+</view>
+
+<!-- 商品清单 -->
+<view class="confirm-goods-mask-bg" catchtouchmove="move" wx:if="{{isList}}" bindtap="closeGoodsList"></view>
+<view class="confirm-goods-mask" style="bottom: {{maskBottom}};">
+  <view class="confirm-goods-mask-cont">
+    <view class="confirm-goods-mask-head flex-sw">
+      <view class="confirm-goods-mask-head-word">商品清单</view>
+      <view class="confirm-goods-mask-head-num flex-y-center">
+        <view style="margin-right: 60rpx;">共{{checkGoods.length}}件</view>
+        <image src="../../images/order_close.png" bindtap="closeGoodsList"></image>
+      </view>
+    </view>
+    
+    <view style="height: 700rpx; overflow-y: auto; -webkit-overflow-scrolling : touch; padding-bottom: 31rpx; box-sizing: border-box;">
+      <block wx:for="{{checkGoods}}" wx:key="{{index}}">
+        <view class="confirm-goods-mask-list flex-sw">
+          <view class="confirm-goods-mask-list-img">
+            <image src="{{item.goods_image}}"></image>
+          </view>
+          <view class="confirm-goods-mask-list-word">
+            <view class="confirm-goods-mask-list-word-top">
+              {{item.goods_name}}
+            </view>
+            <view class="confirm-goods-mask-list-price">￥{{item.goods_price}}</view>
+          </view>
+          <view class="confirm-goods-mask-list-num">×{{item.goods_num}}</view>
+        </view>
+      </block>
+    </view >
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "添加地址",
+  "usingComponents": {
+    "region-picker": "../../../component/region-picker/region-picker"
+  }
+}

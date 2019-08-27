@@ -1,5 +1,5 @@
 <view wx:if="{{isShow}}">
-  <view wx:if="{{ isGoods }}">
+  <view wx:if="{{ isGoods }}" wx:if="{{cardTeams.length == 0 ? false : true}}">
     <!-- 购物车列表 -->
     <view class="cart-wrapper">
       <view class="cart-manage {{ cardTeams.length == 0 ? 'no-click' : '' }}" bindtap="manageClick">{{manage}}</view>
@@ -19,7 +19,7 @@
                 <image src="../../../images/go_shop.png"></image>
               </view>
             </view>
-            <view wx:for="{{item.list}}" wx:key="index" wx:for-item="element" wx:for-index="index" class="row c-btm-list {{element.isTouchMove ? 'touch-move-active' : ''}}" wx:if="{{element.stock.length == 0 ? false : true}}">
+            <view wx:for="{{item.list}}" wx:key="index" wx:for-item="element" wx:for-index="index" class="row c-btm-list {{element.isTouchMove ? 'touch-move-active' : ''}}" wx:if="{{element.stock == false || element.goods_state == 0 ? false : true}}">
               <!--多选框-->
               <!-- <view style='width:60rpx;height:60rpx;' wx:if="{{element.stock == 0}}"></view> -->
               <checkbox-group class="checkbox-box" data-key="{{key}}" data-checkid="{{index}}" bindchange='goodsdagou' data-index="{{index}}" data-fuindex="{{key}}">
@@ -63,7 +63,7 @@
                 <view class="collection" data-key="{{key}}" data-index='{{index}}'>
                   移入收藏
                 </view>
-                <view class="remove" catchtap="delItem" data-key="{{key}}" data-index='{{index}}'>
+                <view class="remove" catchtap="delItem" data-key="{{key}}" data-index='{{index}}' bindtap="removeGoods">
                   删除
                 </view>
 
@@ -82,19 +82,19 @@
             </view>
           </view>
           <view wx:for="{{invalidArr}}" wx:key="key" wx:for-item="item" wx:for-index="key">
-            <view class="invalid-goods-item flex" wx:for="{{item.list}}" wx:key="index" wx:for-item="element" wx:for-index="index">
+            <view class="invalid-goods-item flex">
               <view class="invalid-goods-item-left">
-                <image src="{{element.goods_image}}"></image>
+                <image src="{{item.goods_image}}"></image>
                 <view class="invalid-goods-item-left-mask">暂无库存</view>
               </view>
               <view class="invalid-goods-item-right">
                 <view class='c-right-top' style="padding-top: 0;">
-                  {{element.goods_name}}
+                  {{item.goods_name}}
                 </view>
                 <view class='c-right-btm between' style="bottom: 45rpx; padding-left: 24rpx; box-sizing: border-box;">
                   <view class='c-price'>
                     <text>￥</text>
-                    <text style="font-size: 30rpx;">{{element.goods_price}}</text>
+                    <text style="font-size: 30rpx;">{{item.goods_price}}</text>
                   </view>
                 </view>
               </view>
@@ -119,7 +119,7 @@
           </label>
         </checkbox-group>
       </view>
-      <view class="c-settlement-right {{ yixuanlength == 0 ? 'pointer-none' : ''}}" wx:if="{{settState}}" bindtap="jkl">
+      <view class="c-settlement-right {{ yixuanlength == 0 ? 'pointer-none' : ''}}" wx:if="{{settState}}" bindtap="settlement">
         结算
         <text>({{countNum}})</text>
       </view>
@@ -134,7 +134,7 @@
     </view>
   </view>
 
-  <view wx:else class="flex-center flex-col" style="height: 100%;">
+  <view wx:else class="flex-center flex-col" style="height: 100%; margin-top: 320rpx;">
     <image class="not-cart-img" src="../../../images/not_cart_bg.png"></image>
     <view class="not-cart-word">购物车空了，快去添加宝贝吧！</view>
   </view>

@@ -1,0 +1,175 @@
+@import "/pages/my_subpage/cancelReason/cancelReason.wxss";
+
+.orderList-view {
+  background-color: #f5f5f5;
+  margin-top: 150rpx;
+  overflow: hidden;
+}
+
+.search_view {
+  top: 0;
+  background: #fff;
+  height: 80rpx;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+}
+
+.search_view .searchBar {
+  background: #fff;
+  color: #333;
+  font-size: 26rpx;
+  margin: 10rpx 30rpx;
+  width: 100%;
+  border-radius: 68rpx;
+  border: 1rpx #ef9901 solid;
+}
+
+.search_view .searchBar image {
+  width: 25rpx;
+  height: 25rpx;
+  margin-left: 30rpx;
+}
+
+.search_view .searchBar text {
+  margin-left: 10rpx;
+  line-height: 58rpx;
+  font-size: 24rpx;
+}
+
+.selectBar {
+  top: 80rpx;
+  height: 70rpx;
+  width: 100%;
+  background: #fff;
+  box-shadow: 5rpx 5rpx 10rpx #eee;
+  position: fixed;
+  z-index: 20;
+}
+
+.selectBar .selectItem {
+  font-size: 26rpx;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  padding-top: 10rpx;
+}
+
+.selectBar .bottom_line {
+  position:absolute;
+  bottom:0;
+  height:2rpx;
+  background-color:#ef6601;
+  -webkit-transition:-webkit-transform .3s;
+  transition:-webkit-transform .3s;
+  transition:transform .3s;
+}
+
+.orders_cell {
+  /* height: 348rpx; */
+  margin: 18rpx;
+  background-color: #fff;
+  position: relative;
+}
+
+.orders_cell .storeinfo_view {
+  height: 56rpx;
+  margin: 0rpx 18rpx;
+  border-bottom: 1rpx solid #dddddd;
+}
+
+.orders_cell .storeinfo_view .storeinfo_title {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.orders_cell .storeinfo_view .storeinfo_state {
+  font-size: 22rpx;
+  color: #ef6601;
+}
+
+.orders_cell .storeinfo_view .storeinfo_title image {
+  height: 16rpx;
+  width: 10rpx;
+  padding-left: 12rpx;
+}
+
+.orders_cell .goodsinfo_view {
+  margin: 10rpx 18rpx;
+}
+
+.orders_cell .goodsinfo_view .single_goodsview, .multi_goodsview {
+  height: 156rpx;
+}
+
+.orders_cell .goodsinfo_view .multi_goodsview {
+  justify-content: space-between;
+  margin-bottom: 6rpx;
+}
+
+.orders_cell .goodsinfo_view .single_goodsview text {
+  font-size: 22rpx;
+  color: #333;
+}
+
+.orders_cell .goodsinfo_view .single_goodsview image, .multi_goodsview image {
+  height: 100%;
+  width: 156rpx;
+}
+
+.orders_cell .goodsinfo_view .order_num_price {
+  font-size: 24rpx;
+  text-align: right;
+  color: #333;
+}
+
+.orders_cell .function_view {
+ 
+  margin: 0rpx 18rpx;
+  border-top: 1rpx solid #dddddd;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.orders_cell .function_view view {
+  height: 48rpx;
+  width: 138rpx;
+  border-radius: 24rpx;
+  background-color: #fff;
+  font-size: 26rpx;
+  border: 1rpx solid #666;
+  color: #666;
+}
+
+.orders_cell .function_view view:last-child {
+  margin-left: 12rpx;
+  border: 1rpx solid #ef6601;
+  color: #ef6601;
+}
+
+
+.orderList-view .empty_view image{
+  height: 380rpx;
+  width: 380rpx;
+  margin-top: 322rpx;
+}
+
+.orderList-view .empty_view .empty_title{
+  color: #999;
+  font-size: 28rpx;
+  text-align: center;
+  margin-top: 0rpx;
+}
+
+.cancel_view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .1);
+  z-index: 30;
+  overflow: hidden;
+}
+
+ 

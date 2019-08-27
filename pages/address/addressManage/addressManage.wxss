@@ -1,0 +1,90 @@
+.address-wrapper{
+  width: 100%;
+  padding: 0 18rpx 110rpx;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.address-item{
+  width: 100%;
+  height: 126rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+.address-item-img{
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 50%;
+  background-color: #fe6601;
+}
+
+.address-item-img image{
+  width: 24rpx;
+  height: 34rpx;
+}
+
+.address-item-word{
+  width: calc(100% - 94rpx);
+  height: 126rpx;
+  padding-left: 24rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+}
+
+.address-item-word-top{
+  color: #333;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.default-address{
+  width: 72rpx;
+  height: 32rpx;
+  background-color: #fe6601;
+  text-align: center;
+  line-height: 32rpx;
+  color: #fff;
+  font-size: 22rpx;
+  border-radius: 13rpx;
+  margin-left: 29rpx;
+}
+
+.address-item-word-bottom{
+  width: 100%;
+  color: #333;
+  font-size: 22rpx;
+  margin-top: 20rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.address-item-reset{
+  width: 48rpx;
+  height: 44rpx;
+}
+
+.address-item-reset image{
+  width: 100%;
+  height: 100%;
+}
+
+.new-address-btn-wrapper{
+  width: 100%;
+  height: 110rpx;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.new-address-btn{
+  width: 534rpx;
+  height: 66rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 66rpx;
+  background: linear-gradient(to right, #fe9701 , #fe7201);
+  border-radius: 33rpx;
+  margin: 0 auto;
+}

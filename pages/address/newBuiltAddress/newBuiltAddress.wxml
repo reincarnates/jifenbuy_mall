@@ -1,0 +1,54 @@
+<view class="new-built-address-wrapper" style="min-height: {{winHeight}}px">
+  <view class="new-built-address-del flex-right" wx:if="{{isShowDel}}" bindtap="delAddress">删除</view>
+  <view class="new-built-address-name flex-y-center">
+    <view class="new-built-address-name-left">姓名</view>
+    <view class="new-built-address-name-right">
+      <input bindinput="getUserName" value="{{name}}" placeholder="请填写收货人姓名" placeholder-style="color: #999999;" maxlength="10"></input>
+    </view>
+  </view>
+  <view class="new-built-address-name flex-y-center">
+    <view class="new-built-address-name-left">手机号</view>
+    <view class="new-built-address-name-right">
+      <input bindinput="getUserPhone" value="{{phone}}" placeholder="请填写收货人手机号" type="number" placeholder-style="color: #999999;"></input>
+    </view>
+  </view>
+  <view class="new-built-address-name flex-y-center">
+    <view class="new-built-address-name-left">选择地区</view>
+    <view class="new-built-address-name-right2" bindtap="chooseRegion">
+      <view class="picker flex" wx:if="{{regionValue.length > 0 ? true : false}}">
+        <view wx:if="{{regionValue[0].id}}">{{regionValue[0].name}}</view>
+        <view wx:if="{{regionValue[1].id}}" style="margin: 0 6rpx;">{{regionValue[1].name}}</view>
+        <view wx:if="{{regionValue[2].id}}">{{regionValue[2].name}}</view>
+      </view>
+      <view class="picker" wx:else>
+        请选择
+      </view>
+    </view>
+    <view class="new-built-address-check flxe-center">
+      <image src="../../../images/go_shop.png"></image>
+    </view>
+  </view>
+  <view class="new-built-address-name flex-y-center">
+    <view class="new-built-address-name-left">详细地址</view>
+    <view class="new-built-address-name-right">
+      <input bindinput="getDetailAddress" value="{{address}}" placeholder="详细地址(如街道,小区,乡镇,村)" type="number" placeholder-style="color: #999999;"></input>
+    </view>
+  </view>
+  <view class="new-built-address-name flex-sw">
+    <view class="new-built-address-name-left">设置默认</view>
+    <checkbox-group class="checkbox-box" bindchange='checkedShopAll'>
+      <label class="checkbox checkboxHeight">
+        <checkbox value="1" checked="{{isDefault == 1 ? true : false}}" />
+      </label>
+    </checkbox-group>
+  </view>
+  <view class="new-built-address-save-wrapper">
+    <view class="new-built-address-save" bindtap="saveAddress">保存</view>
+  </view>
+</view>
+
+<region-picker
+    region-value="{{regionValue}}"
+    show-region="{{showRegion}}"
+    bind:myevent="emitHideRegion">
+</region-picker>

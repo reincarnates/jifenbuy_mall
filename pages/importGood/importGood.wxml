@@ -1,0 +1,32 @@
+<view class="fulimall">
+  <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true" indicator-color="#fff" indicator-active-color="#f20b0b">
+    <block wx:for="{{bannerImg.data8.banner}}" wx:key="index">
+      <swiper-item class="fulimall-title-img">
+        <image src="{{'http://test.fulibuy.cn'+item.img}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="import-goods-wrapper">
+    <block wx:for="{{special.data5.list}}" wx:key="index">
+      <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+        <view class="import-goods-item-img">
+          <image src="{{item.img}}"></image>
+        </view>
+        <view class="import-goods-item-right">
+          <view class="import-goods-item-title">{{item.title}}</view>
+          <view class="import-goods-item-subtitle">{{item.subtitle}}</view>
+          <view class="import-goods-item-operation flex-sw">
+            <view class="import-goods-item-price flex">
+              <view class="present-price">￥{{item.goods_price}}</view>
+              <view class="original-price">
+                <text style="margin-right: 5rpx;">{{item.source}}</text>
+                <text style="text-decoration: line-through;">￥{{item.goods_marketprice}}</text>
+              </view>
+            </view>
+            <view class="import-goods-item-price-btn">立即抢购</view>
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>

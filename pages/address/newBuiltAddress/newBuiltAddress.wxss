@@ -1,0 +1,155 @@
+.new-built-address-wrapper{
+  width: 100%;
+  background-color: #ffff;
+}
+
+.new-built-address-del{
+  width: 100%;
+  height: 85rpx;
+  color: #000;
+  font-size: 24rpx;
+  justify-content: flex-end;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.new-built-address-name{
+  width: 100%;
+  height: 85rpx;
+  border-bottom: 1px solid #ddd;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.new-built-address-name-left{
+  width: 120rpx;
+  height: 100%;
+  color: #333;
+  font-size: 26rpx;
+  line-height: 85rpx;
+}
+
+.new-built-address-name-right{
+  width: calc(100% - 120rpx);
+  height: 100%;
+}
+
+.new-built-address-name-right input,
+.new-built-address-name-right2 input{
+  height: 100%;
+  font-size: 24rpx;
+}
+
+.new-built-address-name-right2{
+  width: calc(100% - 135rpx);
+  height: 100%;
+}
+
+.new-built-address-check{
+  width: 30rpx;
+  height: 48rpx;
+}
+
+.new-built-address-check image{
+  width: 15rpx;
+  height: 24rpx;
+}
+
+.checkbox-box{
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+/* 重写 checkbox 样式 */
+/* 未选中的 背景样式 */
+checkbox .wx-checkbox-input{
+  border-radius: 50%;/* 圆角 */
+  width: 30rpx; /* 背景的宽 */
+  height: 30rpx; /* 背景的高 */
+}
+
+/* 选中后的 背景样式 （红色背景 无边框 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked{
+  border: 2rpx solid #fe6601;
+  background: #fe6601;
+}
+
+/* 选中后的 对勾样式 （白色对勾 可根据UI需求自己修改） */
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before{
+  border-radius: 50%;/* 圆角 */
+  width: 26rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  height: 26rpx;/* 选中后对勾大小，不要超过背景的尺寸 */
+  line-height: 26rpx;
+  text-align: center;
+  font-size: 20rpx; /* 对勾大小 30rpx */
+  color:#fff; /* 对勾颜色 白色 */
+  background: transparent;
+  transform:translate(-50%, -50%) scale(1);
+  -webkit-transform:translate(-50%, -50%) scale(1);
+}
+
+.new-built-address-save-wrapper{
+  width: 100%;
+  height: 108rpx;
+  position: fixed;
+  bottom: 0;
+}
+
+.new-built-address-save{
+  width: 534rpx;
+  height: 66rpx;
+  color: #fff;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 66rpx;
+  background-color: #fe6601;
+  border-radius: 33rpx;
+  margin: 0 auto;
+}
+
+.picker{
+  width: 100%;
+  line-height: 85rpx;
+  color: #999;
+  font-size: 24rpx;
+  padding-left: 4rpx;
+  box-sizing: border-box;
+}
+
+
+
+
+.picker-view {
+  width: 100%;
+  display: flex;
+  z-index:12;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0rpx;
+  left: 0rpx;
+  height: 40vh;
+}
+ 
+.picker-item {
+  line-height: 70rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
+  text-align: center;
+}
+ 
+.mask{
+  background-color: #000;
+  opacity: 0.2;
+  position: fixed;
+  width: 100%;  
+  height: 100%;  
+  top: 0;
+  left: 0;
+  z-index: 10
+}

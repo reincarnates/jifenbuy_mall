@@ -1,4 +1,5 @@
 //index.js
+let api = require('../../../utils/api.js');
 //获取应用实例
 const app = getApp()
 
@@ -9,24 +10,44 @@ Page({
     floorArr: [], //楼层数组
     guessLikeArr: [], //推荐
     page: 1, //页数
+    isLogin: false
   },
 
-  getPhoneNumber: function(e) {
-    console.log(e);
+  //获取登陆状态
+  getLoginStatus: function () {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    if (user != undefined) {
+      if (user.is_visitor == false && user.is_login == true) {
+        _this.setData({
+          isLogin: true
+        });
+      }
+    }
   },
 
   onLoad: function () {
     var _this = this;
-    setTimeout(function() {
+    wx.showLoading({ title: '加载中' });
+    setTimeout(function () {
       //专题
-      wx.request({
-        url: 'http://tapi.fulibuy.cn/index/nav',
-        method: 'POST',
-        data: {
-          user_token: wx.getStorageSync('user_token'),
-          device_id: wx.getStorageSync('device_id')
-        },
-        success(res) {
+      // wx.request({
+      //   url: 'http://tapi.fulibuy.cn/index/nav',
+      //   method: 'POST',
+      //   data: {
+      //     user_token: wx.getStorageSync('user_token'),
+      //     device_id: wx.getStorageSync('device_id')
+      //   },
+      //   success(res) {
+      //     if (res.data.code) {
+      //       _this.setData({
+      //         specialArr: res.data.data
+      //       });
+      //     }
+      //   }
+      // });
+      api.nav({
+        success: function (res) {
           if (res.data.code) {
             _this.setData({
               specialArr: res.data.data
@@ -34,6 +55,7 @@ Page({
           }
         }
       });
+
       //楼层
       wx.request({
         url: 'http://tapi.fulibuy.cn/index/floor',
@@ -46,7 +68,6 @@ Page({
           if (res.data.code) {
             res.data.data.forEach((item, index) => {
               if (item.type == 3) {
-                console.log(item);
                 item.data3.list.forEach((element, key) => {
                   if (element.source == '') {
                     element.source = '市场价';
@@ -75,7 +96,6 @@ Page({
           per_page: '10'
         },
         success(res) {
-          console.log(res);
           if (res.data.code) {
             res.data.data.list.forEach(item => {
               if (item.source == '') {
@@ -92,29 +112,20 @@ Page({
           }
         }
       });
-    }, 1000);
+      wx.hideLoading();
+    }, 1500);
   },
 
   onReady: function () {
-    //获得dialog组件
-    this.dialog = this.selectComponent("#dialog");
+
   },
 
-  showDialog: function () {
-    this.dialog.showDialog();
-  },
-
-  confirmEvent: function () {
-    this.dialog.hideDialog();
-  },
-
-  bindGetUserInfo: function () {
-    // 用户点击授权后，这里可以做一些登陆操作
-    this.login();
+  onShow: function () {
+    this.getLoginStatus();
   },
 
   //跳转至搜索页
-  jumpSearch: function() {
+  jumpSearch: function () {
     wx.navigateTo({
       url: '/pages/search/search'
     });
@@ -142,9 +153,9 @@ Page({
     //   }
     // })
   },
-  
+
   //跳转专题
-  navigatorClick: function(e) {
+  navigatorClick: function (e) {
     var name = e.currentTarget.dataset.name;
     var id = e.currentTarget.dataset.bindid;
     if (name == "福利商城") {
@@ -180,7 +191,47 @@ Page({
         url: `/pages/special/parentChildFamily/parentChildFamily?id=${id}`
       });
     }
-    
+
+  },
+
+  specialClick: function (e) {
+    var _this = this;
+    var id = e.currentTarget.dataset.reqid;
+    var title = e.currentTarget.dataset.title;
+    if (title == '品牌专供') {
+      wx.navigateTo({
+        url: `/pages/brandOem/brandOem?id=${id}`
+      });
+    } else if (title == '进口好货') {
+      wx.navigateTo({
+        url: `/pages/importGood/importGood?id=${id}`
+      });
+    }
+  },
+
+  //优惠专区跳转页面
+  discount: function (e) {
+    console.log(e);
+    var _this = this;
+    var title = e.currentTarget.dataset.title;
+    var id = e.currentTarget.dataset.atid;
+    if (title == '口碑精品') {
+      wx.navigateTo({
+        url: `/pages/publicSelected/publicSelected?id=${id}`
+      });
+    } else if (title == '人气榜') {
+      wx.navigateTo({
+        url: `/pages/popularityList/popularityList?id=${id}`
+      });
+    } else if (title == '员工特惠') {
+      wx.navigateTo({
+        url: `/pages/employeeOdds/employeeOdds?id=${id}`
+      });
+    } else if (title == '达人囤货') {
+      wx.navigateTo({
+        url: `/pages/goodManStore/goodManStore?id=${id}`
+      });
+    }
   },
 
   onReachBottom: function () {
@@ -199,11 +250,19 @@ Page({
       },
       success(res) {
         if (res.data.code) {
+          res.data.data.list.forEach(item => {
+            if (item.source == '') {
+              item.source = '市场价';
+            } else if (item.source == 'jd') {
+              item.source = '京东价';
+            } else if (item.source == 'wyyx') {
+              item.source = '严选价';
+            }
+          });
           _this.setData({
             guessLikeArr: _this.data.guessLikeArr.concat(res.data.data.list)
           });
           wx.hideLoading();
-          console.log(_this.data.guessLikeArr);
         }
       }
     });

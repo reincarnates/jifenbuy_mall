@@ -1,5 +1,6 @@
 //app.js
 App({
+  systemInfo: null,
   onLaunch: function () {
     if (wx.getStorageSync('user_token') == '') {
       wx.login({
@@ -29,9 +30,18 @@ App({
           })
         }
       })
-    }
+    };
+    const self = this;
+    wx.getSystemInfo({
+      success(res) {
+        self.systemInfo = res;
+      },
+    });
   },
+  
   globalData: {
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   }
+
+  
 })

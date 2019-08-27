@@ -1,0 +1,169 @@
+<view class="casualSnacks-nav">
+  <block wx:for="{{navArr}}" wx:key="index">
+    <text class="casualSnacks-nav-item {{currentData == index ? 'cactive' : ''}}" data-current="{{index}}" data-atid="{{item.at_id}}" bindtap='checkCurrent'>{{item.at_name}}</text>
+  </block>
+</view>
+
+<swiper current="{{currentData}}" class='swiper' style="height:{{winHeight}}px;" duration="300" bindchange="bindchange">
+  <swiper-item>
+    <view class="fulimall">
+      <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true" indicator-color="#fff" indicator-active-color="#f20b0b">
+        <block wx:for="{{bannerImg.data8.banner}}" wx:key="index">
+          <swiper-item class="fulimall-title-img">
+            <image src="{{'http://test.fulibuy.cn'+item.img}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="import-goods-wrapper">
+        <block wx:for="{{special}}" wx:key="index">
+          <block wx:for="{{item.data1.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="public-img">
+              <image src="{{'http://test.fulibuy.cn'+itemName.img}}"></image>
+            </view>
+          </block>
+          <block wx:for="{{item.data5.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="import-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="import-goods-item-right">
+                <view class="import-goods-item-title">{{itemName.title}}</view>
+                <view class="import-goods-item-subtitle">{{itemName.subtitle}}</view>
+                <view class="import-goods-item-operation flex-sw">
+                  <view class="import-goods-item-price flex">
+                    <view class="present-price">￥{{itemName.goods_price}}</view>
+                    <view class="original-price">
+                      <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                      <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                    </view>
+                  </view>
+                  <view class="import-goods-item-price-btn">立即抢购</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <view class="import-goods-wrapper">
+        <block wx:for="{{special2}}" wx:key="index">
+          <block wx:for="{{item.data5.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="import-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="import-goods-item-right">
+                <view class="import-goods-item-title">{{itemName.title}}</view>
+                <view class="import-goods-item-subtitle">{{itemName.subtitle}}</view>
+                <view class="import-goods-item-operation flex-sw">
+                  <view class="import-goods-item-price flex">
+                    <view class="present-price">￥{{itemName.goods_price}}</view>
+                    <view class="original-price">
+                      <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                      <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                    </view>
+                  </view>
+                  <view class="import-goods-item-price-btn">立即抢购</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <view class="import-goods-wrapper">
+        <block wx:for="{{special3}}" wx:key="index">
+          <block wx:for="{{item.data5.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="import-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="import-goods-item-right">
+                <view class="import-goods-item-title">{{itemName.title}}</view>
+                <view class="import-goods-item-subtitle">{{itemName.subtitle}}</view>
+                <view class="import-goods-item-operation flex-sw">
+                  <view class="import-goods-item-price flex">
+                    <view class="present-price">￥{{itemName.goods_price}}</view>
+                    <view class="original-price">
+                      <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                      <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                    </view>
+                  </view>
+                  <view class="import-goods-item-price-btn">立即抢购</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <view class="import-goods-wrapper">
+        <block wx:for="{{special4}}" wx:key="index">
+          <block wx:for="{{item.data5.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="import-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="import-goods-item-right">
+                <view class="import-goods-item-title">{{itemName.title}}</view>
+                <view class="import-goods-item-subtitle">{{itemName.subtitle}}</view>
+                <view class="import-goods-item-operation flex-sw">
+                  <view class="import-goods-item-price flex">
+                    <view class="present-price">￥{{itemName.goods_price}}</view>
+                    <view class="original-price">
+                      <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                      <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                    </view>
+                  </view>
+                  <view class="import-goods-item-price-btn">立即抢购</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <view class="import-goods-wrapper">
+        <block wx:for="{{special5}}" wx:key="index">
+          <block wx:for="{{item.data5.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="import-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="import-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="import-goods-item-right">
+                <view class="import-goods-item-title">{{itemName.title}}</view>
+                <view class="import-goods-item-subtitle">{{itemName.subtitle}}</view>
+                <view class="import-goods-item-operation flex-sw">
+                  <view class="import-goods-item-price flex">
+                    <view class="present-price">￥{{itemName.goods_price}}</view>
+                    <view class="original-price">
+                      <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                      <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                    </view>
+                  </view>
+                  <view class="import-goods-item-price-btn">立即抢购</view>
+                </view>
+              </view>
+            </navigator>
+          </block>
+        </block>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

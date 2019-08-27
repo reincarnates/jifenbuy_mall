@@ -1,0 +1,82 @@
+.goods-view image {
+  width: 142rpx;
+  height: 142rpx;
+  margin-top: 18rpx;
+  background: #ddd;
+}
+
+.goods-view text {
+  font-size: 24rpx;
+  color: #333;
+  text-align: center;
+  padding: 0 50rpx;
+  margin: 20rpx 0;
+}
+
+.goods-view ,
+.logistics-view {
+  background: #fff;
+  border-radius: 10rpx;
+  margin: 18rpx 18rpx;
+  overflow: hidden;
+}
+
+.goods-view .state-view {
+  width: 100%;
+  background:linear-gradient(0deg,rgba(254,102,1,1) 0%,rgba(254,153,1,1) 100%);
+  align-items: flex-start;
+  padding: 30rpx 0rpx;
+}
+
+.goods-view .state-view text {
+  color: #fff;
+  font-size: 24rpx;
+  text-align: left;
+  margin: 0;
+  padding: 0 22rpx;
+}
+
+.goods-view .state-view text:last-child {
+   margin-top: 12rpx;
+}
+
+.logistics-view .logistics-info-view image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+  margin-right: 16rpx;
+  /* border-radius: 50%; */
+}
+
+.logistics-view .logistics-info-view {
+  margin: 12rpx 12rpx;
+  border-bottom: 1rpx #ddd solid;
+}
+
+.logistics-view .logistics-info-view .copyimage {
+  width:24rpx;
+  height:24rpx;
+  margin-left:14rpx;
+  margin-top:5rpx;
+  background:#fff;
+  border-radius: 0rpx;
+}
+
+.logistics-view .shipping-cell {
+  padding: 30rpx 30rpx;
+}
+
+.logistics-view .shipping-cell .point {
+  position: relative;
+  width: 80rpx;
+}
+
+.logistics-view .shipping-cell .point::before {
+  position: absolute;
+  width: 2rpx;
+  content: '';
+  top: 10rpx;
+  bottom: -70rpx;
+  left: 49%;
+  background: #999;
+}

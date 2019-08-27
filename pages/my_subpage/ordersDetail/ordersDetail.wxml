@@ -1,0 +1,108 @@
+ 
+<view class="orderDetail_view">
+  <view class="orderState_view flex-row">
+    <view class="orderState_view_left flex-col flex-grow-1 flex-x-center">
+      <view class="flex-row">
+        <image src="/images/icon_orders_wait.png"></image>
+        <view wx:if="{{orderModel.order_state != 20}}">{{orderModel.order_desc}}</view>
+        <view wx:if="{{orderModel.order_state == 20}}">
+          <view wx:if="{{orderModel.refund_state == 0}}">{{orderModel.order_desc}}</view>
+          <view wx:if="{{orderModel.refund_state != 0 && orderModel.watting_seller_state == 1}}">商家审核中</view>
+          <view wx:if="{{orderModel.refund_state != 0 && orderModel.watting_seller_state == 2}}">平台处理中</view>
+          <view wx:if="{{orderModel.refund_state != 0 && orderModel.watting_seller_state == 2 && orderModel.refund_del_state == 3}}">已取消</view>
+        </view>
+      </view>
+      <text wx:if="{{orderModel.order_state == 10 && orderModel.rest_time != '已取消'}}">剩余 {{orderModel.rest_time}} 自动关闭</text>
+      <text wx:if="{{orderModel.order_state == 30}}">剩余 {{orderModel.rest_time}} 自动确认</text>
+      <text wx:if="{{orderModel.order_state == 20}}">
+        <text wx:if="{{orderModel.refund_state == 0}}">商家已接单，您的订单正在备货中</text>
+        <text wx:if="{{orderModel.refund_state != 0 && orderModel.watting_seller_state == 1}}">您的取消申请待商家审核，请耐心等待</text>
+        <text wx:if="{{orderModel.refund_state != 0 && orderModel.watting_seller_state == 2}}">商家已同意申请，系统将尽快为您取消订单</text>
+      </text>
+    </view>
+    <view class="orderState_view_right flex-col flex-grow-0 flex-y-center">
+      <image src="/images/icon_orders_cancel.png" wx:if="{{orderModel.order_state == 0 || orderModel.rest_time == '已取消'}}"></image>
+      <image src="/images/icon_ordersStatus_waitpay.png" wx:if="{{orderModel.order_state == 10 && orderModel.rest_time != '已取消'}}"></image>
+      <image src="/images/icon_ordersStatus_waitsend.png" wx:if="{{orderModel.order_state == 20}}" mode="aspectFit"></image>
+      <image src="/images/icon_ordersStatus_waitreceive.png" wx:if="{{orderModel.order_state == 30}} " mode="aspectFit"></image>
+      <image src="/images/icon_ordersStatus_complete.png" wx:if="{{orderModel.order_state == 40}}" mode="aspectFit"></image>
+      <view wx:if="{{orderModel.order_state == 10 && orderModel.rest_time != '已取消'}}">需付款:<text style="font-size: 18rpx;margin:0 4rpx;">¥</text>155.00</view>
+    </view>
+  </view>
+  
+  <view class="address_view flex-col">
+    <view class="flex-row">
+      <image src="/images/icon_location.png"></image>
+      <text>{{orderModel.reciver_info.true_name}} {{phone}}</text>
+    </view>
+    <view class="address">地址: {{orderModel.reciver_info.area_info}} {{orderModel.reciver_info.address}}</view>
+  </view>
+  <view class="commodity_view">
+    <view class="commodity_title flex-row flex-y-center">
+      <image src="/images/order_shop.png" style="width:25rpx;height:25rpx;"></image>
+      <text>{{orderModel.store_name}}</text>
+      <image src="/images/order_go.png" style="width:9rpx;height:16rpx;"></image>
+    </view>
+    <block wx:for="{{orderModel.goods_info}}" wx:key="unique" wx:for-item="commodity">
+      <view class="commodity_item_view flex-row" style="padding-top:{{index == 0 ? '12rpx' : '37rpx'}}; padding-bottom: 41rpx;border-bottom: {{index == orderModel.goods_info.length - 1 ? '0' : '1rpx'}} #ddd solid;">
+        <image class="flex-grow-0" src="{{commodity.goods_image}}" style="width:170rpx;height:170rpx;"></image>
+        <view class="commodity_item_center_view flex-col flex-grow-1"> 
+          <text class="text-more-2" style="font-size:22rpx;">{{commodity.goods_name}}</text>
+          <text style="font-size:24rpx;color:#ef6601;"><text style="font-size:18rpx;margin-right:3rpx">¥</text>{{commodity.goods_price}}</text>
+        </view>
+        <view class="flex-col flex-grow-0">
+          <text style="font-size:24rpx;">数量</text>
+          <text style="font-size:20rpx;text-align:right;">x{{commodity.goods_num}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="orders_info_view">
+    <view class="orders_info_double_cell flex-col">
+      <view>订单编码: <text>{{orderModel.order_sn}}</text> <image src="/images/icon_copy.png" style="width:24rpx;height:24rpx;margin-left:14rpx;margin-top:3rpx;" bindtap="copyOrderSN"/> </view>
+      <view style="margin-top:8rpx;">下单时间: <text>{{add_time}}</text></view>
+    </view>
+    <view class="orders_info_double_cell flex-col">
+      <view>支付方式: <text>{{orderModel.pay_type ? orderModel.pay_type : '--'}}</text></view>
+      <view style="margin-top:8rpx;">支付时间: <text>{{orderModel.pay_time ? orderModel.pay_time : '--'}}</text></view>
+    </view>
+    <view class="orders_info_single_cell">
+      <view>配送方式: <text>京东物流</text></view>
+    </view>
+  </view>
+
+  <view class="confirm-goods-bottom">
+    <view class="confirm-goods-price-wrapper">
+      <view class="confirm-goods-price-top flex-sw">
+        <view class="confirm-goods-price-word">商品金额</view>
+        <view class="confirm-goods-price-num">￥{{orderModel.order_amount}}</view>
+      </view>
+      <view class="confirm-goods-price-bottom flex-sw">
+        <view class="confirm-goods-price-word">运费</view>
+        <view class="confirm-goods-price-num">￥{{orderModel.shipping_fee}}</view>
+      </view>
+    </view>
+    <view class="confirm-goods-payment">
+      <view>需支付：</view>
+      <view style="font-size: 30rpx; color: #fe6601; font-weight: 600;">￥{{orderModel.order_amount}}</view>
+    </view>
+    <view class="contact-service flex-center">
+      <image src="/images/order_service.png"></image>
+      <view>联系客服</view>
+    </view>
+  </view>
+</view>
+
+<view class="bottom_view flex-row" wx:if="{{orderModel.order_desc != '已取消'}}">
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 30 || orderModel.order_state == 40}}" data-title="查看物流">查看物流</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 20 || orderModel.order_state == 10}}" data-title="取消订单">取消订单</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 30}}" data-title="确认收货">确认收货</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 10}}" data-title="去支付">去支付</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == false}}" data-title="评价">评价</view>
+    <view class="flex-center" catchtap="tapFuncwtionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == true}}" data-title="查看评价">查看评价</view>
+</view>
+
+<!-- cancel reason -->
+<view class="cancel_view" catchtap="hideCancelView" wx:if="{{isShowCancelView}}" catchtouchmove="true"></view>
+<include src="/pages/my_subpage/cancelReason/cancelReason.wxml" />

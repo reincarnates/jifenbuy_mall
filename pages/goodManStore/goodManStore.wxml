@@ -1,0 +1,193 @@
+<view class="casualSnacks-nav">
+  <block wx:for="{{navArr}}" wx:key="index">
+    <text class="casualSnacks-nav-item {{currentData == index ? 'cactive' : ''}}" data-current="{{index}}" data-atid="{{item.at_id}}" bindtap='checkCurrent'>{{item.at_name}}</text>
+  </block>
+</view>
+
+<swiper current="{{currentData}}" class='swiper' style="height:{{winHeight}}px;" duration="300" bindchange="bindchange">
+  <swiper-item>
+    <view class="fulimall">
+      <block wx:for="{{brandArr}}" wx:key="index">
+        <swiper indicator-dots="true" autoplay="true" interval="3000" circular="true" indicator-color="#fff" indicator-active-color="#f20b0b" wx:if="{{item.type == 8}}">
+          <block wx:for="{{item.data8.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{idx}}">
+            <swiper-item class="fulimall-title-img">
+              <image src="{{'http://test.fulibuy.cn'+itemName.img}}" />
+            </swiper-item>
+          </block>
+        </swiper>
+        <block wx:for="{{item.data1.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{idx}}" wx:if="{{item.type == 1}}">
+          <view class="fulimall-title-img">
+            <image src="{{'http://test.fulibuy.cn'+itemName.img}}"></image>
+          </view>
+        </block>
+        <view class="fulimall-goods-wrapper" wx:if="{{item.type == 11}}">
+          <block wx:for="{{item.data11.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <navigator class="fulimall-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+              <view class="fulimall-goods-item-img">
+                <image src="{{itemName.img}}"></image>
+              </view>
+              <view class="fulimall-goods-item-content">
+                <view class="fulimall-goods-item-name">
+                  {{itemName.title}}
+                </view>
+                <view class="fulimall-goods-item-shop-price">
+                  <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                  <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                </view>
+                <view class="fulimall-goods-item-price">￥{{itemName.goods_price}}</view>
+              </view>
+            </navigator>
+          </block>
+        </view>
+        <view class="fulimall-special" wx:if="{{item.type == 6}}">
+          <view class="fulimall-special-content">
+            <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{itemName.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{itemName.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <block wx:for="{{brandArr2}}" wx:key="index">
+        <view class="fulimall-special" wx:if="{{item.type == 6}}">
+          <view class="fulimall-special-content">
+            <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{itemName.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{itemName.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <block wx:for="{{brandArr3}}" wx:key="index">
+        <view class="fulimall-special" wx:if="{{item.type == 6}}">
+          <view class="fulimall-special-content">
+            <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{itemName.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{itemName.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <block wx:for="{{brandArr4}}" wx:key="index">
+        <view class="fulimall-special" wx:if="{{item.type == 6}}">
+          <view class="fulimall-special-content">
+            <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{itemName.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{itemName.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </swiper-item>
+
+  <swiper-item>
+    <view class="fulimall">
+      <block wx:for="{{brandArr5}}" wx:key="index">
+        <view class="fulimall-special" wx:if="{{item.type == 6}}">
+          <view class="fulimall-special-content">
+            <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+              <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+                <view class="fulimall-special-item-img">
+                  <image src="{{itemName.img}}"></image>
+                </view>
+                <view class="fulimall-special-item-content">
+                  <view class="fulimall-special-item-name">
+                    {{itemName.title}}
+                  </view>
+                  <view class="fulimall-goods-item-shop-price">
+                    <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                    <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+                  </view>
+                  <view class="fulimall-special-item-price">
+                    <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                    <view class="fulimall-special-item-right">立即抢购</view>
+                  </view>
+                </view>
+              </navigator>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </swiper-item>
+</swiper>

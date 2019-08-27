@@ -1,7 +1,7 @@
 <view class="user-header-wrapper" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/personal_bg.png) no-repeat; background-size: 100% 100%; background-color: #f5f5f5;" wx:if="{{ isShow }}">
   <view class="user-header">
     <image src="../../../images/use_msg.png" class="user-msg"></image>
-    <image src="../../../images/user_setting.png" class="user-setting"></image>
+    <image src="../../../images/user_setting.png" class="user-setting" bindtap="setting"></image>
   </view>
   <view class="user-header-info">
     <view class="user-header-info-avtar">
@@ -36,32 +36,32 @@
         <view class="user-order-head-left-ver"></view>
         <view>我的订单</view>
       </view>
-      <view class="user-order-head-right">
+      <view class="user-order-head-right" bindtap="viewOrders" id="0">
         全部订单
         <image src="../../../images/order_go.png"></image>
       </view>
     </view>
     <view class="user-order-operation">
-      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="1">
         <image class="payment-made" src="../../../images/payment_made.png"></image>
         <view class="user-order-operation-word">待付款</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_new > 0}}">{{orderNum.order_new}}</view>
-      </navigator>
-      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+      </view>
+      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="2">
         <image class="shipped-made" src="../../../images/shipped_made.png"></image>
         <view class="user-order-operation-word">待发货</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_pay > 0}}">{{orderNum.order_pay}}</view>
-      </navigator>
-      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+      </view>
+      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="3">
         <image class="received-made" src="../../../images/received_made.png"></image>
         <view class="user-order-operation-word">待收货</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_recive > 0}}">{{orderNum.order_recive}}</view>
-      </navigator>
-      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+      </view>
+      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="5">
         <image class="comment-made" src="../../../images/comment_made.png"></image>
-        <view class="user-order-operation-word">待收货</view>
+        <view class="user-order-operation-word">待评价</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_noeval > 0}}">{{orderNum.order_noeval}}</view>
-      </navigator>
+      </view>
       <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
         <image class="after-sale" src="../../../images/after_sale.png"></image>
         <view class="user-order-operation-word">售后/退款</view>
@@ -69,7 +69,7 @@
       </navigator>
     </view>
     <view class="user-order-banner">
-      <image src=""></image>
+      <image src="../../../images/WechatIMG69.png"></image>
     </view>
   </view>
   <view class="personal-service-wrapper">

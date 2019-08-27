@@ -1,0 +1,52 @@
+<view class="fulimall">
+  <block wx:for="{{brandArr}}" wx:key="index">
+    <block wx:for="{{item.data1.banner}}" wx:for-index="idx" wx:for-item="itemName" wx:key="{{idx}}" wx:if="{{item.type == 1}}">
+      <view class="fulimall-title-img">
+        <image src="{{'http://test.fulibuy.cn'+itemName.img}}"></image>
+      </view>
+    </block>
+    <view class="fulimall-goods-wrapper" wx:if="{{item.type == 3}}">
+      <block wx:for="{{item.data3.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+        <navigator class="fulimall-goods-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+          <view class="fulimall-goods-item-img">
+            <image src="{{itemName.img}}"></image>
+          </view>
+          <view class="fulimall-goods-item-content">
+            <view class="fulimall-goods-item-name">
+              {{itemName.title}}
+            </view>
+            <view class="fulimall-goods-item-shop-price">
+              <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+              <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+            </view>
+            <view class="fulimall-goods-item-price">￥{{itemName.goods_price}}</view>
+          </view>
+        </navigator>
+      </block>
+    </view>
+    <view class="fulimall-special" wx:if="{{item.type == 6}}">
+      <view class="fulimall-special-content">
+        <block wx:for="{{item.data6.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+          <navigator class="fulimall-special-item" url="/pages/goodsDetail/goodsDetail?id={{itemName.goods_sku}}" hover-class="none">
+            <view class="fulimall-special-item-img">
+              <image src="{{itemName.img}}"></image>
+            </view>
+            <view class="fulimall-special-item-content">
+              <view class="fulimall-special-item-name">
+                {{itemName.title}}
+              </view>
+              <view class="fulimall-goods-item-shop-price">
+                <text style="margin-right: 5rpx;">{{itemName.source}}</text>
+                <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
+              </view>
+              <view class="fulimall-special-item-price">
+                <view class="fulimall-special-item-left">￥{{itemName.goods_price}}</view>
+                <view class="fulimall-special-item-right">立即抢购</view>
+              </view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>

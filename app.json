@@ -1,6 +1,19 @@
 {
   "pages": [
     "pages/tabBar/index/index",
+    "pages/address/addressManage/addressManage",
+    "pages/address/newBuiltAddress/newBuiltAddress",
+    "pages/tabBar/shopCart/shopCart",
+    "pages/goodsDetail/goodsDetail",
+    "pages/confirmOrder/confirmOrder",
+    "pages/address/addressManage/addressManage",
+    "pages/address/newBuiltAddress/newBuiltAddress",
+    "pages/goodManStore/goodManStore",
+    "pages/employeeOdds/employeeOdds",
+    "pages/popularityList/popularityList",
+    "pages/publicSelected/publicSelected",
+    "pages/importGood/importGood",
+    "pages/brandOem/brandOem",
     "pages/special/parentChildFamily/parentChildFamily",
     "pages/special/officeGoodies/officeGoodies",
     "pages/special/freshFood/freshFood",
@@ -11,18 +24,19 @@
     "pages/special/fuliMall/fuliMall",
     "pages/tabBar/user/user",
     "pages/login/login",
-    "pages/tabBar/shopCart/shopCart",
     "pages/listPage/listPage",
-    "pages/goodsDetail/goodsDetail",
-    "pages/comment/comment",   
+    "pages/comment/comment",
     "pages/screen/screen",
     "pages/tabBar/classification/classification",
     "pages/search/search",
-    "pages/de/de",
     "pages/businessCooperation/businessCooperation",
     "pages/components/dialog/dialog",
     "pages/searchOrder/searchOrder",
-    "pages/floorSpecial/floorSpecial"
+    "pages/floorSpecial/floorSpecial",
+    "pages/my_subpage/setting/setting",
+    "pages/my_subpage/ordersList/ordersList",
+    "pages/my_subpage/ordersDetail/ordersDetail",
+    "pages/my_subpage/logistics/logistics"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -34,7 +48,7 @@
     "color": "#333",
     "selectedColor": "#fe6601",
     "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/tabBar/index/index",

@@ -1,5 +1,6 @@
 // pages/user/user.js
 var storages = require('../../../lib/js/storage.js');
+let api = require('../../../utils/api.js');
 Page({
 
   /**
@@ -210,58 +211,48 @@ Page({
   //获取各订单数量
   getOrderNumber: function() {
     var _this = this;
-    wx.request({
-      url: 'http://tapi.fulibuy.cn/Member/getOrderNum',
-      method: 'POST',
-      data: {
-        user_token: wx.getStorageSync('user_token'),
-        device_id: wx.getStorageSync('device_id')
-        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjU2MDYzNDcsImV4cCI6MzEzMTIxMjY5NCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.pm1Q-zYlqy1ZVZ3Tzbtu7l4tib5mZ19f2Mj5DFa2FYA',
-        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk'
-      },
-      success(res) {
-        if(res.data.code) {
+    // wx.request({
+    //   url: 'http://tapi.fulibuy.cn/Member/getOrderNum',
+    //   method: 'POST',
+    //   data: {
+    //     user_token: wx.getStorageSync('user_token'),
+    //     device_id: wx.getStorageSync('device_id')
+    //     // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjU2MDYzNDcsImV4cCI6MzEzMTIxMjY5NCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.pm1Q-zYlqy1ZVZ3Tzbtu7l4tib5mZ19f2Mj5DFa2FYA',
+    //     // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk'
+    //   },
+    //   success(res) {
+    //     if(res.data.code) {
+    //       console.log(res);
+    //       _this.setData({
+    //         orderNum: res.data.data
+    //       });
+    //     }
+    //   }
+    // })
+    api.getOrderNumber({
+      success: (res) => {
+        if (res.data.code) {
           console.log(res);
           _this.setData({
             orderNum: res.data.data
           });
         }
       }
+    });
+  },
+
+  // 设置
+  setting: function () {
+    wx.navigateTo({
+      url: '/pages/my_subpage/setting/setting',
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  viewOrders: function (e) {
+    wx.navigateTo({
+      url: '/pages/my_subpage/ordersList/ordersList?order_state=' + e.currentTarget.id,
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
 
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

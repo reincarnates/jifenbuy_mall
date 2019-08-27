@@ -13,7 +13,7 @@
       <text class="home-right-word">消息</text>
     </view>
   </view>
-  <view class="home-head-wrapper">
+  <view class="home-head-wrapper" wx:if="{{isLogin}}">
     <view class="home-head-info">
       <view class="home-head-avatar">
         <image src="../../../images/avatar.png"></image>
@@ -53,7 +53,7 @@
       </view>
       <view class="home-goods-wrapper flex" wx:if="{{item.type == 2 }}">
         <block wx:for="{{item.data2.list}}" wx:for-item="itemName" wx:for-index="idx" wx:key="{{idx}}">
-          <view class="home-goods-brand">
+          <view class="home-goods-brand" bindtap="specialClick" data-reqid="{{itemName.at_id}}" data-title="{{itemName.title}}">
             <view class="home-goods-brand-title">{{itemName.title}}</view>
             <view class="home-goods-brand-content flex">
               <block wx:for="{{itemName.goodsInfo}}" wx:for-item="itemName2" wx:for-index="idx2" wx:key="{{idx2}}">
@@ -98,7 +98,8 @@
                 ￥<text>{{element.goods_price}}</text>
               </view>
               <view class="welfare-selection-goods-item-shop-price">
-                {{element.source}}<text>￥{{element.goods_marketprice}}</text>
+                <text>{{element.source}}</text>
+                <text>￥{{element.goods_marketprice}}</text>
               </view>
             </navigator>
           </block>
@@ -118,7 +119,7 @@
         </view>
         <view class="preferential-zone-content flex">
           <block wx:for="{{item.data4.list}}" wx:for-index="index2" wx:for-item="val" wx:key="{{index2}}">
-            <view class="preferential-zone-item" data-atid="{{val.at_id}}">
+            <view class="preferential-zone-item" data-atid="{{val.at_id}}" data-title="{{val.title}}" bindtap="discount">
               <view class="preferential-zone-item-name">{{val.title}}</view>
               <view class="preferential-zone-item-word">{{val.subtitle}}</view>
               <view class="preferential-zone-item-img-wrapper flex">

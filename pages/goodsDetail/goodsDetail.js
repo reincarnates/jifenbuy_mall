@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
     statusBarHeight: app.globalData.statusBarHeight,
     returnPage: '<',
     goodsImg: [],
@@ -25,7 +23,7 @@ Page({
     returnHeight: '',
     isComment: false,
     isDetail: false,
-    goodsNumber: 0,
+    goodsNumber: 1,
     params: '-100%',
     isParams: false,
     goodsName: '', //商品名称
@@ -47,72 +45,115 @@ Page({
     cartNumber: 100, //购物车数量
     listCount: {}, //评论类别
     goodsSku: '', //商品sku
+    source: '', //商城名称
+    collectImg: '../../images/collection.png', //收藏商品状态图片
+    collectStatus: '', //商品收藏的状态
+    collectNum: 1, // 判断收藏/取消收藏
+    nodes: '', //详情
+    bgs: [], //背景图片
+    imgs: [],
+    imgs2: [],
+    swiperIndex: 1, //轮播下标
+    seleGoodsSku: '', //选择商品参数的sku
+    confirmSku: '', //跳转提交订单的sku
+    checkSkuData: '', //跳转提交订单的goods_sku
+    quantity: 1, //商品数量
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options);
     var _this = this;
     _this.setData({
       goodsSku: options.id
     });
     wx.showLoading({ title: '加载中' });
-    wx.request({
-      url: 'http://tapi.fulibuy.cn/goods/goodsDetail',
-      method: 'POST',
-      data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId,
-        // sku: 'ZY6ec8d9147c',
-        sku: options.id,
-        type: 'html',
-        server: 'is_wx'
-      },
-      success(res) {
-        if (res.data.code) {
-          // console.log(res.data.data.comment);
-          var a = [];
-          var res = res.data.data;
-          a.push(res.goods_image);
-          res.image_more.forEach(item => {
-            a.push(item.goods_image);
+    setTimeout(function() {
+      wx.request({
+        url: 'http://tapi.fulibuy.cn/goods/goodsDetail',
+        method: 'POST',
+        data: {
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id'),
+          // sku: '4d5528fbf9',
+          sku: options.id,
+          type: 'html',
+          server: 'is_wx'
+        },
+        success(res) {
+          if (res.data.code) {
+            // console.log(res.data.data.comment);
+            var a = [];
+            var res = res.data.data;
+            a.push(res.goods_image);
+            res.image_more.forEach(item => {
+              a.push(item.goods_image);
+              _this.setData({
+                goodsImg: a,
+              });
+            });
+
+            //循环处理参数内容，增加is_xuan
+            res.spec_value_ar.forEach((element, key) => {
+              element.forEach((item, index) => {
+                element[0].is_xuan = true;
+                item.is_xuan = false;
+              });
+            });
+
+            //判断source是哪个商城
+            if (res.source == '') {
+              res.source = '市场价';
+            } else if (res.source == 'jd') {
+              res.source = '京东商城价';
+            } else if (res.source == 'wyyx') {
+              res.source = '网易严选价';
+            }
+
+            var imgs = res.mobile_body.match(/h[^']+g/g);
+            var bgs = res.mobile_body.match(/background-image:url([^)]+)/g);
+            var imgs2 = res.mobile_body.match(/img30[^"]+g/g);
+            var imgs3 = res.mobile_body.match(/img10[^"]+g/g);
+
             _this.setData({
-              goodsImg: a,
+              goodsName: res.goods_name,
+              goodsPrice: res.goods_price,
+              goodsSalenum: res.goods_salenum,
+              goodsDiscount: res.goods_discount,
+              goodsMarketprice: res.goods_marketprice,
+              goodsParams: res.spec_name,
+              specName: res.spec_name,
+              specValue: res.spec_value_ar,
+              goodsImage: res.goods_image,
+              skuData: res.sku_data,
+              paramsPrice: res.goods_price,
+              goodsClass: res.spec_name,
+              listCount: res.comment.listCount,
+              source: res.source,
+              collectStatus: res.favorites,
+              // nodes: res.mobile_body
+              bgs: bgs,
+              imgs: imgs,
+              imgs2: imgs2 != undefined ? imgs2 : imgs3,
+              confirmSku: res.sku
             });
-          });
 
-          //循环处理参数内容，增加is_xuan
-          res.spec_value_ar.forEach((element, key) => {
-            element.forEach((item, index) => {
-              item.is_xuan = false;
-            });
-          });
+            if (_this.data.goodsParams.length == 0) {
+              _this.setData({
+                checkSkuData: res.sku_data[0].goods_sku
+              });
+            }
 
-          _this.setData({
-            goodsName: res.goods_name,
-            goodsPrice: res.goods_price,
-            goodsSalenum: res.goods_salenum,
-            goodsDiscount: res.goods_discount,
-            goodsMarketprice: res.goods_marketprice,
-            goodsParams: res.spec_name,
-            specName: res.spec_name,
-            specValue: res.spec_value_ar,
-            goodsImage: res.goods_image,
-            skuData: res.sku_data,
-            paramsPrice: res.goods_price,
-            goodsClass: res.spec_name,
-            listCount: res.comment.listCount
-          });
-          // console.log(_this.data.skuData);
-          // var article = res.mobile_body;
-          // WxParse.wxParse('article', 'html', article, _this, 5);
+            // console.log(_this.data.skuData[0].goods_sku);
+            // var article = res.mobile_body;
+            // WxParse.wxParse('article', 'html', article, _this, 0);
 
+          }
+          wx.hideLoading();
         }
-        wx.hideLoading();
-      }
-    });
+      });
+    }, 1000);
 
     wx.getSystemInfo({
       success: function (res) {
@@ -131,7 +172,7 @@ Page({
   },
 
   //查看全部评论
-  checkAll: function() {
+  checkAll: function () {
     wx.navigateTo({
       url: `/pages/comment/comment?sku=${this.data.goodsSku}`
     });
@@ -293,11 +334,15 @@ Page({
   //弹出选择参数页面
   checkParams: function (e) {
     var _this = this;
-    _this.newdobj()
     _this.setData({
       params: '0',
       isParams: true
     });
+  },
+
+  checkParams2: function (e) {
+    var _this = this;
+    _this.newdobj();
 
     var pinjiein = 'pinjie[' + e.target.dataset.fuji + '].id';
     _this.setData({
@@ -332,7 +377,9 @@ Page({
           paramsPrice: item.goods_price,
           goodsClass: item.goods_spec,
           checkWord: '已选择',
-          goodsStorage: item.goods_storage + item.goods_unit
+          goodsStorage: item.goods_storage + item.goods_unit,
+          seleGoodsSku: item.goods_sku,
+          checkSkuData: item.goods_sku
         });
       }
     });
@@ -393,7 +440,8 @@ Page({
     if (_this.data.goodsNumber > 0) {
       _this.data.goodsNumber--;
       _this.setData({
-        goodsNumber: _this.data.goodsNumber
+        goodsNumber: _this.data.goodsNumber,
+        quantity: _this.data.goodsNumber
       });
     }
   },
@@ -403,14 +451,191 @@ Page({
     var _this = this;
     _this.data.goodsNumber++;
     _this.setData({
-      goodsNumber: _this.data.goodsNumber
+      goodsNumber: _this.data.goodsNumber,
+      quantity: _this.data.goodsNumber
     });
   },
+
+  //加入购物车
+  plusShopCart: function() {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    console.log(user);
+    if (user != undefined && user != '') {
+      if (_this.data.goodsParams.length != 0) {
+        _this.checkParams();
+      } else {
+        _this.plusShopCartReq(_this.data.skuData[0].goods_sku);
+      }
+    }else{
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
+
+  //选择参数加入购物车
+  paramsAddCart: function() {
+    var _this = this;
+    _this.plusShopCartReq(_this.data.seleGoodsSku);
+  },
+
+  plusShopCartReq: function(sku) {
+    var _this = this;
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Cart/addCart',
+      method: 'POST',
+      data: {
+        // sku: '6e728080b3',
+        sku: _this.data.goodsSku,
+        quantity: _this.data.goodsNumber,
+        goods_sku: sku,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id')
+      },
+      success(res) {
+        if(res.data.code) {
+          console.log(res);
+          _this.closeParams();
+          wx.showToast({
+            title: '已加入购物车',
+            icon: 'succes',
+            duration: 1000,
+            mask: true
+          })
+        }
+      }
+    })
+  },
+
+  //立即购买
+  buyImdy: function () {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    if (user != undefined && user != ''){
+      if (_this.data.goodsParams.length != 0) {
+        _this.checkParams();
+      }else{
+        wx.navigateTo({
+          url: `/pages/confirmOrder/confirmOrder?status=1&sku=${_this.data.confirmSku}&goodsSku=${_this.data.checkSkuData}&quantity=${_this.data.quantity}`
+        });
+      }
+    }else{
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
+
+  //选择参数立即购买
+  buyNow: function() {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    if (user != undefined && user != '') {
+      wx.navigateTo({
+        url: `/pages/confirmOrder/confirmOrder?status=1&sku=${_this.data.confirmSku}&goodsSku=${_this.data.checkSkuData}&quantity=${_this.data.quantity}`
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      });
+    }
+  },
+
+  //收藏
+  collect: function() {
+    var _this = this;
+    var user = wx.getStorageSync('userInfo');
+    console.log(user.username);
+    if (_this.data.collectNum == 1) {
+      if (user.username != undefined && user.username != '') {
+        _this.collectReq(user.username);
+        _this.setData({
+          collectNum: 2
+        });
+      } else {
+        wx.navigateTo({
+          url: '/pages/login/login'
+        });
+      }
+    }else {
+      _this.collectReq(user.username);
+      _this.setData({
+        collectNum: 1
+      });
+    }
+  },
+
+  //添加/取消收藏
+  collectReq: function (userName) {
+    var _this = this
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/goods/userFavorites',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        sku: _this.data.goodsSku,
+        username: userName,
+        fav_type: 'goods'
+      },
+      success(res) {
+        if(!res.code) {
+          var res = res.data.data;  
+          if (res.status == 1) {
+            _this.setData({
+              collectImg: '../../images/collection_ac.png',
+            });
+            wx.showToast({
+              title: '收藏成功',
+              icon: 'none',
+              duration: 2000
+            });
+          }else{
+            _this.setData({
+              collectImg: '../../images/collection.png',
+            });
+            wx.showToast({
+              title: '取消成功',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        }
+      }
+    });
+  },
+
+  //跳转购物车页面
+  shopCartUrl: function() {
+    wx.switchTab({
+      url: '/pages/tabBar/shopCart/shopCart'
+    })
+  },
+
+  //获取轮播图的下标
+  swiperchange: function (e) {
+    this.setData({
+      swiperIndex: e.detail.current + 1
+    });
+  },
+
+  //禁止滑动
+  move: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
+
+    setTimeout(function() {
+      if (_this.data.collectStatus == 1) {
+        _this.setData({
+          collectImg: '../../images/collection_ac.png'
+        });
+      }
+    }, 1000);
     wx.loadFontFace({
       family: 'tw',
       source: 'url("https://reincarnation.oss-cn-beijing.aliyuncs.com/font/%E6%A5%B7%E4%BD%93_GB2312.ttf")',

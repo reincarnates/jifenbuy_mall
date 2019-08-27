@@ -7,11 +7,24 @@
 .goods-img{
   width: 100%;
   height: 750rpx;
+  position: relative;
 }
 
 .goods-img image{
   width: 100%;
   height: 100%;
+}
+
+.bannerIndex{
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, .3);
+  color: #fff;
+  font-size: 26rpx;
+  padding: 0 10rpx;
+  box-sizing: border-box;
 }
 
 .goods-head{
@@ -96,15 +109,20 @@
 }
 
 .goods-attr-discount{
-  color: #fe6601;
+  width: 125rpx;
+  height: 35rpx;
+  border-radius: 2rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 35rpx;
   font-size: 20rpx;
   margin-left: 30rpx;
+  background-color: #fe9901;
 }
 
 .goods-attr-old-price{
   color: #999;
   font-size: 22rpx;
-  text-decoration: line-through;
 }
 
 .goods-attr-sales{
@@ -315,7 +333,7 @@
 .check-params-mask{
   position: fixed;
   width: 100%;
-  height: 1068rpx;
+  height: 1000rpx;
   background-color: #fff;
   border-top-left-radius: 22rpx;
   border-top-right-radius: 22rpx;
@@ -598,6 +616,7 @@
 
 .check-params-mask-number{
   width: 100%;
+  margin-bottom: 15rpx;
 }
 
 .check-params-mask-right{

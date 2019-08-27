@@ -1,0 +1,19 @@
+
+<view class="setting-view">
+   <view class='content flex-row flex-y-center'>
+      <view class='left-title flex-grow-1'>个人信息</view>
+      <image src='/images/order_go.png' mode='aspectFit' class='arrow'></image>
+    </view>
+    <view class='content flex-row flex-y-center'>
+      <view class='left-title flex-grow-1'>账号安全</view>
+      <image src='/images/order_go.png' mode='aspectFit' class='arrow'></image>
+    </view>
+    <view class='content flex-row flex-y-center'>
+      <view class='left-title flex-grow-1'>修改密码</view>
+      <image src='/images/order_go.png' mode='aspectFit' class='arrow'></image>
+    </view>
+    <view class='content flex-row flex-y-center' style="border-bottom: 0rpx solid #ddd;">
+      <view class='left-title flex-grow-1'>关于福利购</view>
+      <image src='/images/order_go.png' mode='aspectFit' class='arrow'></image>
+    </view>
+</view>

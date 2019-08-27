@@ -1,192 +1,3 @@
-
-const list = [
-  {
-    "store_name": "供应商测试001",
-    "store_id": 31,
-    "list": [
-      {
-        "cart_id": 1282,
-        "buyer_id": 1,
-        "store_id": 31,
-        "store_name": "供应商测试001",
-        "goods_id": "ZY3c9148d135",
-        "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
-        "goods_price": "88.00",
-        "goods_num": 1,
-        "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
-        "bl_id": 0,
-        "goods_sku": "ZY3c9148d135",
-        "yggc_sku": "",
-        "goods_state": 1,
-        "stock": [],
-        "goods_total": "88.00"
-      }
-    ]
-  },
-  {
-    "store_name": "YGGC商城",
-    "store_id": 28,
-    "list": [
-      {
-        "cart_id": 1287,
-        "buyer_id": 1,
-        "store_id": 28,
-        "store_name": "YGGC商城",
-        "goods_id": "ecdb9f6a96",
-        "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
-        "goods_price": "264.00",
-        "goods_num": 1,
-        "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
-        "bl_id": 0,
-        "goods_sku": "ecdb9f6a96",
-        "yggc_sku": "jd_personal_1003829",
-        "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 114436,
-            "goods_sku": "ecdb9f6a96",
-            "goods_id": 114436,
-            "goods_name": "耐司（NiSi）MC UV 95mm UV镜 双面多层镀膜无暗角 单反uv镜 保护镜 单反滤镜 滤光镜 佳能尼康相机滤镜",
-            "goods_price": "264.00",
-            "goods_marketprice": "264.00",
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t5929/150/6044560460/53480/c3c30244/596f0b85N3eb3444d.jpg",
-            "goods_unit": "件",
-            "goods_storage": 100,
-            "spu": "ecdb9f6a96"
-          }
-        ],
-        "goods_total": "264.00"
-      },
-      {
-        "cart_id": 1289,
-        "buyer_id": 1,
-        "store_id": 28,
-        "store_name": "YGGC商城",
-        "goods_id": "8e87427dd6",
-        "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
-        "goods_price": "379.00",
-        "goods_num": 1,
-        "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
-        "bl_id": 0,
-        "goods_sku": "8e87427dd6",
-        "yggc_sku": "jd_personal_100001736149",
-        "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 44628,
-            "goods_sku": "8e87427dd6",
-            "goods_id": 44628,
-            "goods_name": "Samsonite/新秀丽韩版休闲旅行背包女 13英寸商务电脑包拉链双肩包BP2*28002浅灰色",
-            "goods_price": "379.00",
-            "goods_marketprice": "379.00",
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t18322/89/1433264582/361827/cc5849b7/5ac9a0d7N40eb3dec.jpg",
-            "goods_unit": "件",
-            "goods_storage": 100,
-            "spu": "8e87427dd6"
-          }
-        ],
-        "goods_total": "379.00"
-      },
-      {
-        "cart_id": 1312,
-        "buyer_id": 1,
-        "store_id": 28,
-        "store_name": "YGGC商城",
-        "goods_id": "1d84795745",
-        "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
-        "goods_price": "36.01",
-        "goods_num": 1,
-        "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
-        "bl_id": 0,
-        "goods_sku": "1d84795745",
-        "yggc_sku": "jd_personal_5028785",
-        "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 34605,
-            "goods_sku": "1d84795745",
-            "goods_id": 34605,
-            "goods_name": "金河田KM021彩虹湾游戏键盘鼠标套装 键鼠套装 办公鼠标键盘套装 七彩背光机械手感有线键盘电脑键盘 白色",
-            "goods_price": "36.01",
-            "goods_marketprice": "45.00",
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t7294/2/2879577919/293420/16506df2/59b5eeffN2ae1fa0d.jpg",
-            "goods_unit": "件",
-            "goods_storage": 100,
-            "spu": "1d84795745"
-          }
-        ],
-        "goods_total": "36.01"
-      },
-      {
-        "cart_id": 1427,
-        "buyer_id": 1,
-        "store_id": 28,
-        "store_name": "YGGC商城",
-        "goods_id": "1566474581",
-        "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
-        "goods_price": "60.20",
-        "goods_num": 1,
-        "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
-        "bl_id": 0,
-        "goods_sku": "1566474581",
-        "yggc_sku": "jd_personal_497495",
-        "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 684452,
-            "goods_sku": "1566474581",
-            "goods_id": 684451,
-            "goods_name": "伊利奶粉 金领冠系列 婴儿配方奶粉 1段400克（0-6个月婴儿适用）新老包装随机发货",
-            "goods_price": "60.20",
-            "goods_marketprice": "60.20",
-            "goods_image": "http://img11.360buyimg.com/n1/jfs/t19231/365/811688584/207102/892d6cb8/5aa8f881N0fa37b98.jpg",
-            "goods_unit": "件",
-            "goods_storage": 100,
-            "spu": "1566474581"
-          }
-        ],
-        "goods_total": "60.20"
-      }
-    ]
-  },
-  {
-    "list": [
-      {
-        "cart_id": 1282,
-        "buyer_id": 1,
-        "store_id": 31,
-        "store_name": "供应商测试001",
-        "goods_id": "ZY3c9148d135",
-        "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
-        "goods_price": "88.00",
-        "goods_num": 1,
-        "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
-        "bl_id": 0,
-        "goods_sku": "ZY3c9148d135",
-        "yggc_sku": "",
-        "goods_state": 1,
-        "stock": [
-          {
-            "goods_sku_id": 2800007,
-            "goods_sku": "ZY3c9148d135",
-            "goods_id": 2800004,
-            "goods_name": "满199减120_百草味 坚果大礼包1368g/8袋 每日坚果礼盒零食 夏威夷果碧根果等 MJ",
-            "goods_price": "88.00",
-            "goods_marketprice": "54.99",
-            "goods_image": "http://test.fulibuy.cn/upload/picture/goodsImage/20190710/a9afacb9e2801499adde30dd7dcef897.jpg",
-            "goods_unit": "件",
-            "goods_storage": 1000,
-            "spu": "ZY3c9148d135"
-          }
-        ],
-        "goods_total": "88.00"
-      }
-    ],
-    "store_name": "供应商测试001",
-    "store_id": 31
-  }
-]
-
 var storages = require('../../../lib/js/storage.js');
 // pages/shopCart/shopCart.js
 Page({
@@ -195,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cardTeams: list,
+    cardTeams: [],
     checked_all: false, //全选
     newArr: [], //复选框选中
     countMoney: 0, //结算价格
@@ -228,20 +39,22 @@ Page({
     var index = e.currentTarget.dataset.index;
     // console.log(index)
     var goods_num = cardTeams[key].list[index].goods_num;
-    var maxNum = cardTeams[key].list[index].stock;
-    for (var i = 0; i < maxNum.length; i++) {
-      if (cardTeams[key].list[index].goods_sku == maxNum[i].goods_sku) {
-        if (cardTeams[key].list[index].goods_num < maxNum[i].goods_storage) {
-          goods_num++
-        } else if (cardTeams[key].list[index].goods_num == maxNum[i].goods_storage) {
-          wx.showToast({
-            title: '没有库存了哦~',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }
-    }
+    goods_num++;
+    that.shopCartNum(cardTeams[key].list[index].cart_id, goods_num);
+    // var maxNum = cardTeams[key].list[index].stock;
+    // for (var i = 0; i < maxNum.length; i++) {
+    //   if (cardTeams[key].list[index].goods_sku == maxNum[i].goods_sku) {
+    //     if (cardTeams[key].list[index].goods_num < maxNum[i].goods_storage) {
+    //       goods_num++
+    //     } else if (cardTeams[key].list[index].goods_num == maxNum[i].goods_storage) {
+    //       wx.showToast({
+    //         title: '没有库存了哦~',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     }
+    //   }
+    // }
 
     cardTeams[key].list[index].goods_num = goods_num;
     that.setData({
@@ -262,12 +75,30 @@ Page({
       // cardTeams[key].list[index].goods_num = 1
       // that.delItem(e)
       cardTeams[key].list[index].goods_num--;
+      that.shopCartNum(cardTeams[key].list[index].cart_id, cardTeams[key].list[index].goods_num);
     }
     // console.log(cardTeams[key].list[index].goods_num)
     that.setData({
       cardTeams: cardTeams
     })
     that.getTotalPrice();
+  },
+
+  //请求购物车商品数量
+  shopCartNum: function(id, num) {
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Cart/CartUpdate',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        cart_id: id,
+        sum: num
+      },
+      success(res) {
+        console.log(res);
+      }
+    })
   },
 
   // 单选
@@ -484,8 +315,11 @@ Page({
     }
   },
 
-  jkl: function() {
-    console.log(1);
+  settlement: function() {
+    console.log(this.data.newArr);
+    wx.navigateTo({
+      url: `/pages/confirmOrder/confirmOrder?cartId=${this.data.newArr}`
+    });
   },
 
   // 计算商品价格
@@ -522,6 +356,18 @@ Page({
       success: function(res) {
         if (res.confirm) {
           var _index = cardTeams[key].list.indexOf(cardTeams[key].list[index]);
+          wx.request({
+            url: 'http://tapi.fulibuy.cn/Cart/delCart',
+            method: 'POST',
+            data: {
+              user_token: wx.getStorageSync('user_token'),
+              device_id: wx.getStorageSync('device_id'),
+              cart_id: cardTeams[key].list[index].cart_id,
+            },
+            success(res) {
+              console.log(res);
+            }
+          });
           cardTeams[key].list.splice(_index, 1);
           if (cardTeams[key].list.length != 0) {
             cardTeams[key].lengthz = cardTeams[key].list.length;
@@ -566,6 +412,7 @@ Page({
         confirmText: '是',
         success: function (res) {
           if (res.confirm) {
+            _this.semDelItemReq();
             _this.setData({
               cardTeams: [],
               manage: '管理',
@@ -581,28 +428,7 @@ Page({
         }
       })
     }
-    // //选中一个删除
-    // if (_this.data.yixuanlength == 1) {
-    //   if (_this.data.zonglength != 1) {
-    //     wx.showModal({
-    //       title: '提示',
-    //       content: '确定删除吗？',
-    //       cancelText: '否',
-    //       confirmText: '是',
-    //       success: function (res) {
-    //         if (res.confirm) {
-    //           var _index = cardTeams[selectIndex].list.indexOf(_this.data.selectGoods);
-    //           cardTeams[selectIndex].list.splice(_index, 1);
-    //           _this.setData({
-    //             cardTeams: cardTeams,
-    //             zonglength: cardTeams[selectIndex].list.length,
-    //             yixuanlength: 0
-    //           });
-    //         }
-    //       }
-    //     })
-    //   }
-    // }
+    
     //选中两个以上删除
     if (_this.data.yixuanlength >= 1) {
       if (_this.data.yixuanlength != _this.data.zonglength) {
@@ -613,7 +439,8 @@ Page({
           confirmText: '是',
           success: function (res) {
             if (res.confirm) {
-              
+
+              _this.semDelItemReq();
               for (var i = 0; i < cardTeams.length; i++) {
                 for (var j = cardTeams[i].list.length; j > 0; j--) {
                   if (cardTeams[i].list[j-1].is_xuan == 1) {
@@ -623,7 +450,7 @@ Page({
                       cardTeams: cardTeams,
                     });
                     
-                    console.log(cardTeams);
+                    
                     var aasindex = 0;
                     for (var k = 0; k < cardTeams.length; k++) {
                       for (var l = 0; l < cardTeams[k].list.length; l++) {
@@ -642,6 +469,26 @@ Page({
         })
       }
     }
+  },
+
+  //操作删除请求接口
+  semDelItemReq: function() {
+    var _this = this;
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Cart/delCart',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        cart_id: _this.data.newArr.join(','),
+      },
+      success(res) {
+        console.log(res);
+        _this.setData({
+          newArr: []
+        });
+      }
+    });
   },
 
   //清理失效商品
@@ -748,22 +595,7 @@ Page({
    */
   onLoad: function(options) {
    var _this = this;
-  //  wx.request({
-  //    url: 'http://tapi.fulibuy.cn/Cart/cart',
-  //    method: 'POST',
-  //    data: {
-  //      user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-  //      device_id: 'ffbcb5efff6aa294'
-  //    },
-  //    success(res) {
-  //      if(res.data.code) {
-  //        console.log(res);
-  //        _this.setData({
-  //          cardTeams: res.data.data.cart_list
-  //        });
-  //      }
-  //    }
-  //  })
+   
   },
 
   /**
@@ -776,57 +608,79 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(e) {
+  onShow: function (e) {
     var that = this;
-    var cardTeams = that.data.cardTeams;
+    // var cardTeams;
     var arr = that.data.newArr;
-    var arr2 = [];
-    var arr3 = [];
-    var zlength = 0
-    for (var i = 0; i < cardTeams.length; i++) {
-      cardTeams[i].lengthz = cardTeams[i].list.length;
-      cardTeams[i].lengths = 0;
-      for (var j = 0; j < cardTeams[i].list.length; j++) {
-        if (cardTeams[i].list[j].stock.length != 0) {
-          zlength++;
+
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Cart/cart',
+      method: 'POST',
+      data: {
+         user_token: wx.getStorageSync('user_token'),
+         device_id: wx.getStorageSync('device_id')
+        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+      },
+      success(res) {
+        if (res.data.code) {
+          //  console.log(res);
+          // cardTeams = res.data.data.cart_list[0].list;
           that.setData({
-            zonglength: zlength
+            cardTeams: res.data.data.cart_list
+          });
+
+          var arr2 = [];
+          var arr3 = [];
+          var zlength = 0;
+          for (var i = 0; i < that.data.cardTeams.length; i++) {
+            that.data.cardTeams[i].lengthz = that.data.cardTeams[i].list.length;
+            that.data.cardTeams[i].lengths = 0;
+            arr3.push({
+              store_id: that.data.cardTeams[i].store_id,
+              store_name: that.data.cardTeams[i].store_name,
+              list: [],
+              lengths: that.data.cardTeams[i].lengths
+            });
+            for (var j = 0; j < that.data.cardTeams[i].list.length; j++) {
+              if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
+                zlength++;
+                that.setData({
+                  zonglength: zlength
+                });
+              }
+
+              that.data.cardTeamsLen.push(that.data.cardTeams[i].list.length);
+
+              if (that.data.checked_all) {
+                that.data.cardTeams[i].list[j].is_xuan = 1;
+                // that.data.cardTeams[i].shopSelect = true;
+                arr.push(that.data.cardTeams[i].list[j].cart_id);
+              } else {
+                that.data.cardTeams[i].list[j].is_xuan = 0;
+                // that.data.cardTeams[i].shopSelect = false;
+                arr = [];
+              }
+
+              var state = that.data.cardTeams[i].list[j].goods_state;
+              if (state != 1) {
+                arr2.push(that.data.cardTeams[i].list[j]);
+              }
+
+              if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
+                arr3[i].list.push(that.data.cardTeams[i].list[j]);
+                arr3[i].lengthz = arr3[i].list.length;
+              }
+            }
+          }
+
+          that.setData({
+            cardTeams: arr3,
+            newArr: arr,
+            invalidArr: arr2,
           });
         }
-        that.data.cardTeamsLen.push(cardTeams[i].list.length);
-        // cardTeams[i].list[j].is_xuan = false;
-        if (cardTeams[i].list[j].stock.length == 0) {
-          cardTeams[i].errorState = true;
-        }else{
-          cardTeams[i].errorState = false;
-        }
-        
-        if (cardTeams[i].list[j].stock.length == 0) {
-          cardTeams[i].fstock = [];
-        }
-        
-        if (that.data.checked_all) {
-          cardTeams[i].list[j].is_xuan = 1;
-          // cardTeams[i].shopSelect = true;
-          arr.push(cardTeams[i].list[j].cart_id);
-        } else {
-          cardTeams[i].list[j].is_xuan = 0;
-          // cardTeams[i].shopSelect = false;
-          arr = [];
-        }
       }
-
-      if (cardTeams[i].fstock != undefined) {
-        arr2.push(cardTeams[i]);
-      }else{
-        arr3.push(cardTeams[i]);
-      }
-    }
-
-    that.setData({
-      cardTeams: arr3,
-      newArr: arr,
-      invalidArr: arr2,
     });
 
     that.getTotalPrice(); //合计
