@@ -24,7 +24,7 @@
       <image src="/images/icon_orders_cancel.png" wx:if="{{orderModel.order_state == 0 || orderModel.rest_time == '已取消'}}"></image>
       <image src="/images/icon_ordersStatus_waitpay.png" wx:if="{{orderModel.order_state == 10 && orderModel.rest_time != '已取消'}}"></image>
       <image src="/images/icon_ordersStatus_waitsend.png" wx:if="{{orderModel.order_state == 20}}" mode="aspectFit"></image>
-      <image src="/images/icon_ordersStatus_waitreceive.png" wx:if="{{orderModel.order_state == 30}} " mode="aspectFit"></image>
+      <image src="/images/icon_ordersStatus_waitreceive.png" wx:if="{{orderModel.order_state == 30}}" mode="aspectFit"></image>
       <image src="/images/icon_ordersStatus_complete.png" wx:if="{{orderModel.order_state == 40}}" mode="aspectFit"></image>
       <view wx:if="{{orderModel.order_state == 10 && orderModel.rest_time != '已取消'}}">需付款:<text style="font-size: 18rpx;margin:0 4rpx;">¥</text>155.00</view>
     </view>

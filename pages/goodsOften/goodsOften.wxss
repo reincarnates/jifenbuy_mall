@@ -1,0 +1,14 @@
+@import '../MyTracks/MyTracks.wxss';
+@import '../tabBar/shopCart/shopCart.wxss';
+
+.goodsoften-wrapper{
+  width: 100%;
+  padding: 18rpx;
+  box-sizing: border-box;
+}
+
+.shop-num{
+  color: #999;
+  font-size: 22rpx;
+  margin-top: 10rpx;
+}

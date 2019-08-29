@@ -1,0 +1,16 @@
+<view class="mytracks-wrapper">
+  <block wx:for="{{tracks}}" wx:key="index">
+    <navigator url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none" class="mytracks-item flex">
+      <view class="mytracks-item-img">
+        <image src="{{item.goods_image}}"></image>
+      </view>
+      <view class="mytracks-item-word">
+        <view class="mytracks-item-word-top text-more-2">{{item.goods_name}}</view>
+        <view class="mytracks-item-word-bottom flex-sw">
+          <view class="mytracks-item-word-price">￥{{item.goods_price}}</view>
+          <view class="mytracks-item-word-btn">立即购买</view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+</view>

@@ -1,0 +1,13 @@
+ 
+<block wx:for="{{evaluateModel.orderGoods}}" wx:for-item="model" wx:key="unique" wx:for-index="index">
+  <view class="evaluate-view flex-col">
+    <view class="top-view flex-row flex-y-center">
+      <image src="{{model.goods_image}}" style="width:100rpx; height:100rpx; margin-right:12rpx;" mode="aspectFit"></image>
+      <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique">
+        <image src="/images/icon_star_whole.png" style="width:44rpx; height:44rpx; margin-left:16rpx;"></image>
+      </block>
+      <text class="flex-grow-1" style="font-size:26rpx;text-align:right;color:#ef6601;">一般</text>
+    </view>
+     <textarea placeholder="写下您的评论分享给大家吧~"></textarea>
+  </view>
+</block>

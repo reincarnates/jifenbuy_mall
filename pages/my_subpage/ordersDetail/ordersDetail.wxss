@@ -1,7 +1,7 @@
  @import "/pages/my_subpage/cancelReason/cancelReason.wxss";
- 
+
 .orderDetail_view {
-  margin-bottom: 144rpx;
+  padding-bottom: 144rpx;
 }
 
 .orderDetail_view .orderState_view {

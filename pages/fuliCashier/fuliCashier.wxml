@@ -1,0 +1,62 @@
+<view style="width: 100%; height: {{statusBarHeight}}px; background: #fff;"></view>
+<view class="cashier-wrapper">
+  <view class="cashier-head flex-y-center">
+    <image src="../../images/cashier_return.png" bindtap="returnDetail"></image>
+    <view class="cashier-word">福利商品收银台</view>
+  </view>
+  <view class="cashier-pirce">
+    <view class="cashier-pirce-right">
+      <text>需支付：</text>
+      <text style="color: #fe6601; font-size: 32rpx;">￥{{totalPrice}}</text>
+    </view>
+  </view>
+  <view class="cashier-payment">
+    <radio-group class="radio-group" bindchange="radioChange">
+      <view class="cashier-payment-item flex-sw">
+        <view class="cashier-payment-name flex-center">
+          <image src="../../images/balance_icon.png"></image>
+          <view style="margin-left: 20rpx;">余额支付</view>
+        </view>
+        <label class="radio">
+          <radio value="余额" checked="true" />
+        </label>
+      </view>
+      <view class="cashier-payment-item flex-sw">
+        <view class="cashier-payment-name flex-center">
+          <image src="../../images/wx_icon.png" style="width: 35rpx; height: 35rpx;"></image>
+          <view style="margin-left: 20rpx;">微信支付</view>
+        </view>
+        <label class="radio">
+          <radio value="微信" />
+        </label>
+      </view>
+    </radio-group>
+  </view>
+  <view class="cashier-payment-btn" bindtap="confirmPayment">确认支付</view>
+</view>
+
+<view class="cashier-mask-bg" wx:if="{{payment}}" bindtap="closePayment"></view>
+<view class="cashier-mask" wx:if="{{payment}}">
+  <view class="cashier-mask-head flex">
+    <view class="cashier-mask-head-img flex-center" bindtap="closePayment">
+      <image src="../../images/close_params.png"></image>
+    </view>
+    <view class="cashier-mask-head-word">请输入密码</view>
+  </view>
+  <view class="cashier-mask-content">
+    <view class="cashier-mask-price">￥78.00</view>
+    <paySix 
+    bindvalueSix="valueSix" 
+    input_value="{{inputData.input_value}}" 
+    value_length="{{inputData.value_length}}" 
+    isNext="{{inputData.isNext}}" 
+    get_focus="{{inputData.get_focus}}" 
+    focus_class="{{inputData.focus_class}}" 
+    value_num="{{inputData.value_num}}"
+    height="{{inputData.height}}" 
+    width="{{inputData.width}}" 
+    see="{{inputData.see}}" 
+    interval="{{inputData.interval}}">
+    </paySix>
+  </view>
+</view>

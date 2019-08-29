@@ -31,7 +31,7 @@
   <view class="new-built-address-name flex-y-center">
     <view class="new-built-address-name-left">详细地址</view>
     <view class="new-built-address-name-right">
-      <input bindinput="getDetailAddress" value="{{address}}" placeholder="详细地址(如街道,小区,乡镇,村)" type="number" placeholder-style="color: #999999;"></input>
+      <input bindinput="getDetailAddress" value="{{address}}" placeholder="详细地址(如街道,小区,乡镇,村)" placeholder-style="color: #999999;"></input>
     </view>
   </view>
   <view class="new-built-address-name flex-sw">

@@ -1,9 +1,12 @@
 {
   "pages": [
-    "pages/tabBar/index/index",
-    "pages/address/addressManage/addressManage",
-    "pages/address/newBuiltAddress/newBuiltAddress",
+    "pages/goodsOften/goodsOften",
     "pages/tabBar/shopCart/shopCart",
+    "pages/tabBar/user/user",
+    "pages/MyTracks/MyTracks",
+    "pages/tabBar/index/index",
+    "pages/fuliCashier/fuliCashier",
+    "pages/paymentSuccess/paymentSuccess",
     "pages/goodsDetail/goodsDetail",
     "pages/confirmOrder/confirmOrder",
     "pages/address/addressManage/addressManage",
@@ -22,7 +25,6 @@
     "pages/special/wyMall/wyMall",
     "pages/special/jdMall/jdMall",
     "pages/special/fuliMall/fuliMall",
-    "pages/tabBar/user/user",
     "pages/login/login",
     "pages/listPage/listPage",
     "pages/comment/comment",
@@ -36,7 +38,8 @@
     "pages/my_subpage/setting/setting",
     "pages/my_subpage/ordersList/ordersList",
     "pages/my_subpage/ordersDetail/ordersDetail",
-    "pages/my_subpage/logistics/logistics"
+    "pages/my_subpage/logistics/logistics",
+    "pages/my_subpage/orderEvaluetion/orderEvaluetion"
   ],
   "window": {
     "backgroundTextStyle": "light",

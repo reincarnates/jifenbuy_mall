@@ -1,13 +1,15 @@
 <!-- search bar -->
 <view class="search_view flex-y-center">
-  <navigator class="searchBar flex-row flex-y-center">
+  <view class="searchBar flex-row flex-y-center" bindtap="pushtoSearch" style="width:{{isSearch ? '80%' : '100%'}}">
     <image src="/images/search_btn.png"></image>
-    <text>搜索全部订单</text>
-  </navigator>
+    <!-- <text>搜索全部订单</text> -->
+    <input placeholder="搜索全部订单" disabled="{{!isSearch}}" confirm-type="search" focus="{{focus}}" bindinput="willInputText" bindconfirm="doneInputText"></input>
+  </view>
+ <view wx:if="{{isSearch}}" style="font-size:26rpx;color:#999;" bindtap="cancelSearch">取消</view>
 </view>
 
 <!-- segment -->
-<view class="selectBar flex-row">
+<view class="selectBar flex-row" wx:if="{{!isSearch}}">
   <view class="selectItem flex-grow-1" wx:for="{{tabs}}" wx:key="unique" bindtap="tabClick" id="{{index}}">
     <view class="selectTitle">{{item}}</view>
   </view>
@@ -15,7 +17,7 @@
 </view>
 
 <!-- orders list -->
-<view class="orderList-view">
+<view class="orderList-view" style="margin-top: {{isSearch ? '80rpx' : '150rpx'}};">
 
   <block wx:for="{{orders_list}}" wx:key="unique" wx:for-item="order">
     <view class="orders_cell flex-col" bindtap="viewOrdersDetail" data-ordersn="{{order.order_sn}}">

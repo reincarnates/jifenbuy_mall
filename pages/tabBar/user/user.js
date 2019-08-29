@@ -10,7 +10,7 @@ Page({
     personal: [
       {
         url: '../../../images/address.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/address/addressManage/addressManage',
         personalName: '收货地址'
       },
       {
@@ -20,7 +20,7 @@ Page({
       },
       {
         url: '../../../images/footprint.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/MyTracks/MyTracks',
         personalName: '我的足迹'
       },
       {
@@ -103,7 +103,8 @@ Page({
         data: {
           code: code,
           encryptedData: msg.detail.encryptedData,
-          iv: msg.detail.iv
+          iv: msg.detail.iv,
+          client: 'wx'
         },
         success(res) {
           if (res.data.data.wrong == "code") {
@@ -250,7 +251,7 @@ Page({
 
   viewOrders: function (e) {
     wx.navigateTo({
-      url: '/pages/my_subpage/ordersList/ordersList?order_state=' + e.currentTarget.id,
+      url: '/pages/my_subpage/ordersList/ordersList?order_state=' + e.currentTarget.id +'&isSearchPage=0',
     })
   },
 

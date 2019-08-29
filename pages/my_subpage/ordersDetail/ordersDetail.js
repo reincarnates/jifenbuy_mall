@@ -70,6 +70,10 @@ Page({
         isShowCancelView: true,
         canScrollY: false
       });
+    } else if (title == '查看物流') {
+      wx.navigateTo({
+        url: '/pages/my_subpage/logistics/logistics?order_sn=' + orderModel.order_sn,
+      })
     }
   },
 
@@ -83,7 +87,6 @@ Page({
   },
 
   radioChange: function (e) {
-    console.log(e);
     var cancel_reason = this.data.cancel_reason, index = e.detail.value;
     for (var i = 0; i < cancel_reason.length; i++) {
       cancel_reason[i].checked = false;

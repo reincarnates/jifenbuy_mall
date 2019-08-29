@@ -22,22 +22,47 @@ Page({
     cancel_reason: [],
     reason_id: '',  // 取消原因id
     order_sn: '',   // 订单号
-    state_id: '', 
+
+    state_id: '',  // 订单类型
+    keyword: '', // 搜索关键词
 
     isShowCancelView: false,
     cancel_bottom: '-100%',
     canScrollY: true,
+
+    focus: false,
+    isSearch: false, //是否是搜索页
   },
 
   onLoad: function (options) {
     const self = this;
     let orders_state = options.order_state;
+    let isSearchPage = options.isSearchPage == '1';
+    let item_width = self.data.windowWidth/self.data.tabs.length;
+
     this.setData({
       state_id: orders_state,
+      isSearch: isSearchPage,
+      sliderWidth: orders_state == '0' ? 64 : 96,
+      sliderOffset: item_width*(orders_state == '5' ? 4 : orders_state) + (orders_state == '0' ? 0 : -8),
     });
-    this.ordersList();
+
+    wx.setNavigationBarTitle({
+      title: this.data.isSearch ? '搜索订单' : '我的订单',
+    });
+
+    if (!this.data.isSearch) {
+      this.ordersList();
+    } 
   },
- 
+
+  onShow: function(options) {
+    if (this.data.isSearch) {
+      this.setData({
+        focus: true
+      });
+    }
+  },
 
   // 刷新
   onPullDownRefresh: function () {
@@ -68,7 +93,8 @@ Page({
     api.ordersList({
       data: {
         'order_state': self.data.state_id,
-        'page': page_num
+        'page': page_num,
+        'keyword' : self.data.keyword,
       },
       success:(res) => {
         var order_list = res.data.data.list ? res.data.data.list : [];
@@ -174,6 +200,10 @@ Page({
        wx.navigateTo({
          url: '/pages/my_subpage/logistics/logistics?order_sn=' + order_model.order_sn,
        })
+    } else if (title == '评价') {
+      wx.navigateTo({
+        url: '/pages/my_subpage/orderEvaluetion/orderEvaluetion?order_sn=' + order_model.order_sn,
+      })
     }
   },
 
@@ -219,6 +249,37 @@ Page({
         })  
       }
     });
+  },
+
+  pushtoSearch: function(e) {
+    if (this.data.isSearch == '0') {
+      wx.navigateTo({
+        url: '/pages/my_subpage/ordersList/ordersList?order_state=' + e.currentTarget.id + '&isSearchPage=1',
+      });
+    }
+  },
+
+  willInputText: function(e) {
+    this.setData({
+      focus: true
+    });
+  },
+
+  doneInputText: function (e) {
+    page_num = 1;
+    this.setData({
+      focus: false,
+      orders_state: '0',
+      keyword: e.detail.value
+    });
+    this.ordersList();
+  },
+
+  cancelSearch: function(e) {
+    this.setData({
+      focus:false
+    });
+    wx.navigateBack({});
   },
 
   move: function () { },

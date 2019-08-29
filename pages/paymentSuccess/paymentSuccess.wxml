@@ -1,0 +1,43 @@
+<!-- <view style="width: 100%; height: 59rpx; background: #fe9601;"></view> -->
+<view style="padding-top: {{statusBarHeight}}px" class="payment-wrapper">
+  <view class="payment-return">
+    <view class="payment-return-img flex-center" bindtap="returnDetail">
+      <image src="../../images/succ_return.png"></image>
+    </view>
+  </view>
+  <view class="payment-head flex-center" style="">
+    <view class="payment-head-success flex-y-center">
+      <image src="../../images/payment_success.png"></image>
+      <view style="margin-left: 20rpx;">支付成功</view>
+    </view>
+    <view class="payment-head-price">￥{{price}}</view>
+    <view class="check-order" bindtap="checkOrder">查看订单</view>
+  </view>
+</view>
+<view class="guess-you-like" style="margin-top: 450rpx;">
+  <view class="welfare-selection-head flex-center">
+    <view>猜你喜欢</view>
+  </view>
+  <view class="guess-you-like-content flex">
+    <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
+      <navigator class="guess-you-like-item" data-id="{{item.goods_id}}" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+        <view class="guess-you-like-item-img" style="background: #fff;">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+        <view class="guess-you-like-item-name">
+          {{item.goods_name}}
+        </view>
+        <view class="guess-you-like-item-price flex">
+          <view class="guess-you-like-item-new-price">
+            ￥
+            <text>{{item.goods_price}}</text>
+          </view>
+          <view class="shop-price-word">{{item.source}}</view>
+          <view class="guess-you-like-item-old-price">
+            ￥{{item.goods_marketprice}}
+          </view>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>

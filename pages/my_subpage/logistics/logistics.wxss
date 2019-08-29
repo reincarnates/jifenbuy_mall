@@ -9,8 +9,8 @@
   font-size: 24rpx;
   color: #333;
   text-align: center;
-  padding: 0 50rpx;
-  margin: 20rpx 0;
+  margin: 20rpx 50rpx;
+  width: 90%;
 }
 
 .goods-view ,

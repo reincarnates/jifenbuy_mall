@@ -1,16 +1,19 @@
 <view class="confirm-wrapper">
   <view class="confirm-address-wrapper" bindtap="checkAddress">
-    <view class="confirm-address-top flex">
-      <view class="confirm-address-top-img">
-        <image src="../../images/address_order.png"></image>
+    <view wx:if="{{address.length != 0}}">
+      <view class="confirm-address-top flex">
+        <view class="confirm-address-top-img">
+          <image src="../../images/address_order.png"></image>
+        </view>
+        <view class="confirm-address-top-name">{{address.true_name}}</view>
+        <view class="confirm-address-top-phone">{{address.mob_phone}}</view>
       </view>
-      <view class="confirm-address-top-name">{{address.true_name}}</view>
-      <view class="confirm-address-top-phone">{{address.mob_phone}}</view>
+      <view class="confirm-address-bottom">
+        地址：{{address.area_info}}
+        <text style="margin-left: 6rpx;">{{address.address}}</text>
+      </view>
     </view>
-    <view class="confirm-address-bottom">
-      地址：{{address.area_info}}
-      <text style="margin-left: 6rpx;">{{address.address}}</text>
-    </view>
+    <view class="not-address" wx:else>请新建地址</view>
   </view>
   <block wx:for="{{orderGoods}}" wx:key="{{index}}">
     <view class="confirm-goods-wrapper" wx:if="{{item.list.length > 1}}">
@@ -198,7 +201,7 @@
       <text>合计：</text>
       <text style="font-size: 30rpx; color: #fe6601;">￥{{price_num}}</text>
     </view>
-    <view class="submit-order-btn">提交订单</view>
+    <view class="submit-order-btn" bindtap="submitOrder">提交订单</view>
   </view>
 </view>
 

@@ -12,7 +12,7 @@
     <image src="/images/shipped_made.png" mode="aspectFit"></image>
     <view class="flex-col flex-x-center">
       <text style="font-size:26rpx;">{{orderModel.express.e_name}}</text>
-      <view class="flex-x-center" style="font-size:24rpx;margin-top:12rpx;">物流单号: {{orderModel.express.shipping_code}}<image class="copyimage" src="/images/icon_copy.png" bindtap="copyLogisticsSN"/> </view>
+      <view class="flex-x-center" style="font-size:24rpx;margin-top:10rpx;">物流单号: {{orderModel.express.shipping_code}}<image class="copyimage" src="/images/icon_copy.png" bindtap="copyLogisticsSN"/> </view>
     </view>
   </view>
   <block wx:for="{{orderModel.shipping_info}}" wx:for-item="shipping_info" wx:key="unique" wx:for-index="index">

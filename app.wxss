@@ -1,4 +1,4 @@
-@import './component/region-picker/region-picker.wxss'
+@import './component/region-picker/region-picker.wxss';
 
 page{
   width: 100%;

@@ -19,6 +19,7 @@ Page({
     cartSku: '', //单个商品sku
     quantity: 0, //单个商品的数量
     cartId: '', //购物车进来商品的id
+    remarks: [], //订单备注
   },
 
   /**
@@ -31,8 +32,10 @@ Page({
       url: 'http://tapi.fulibuy.cn/Member/getAddressList',
       method: 'POST',
       data: {
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
-        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         list_rows: 10,
         page: 1
       },
@@ -45,6 +48,10 @@ Page({
               _this.setData({
                 address: item,
                 address_id: item.address_id
+              });
+            }else{
+              _this.setData({
+                address: res.data[0],
               });
             }
           });
@@ -109,8 +116,10 @@ Page({
       url: 'http://tapi.fulibuy.cn/buy/confirmOrder',
       method: 'POST',
       data: {
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
-        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         type: 'buynow',
         goods_sku: _this.data.goodsSku,
         cart_id: _this.data.cartSku,
@@ -136,8 +145,10 @@ Page({
       url: 'http://tapi.fulibuy.cn/buy/confirmOrder',
       method: 'POST',
       data: {
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
-        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         cart_id: _this.data.cartId,
         address_id: _this.data.address_id
       },
@@ -166,6 +177,20 @@ Page({
   //禁止页面滚动
   move: function() {},
 
+  //提交订单
+  submitOrder: function() {
+    var _this = this;
+    if (_this.data.status == 1) {
+      wx.redirectTo({
+        url: `/pages/fuliCashier/fuliCashier?goodsSku=${_this.data.goodsSku}&cartId=${_this.data.cartSku}&quantity=${_this.data.quantity}&addressId=${_this.data.address_id}&remarks=${_this.data.remarks}&status=1&total=${_this.data.price_num}`
+      });
+    }else{
+      wx.redirectTo({
+        url: `/pages/fuliCashier/fuliCashier?cartId=${_this.data.cartId}&addressId=${_this.data.address_id}&remarks=${_this.data.remarks}&total=${_this.data.price_num}`
+      });
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -178,18 +203,39 @@ Page({
    */
   onShow: function () {
     var _this = this;
-    _this.data.address2.forEach(item => {
-      if (item.address_id == _this.data.address_id) {
-        _this.setData({
-          address: item,
-          address_id: item.address_id
-        });
-        if(_this.data.status != 1) {
-          _this.getCartOrder();
-        }else{
-          _this.getSignCartOrder();
+    //获取用户地址
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Member/getAddressList',
+      method: 'POST',
+      data: {
+        // user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        // device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        list_rows: 10,
+        page: 1
+      },
+      success(res) {
+        if (res.data.code) {
+          var res = res.data.data;
+          _this.setData({
+            address2: res.data
+          });
+          _this.data.address2.forEach(item => {
+            if (item.address_id == _this.data.address_id) {
+              _this.setData({
+                address: item,
+                address_id: item.address_id
+              });
+              if (_this.data.status != 1) {
+                _this.getCartOrder();
+              } else {
+                _this.getSignCartOrder();
+              }
+            }
+          });
         }
-      }
+      },
     });
   },
 

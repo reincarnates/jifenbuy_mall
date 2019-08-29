@@ -29,7 +29,7 @@
   </view>
 </view>
 
-<view class="user-container" wx:if="{{ isShow }}">
+<view class="user-container" wx:if="{{isShow}}">
   <view class="user-order-wrapper">
     <view class="user-order-head">
       <view class="user-order-head-left">

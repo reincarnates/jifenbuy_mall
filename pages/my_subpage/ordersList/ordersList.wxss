@@ -2,7 +2,7 @@
 
 .orderList-view {
   background-color: #f5f5f5;
-  margin-top: 150rpx;
+
   overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
   color: #333;
   font-size: 26rpx;
   margin: 10rpx 30rpx;
-  width: 100%;
+  /* width: 80%; */
   border-radius: 68rpx;
   border: 1rpx #ef9901 solid;
 }
@@ -31,10 +31,11 @@
   margin-left: 30rpx;
 }
 
-.search_view .searchBar text {
+.search_view .searchBar input {
   margin-left: 10rpx;
   line-height: 58rpx;
   font-size: 24rpx;
+  width: 80%;
 }
 
 .selectBar {

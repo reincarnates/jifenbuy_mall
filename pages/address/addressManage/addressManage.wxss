@@ -88,3 +88,24 @@
   border-radius: 33rpx;
   margin: 0 auto;
 }
+
+.no-address{
+  width: 100%;
+  flex-direction: column;
+}
+
+.no-address-img{
+  width: 463rpx;
+  height: 271rpx;
+}
+
+.no-address-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.no-address-word{
+  color: #666;
+  font-size: 24rpx;
+  margin-top: 50rpx;
+}

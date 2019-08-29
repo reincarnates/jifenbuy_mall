@@ -551,7 +551,8 @@ Page({
         data: {
           code: code,
           encryptedData: msg.detail.encryptedData,
-          iv: msg.detail.iv
+          iv: msg.detail.iv,
+          client: 'wx'
         },
         success(res) {
           if (res.data.data.wrong == "code") {

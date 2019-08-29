@@ -83,6 +83,11 @@ const applyWattingRefund = (params) => {
 const confirmOrders = (params) => {
   wxRequest(params, `${apiURL}/member/SaveCompleteOrder`);
 }
+
+// 获取订单评价
+const orderEvaluetion = (params) => {
+  wxRequest(params, `${apiURL}/order/getOrderEvaluateGoods`);
+}
  
 module.exports = {
   nav,
@@ -92,5 +97,6 @@ module.exports = {
   ordersCancelReason,
   preSaleCancel,
   applyWattingRefund,
-  confirmOrders
+  confirmOrders,
+  orderEvaluetion
 };

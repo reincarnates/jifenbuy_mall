@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "福利商品收银台",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "paySix": "../../component/payment/payment"
+  }
+}
