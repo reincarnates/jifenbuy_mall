@@ -13,14 +13,14 @@
       <text class="home-right-word">消息</text>
     </view>
   </view>
-  <view class="home-head-wrapper" wx:if="{{isLogin}}">
+  <view class="home-head-wrapper flex-sw" wx:if="{{isLogin}}">
     <view class="home-head-info">
       <view class="home-head-avatar">
-        <image src="../../../images/avatar.png"></image>
+        <image src="{{user.member_avatar}}"></image>
       </view>
       <view class="home-head-user-info">
-        <view class="home-head-user-name">迪丽热巴</view>
-        <view class="home-head-user-company-name">北京雷云智链科技有限公司</view>
+        <view class="home-head-user-name">{{user.member_truename}}</view>
+        <view class="home-head-user-company-name">{{user.company_name}}</view>
       </view>
     </view>
     <view class="home-head-user-setting">
@@ -30,7 +30,7 @@
       </view> -->
       <view class="home-head-user-setting-item">
         <view class="setting-name">福利余额</view>
-        <view class="setting-number">0</view>
+        <view class="setting-number">{{user.balance_detail.total_available}}</view>
       </view>
       <view class="home-head-user-setting-item">
         <view class="setting-name">优惠券</view>

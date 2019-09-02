@@ -75,10 +75,10 @@ page{
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: right;
-  -webkit-justify-content: right;
-      -ms-flex-pack: right;
-          justify-content: right;
+  -webkit-box-pack: flex-end;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: flex-end;
+          justify-content: flex-end;
 }
 
 .flex-grow-0 {

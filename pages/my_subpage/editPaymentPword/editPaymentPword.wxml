@@ -1,0 +1,37 @@
+<view class="edit-pay-word-wrapper">
+  <view class="edit-pay-word-tab flex">
+    <view class="edit-pay-word-tab-item {{ current == 1 ? 'edit-pay-word-tab-cur' : '' }}" data-index="1">身份验证</view>
+    <view class="edit-pay-word-tab-item {{ current == 2 ? 'edit-pay-word-tab-cur' : '' }}" data-index="2">设置支付密码</view>
+  </view>
+  <!-- 身份验证 -->
+  <view wx:if="{{isOne}}">
+    <view class="edit-pay-word-info">
+      <view class="edit-pay-word-phone">{{userPhone}}</view>
+      <view class="edit-pay-word-code flex-y-center">
+        <view class="edit-pay-word-code-input">
+          <input type="number" placeholder="请输入验证码" maxlength="6" placeholder-style="color: #333;" bindinput="getCodeVal"></input>
+        </view>
+        <view class="edit-pay-word-send-code" bindtap="getRuleCode">
+          <view wx:if="{{isGetCode}}">{{coderStr}}</view>
+          <view wx:if="{{isCode}}">已发送({{currentTime}}s)</view>
+        </view>
+      </view>
+      <view class="edit-pay-word-tips">短信验证码2分钟内输入有效，下发可能有延迟，请耐心等待</view>
+    </view>
+    <view class="edit-pay-word-btn-wrapper">
+      <view class="edit-pay-word-btn" bindtap="editNext">下一步</view>
+    </view>
+  </view>
+  <!-- 设置支付密码 -->
+  <view class="setpayment-password" wx:if="{{isTwo}}">
+    <view class="set-new-password">
+      <input placeholder="设置新密码" type="number" maxlength="6" placeholder-style="color: #333;" bindinput="getNewPass" password="true"></input>
+    </view>
+    <view class="confirm-new-password">
+      <input placeholder="确认新密码" type="number" maxlength="6" placeholder-style="color: #333;" bindinput="confirmPass" password="true"></input>
+    </view>
+    <view class="edit-pay-word-btn-wrapper">
+      <view class="edit-pay-word-btn" bindtap="sureEdit">确定修改</view>
+    </view>
+  </view>
+</view>

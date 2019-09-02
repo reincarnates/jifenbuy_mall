@@ -97,6 +97,7 @@ Page({
         'keyword' : self.data.keyword,
       },
       success:(res) => {
+        console.log(res);
         var order_list = res.data.data.list ? res.data.data.list : [];
         if (order_list.length < 10) {
           canLoadMore = false;

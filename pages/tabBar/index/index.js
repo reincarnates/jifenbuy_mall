@@ -10,7 +10,8 @@ Page({
     floorArr: [], //楼层数组
     guessLikeArr: [], //推荐
     page: 1, //页数
-    isLogin: false
+    isLogin: false,
+    user: {}, //用户信息
   },
 
   //获取登陆状态
@@ -28,7 +29,7 @@ Page({
 
   onLoad: function () {
     var _this = this;
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     setTimeout(function () {
       //专题
       // wx.request({
@@ -114,6 +115,12 @@ Page({
       });
       wx.hideLoading();
     }, 1500);
+    var userInfor = wx.getStorageSync('userinfoModel');
+    if (userInfor != '' && userInfor != undefined) {
+      _this.setData({
+        user: userInfor
+      });
+    }
   },
 
   onReady: function () {

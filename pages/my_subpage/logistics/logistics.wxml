@@ -12,22 +12,22 @@
     <image src="/images/shipped_made.png" mode="aspectFit"></image>
     <view class="flex-col flex-x-center">
       <text style="font-size:26rpx;">{{orderModel.express.e_name}}</text>
-      <view class="flex-x-center" style="font-size:24rpx;margin-top:10rpx;">物流单号: {{orderModel.express.shipping_code}}<image class="copyimage" src="/images/icon_copy.png" bindtap="copyLogisticsSN"/> </view>
+      <view class="flex-x-center" style="font-size:24rpx; margin-top:10rpx;">物流单号: {{orderModel.express.shipping_code}}<image class="copyimage" src="/images/icon_copy.png" bindtap="copyLogisticsSN"/> </view>
     </view>
   </view>
   <block wx:for="{{orderModel.shipping_info}}" wx:for-item="shipping_info" wx:key="unique" wx:for-index="index">
     <view class="shipping-cell flex-row">
       <view class="date flex-grow-0 flex-col">
-        <text style="font-size:26rpx;color:#333;text-align: center;">{{shipping_info.day}}</text>
-        <text style="font-size:22rpx;color:#666;text-align: center;">{{shipping_info.time}}</text>
+        <text style="font-size:26rpx; color:#333; text-align:center;">{{shipping_info.day}}</text>
+        <text style="font-size:22rpx; color:#666; text-align:center;">{{shipping_info.time}}</text>
       </view>
       <view class="point flex-grow-0 flex-x-center">
-        <view style="background:{{shipping_info.title == '已签收' ? '#ef6601' : '#999'}}; width:20rpx; height:20rpx; border-radius:50%;margin:10rpx 12rpx;" wx:if="{{shipping_info.title != '已签收'}}"></view>
-        <image src="/images/icon_logisics_signin.png" style="width:40rpx;z-index:10; height:40rpx;" wx:if="{{shipping_info.title == '已签收'}}"></image>
+        <view style="background:{{shipping_info.title == '已签收' ? '#ef6601' : '#999'}}; width:20rpx; height:20rpx; border-radius:50%; margin:10rpx 12rpx;" wx:if="{{shipping_info.title != '已签收'}}"></view>
+        <image src="/images/icon_logisics_signin.png" style="width:40rpx; z-index:10; height:40rpx;" wx:if="{{shipping_info.title == '已签收'}}"></image>
       </view>
       <view class="address flex-col flex-grow-1">
-        <text style="font-size:26rpx;color:#000;">{{shipping_info.title}}</text>
-        <text style="font-size:22rpx;color:#333;margin-top:12rpx;">{{shipping_info.AcceptStation}}</text>
+        <text style="font-size:26rpx; color:#000;">{{shipping_info.title}}</text>
+        <text style="font-size:22rpx; color:#333; margin-top:12rpx;">{{shipping_info.AcceptStation}}</text>
       </view>
     </view>
   </block>

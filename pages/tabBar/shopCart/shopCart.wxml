@@ -134,7 +134,7 @@
     </view>
   </view>
 
-  <view wx:else class="flex-center flex-col" style="height: 100%; margin-top: 320rpx;">
+  <view wx:if="{{cardTeams.length == 0 ? true : false}}" class="flex-center flex-col" style="height: 100%; margin-top: 320rpx;">
     <image class="not-cart-img" src="../../../images/not_cart_bg.png"></image>
     <view class="not-cart-word">购物车空了，快去添加宝贝吧！</view>
   </view>

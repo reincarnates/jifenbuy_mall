@@ -1,0 +1,34 @@
+<view class="feedback-wrapper">
+  <view class="feedback-check-type flex-sw" bindtap="checkType">
+    <view class="feedback-check-type-word">{{feedBackStr}}</view>
+    <view class="feedback-check-type-img flex-center">
+      <image src="../../images/check_banck_type.png"></image>
+    </view>
+  </view>
+  <view class="feedback-check-type">
+    <input type="number" placeholder-style="color: #999;" placeholder="请填写手机号，方便我们于您联系" maxlength="11" bindinput="getPhone"></input>
+  </view>
+  <view class="feedback-check-remacks">
+    <textarea placeholder="对我们的小程序还有什么建议？" placeholder-style="color: #999;" maxlength="500" bindinput="getAdvise"></textarea>
+    <view class="feedback-number">1/500</view>
+  </view>
+  <view class="feedback-upload-img">
+    <view class="feedback-upload-img-word">最多上传4张照片</view>
+    <uploadImages bindmyevent="myEventListener" bindmyevent2="myEventListener2" count='{{countPic}}' showUrl="{{showImgUrl}}" uploadUrl="{{uploadImgUrl}}" id="upload"></uploadImages>
+  </view>
+  
+  <view class="feedback-submit-wrapper">
+    <view class="feedback-submit" bindtap="submitFeedBack">提交</view>
+  </view>
+
+  <view class="feedback-mask-bg" wx:if="{{isShow}}" bindtap="closeFeedBack"></view>
+  <view class="feedback-mask" style="bottom: {{maskPos}};">
+    <view class="feedback-mask-item" bindtap="selectType" data-val="goods" data-type="商品相关">商品相关</view>
+    <view class="feedback-mask-item" bindtap="selectType" data-val="logistics" data-type="物流状况">物流状况</view>
+    <view class="feedback-mask-item" bindtap="selectType" data-val="member" data-type="客户服务">客户服务</view>
+    <!-- <view class="feedback-mask-item" bindtap="selectType" data-val="function" data-type="优惠活动">优惠活动</view> -->
+    <view class="feedback-mask-item" bindtap="selectType" data-val="function" data-type="功能异常">功能异常</view>
+    <view class="feedback-mask-item" bindtap="selectType" data-val="product" data-type="产品建议">产品建议</view>
+    <view class="feedback-mask-item" bindtap="selectType" data-val="other" data-type="其他">其他</view>
+  </view>
+</view>

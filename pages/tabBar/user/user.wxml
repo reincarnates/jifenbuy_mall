@@ -91,54 +91,28 @@
       <view class="recommend-goods-head-ver"></view>
       <view class="recommend-goods-head-word">为你推荐</view>
     </view>
-    <view class="recommend-goods-content">
-      <view class="recommend-goods-item">
-        <view class="recommend-goods-item-img">
-          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
-        </view>
-        <view class="recommend-goods-item-word">
-          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
-        </view>
-        <view class="recommend-goods-item-price">
-          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
-          <view class="recommend-goods-item-old-price">￥3614.32</view>
-        </view>
-      </view>
-      <view class="recommend-goods-item">
-        <view class="recommend-goods-item-img">
-          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
-        </view>
-        <view class="recommend-goods-item-word">
-          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
-        </view>
-        <view class="recommend-goods-item-price">
-          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
-          <view class="recommend-goods-item-old-price">￥3614.32</view>
-        </view>
-      </view>
-      <view class="recommend-goods-item">
-        <view class="recommend-goods-item-img">
-          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
-        </view>
-        <view class="recommend-goods-item-word">
-          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
-        </view>
-        <view class="recommend-goods-item-price">
-          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
-          <view class="recommend-goods-item-old-price">￥3614.32</view>
-        </view>
-      </view>
-      <view class="recommend-goods-item">
-        <view class="recommend-goods-item-img">
-          <image src="https://reincarnation.oss-cn-beijing.aliyuncs.com/images/recommend_goods_img.png"></image>
-        </view>
-        <view class="recommend-goods-item-word">
-          花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁花印（日本原装进口）士透亮 赋活洁面乳130g（深层洁
-        </view>
-        <view class="recommend-goods-item-price">
-          <view class="recommend-goods-item-new-price">￥<text>3644.32</text></view>
-          <view class="recommend-goods-item-old-price">￥3614.32</view>
-        </view>
+    <view class="guess-you-like">
+      <view class="guess-you-like-content flex">
+        <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
+          <navigator  class="guess-you-like-item2" data-id="{{item.goods_id}}" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+            <view class="guess-you-like-item-img">
+              <image src="{{item.goods_image}}"></image>
+            </view>
+            <view class="guess-you-like-item-name">
+              {{item.goods_name}}
+            </view>
+            <view class="guess-you-like-item-price flex">
+              <view class="guess-you-like-item-new-price">
+                ￥
+                <text>{{item.goods_price}}</text>
+              </view>
+              <view class="shop-price-word">{{item.source}}</view>
+              <view class="guess-you-like-item-old-price">
+                ￥{{item.goods_marketprice}}
+              </view>
+            </view>
+          </navigator>
+        </block>
       </view>
     </view>
   </view>

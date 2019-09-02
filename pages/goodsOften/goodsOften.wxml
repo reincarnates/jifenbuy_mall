@@ -1,29 +1,28 @@
 <view class="goodsoften-wrapper">
-  <view>
+  <view style="overflow: hidden;">
     <block wx:for="{{often}}" wx:key="index">
-      <navigator url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none" class="mytracks-item  {{element.isTouchMove ? 'touch-move-active' : ''}}">
+      <view class="mytracks-item2  {{item.isTouchMove ? 'touch-move-active2' : ''}}">
         <!-- 商品列表 -->
-        <view class=' row btm-box' bindtap='goDetails' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd">
-          <view class="mytracks-item-img">
-            <image src="{{item.goods_image}}"></image>
-          </view>
-          <view class="mytracks-item-word" style="height: 240rpx;">
-            <view class="mytracks-item-word-top text-more-2">{{item.goods_name}}</view>
-            <view class="shop-num">购买{{item.num}}次</view>
-            <view class="mytracks-item-word-bottom flex-sw">
-              <view class="mytracks-item-word-price">￥{{item.goods_price}}</view>
-              <view class="mytracks-item-word-btn">立即购买</view>
+        <view class=' row btm-box' bindtap='goDetails' bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-index="{{index}}">
+          <view class="flex" data-sku="{{item.goods_sku}}" bindtap="locationDeatil">
+            <view class="mytracks-item-img">
+              <image src="{{item.goods_image}}"></image>
+            </view>
+            <view class="mytracks-item-word" style="height: 240rpx;">
+              <view class="mytracks-item-word-top text-more-2">{{item.goods_name}}</view>
+              <view class="shop-num">购买{{item.num}}次</view>
+              <view class="mytracks-item-word-bottom flex-sw">
+                <view class="mytracks-item-word-price">￥{{item.goods_price}}</view>
+                <view class="mytracks-item-word-btn">立即购买</view>
+              </view>
             </view>
           </view>
           <!--删除  -->
-          <view class="collection" data-key="{{key}}" data-index='{{index}}'>
-            移入收藏
-          </view>
-          <view class="remove" catchtap="delItem" data-key="{{key}}" data-index='{{index}}' bindtap="removeGoods">
+          <view class="remove2" data-index='{{index}}' data-sku="{{item.goods_sku}}" bindtap="removeGoods">
             删除
           </view>
         </view>
-      </navigator>
+      </view>
     </block>
   </view>
 </view>

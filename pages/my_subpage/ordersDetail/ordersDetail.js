@@ -72,7 +72,7 @@ Page({
       });
     } else if (title == '查看物流') {
       wx.navigateTo({
-        url: '/pages/my_subpage/logistics/logistics?order_sn=' + orderModel.order_sn,
+        url: '/pages/my_subpage/logistics/logistics?order_sn=' + this.data.orderModel.order_sn,
       })
     }
   },
@@ -126,4 +126,8 @@ Page({
     })
   },
 
+  // 申请售后
+  tapAftersaleButton: function() {
+
+  }
 })

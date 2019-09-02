@@ -197,3 +197,17 @@
   overflow: hidden;
 }
 
+.after-sale-view {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10rpx;
+}
+
+.after-sale-view .applyfor-button {
+  width: 129rpx;
+  height: 43rpx;
+  border: 1rpx solid #ef6601;
+  color: #ef6601;
+  font-size: 22rpx;
+  border-radius: 21.5rpx;
+}

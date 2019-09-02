@@ -37,8 +37,8 @@
         </view>
          <!-- 多个商品 只展示图片 -->
         <view class="multi_goodsview flex-row" wx:if="{{order.order_goods.length > 1}}">
-          <block wx:for="{{order.order_goods}}" wx:key="unique" wx:for-item="goods" wx:if="{{index<4}}">
-            <image class="flex-grow-0" src="goods.goods_image"></image>
+          <block wx:for="{{[1,2,3,4]}}" wx:key="unique" wx:if="{{index<4}}">
+            <image class="flex-grow-0" src="{{order.order_goods[index].goods_image}}"></image>
           </block>
         </view>
         <view class="order_num_price flex-grow-0">共 {{order.order_goods.length}} 件宝贝 合计: <text style="font-size: 18rpx;">¥</text><text style="font-size: 28rpx;margin-left:4rpx;">{{order.order_amount}}</text></view>

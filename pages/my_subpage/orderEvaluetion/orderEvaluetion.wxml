@@ -1,13 +1,38 @@
- 
-<block wx:for="{{evaluateModel.orderGoods}}" wx:for-item="model" wx:key="unique" wx:for-index="index">
-  <view class="evaluate-view flex-col">
-    <view class="top-view flex-row flex-y-center">
-      <image src="{{model.goods_image}}" style="width:100rpx; height:100rpx; margin-right:12rpx;" mode="aspectFit"></image>
-      <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique">
-        <image src="/images/icon_star_whole.png" style="width:44rpx; height:44rpx; margin-left:16rpx;"></image>
-      </block>
-      <text class="flex-grow-1" style="font-size:26rpx;text-align:right;color:#ef6601;">一般</text>
+<view class="container">
+  <block wx:for="{{evaluateModel.orderGoods}}" wx:for-item="model" wx:key="unique" wx:for-index="index">
+    <view class="evaluate-view flex-col">
+      <view class="top-view flex-row flex-y-center">
+        <image src="{{model.goods_image}}" style="width:100rpx; height:100rpx; margin-right:12rpx;" mode="aspectFit"></image>
+        <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique" wx:for-index="idx">
+          <image src="{{idx <= goods_star_index ? '/images/icon_star_whole.png' : '/images/icon_star_none.png' }}" style="width:44rpx; height:44rpx; margin-left:16rpx;" bindtap="tapStar" data-index="{{idx}}"></image>
+        </block>
+        <text class="flex-grow-1" style="font-size:26rpx; text-align:right; color:#FE9901;">{{level_titles[goods_star_index]}}</text>
+      </view>
+      <textarea placeholder="写下您的评论分享给大家吧~"></textarea>
+      <view class="pic-container">
+        <block wx:for="{{[1,2,3,4]}}" wx:key="unique" wx:for-index="imageIndex">
+          <view class="pics-view">
+            <!-- /images/icon_add_photo.png -->
+            <image src="{{imageIndex == images_paths.length ? '/images/icon_add_photo.png' : images_paths[imageIndex]}}" style="background: #fff; width:150rpx; height:150rpx;" bindtap="tapImage"></image>
+            <image class="close-button" src="/images/icon_pic_delete.png" style="width:48rpx; height:48rpx;" wx:if="{{images_paths[imageIndex]}}" bindtap="deletePic" data-index="{{imageIndex}}"></image>
+          </view>
+        </block>
+      </view>
     </view>
-     <textarea placeholder="写下您的评论分享给大家吧~"></textarea>
+  </block>
+
+  <view class="logistics-star-view-container flex-col">
+    <block wx:for="{{items}}" wx:for-item="item" wx:key="unique" wx:for-index="index">
+      <view class="flex-row flex-y-center" style="margin-bottom:36rpx;">
+        <text style="margin-right:12rpx;">{{item}}</text>
+        <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique" wx:for-index="idx">
+          <image src="{{idx <= logistics_star_indexs[index] ? '/images/icon_star_whole.png' : '/images/icon_star_none.png'}}" style="width:44rpx; height:44rpx; margin-left:16rpx;" bindtap="tapLogisticsStar" data-itemIndex="{{index}}" data-starIndex="{{idx}}"></image>
+        </block>
+        <text class="flex-grow-1" style="font-size:26rpx; text-align:right; color:#FE9901;">{{level_titles[logistics_star_indexs[index]]}}</text>
+      </view>
+    </block>
   </view>
-</block>
+</view>
+<view class="bottom-wrapper">
+  <view class="bottom-button" bindtap="submit">提交</view>
+</view>

@@ -125,7 +125,6 @@
 }
 
 .orders_cell .function_view {
- 
   margin: 0rpx 18rpx;
   border-top: 1rpx solid #dddddd;
   align-items: center;

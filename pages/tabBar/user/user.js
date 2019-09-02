@@ -15,7 +15,7 @@ Page({
       },
       {
         url: '../../../images/integral.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/notOpen/notOpen',
         personalName: '积分中心'
       },
       {
@@ -25,7 +25,7 @@ Page({
       },
       {
         url: '../../../images/purchase.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/goodsOften/goodsOften',
         personalName: '常购商品'
       },
       {
@@ -35,17 +35,17 @@ Page({
       },
       {
         url: '../../../images/invoice.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/notOpen/notOpen',
         personalName: '我的发票'
       },
       {
         url: '../../../images/feed_back.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/feedBack/feedBack',
         personalName: '意见反馈'
       },
       {
         url: '../../../images/service_help.png',
-        toUrl: '/pages/de/de',
+        toUrl: '/pages/serviceHelp/serviceHelp',
         personalName: '服务与帮助'
       }
     ],
@@ -54,6 +54,7 @@ Page({
     userInfo: {}, //用户信息
     code: '', //临时凭证
     orderNum: {}, //订单数量
+    guessLikeArr: [], //推荐
   },
 
   //获取临时凭证
@@ -114,7 +115,7 @@ Page({
               duration: 2000
             });
           } else {
-            if (res.data.data.is_visitor == false) {
+            if (res.data.data.is_visitor == false && res.data.data.is_login == true) {
               wx.showToast({
                 title: '登陆成功',
                 icon: 'none',
@@ -149,7 +150,33 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    
+    //推荐
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/index/guessLike',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        page: 1,
+        per_page: '20'
+      },
+      success(res) {
+        if (res.data.code) {
+          res.data.data.list.forEach(item => {
+            if (item.source == '') {
+              item.source = '市场价';
+            } else if (item.source == 'jd') {
+              item.source = '京东价';
+            } else if (item.source == 'wyyx') {
+              item.source = '严选价';
+            }
+          });
+          _this.setData({
+            guessLikeArr: res.data.data.list
+          });
+        }
+      }
+    });
   },
 
   /**
@@ -190,6 +217,7 @@ Page({
           _this.setData({
             userInfo: res.data.data
           });
+          wx.setStorageSync('userinfoModel', _this.data.userInfo);
         }
       }
     })
@@ -245,7 +273,7 @@ Page({
   // 设置
   setting: function () {
     wx.navigateTo({
-      url: '/pages/my_subpage/setting/setting',
+      url: '/pages/my_subpage/setting/setting?password=0',
     })
   },
 

@@ -1,5 +1,9 @@
- 
-<view class="orderDetail_view">
+<view class="container">
+  <view class="textContainer">
+    <text class="textStyle">{{text}}</text>
+  </view>
+</view>
+ <view class="orderDetail_view">
   <view class="orderState_view flex-row">
     <view class="orderState_view_left flex-col flex-grow-1 flex-x-center">
       <view class="flex-row">
@@ -44,15 +48,20 @@
       <image src="/images/order_go.png" style="width:9rpx;height:16rpx;"></image>
     </view>
     <block wx:for="{{orderModel.goods_info}}" wx:key="unique" wx:for-item="commodity">
-      <view class="commodity_item_view flex-row" style="padding-top:{{index == 0 ? '12rpx' : '37rpx'}}; padding-bottom: 41rpx;border-bottom: {{index == orderModel.goods_info.length - 1 ? '0' : '1rpx'}} #ddd solid;">
-        <image class="flex-grow-0" src="{{commodity.goods_image}}" style="width:170rpx;height:170rpx;"></image>
-        <view class="commodity_item_center_view flex-col flex-grow-1"> 
-          <text class="text-more-2" style="font-size:22rpx;">{{commodity.goods_name}}</text>
-          <text style="font-size:24rpx;color:#ef6601;"><text style="font-size:18rpx;margin-right:3rpx">¥</text>{{commodity.goods_price}}</text>
+      <view class="commodity_item_view flex-col" style="padding-top:{{index == 0 ? '12rpx' : '37rpx'}}; padding-bottom: 41rpx;border-bottom: {{index == orderModel.goods_info.length - 1 ? '0' : '1rpx'}} #ddd solid;">
+        <view class="flex-row">
+          <image class="flex-grow-0" src="{{commodity.goods_image}}" style="width:170rpx;height:170rpx;"></image>
+          <view class="commodity_item_center_view flex-col flex-grow-1"> 
+            <text class="text-more-2" style="font-size:22rpx;">{{commodity.goods_name}}</text>
+            <text style="font-size:24rpx;color:#ef6601;"><text style="font-size:18rpx;margin-right:3rpx">¥</text>{{commodity.goods_price}}</text>
+          </view>
+          <view class="flex-col flex-grow-0">
+            <text style="font-size:24rpx;">数量</text>
+            <text style="font-size:20rpx;text-align:right;">x{{commodity.goods_num}}</text>
+          </view>
         </view>
-        <view class="flex-col flex-grow-0">
-          <text style="font-size:24rpx;">数量</text>
-          <text style="font-size:20rpx;text-align:right;">x{{commodity.goods_num}}</text>
+        <view class="after-sale-view" wx:if="{{orderModel.order_state == 40 && commodity.is_refund == 1}}"> 
+          <view class="applyfor-button flex-center" catchtap="tapAftersaleButton">申请售后</view>
         </view>
       </view>
     </block>

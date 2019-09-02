@@ -1,0 +1,10 @@
+<view class="interest-wrapper" style="height: {{height}}px">
+  <view class="flex" style="flex-wrap: wrap;">
+    <block wx:for="{{interest}}" wx:key="index">
+      <view class="interest-item {{item.choose == true ? 'interest-item-cur' : ''}}" data-curid="{{item.gc_id}}" data-index="{{index}}" bindtap="checkInterest">{{item.gc_name}}</view>
+    </block>
+  </view>
+</view>
+<view class="interest-btn-wrapper">
+  <view class="interest-btn" bindtap="confirmInterest">确认</view>
+</view>

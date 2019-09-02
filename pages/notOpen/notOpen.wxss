@@ -1,0 +1,9 @@
+.no-open-wrapper{
+  width: 100%;
+}
+
+.no-open-wrapper image{
+  width: 380rpx;
+  height: 449rpx;
+  margin-top: 167rpx;
+}

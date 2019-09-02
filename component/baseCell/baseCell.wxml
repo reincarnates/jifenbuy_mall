@@ -1,0 +1,6 @@
+<template name="baseCell">
+  <view class='content flex-row flex-y-center' bindtap="didSelectCell" data-title="{{title}}" style="border-bottom: {{hideSeparator ? '0' : '1rpx'}} solid #ddd">
+    <view class='left-title flex-grow-1'>{{title}}</view>
+    <image class='arrow' src='/images/order_go.png' mode='aspectFit' ></image>
+  </view>
+</template>

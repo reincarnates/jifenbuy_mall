@@ -1,0 +1,3 @@
+<view class="no-open-wrapper flex-x-center">
+  <image src="../../images/not_open.png"></image>
+</view>

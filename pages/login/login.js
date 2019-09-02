@@ -232,7 +232,7 @@ Page({
               duration: 2000
             });
           } else {
-            if (res.data.data.is_visitor == false) {
+            if (res.data.data.is_visitor == false && res.data.data.is_login == true) {
               wx.showToast({
                 title: '登陆成功',
                 icon: 'none',

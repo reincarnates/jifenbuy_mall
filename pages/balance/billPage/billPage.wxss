@@ -1,0 +1,83 @@
+.bill-wrapper{
+  width: 100%;
+}
+
+.bill-head{
+  width: 100%;
+  height: 90rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: #fff;
+  margin: 20rpx 0;
+}
+
+.bill-head-img{
+  width: 26rpx;
+  height: 21rpx;
+  margin-right: 10rpx;
+}
+
+.bill-head-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.bill-head-word{
+  color: #333;
+  font-size: 24rpx;
+}
+
+.bill-tab-wrapper{
+  width: 100%;
+  height: 98rpx;
+}
+
+.bill-tab{
+  width: 485rpx;
+  height: 97rpx;
+  margin: 0 auto;
+}
+
+.bill-tab-item{
+  line-height: 97rpx;
+  color: #333;
+  font-size: 28rpx;
+  border-bottom: 1px solid #fff;
+  box-sizing: border-box;
+}
+
+.bill-tab-item-cur{
+  color: #fe6601;
+  border-color: #fe6601;
+}
+
+.bill-tab-content{
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.bill-item-wrapper{
+  width: 100%;
+  height: 147rpx;
+  border-bottom: 1px solid #ddd;
+}
+
+.bill-item-left{
+  color: #999;
+  font-size: 22rpx;
+}
+
+.bill-item-left-title{
+  color: #333;
+  font-size: 28rpx;
+}
+
+.bill-item-right{
+  color: #222;
+  font-size: 30rpx;
+}

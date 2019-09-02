@@ -19,10 +19,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Goodsoften/goodsOftenList',
       method: 'POST',
       data: {
-        // user_token: wx.getStorageSync('user_token'),
-        // device_id: wx.getStorageSync('device_id'),
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
-        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         page: 1,
         per_page: 10
       },
@@ -32,6 +30,41 @@ Page({
             often: res.data.data.data
           });
           wx.hideLoading();
+        }
+      }
+    })
+  },
+
+  //跳转商品详情
+  locationDeatil: function(e) {
+    wx.navigateTo({
+      url: `/pages/goodsDetail/goodsDetail?id=${e.currentTarget.dataset.sku}`
+    });
+  },
+
+  //删除商品
+  removeGoods: function(e) {
+    var _this = this;
+    var index = e.currentTarget.dataset.index;
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Goodsoften/delGoodsOften',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        goods_sku: e.currentTarget.dataset.sku
+      },
+      success(res) {
+        if(res.data.code) {
+          _this.data.often.splice(index, 1);
+          _this.setData({
+            often: _this.data.often
+          });
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 2000
+          })
         }
       }
     })
@@ -68,8 +101,6 @@ Page({
   //滑动删除
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
-    // var index = e.currentTarget.dataset.checkid;
-    var key = e.currentTarget.dataset.key;
     //开始触摸时 重置所有删除
     this.data.often.forEach(function (v, i) {
       if (v.isTouchMove) //只操作为true的
@@ -99,7 +130,6 @@ Page({
           Y: touchMoveY
         });
 
-    var key = e.currentTarget.dataset.key;
     that.data.often.forEach(function (v, i) {
       v.isTouchMove = false
 
@@ -151,10 +181,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Goodsoften/goodsOftenList',
       method: 'POST',
       data: {
-        // user_token: wx.getStorageSync('user_token'),
-        // device_id: wx.getStorageSync('device_id'),
-        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
-        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         page: _this.data.page,
         per_page: '10'
       },
@@ -164,14 +192,15 @@ Page({
             _this.setData({
               often: _this.data.often.concat(res.data.data.data)
             });
-          }else{
+            wx.hideLoading();
+          } else {
+            wx.hideLoading();
             wx.showToast({
               title: '没有更多商品',
               icon: 'none',
               duration: 2000
             });
           }
-          wx.hideLoading();
         }
       }
     });

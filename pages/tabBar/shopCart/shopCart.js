@@ -562,7 +562,7 @@ Page({
               duration: 2000
             });
           } else {
-            if (res.data.data.is_visitor == false) {
+            if (res.data.data.is_visitor == false && res.data.data.is_login == true) {
               wx.showToast({
                 title: '登陆成功',
                 icon: 'none',
@@ -613,7 +613,7 @@ Page({
     var that = this;
     // var cardTeams;
     var arr = that.data.newArr;
-
+    wx.showLoading({ title: '加载中', mask: true });
     wx.request({
       url: 'http://tapi.fulibuy.cn/Cart/cart',
       method: 'POST',
@@ -627,59 +627,62 @@ Page({
         if (res.data.code) {
           //  console.log(res);
           // cardTeams = res.data.data.cart_list[0].list;
-          that.setData({
-            cardTeams: res.data.data.cart_list
-          });
-
-          var arr2 = [];
-          var arr3 = [];
-          var zlength = 0;
-          for (var i = 0; i < that.data.cardTeams.length; i++) {
-            that.data.cardTeams[i].lengthz = that.data.cardTeams[i].list.length;
-            that.data.cardTeams[i].lengths = 0;
-            arr3.push({
-              store_id: that.data.cardTeams[i].store_id,
-              store_name: that.data.cardTeams[i].store_name,
-              list: [],
-              lengths: that.data.cardTeams[i].lengths
+          wx.hideLoading();
+          if (res.data.data.cart_list != undefined) {
+            that.setData({
+              cardTeams: res.data.data.cart_list
             });
-            for (var j = 0; j < that.data.cardTeams[i].list.length; j++) {
-              if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
-                zlength++;
-                that.setData({
-                  zonglength: zlength
-                });
-              }
 
-              that.data.cardTeamsLen.push(that.data.cardTeams[i].list.length);
+            var arr2 = [];
+            var arr3 = [];
+            var zlength = 0;
+            for (var i = 0; i < that.data.cardTeams.length; i++) {
+              that.data.cardTeams[i].lengthz = that.data.cardTeams[i].list.length;
+              that.data.cardTeams[i].lengths = 0;
+              arr3.push({
+                store_id: that.data.cardTeams[i].store_id,
+                store_name: that.data.cardTeams[i].store_name,
+                list: [],
+                lengths: that.data.cardTeams[i].lengths
+              });
+              for (var j = 0; j < that.data.cardTeams[i].list.length; j++) {
+                if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
+                  zlength++;
+                  that.setData({
+                    zonglength: zlength
+                  });
+                }
 
-              if (that.data.checked_all) {
-                that.data.cardTeams[i].list[j].is_xuan = 1;
-                // that.data.cardTeams[i].shopSelect = true;
-                arr.push(that.data.cardTeams[i].list[j].cart_id);
-              } else {
-                that.data.cardTeams[i].list[j].is_xuan = 0;
-                // that.data.cardTeams[i].shopSelect = false;
-                arr = [];
-              }
+                that.data.cardTeamsLen.push(that.data.cardTeams[i].list.length);
 
-              var state = that.data.cardTeams[i].list[j].goods_state;
-              if (state != 1) {
-                arr2.push(that.data.cardTeams[i].list[j]);
-              }
+                if (that.data.checked_all) {
+                  that.data.cardTeams[i].list[j].is_xuan = 1;
+                  // that.data.cardTeams[i].shopSelect = true;
+                  arr.push(that.data.cardTeams[i].list[j].cart_id);
+                } else {
+                  that.data.cardTeams[i].list[j].is_xuan = 0;
+                  // that.data.cardTeams[i].shopSelect = false;
+                  arr = [];
+                }
 
-              if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
-                arr3[i].list.push(that.data.cardTeams[i].list[j]);
-                arr3[i].lengthz = arr3[i].list.length;
+                var state = that.data.cardTeams[i].list[j].goods_state;
+                if (state != 1) {
+                  arr2.push(that.data.cardTeams[i].list[j]);
+                }
+
+                if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
+                  arr3[i].list.push(that.data.cardTeams[i].list[j]);
+                  arr3[i].lengthz = arr3[i].list.length;
+                }
               }
             }
-          }
 
-          that.setData({
-            cardTeams: arr3,
-            newArr: arr,
-            invalidArr: arr2,
-          });
+            that.setData({
+              cardTeams: arr3,
+              newArr: arr,
+              invalidArr: arr2,
+            });
+          }
         }
       }
     });

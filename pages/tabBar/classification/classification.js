@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     var _this = this;
     wx.request({
       url: 'http://tapi.fulibuy.cn/Category/getCategoryParent',

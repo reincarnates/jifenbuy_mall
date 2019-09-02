@@ -58,6 +58,7 @@ Page({
     confirmSku: '', //跳转提交订单的sku
     checkSkuData: '', //跳转提交订单的goods_sku
     quantity: 1, //商品数量
+    goodsState: '', //商品是否下架
   },
 
   /**
@@ -68,7 +69,7 @@ Page({
     _this.setData({
       goodsSku: options.id
     });
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     setTimeout(function() {
       wx.request({
         url: 'http://tapi.fulibuy.cn/goods/goodsDetail',
@@ -83,7 +84,6 @@ Page({
         },
         success(res) {
           if (res.data.code) {
-            // console.log(res.data.data.comment);
             var a = [];
             var res = res.data.data;
             a.push(res.goods_image);
@@ -136,7 +136,8 @@ Page({
               bgs: bgs,
               imgs: imgs,
               imgs2: imgs2 != undefined ? imgs2 : imgs3,
-              confirmSku: res.sku
+              confirmSku: res.sku,
+              goodsState: res.goods_state
             });
 
             if (_this.data.goodsParams.length == 0) {
@@ -460,17 +461,24 @@ Page({
   plusShopCart: function() {
     var _this = this;
     var user = wx.getStorageSync('userInfo');
-    console.log(user);
-    if (user != undefined && user != '') {
-      if (_this.data.goodsParams.length != 0) {
-        _this.checkParams();
+    if(_this.data.goodsState == 1) {
+      if (user != undefined && user != '') {
+        if (_this.data.goodsParams.length != 0) {
+          _this.checkParams();
+        } else {
+          _this.plusShopCartReq(_this.data.skuData[0].goods_sku);
+        }
       } else {
-        _this.plusShopCartReq(_this.data.skuData[0].goods_sku);
+        wx.navigateTo({
+          url: '/pages/login/login'
+        });
       }
-    }else{
-      wx.navigateTo({
-        url: '/pages/login/login'
-      });
+    }else {
+      wx.showToast({
+        title: '该商品已被商家下架',
+        icon: 'none',
+        duration: 2000
+      })
     }
   },
 
@@ -512,18 +520,26 @@ Page({
   buyImdy: function () {
     var _this = this;
     var user = wx.getStorageSync('userInfo');
-    if (user != undefined && user != ''){
-      if (_this.data.goodsParams.length != 0) {
-        _this.checkParams();
-      }else{
+    if(_this.data.goodsState == 1) {
+      if (user != undefined && user != '') {
+        if (_this.data.goodsParams.length != 0) {
+          _this.checkParams();
+        } else {
+          wx.navigateTo({
+            url: `/pages/confirmOrder/confirmOrder?status=1&sku=${_this.data.confirmSku}&goodsSku=${_this.data.checkSkuData}&quantity=${_this.data.quantity}`
+          });
+        }
+      } else {
         wx.navigateTo({
-          url: `/pages/confirmOrder/confirmOrder?status=1&sku=${_this.data.confirmSku}&goodsSku=${_this.data.checkSkuData}&quantity=${_this.data.quantity}`
+          url: '/pages/login/login'
         });
       }
-    }else{
-      wx.navigateTo({
-        url: '/pages/login/login'
-      });
+    }else {
+      wx.showToast({
+        title: '该商品已被商家下架',
+        icon: 'none',
+        duration: 2000
+      })
     }
   },
 

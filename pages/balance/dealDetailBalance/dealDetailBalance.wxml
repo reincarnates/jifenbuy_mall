@@ -1,0 +1,42 @@
+<view class="deal-detail-wrapper" style="height: {{height}}px">
+  <view class="deal-detail-head flex-x-center">
+    <view class="deal-detail-head-top flex-center">
+      <view class="deal-detail-head-img">
+        <image></image>
+      </view>
+      <view class="deal-detail-head-word">{{data.goods_info[0].goods_name}}</view>
+    </view>
+    <view class="deal-detail-head-price">{{reducePrice}}</view>
+  </view>
+  <view class="deal-detail-info">
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">支付方式</view>
+      <view class="deal-detail-info-item-type">{{data.pay_type}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">收货地址</view>
+      <view class="deal-detail-info-item-type">{{data.reciver_info.area_info + data.reciver_info.address}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">交易时间</view>
+      <view class="deal-detail-info-item-type">{{data.pay_time}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">交易订单</view>
+      <view class="deal-detail-info-item-type">{{data.order_sn}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">说明</view>
+      <view class="deal-detail-info-item-type">{{payType}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">商品备注</view>
+      <view class="deal-detail-info-item-type2">{{payDesc}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="phone-service flex-center" bindtap="phoneService">
+  <image src="../../../images/order_service.png"></image>
+  <view style="margin-left: 18rpx;">联系客服</view>
+</view>

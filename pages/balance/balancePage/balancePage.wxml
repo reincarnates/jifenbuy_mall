@@ -1,0 +1,9 @@
+<view class="balance-wrapper" style="height: {{height}}px">
+  <view class="balance-icon flex-center">
+    <image src="../../../images/balance.png"></image>
+    <view style="margin-top: 15rpx;">余额</view>
+    <view class="balance-price">{{balance}}</view>
+    <view class="balance-payment">充值</view>
+    <view class="balance-bill" bindtap="locationBill">账单</view>
+  </view>
+</view>

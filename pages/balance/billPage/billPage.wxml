@@ -1,0 +1,40 @@
+<view class="bill-wrapper">
+  <view class="bill-head">
+    <view class="flex-center" style="flex-direction: column;">
+      <view class="bill-head-img flex-center">
+        <image src="../../../images/screen_icon.png"></image>
+      </view>
+      <view class="bill-head-word">筛选</view>
+    </view>
+  </view>
+  <view style="min-height: {{height - 65}}px; background: #fff;">
+    <view class="bill-tab-wrapper">
+      <view class="bill-tab flex-sw">
+        <view class="bill-tab-item {{current == 1 ? 'bill-tab-item-cur' : ''}}" data-index="1" bindtap="tabBill">余额明细</view>
+        <view class="bill-tab-item {{current == 2 ? 'bill-tab-item-cur' : ''}}" data-index="2" bindtap="tabBill">充值明细</view>
+      </view>
+    </view>
+    <view class="bill-tab-content" wx:if="{{current == 1}}">
+      <block wx:for="{{bill}}" wx:key="index">
+        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-price="{{item.balance_sum}}" bindtap="dealDetail">
+          <view class="bill-item-left">
+            <view class="bill-item-left-title">{{item.pay_type}}</view>
+            <view style="margin-top: 12rpx;">{{item.create_time}}</view>
+          </view>
+          <view class="bill-item-right">{{item.balance}}</view>
+        </view>
+      </block>
+    </view>
+    <view class="bill-tab-content" wx:if="{{current == 2}}">
+      <block wx:for="{{paymentBill}}" wx:key="index">
+        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}" bindtap="dealDetail">
+          <view class="bill-item-left">
+            <view class="bill-item-left-title">{{item.pay_type}}</view>
+            <view style="margin-top: 12rpx;">{{item.create_time}}</view>
+          </view>
+          <view class="bill-item-right">{{item.balance}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

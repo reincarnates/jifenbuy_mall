@@ -1,0 +1,18 @@
+ 
+  <view class="header-view flex-col flex-y-center">
+    <image src="{{images_paths.length > 0 ? images_paths[0] : userinfo.member_avatar}}" bindtap="changeAvatar"></image>
+    <view bindtap="changeAvatar">点击修改头像</view>
+  </view>
+
+  <view class="info-list">
+    <block wx:for="{{list_data}}" wx:for-item="item" wx:key="unique">
+      <view class="info-list-cell flex-row" style="border-bottom: {{index == (list_data.length-1) ? '0' : '1rpx'}} #ddd solid;">
+        <view class="title flex-grow-0">{{item}}</view>
+        <input class="flex-grow-1" disabled="{{index != 0}}" style="color:#333; margin-left:30rpx; padding-top:27rpx;" placeholder-style="color:#999;" value="{{index == 0 ? list_value[0] : ''}}" placeholder="{{list_value[index]}}"></input>
+      </view>
+    </block>
+  </view>
+ 
+ <view class="bottom-wrapper">
+  <view class="bottom-button" bindtap="saveinfo">保存</view>
+</view>

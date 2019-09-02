@@ -1,0 +1,11 @@
+<view class="feedback-upload-btn-wrapper flex">
+  <view class="feedback-upload-btn flex-center" bindtap='uploadDetailImage' wx:if="{{detailPics.length < 4}}">
+    <image src="../../images/uopload.png"></image>
+  </view>
+  <block wx:for="{{detailPics}}" wx:key="index">
+    <view class="feedback-upload-image">
+      <image src='{{item}}' bindlongpress="bindlongpressimg" data-id='{{index}}'></image>
+      <view class="delete-img" bindtap="delImg" data-index="{{index}}">×</view>
+    </view>
+  </block>
+</view>

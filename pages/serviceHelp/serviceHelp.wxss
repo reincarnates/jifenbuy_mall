@@ -1,0 +1,87 @@
+.service-wrapper{
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.service-head{
+  width: 100%;
+  height: 203rpx;
+  padding: 27rpx 0 0 22rpx;
+  box-sizing: border-box;
+}
+
+.service-head-img{
+  width: 79rpx;
+  height: 79rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-right: 12rpx;
+}
+
+.service-head-img image{
+  width: 64rpx;
+  height: 66rpx;
+}
+
+.service-head-content{
+  width: 334rpx;
+  height: 118rpx;
+  border-top-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  color: #000;
+  font-size: 26rpx;
+  background-color: #fff;
+  line-height: 45rpx;
+  padding: 15rpx 0 0 25rpx;
+  box-sizing: border-box;
+  margin-top: 14rpx;
+}
+
+.service-phone{
+  width: 100%;
+  height: 34rpx;
+  padding-left: 10rpx;
+  box-sizing: border-box;
+}
+
+.service-phone-ver{
+  width: 6rpx;
+  height: 34rpx;
+  background-color: #fe6601;
+  border-radius: 4rpx;
+  margin-right: 13rpx;
+}
+
+.service-phone-word{
+  color: #333;
+  font-size: 28rpx;
+  line-height: 34rpx;
+}
+
+.service-shop{
+  width: 100%;
+  height: 110rpx;
+  background-color: #fff;
+  border-radius: 5rpx;
+  padding: 0 22rpx;
+  box-sizing: border-box;
+}
+
+.service-shop-phone{
+  color: #111;
+  font-size: 26rpx;
+}
+
+.service-shop-dial{
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  background-color: #999;
+}
+
+.service-shop-dial image{
+  width: 30rpx;
+  height: 43rpx;
+}

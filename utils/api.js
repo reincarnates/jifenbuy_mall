@@ -40,6 +40,51 @@ const wxRequest = (params, url) => {
   });
 };
 
+// 文件上传
+const wxUpload = (params, url) => {
+  var data = params.data || {};
+  var user_token = wx.getStorageSync('user_token');
+  var device_id = wx.getStorageSync('device_id');
+
+  if (user_token) {
+    data.user_token = user_token;
+  }
+  if (device_id) {
+    data.device_id = device_id;
+  }
+  wx.uploadFile({
+    url,
+    filePath: params.filePath,
+    name: params.name,
+    formData: data ,
+    header: {
+      Accept: 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    success(res) {
+      if (params.success) {
+        params.success(res);
+      }
+    },
+    fail(res) {
+      if (params.fail) {
+        params.fail(res);
+      }
+      wx.showModal({
+        title: '提示',
+        content: '上传失败',
+        showCancel: false
+      })
+    },
+    complete(res) {
+      if (params.complete) {
+        params.complete(res);
+      }
+      wx.hideToast();
+    },
+  });
+};
+
 /** --------------------------- 首页相关 -------------------------------- */
 
 // 首页八个频道
@@ -88,9 +133,32 @@ const confirmOrders = (params) => {
 const orderEvaluetion = (params) => {
   wxRequest(params, `${apiURL}/order/getOrderEvaluateGoods`);
 }
+
+// 提交评价
+const submitEvaluation = (params) => {
+  wxRequest(params, `${apiURL}/order/saveOrderEvaluateGoods`);
+}
+
+// 评价图片上传
+const uploadPicEvaluation = (params) => {
+  wxUpload(params, `${apiURL}/Member/upload`);
+}
+
+/** --------------------------- 设置相关 -------------------------------- */
  
+// 保存个人信息设置
+const saveUserinfo = (params) => {
+  wxUpload(params, `${apiURL}/Member/editMemberInfo`);
+}
+
+// 头像上传
+const uploadAvatarimg = (params) => {
+  wxUpload(params, `${apiURL}/Publicauth/upload_img`);
+}
+
 module.exports = {
   nav,
+
   getOrderNumber,
   ordersList,
   ordersDetail,
@@ -98,5 +166,8 @@ module.exports = {
   preSaleCancel,
   applyWattingRefund,
   confirmOrders,
-  orderEvaluetion
+  orderEvaluetion,
+
+  saveUserinfo,
+  uploadAvatarimg
 };

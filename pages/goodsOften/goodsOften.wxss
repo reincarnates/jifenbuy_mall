@@ -1,6 +1,22 @@
 @import '../MyTracks/MyTracks.wxss';
 @import '../tabBar/shopCart/shopCart.wxss';
 
+.mytracks-item2{
+  width: 100%;
+  height: 274rpx;
+  background-color: #fff;
+  border-radius: 4rpx;
+  margin-bottom: 12rpx;
+  padding: 18rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  box-sizing: border-box;
+  -webkit-transform: translateX(70px);
+  transform: translateX(70px);
+  position: relative;
+  margin-left: -72px;
+}
+
 .goodsoften-wrapper{
   width: 100%;
   padding: 18rpx;
@@ -11,4 +27,25 @@
   color: #999;
   font-size: 22rpx;
   margin-top: 10rpx;
+}
+
+.remove2{
+  width: 80px;
+  height: 100%;
+  background-color: #ff0000;
+  position: absolute;
+  top: 0;
+  right: -82px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  align-items: center;
+  text-align: center;
+  z-index: 9999;
+}
+
+.touch-move-active2{
+  -webkit-transform: translateX(-12px) !important;
+  transform: translateX(-12px) !important;
 }

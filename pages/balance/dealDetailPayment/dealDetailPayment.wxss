@@ -1,0 +1,12 @@
+@import '../dealDetailBalance/dealDetailBalance.wxss';
+
+.deal-detail-head-img2{
+  width: 97rpx;
+  height: 97rpx;
+  border-radius: 50%;
+}
+
+.deal-detail-head-img2 image{
+  width: 100%;
+  height: 100%;
+}

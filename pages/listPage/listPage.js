@@ -5,8 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
     currentData: 0,
     goodsList: '',
     waterfall: '',
@@ -45,7 +43,7 @@ Page({
       keyWord: options.keyWord
     });
     var _this = this;
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     wx.request({
       url: 'http://tapi.fulibuy.cn/Search/searchGoods',
       data: {
@@ -58,8 +56,8 @@ Page({
         ev: _this.data.minVal + '-' + _this.data.maxVal,
         brandId: _this.data.brandId,
         source: _this.data.source,
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id')
       },
       method: "POST",
       success(res) {
@@ -237,8 +235,8 @@ Page({
         ev: _this.data.minVal + '-' + _this.data.maxVal,
         brandId: _this.data.brandId,
         source: _this.data.source,
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id')
       },
       method: "POST",
       success(res) {
@@ -375,8 +373,8 @@ Page({
           ev: _this.data.minVal + '-' + _this.data.maxVal,
           brandId: _this.data.brandId,
           source: _this.data.source,
-          user_token: _this.data.userToken,
-          device_id: _this.data.deviceId
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id')
         },
         method: "POST",
         success(res) {

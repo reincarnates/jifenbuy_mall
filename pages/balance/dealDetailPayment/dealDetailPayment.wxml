@@ -1,0 +1,37 @@
+<view class="deal-detail-wrapper" style="height: {{height}}px">
+  <view class="deal-detail-head flex-x-center">
+    <view class="deal-detail-head-top flex-center">
+      <view class="deal-detail-head-img2">
+        <image src="../../../images/payment_succ.png"></image>
+      </view>
+    </view>
+    <view class="deal-detail-head-price">{{data.state}}</view>
+  </view>
+  <view class="deal-detail-info">
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">金额</view>
+      <view class="deal-detail-info-item-type">{{data.balance}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">充值方式</view>
+      <view class="deal-detail-info-item-type">{{data.paytype}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">交易时间</view>
+      <view class="deal-detail-info-item-type">{{data.createtime}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">交易单号</view>
+      <view class="deal-detail-info-item-type">{{data.order}}</view>
+    </view>
+    <view class="deal-detail-info-item flex-sw">
+      <view class="deal-detail-info-item-name">说明</view>
+      <view class="deal-detail-info-item-type">{{data.paydesc}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="phone-service flex-center" bindtap="phoneService">
+  <image src="../../../images/order_service.png"></image>
+  <view style="margin-left: 18rpx;">联系客服</view>
+</view>

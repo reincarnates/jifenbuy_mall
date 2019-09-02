@@ -1,0 +1,21 @@
+<view class="service-wrapper">
+  <view class="service-head flex">
+    <view class="service-head-img flex-center">
+      <image src="../../images/service_help_icon.png"></image>
+    </view>
+    <view class="service-head-content">HI,亲爱的用户<text>{{text}}</text>请问有什么可以帮助您的</view>
+  </view>
+  <view class="service-phone flex">
+    <view class="service-phone-ver"></view>
+    <view class="service-phone-word">客服热线</view>
+  </view>
+  <view class="service-shop flex-sw" bindtap="dialPhone">
+    <view class="service-shop-phone">
+      <view>京东商城</view>
+      <view style="margin-top: 5rpx;">400-6066866</view>
+    </view>
+    <view class="service-shop-dial flex-center">
+      <image src="../../images/phone.png"></image>
+    </view>
+  </view>
+</view>
