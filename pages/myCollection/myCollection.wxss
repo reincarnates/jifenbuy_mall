@@ -1,0 +1,64 @@
+.collection-wrapper{
+  width: 100%;
+  padding: 18rpx;
+  box-sizing: border-box;
+}
+
+.collection-item-wrapper{
+  width: 100%;
+  height: 274rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 12rpx;
+  padding: 18rpx;
+  box-sizing: border-box;
+}
+
+.collection-item-img{
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 10rpx;
+}
+
+.collection-item-img image{
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.collection-item-word{
+  width: calc(100% - 240rpx);
+  height: 100%;
+  padding-left: 18rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.collection-item-word-name{
+  line-height: 40rpx;
+  color: #000;
+  font-size: 26rpx;
+}
+
+.collection-item-word-info{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.collection-item-word-price{
+  color: #fe6601;
+  font-size: 34rpx;
+}
+
+.collection-item-word-btn{
+  width: 155rpx;
+  height: 48rpx;
+  border: 1px solid #fe6e01;
+  border-radius: 24rpx;
+  text-align: center;
+  line-height: 48rpx;
+  color: #fe6601;
+  font-size: 24rpx;
+  margin-right: 18rpx;
+}

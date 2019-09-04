@@ -1,0 +1,26 @@
+<view class="recharge-wrapper" style="height: {{height}}px">
+  <view class="recharge-head flex-right">
+    <view class="recharge-head-ver flex-center" bindtap="locationProblem">
+      <image src="../../../images/ver.png"></image>
+    </view>
+  </view>
+  <view class="recharge-title">充值金额 <text style="color: #fe9901;">(最低充值10元)</text></view>
+  <view class="recharge-price-wrapper flex">
+    <view class="recharge-price-word">￥</view>
+    <view class="recharge-price-input">
+      <input type="number" placeholder="请输入金额" placeholder-style="color: #ddd;" bindinput="getPrice"></input>
+    </view>
+  </view>
+  <view class="recharge-price-type flex-y-center">
+    <view class="recharge-price-type-img flex-center">
+      <image src="../../../images/wx_icon.png"></image>
+    </view>
+    <view class="recharge-price-type-name">微信支付</view>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio">
+        <radio value="微信支付" checked="true"/>
+      </label>
+    </radio-group>
+  </view>
+  <view class="recharge-price-btn" bindtap="goRecharge">去充值</view>
+</view>

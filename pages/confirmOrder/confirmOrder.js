@@ -44,6 +44,7 @@ Page({
           // console.log(res);
           var res = res.data.data;
           res.data.forEach(item => {
+            item.mob_phone = item.mob_phone.replace(item.mob_phone.substring(3, 7), "****");
             if (item.is_default == 1) {
               _this.setData({
                 address: item,
@@ -218,6 +219,9 @@ Page({
       success(res) {
         if (res.data.code) {
           var res = res.data.data;
+          res.data.forEach(item => {
+            item.mob_phone = item.mob_phone.replace(item.mob_phone.substring(3, 7), "****");
+          });
           _this.setData({
             address2: res.data
           });

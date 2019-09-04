@@ -18,7 +18,7 @@
   <view class="welfare-selection-head flex-center">
     <view>猜你喜欢</view>
   </view>
-  <view class="guess-you-like-content flex">
+  <view class="guess-you-like-content flex" style="padding: 0 14rpx; box-sizing: border-box;">
     <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
       <navigator class="guess-you-like-item" data-id="{{item.goods_id}}" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
         <view class="guess-you-like-item-img" style="background: #fff;">

@@ -11,10 +11,10 @@
       <view class="user-header-name">{{userInfo.nickname != '' ? userInfo.nickname : userInfo.member_truename}}</view>
       <view class="user-header-compeny-name">{{userInfo.company_name}}</view>
     </view>
-    <view class="recharge-btn">充值</view>
+    <view class="recharge-btn" bindtap="recharge">充值</view>
   </view>
   <view class="user-header-operation">
-    <view class="user-header-operation-item">
+    <view class="user-header-operation-item" bindtap="locationBanlace">
       <view class="user-header-operation-item-name">余额</view>
       <view class="user-header-operation-item-num">{{userInfo.balance_detail.total_available}}</view>
     </view>
@@ -22,7 +22,7 @@
       <view class="user-header-operation-item-name">优惠券</view>
       <view class="user-header-operation-item-num">0</view>
     </view>
-    <view class="user-header-operation-item">
+    <view class="user-header-operation-item" bindtap="collection">
       <view class="user-header-operation-item-name">我的收藏</view>
       <view class="user-header-operation-item-num">{{userInfo.favorit_count}}</view>
     </view>

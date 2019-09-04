@@ -1,0 +1,22 @@
+<view class="problem-wrapper" style="height: {{height}}px">
+  <view class="problem-content">
+    <view class="problem-title">Q：目前充值方式有哪几种呢？</view>
+    <view class="problem-item">A：目前，我们的充值系统有两种充值方式：支付宝、微信信</view>
+  </view>
+  <view class="problem-content">  
+    <view class="problem-title">Q：如何使用微信充值</view>
+    <view class="problem-item">A：先开始绑定自己的微信或者支付宝账号，然后充值时就可以进行余额充值了</view>
+  </view>
+  <view class="problem-content"> 
+    <view class="problem-title">Q：充值显示失败怎么办？</view>
+    <view class="problem-item">A：当您使用支付宝、微信余额进行支付失败时，请先查看支付宝、微信余额是否足够支付，如足够的支付，请联系客服</view>
+  </view>
+  <view class="problem-content"> 
+    <view class="problem-title">Q：显示支付成功了，但怎么还没有到账？</view>
+    <view class="problem-item">A：当您支付成功后，余额账户金额没变，请先退出APP重新进入后查看；若仍未收到，您登录您的支付宝或者微信个人账户，在交易明细里查询您支付成功的微信、支付宝交易号和商家订单号后，提交给我们客服为您核实处理。</view>
+  </view>
+  <view class="problem-content"> 
+    <view class="problem-title">Q：账户充值余额可否退款？</view>
+    <view class="problem-item">A：客户如果使用微信、支付宝充值帐户余额，将不能够申请余额退款。</view>
+  </view>
+</view>

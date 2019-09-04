@@ -1,4 +1,4 @@
-// pages/balance/balancePage/balancePage.js
+// pages/privacyPolicy/privacyPolicy.js
 Page({
 
   /**
@@ -6,32 +6,16 @@ Page({
    */
   data: {
     height: 0,
-    balance: '', //余额
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user = wx.getStorageSync('userinfoModel');
-    this.setData({
+    var _this = this;
+    _this.setData({
       height: wx.getSystemInfoSync().windowHeight,
-      balance: user.balance_detail.total_available
     })
-  },
-
-  //跳至账单页面
-  locationBill: function() {
-    wx.navigateTo({
-      url: '/pages/balance/billPage/billPage'
-    });
-  },
-
-  //跳至充值页面
-  locationRecharge: function() {
-    wx.navigateTo({
-      url: '/pages/balance/rechargeCenter/rechargeCenter'
-    });
   },
 
   /**

@@ -1,15 +1,12 @@
-// pages/balance/dealDetail/dealDetail.js
+// pages/myCollection/myCollection.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    height: 0,
-    payDesc: '', //商品备注
-    payType: '', //商品说明
-    data: {}, //页面内容
-    reducePrice: '', //支出金额
+    collection: [], //收藏列表
+    page: 1, //页数
   },
 
   /**
@@ -17,38 +14,22 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    _this.setData({
-      payDesc: options.paydesc,
-      payType: options.paytype,
-      reducePrice: options.price
-    });
     wx.request({
-      url: 'http://tapi.fulibuy.cn/Order/getOrderInfo',
+      url: 'http://tapi.fulibuy.cn/member/getFavorites',
       method: 'POST',
       data: {
         user_token: wx.getStorageSync('user_token'),
         device_id: wx.getStorageSync('device_id'),
-        order_sn: options.order
+        page: 1
       },
       success(res) {
         if(res.data.code) {
-          console.log(res);
           _this.setData({
-            data: res.data.data
+            collection: res.data.data.list
           });
         }
       }
     })
-    _this.setData({
-      height: wx.getSystemInfoSync().windowHeight,
-    })
-  },
-
-  //跳至客服页面
-  phoneService: function() {
-    wx.navigateTo({
-      url: '/pages/serviceHelp/serviceHelp'
-    });
   },
 
   /**
@@ -62,7 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad();
   },
 
   /**
@@ -90,7 +71,32 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var _this = this;
+    _this.data.page++;
+    wx.showLoading({ title: '加载中' });
+    if (_this.data.page < _this.data.pagecount) {
+      wx.request({
+        url: 'http://tapi.fulibuy.cn/member/getFavorites',
+        data: {
+          user_token: wx.getStorageSync('user_token'),
+          device_id: wx.getStorageSync('device_id'),
+          page: _this.data.page
+        },
+        method: "POST",
+        success(res) {
+          _this.setData({
+            collection: _this.data.collection.concat(res.data.data.list)
+          });
+          wx.hideLoading();
+        }
+      })
+    } else {
+      wx.showToast({
+        title: '没有更多了',
+        icon: 'none',
+        duration: 2000
+      })
+    }
   },
 
   /**

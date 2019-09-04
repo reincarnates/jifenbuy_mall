@@ -161,11 +161,13 @@ Page({
             wx.showToast({
               title: '修改成功',
               icon: 'none',
-              duration: 2000
+              duration: 500
             });
-            wx.navigateBack({
-              delta: 1
-            })
+            setTimeout(function() {
+              wx.navigateBack({
+                delta: 1
+              });
+            }, 500);
           }
         }
       })

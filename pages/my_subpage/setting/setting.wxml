@@ -9,6 +9,6 @@
 
 
 <view class="setting-pw-view" wx:if="{{pwPage}}">
-  <template is="baseCell" data="{{title: '支付密码'}}" />
+  <template is="baseCell" data="{{title: '支付密码', hideSeparator: true}}" />
   <!-- <template is="baseCell" data="{{title: '登录密码', hideSeparator: true}}" /> -->
 </view>

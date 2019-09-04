@@ -1,6 +1,6 @@
 <view class="bill-wrapper">
   <view class="bill-head">
-    <view class="flex-center" style="flex-direction: column;">
+    <view class="flex-center" style="flex-direction: column;" bindtap="screen">
       <view class="bill-head-img flex-center">
         <image src="../../../images/screen_icon.png"></image>
       </view>
@@ -27,7 +27,8 @@
     </view>
     <view class="bill-tab-content" wx:if="{{current == 2}}">
       <block wx:for="{{paymentBill}}" wx:key="index">
-        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}" bindtap="dealDetail">
+        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}"
+          bindtap="dealDetail">
           <view class="bill-item-left">
             <view class="bill-item-left-title">{{item.pay_type}}</view>
             <view style="margin-top: 12rpx;">{{item.create_time}}</view>
@@ -36,5 +37,79 @@
         </view>
       </block>
     </view>
+  </view>
+</view>
+
+<!-- 筛选弹框 -->
+<view class="bill-mask-bg" wx:if="{{isMask}}" bindtap="closeScreen"></view>
+<view class="bill-mask" style="bottom: {{billPos}};">
+  <view style="padding: 0 30rpx; box-sizing: border-box;">
+    <block wx:for="{{screenData}}" wx:key="index">
+      <view wx:if="{{item.state == 1}}">
+        <view class="bill-mask-head flex-sw">
+          <view class="bill-mask-head-left">{{item.title}}</view>
+          <view class="bill-mask-head-close flex-center" bindtap="closeScreen">
+            <image src="../../../images/close_params.png"></image>
+          </view>
+        </view>
+        <view class="bill-mask-content flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="bill-mask-item {{itemName.choose == true ? 'bill-mask-item-cur' : ''}}" data-key="{{index}}" data-index="{{idx}}" data-value="{{itemName.value}}" bindtap="checkType">{{itemName.name}}</view>
+          </block>
+        </view>
+      </view>
+      <view wx:else>
+        <view class="bill-mask-head2">
+          {{item.title}}
+        </view>
+        <view class="bill-mask-content flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="bill-mask-item {{itemName.choose == true ? 'bill-mask-item-cur' : ''}}" data-key="{{index}}" data-index="{{idx}}" data-value="{{itemName.value}}" bindtap="checkType">{{itemName.name}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="bill-mask-btn flex">
+    <view class="bill-mask-btn-reset" bindtap="resetScreen">重置</view>
+    <view class="bill-mask-btn-confirm" bindtap="confirmScreen">确认</view>
+  </view>
+</view>
+
+<!-- 充值明细筛选 -->
+<view class="bill-mask-bg" wx:if="{{isMask2}}" bindtap="closeScreen"></view>
+<view class="bill-mask" style="bottom: {{billPos2}};">
+  <view style="padding: 0 30rpx; box-sizing: border-box;">
+    <block wx:for="{{screenData2}}" wx:key="index">
+      <view wx:if="{{item.state == 1}}">
+        <view class="bill-mask-head flex-sw">
+          <view class="bill-mask-head-left">{{item.title}}</view>
+          <view class="bill-mask-head-close flex-center" bindtap="closeScreen">
+            <image src="../../../images/close_params.png"></image>
+          </view>
+        </view>
+        <view class="bill-mask-content flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="bill-mask-item {{itemName.choose == true ? 'bill-mask-item-cur' : ''}}" data-key="{{index}}" data-index="{{idx}}" data-value="{{itemName.value}}" bindtap="checkType2">{{itemName.name}}</view>
+          </block>
+        </view>
+      </view>
+      <view wx:else>
+        <view class="bill-mask-head2">
+          {{item.title}}
+        </view>
+        <view class="bill-mask-content flex">
+          <block wx:for="{{item.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
+            <view class="bill-mask-item {{itemName.choose == true ? 'bill-mask-item-cur' : ''}}" data-key="{{index}}" data-index="{{idx}}" data-value="{{itemName.value}}" bindtap="checkType2">{{itemName.name}}</view>
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="bill-mask-btn flex" style="margin-top: 200rpx;">
+    <view class="bill-mask-btn-reset" bindtap="resetScreen">重置</view>
+    <view class="bill-mask-btn-confirm" bindtap="confirmScreen">确认</view>
   </view>
 </view>

@@ -145,6 +145,27 @@ Page({
     }
   },
 
+  //跳转余额页面
+  locationBanlace: function() {
+    wx.navigateTo({
+      url: '/pages/balance/balancePage/balancePage'
+    });
+  },
+
+  //充值
+  recharge: function() {
+    wx.navigateTo({
+      url: '/pages/balance/rechargeCenter/rechargeCenter'
+    });
+  },
+
+  //收藏
+  collection: function() {
+    wx.navigateTo({
+      url: '/pages/myCollection/myCollection'
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

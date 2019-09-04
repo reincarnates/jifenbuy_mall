@@ -1,7 +1,7 @@
 @import "/component/baseCell/baseCell.wxss";
 
 .setting-view ,
-setting-pw-view {
+.setting-pw-view {
   background: #fff;
   margin-top: 1rpx;
 }

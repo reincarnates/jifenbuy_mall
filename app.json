@@ -1,15 +1,20 @@
 {
   "pages": [
+    "pages/tabBar/index/index",
     "pages/balance/billPage/billPage",
+    "pages/tabBar/user/user",
+    "pages/balance/rechargeCenter/rechargeCenter",
+    "pages/myCollection/myCollection",
+    "pages/paymentSucc/paymentSucc",
+    "pages/privacyPolicy/privacyPolicy",
+    "pages/balance/rechargeProblem/rechargeProblem",
+    "pages/balance/balancePage/balancePage",
     "pages/balance/dealDetailPayment/dealDetailPayment",
     "pages/balance/dealDetailBalance/dealDetailBalance",
-    "pages/balance/balancePage/balancePage",
     "pages/my_subpage/setting/setting",
     "pages/my_subpage/interestManage/interestManage",
-    "pages/tabBar/index/index",
     "pages/my_subpage/editPaymentPword/editPaymentPword",
     "pages/goodsDetail/goodsDetail",
-    "pages/tabBar/user/user",
     "pages/serviceHelp/serviceHelp",
     "pages/feedBack/feedBack",
     "pages/notOpen/notOpen",
@@ -49,7 +54,8 @@
     "pages/my_subpage/ordersDetail/ordersDetail",
     "pages/my_subpage/logistics/logistics",
     "pages/my_subpage/orderEvaluetion/orderEvaluetion",
-    "pages/my_subpage/userinfo/userinfo"
+    "pages/my_subpage/userinfo/userinfo",
+    "pages/my_subpage/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

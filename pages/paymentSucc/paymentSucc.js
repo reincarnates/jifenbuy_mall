@@ -1,36 +1,28 @@
-// pages/balance/balancePage/balancePage.js
+// pages/paymentSucc/paymentSucc.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    height: 0,
-    balance: '', //余额
+    winHeight: 0,
+    price: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var user = wx.getStorageSync('userinfoModel');
-    this.setData({
-      height: wx.getSystemInfoSync().windowHeight,
-      balance: user.balance_detail.total_available
-    })
-  },
-
-  //跳至账单页面
-  locationBill: function() {
-    wx.navigateTo({
-      url: '/pages/balance/billPage/billPage'
+    var _this = this;
+    _this.setData({
+      price: options.price
     });
-  },
-
-  //跳至充值页面
-  locationRecharge: function() {
-    wx.navigateTo({
-      url: '/pages/balance/rechargeCenter/rechargeCenter'
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          winHeight: res.windowHeight
+        })
+      }
     });
   },
 

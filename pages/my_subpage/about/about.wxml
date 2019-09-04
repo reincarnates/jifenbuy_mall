@@ -1,5 +1,13 @@
+<import src="/component/baseCell/baseCell.wxml" />
+
 <view class="container">
-  <view class="textContainer">
-    <text class="textStyle">{{text}}</text>
+  <view class="flex-col flex-y-center" style="width:100%;">
+    <image src="/images/logo_about_fulibuy.png" style="height:270rpx; width:319rpx;"></image>
+    <view style="background:#fff; margin-top:96rpx; width:100%;">
+     <template is="baseCell" data="{{title: '隐私政策', hideSeparator: true}}" />
+    </view>
   </view>
+  <text style="font-size:24rpx; color:#666; text-align:center;">Copyright@2018-2019
+阳光福利fulibuy.cn 版权所有</text>
 </view>
+

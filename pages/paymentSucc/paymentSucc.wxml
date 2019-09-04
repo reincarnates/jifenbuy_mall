@@ -1,0 +1,17 @@
+<view class="payment-wrapper" style="height: {{winHeight}}px">
+  <view class="payment-head flex-center">
+    <image src="../../images/payment_succ.png"></image>
+    <view class="payment-head-word">支付成功</view>
+  </view>
+  <view class="payment-price-wrapper">
+    <view class="payment-price-item flex-sw" style="margin-bottom: 20rpx;">
+      <view class="payment-price-item-left">支付方式</view>
+      <view class="payment-price-item-right">微信</view>
+    </view>
+    <view class="payment-price-item flex-sw">
+      <view class="payment-price-item-left">充值金额</view>
+      <view class="payment-price-item-right">￥{{price}}</view>
+    </view>
+  </view>
+  <view class="payment-price-btn">查看余额</view>
+</view>

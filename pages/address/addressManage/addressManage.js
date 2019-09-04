@@ -19,7 +19,7 @@ Page({
       status: options.status
     });
 
-    _this.getUserAddress();
+    // _this.getUserAddress();
     
     //获取设备高度
     wx.getSystemInfo({
@@ -47,9 +47,13 @@ Page({
         page: 1
       },
       success(res) {
-        if (!res.code) {
+        if (res.data.code) {
           // console.log(res);
           var res = res.data.data;
+          res.data.forEach(item => {
+            item.mob_phone = item.mob_phone.replace(item.mob_phone.substring(3, 7), "****");
+            console.log(item.mob_phone);
+          });
           _this.setData({
             address: res.data
           });

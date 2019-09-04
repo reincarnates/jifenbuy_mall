@@ -102,6 +102,12 @@ Page({
               });
             });
 
+            if (res.favorites == 1) {
+              _this.setData({
+                collectImg: '../../images/collection_ac.png',
+              });
+            }
+
             //判断source是哪个商城
             if (res.source == '') {
               res.source = '市场价';
@@ -110,6 +116,7 @@ Page({
             } else if (res.source == 'wyyx') {
               res.source = '网易严选价';
             }
+
 
             var imgs = res.mobile_body.match(/h[^']+g/g);
             var bgs = res.mobile_body.match(/background-image:url([^)]+)/g);

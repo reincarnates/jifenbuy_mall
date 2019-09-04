@@ -1,0 +1,14 @@
+<view class="collection-wrapper">
+  <navigator wx:for="{{collection}}" wx:key="index" class="collection-item-wrapper flex" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
+    <view class="collection-item-img">
+      <image src="{{item.goods_image}}"></image>
+    </view>
+    <view class="collection-item-word">
+      <view class="collection-item-word-name text-more-2">{{item.goods_name}}</view>
+      <view class="collection-item-word-info flex-sw">
+        <view class="collection-item-word-price">￥{{item.log_price}}</view>
+        <view class="collection-item-word-btn">立即购买</view>
+      </view>
+    </view>
+  </navigator>
+</view>

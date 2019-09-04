@@ -1,0 +1,25 @@
+.problem-wrapper{
+  width: 100%;
+  background-color: #fff;
+  padding: 30rpx 36rpx 0;
+  box-sizing: border-box;
+}
+
+.problem-content{
+  width: 100%;
+  margin-bottom: 48rpx;
+}
+
+.problem-title{
+  color: #333;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.problem-item{
+  color: #666;
+  font-size: 26rpx;
+  margin-top: 15rpx;
+  padding-left: 2rpx;
+  box-sizing: border-box;
+}

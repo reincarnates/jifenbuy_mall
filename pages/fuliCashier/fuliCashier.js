@@ -26,6 +26,7 @@ Page({
     },
     payment: false, //支付弹框
     blanceInfo: {}, //余额支付参数
+    wxPay: {}, //微信支付参数
   },
 
   /**
@@ -51,12 +52,14 @@ Page({
           cart_id: options.cartId,
           quantity: options.quantity,
           address_id: options.addressId,
-          order_message: options.remarks
+          order_message: options.remarks,
+          pay_type: 'wx'
         },
         success(res) {
           if (res.data.code) {
             _this.setData({
-              blanceInfo: res.data.data.blance_info
+              blanceInfo: res.data.data.blance_info,
+              wxPay: res.data.data.xcxpay_str
             });
             wx.hideLoading();
           }
@@ -73,12 +76,14 @@ Page({
           device_id: wx.getStorageSync('device_id'),
           cart_id: options.cartId,
           address_id: options.addressId,
-          order_message: options.remarks
+          order_message: options.remarks,
+          pay_type: 'wx'
         },
         success(res) {
           if (res.data.code) {
             _this.setData({
-              blanceInfo: res.data.data.blance_info
+              blanceInfo: res.data.data.blance_info,
+              wxPay: res.data.data.xcxpay_str
             });
             wx.hideLoading();
           }
@@ -98,9 +103,28 @@ Page({
   //确认支付
   confirmPayment: function() {
     var _this = this;
-    _this.setData({
-      payment: true
-    });
+    if (_this.data.paymentType == '余额') {
+      _this.setData({
+        payment: true
+      });
+    } else {
+      console.log('微信');
+      wx.requestPayment({
+        timeStamp: _this.data.wxPay.timeStamp,
+        nonceStr: _this.data.wxPay.nonceStr,
+        package: _this.data.wxPay.package,
+        signType: _this.data.wxPay.signType,
+        paySign: _this.data.wxPay.paySign,
+        success(res) {
+          wx.redirectTo({
+            url: `/pages/paymentSuccess/paymentSuccess?price=${_this.data.totalPrice}`
+          });
+        },
+        fail(res) {
+          console.log('错误', res);
+        }
+      })
+    }
   },
 
   //输入密码正确之后

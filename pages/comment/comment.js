@@ -6,8 +6,6 @@ Page({
    */
   data: {
     currentIndex: 0,
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
     listCount: {}, //评论类型数量
     commentList: [], //评论条数
     goodsSku: '', //商品sku
@@ -29,8 +27,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
       method: 'POST',
       data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         sku: 'ZY6ec8d9147c',
         // sku: options.sku,
         order_state: 0,
@@ -86,8 +84,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
       method: 'POST',
       data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         // sku: 'ZY6ec8d9147c',
         sku: _this.data.goodsSku,
         order_state: type,
@@ -156,8 +154,8 @@ Page({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
       method: 'POST',
       data: {
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId,
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
         sku: 'ZY6ec8d9147c',
         // sku: options.sku,
         order_state: _this.data.orderState,

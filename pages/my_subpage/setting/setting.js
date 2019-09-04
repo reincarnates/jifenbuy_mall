@@ -36,6 +36,10 @@ Page({
       wx.navigateTo({
         url: '/pages/my_subpage/interestManage/interestManage',
       })
+    } else if (title == '关于福利购') {
+      wx.navigateTo({
+        url: '/pages/my_subpage/about/about',
+      })
     }
   }
 
