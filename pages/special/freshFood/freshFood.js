@@ -124,7 +124,6 @@ Page({
 
   //点击切换，滑块index赋值
   checkCurrent: function (e) {
-    console.log(e)
     const _this = this;
     var _index = e.target.dataset.index;
 

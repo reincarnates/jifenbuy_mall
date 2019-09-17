@@ -19,6 +19,7 @@
     </swiper>
     <block wx:for="{{eveyDay}}" wx:key="index">
       <view class="everyDay-wrapper" id="{{'mao'+item.at_id}}">
+        <view class="fulimall-special-titlekong" wx:if="{{eveyDay[index].at_id == isid}}"></view>
         <view class="fulimall-special-title">{{item.goodsName}}</view>
         <view class="everyDay-goods">
           <block wx:for="{{item.data7.list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
@@ -31,6 +32,7 @@
                   {{itemName.title}}
                 </view>
                 <view class="everyDay-goods-item-shopprice">
+                
                   <text style="margin-right: 5rpx;">{{itemName.source}}</text>
                   <text style="text-decoration: line-through;">￥{{itemName.goods_marketprice}}</text>
                 </view>
@@ -44,7 +46,7 @@
     <view class="fulimall-special">
       <block wx:for="{{special}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
         <view class="j" id="{{'mao'+itemName.at_id}}">
-          <view class="fulimall-special-titlekong" wx:if="{{navName[idx].at_id == isid}}">aaa</view>
+          <view class="fulimall-special-titlekong" wx:if="{{special[idx].at_id == isid}}"></view>
           <view class="fulimall-special-title">{{itemName.goodsName}}</view>
           <view class="fulimall-special-content">
             <block wx:for="{{itemName.data6.list}}" wx:key="index">
