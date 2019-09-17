@@ -1,0 +1,23 @@
+<view class="trade-wrapper" wx:if="{{trade.length != 0}}">
+  <block wx:for="{{trade}}" wx:key="index">
+    <view class="trade-item">
+      <view class="trade-item-title text-more">{{item.msgInfo.data.title}}</view>
+      <view class="trade-item-content flex">
+        <view class="trade-item-img">
+          <image src="{{item.msgInfo.data.big_img}}"></image>
+        </view>
+        <view class="trade-item-word">
+          <view class="trade-item-word-name text-more-2">{{item.msgInfo.data.content_array.goods_list[0].goods_name}}</view>
+          <!-- <view class="trade-item-num">共 {{1}} 件商品</view> -->
+          <view class="trade-item-num">运单编号：{{item.msgInfo.data.content_array.order_sn}}</view>
+          <view class="trade-item-time">{{item.addTime}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class="no-record-wrapper flex-center" style="height: {{height}}px" wx:else>
+  <image src="../../../images/no_record.png"></image>
+  <view>暂无记录</view>
+</view>

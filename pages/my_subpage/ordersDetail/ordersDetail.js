@@ -74,6 +74,10 @@ Page({
       wx.navigateTo({
         url: '/pages/my_subpage/logistics/logistics?order_sn=' + this.data.orderModel.order_sn,
       })
+    } else if (title == '评价' || title == '查看评价') {
+      wx.navigateTo({
+        url: '/pages/my_subpage/orderEvaluetion/orderEvaluetion?order_sn=' + this.data.orderModel.order_sn,
+      })
     }
   },
 
@@ -127,7 +131,23 @@ Page({
   },
 
   // 申请售后
-  tapAftersaleButton: function() {
+  tapAftersaleButton: function(e) {
+    wx.redirectTo({
+      url: `/pages/afterSale/checkAfterSaleType/checkAfterSaleType?img=${e.currentTarget.dataset.img}&name=${e.currentTarget.dataset.name}&price=${e.currentTarget.dataset.price}&num=${e.currentTarget.dataset.num}&order=${e.currentTarget.dataset.order}&sku=${e.currentTarget.dataset.sku}`
+    });
+  },
 
+  //联系客服
+  contactService: function() {
+    wx.navigateTo({
+      url: '/pages/serviceHelp/serviceHelp',
+    })
+  },
+
+  //商品详情
+  locDetail: function(e) {
+    wx.navigateTo({
+      url: `/pages/goodsDetail/goodsDetail?id=${e.currentTarget.dataset.sku}`,
+    })
   }
 })

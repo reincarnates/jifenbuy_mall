@@ -50,6 +50,11 @@ Page({
         });
       }
 
+      //重新设置页面标题
+      wx.setNavigationBarTitle({
+        title: '修改地址'
+      })
+
       _this.setData({
         name: options.name,
         phone: options.phone,
@@ -129,6 +134,13 @@ Page({
       });
       return false;
     } else if (_this.data.phone == '') {
+      wx.showToast({
+        title: '手机号不能为空',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    } else if (!(/^1[34578]\d{9}$/.test(_this.data.phone))) {
       wx.showToast({
         title: '请输入正确的手机号',
         icon: 'none',

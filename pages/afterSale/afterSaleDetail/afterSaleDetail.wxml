@@ -1,0 +1,506 @@
+<view class="sale-detail-step-wrapper" wx:if="{{ notSaleData.admin_state == 0 && notSaleData.seller_state == 3 && notSaleData.refund_state == 3 ? false : true }}">
+  <view class="sale-detail-step-word flex-sw">
+    <view style="margin-left: 5rpx;" class="sale-detail-step-word-cur">提交</view>
+    <view style="margin-left: 4rpx;" class="{{ stepState > 1 ? 'sale-detail-step-word-cur' : '' }}">商家审核</view>
+    <view class="{{ stepState == 3 ? 'sale-detail-step-word-cur' : '' }}">售后中</view>
+    <view class="{{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-word-cur' : '' }}">系统处理</view>
+    <view style="margin-right: 4rpx;" class="{{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-word-cur' : '' }}">完成</view>
+  </view>
+  <view class="sale-detail-step flex-y-center">
+    <view class="sale-detail-step-ver sale-detail-step-ver-cur flex-center">
+      <view class="sale-detail-step-ver-bg sale-detail-step-ver-cur2"></view>
+    </view>
+    <view class="sale-detail-step-line {{ stepState > 1 ? 'sale-detail-step-line-cur' : '' }}"></view>
+    <view class="sale-detail-step-ver {{ stepState > 1 ? 'sale-detail-step-ver-cur' : '' }} flex-center">
+      <view class="sale-detail-step-ver-bg {{ stepState > 1 ? 'sale-detail-step-ver-cur2' : '' }}"></view>
+    </view>
+    <view class="sale-detail-step-line {{ stepState == 3 ? 'sale-detail-step-line-cur' : '' }}"></view>
+    <view class="sale-detail-step-ver {{ stepState == 3 ? 'sale-detail-step-ver-cur' : '' }} flex-center">
+      <view class="sale-detail-step-ver-bg {{ stepState == 3 ? 'sale-detail-step-ver-cur2' : '' }}"></view>
+    </view>
+    <view class="sale-detail-step-line {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-line-cur' : '' }}"></view>
+    <view class="sale-detail-step-ver {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-ver-cur' : '' }} flex-center">
+      <view class="sale-detail-step-ver-bg {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-ver-cur2' : '' }}"></view>
+    </view>
+    <view class="sale-detail-step-line {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-line-cur' : '' }}"></view>
+    <view class="sale-detail-step-ver {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-ver-cur' : '' }} flex-center">
+      <view class="sale-detail-step-ver-bg {{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 ? 'sale-detail-step-ver-cur2' : '' }}"></view>
+    </view>
+  </view>
+</view>
+
+<!-- 审核不通过step -->
+<view class="sale-detail-step-wrapper" wx:if="{{ notSaleData.admin_state == 0 && notSaleData.seller_state == 3 && notSaleData.refund_state == 3 }}" style="padding: 0 97rpx;">
+  <view class="sale-detail-step-word flex-sw">
+    <view class="sale-detail-step-word-cur">提交</view>
+    <view class="sale-detail-step-word-cur" style="margin-left: 40rpx;">商家审核</view>
+    <view class="sale-detail-step-word-cur" style="margin-right: -30rpx;">审核不通过</view>
+  </view>
+  <view class="sale-detail-step flex-y-center">
+    <view class="sale-detail-step-ver sale-detail-step-ver-cur flex-center">
+      <view class="sale-detail-step-ver-bg sale-detail-step-ver-cur2"></view>
+    </view>
+    <view class="sale-detail-step-line sale-detail-step-line-cur" style="width: 219rpx;"></view>
+    <view class="sale-detail-step-ver sale-detail-step-ver-cur flex-center">
+      <view class="sale-detail-step-ver-bg sale-detail-step-ver-cur2"></view>
+    </view>
+    <view class="sale-detail-step-line sale-detail-step-line-cur" style="width: 219rpx;"></view>
+    <view class="sale-detail-step-ver sale-detail-step-ver-cur flex-center">
+      <view class="sale-detail-step-ver-bg sale-detail-step-ver-cur2"></view>
+    </view>
+  </view>
+</view>
+
+<!-- 提交 -->
+<view class="sale-detail-wrapper" wx:if="{{locationState == 1}}">
+  <view class="sale-detail-goods-wrapper flex">
+    <view class="sale-detail-goods-img">
+      <image src="{{goodsInfo.goods_image}}"></image>
+    </view>
+    <view class="sale-detail-goods-word">
+      <view class="sale-detail-goods-name text-more-2">{{goodsInfo.goods_name}}</view>
+      <view class="sale-detail-goods-price">￥{{goodsInfo.goods_price}}</view>
+    </view>
+    <view class="sale-detail-goods-number">
+      <view>数量</view>
+      <view>×{{goodsInfo.getAbleRefundNum}}</view>
+    </view>
+  </view>
+  <view class="sale-apply-cause-wrapper flex-sw" bindtap="checkCause">
+    <view class="sale-apply-cause-word">申请原因</view>
+    <view class="sale-apply-cause-check flex-center">
+      <view>{{reasonWord}}</view>
+      <image src="../../../images/cause_go.png"></image>
+    </view>
+  </view>
+  <view class="sale-problem-describe">
+    <view class="sale-problem-describe-title flex-y-center">问题描述</view>
+    <view class="sale-problem-describe-textarea" wx:if="{{isShow}}">
+      <textarea placeholder="请描述申请售后服务的具体原因" placeholder-style="color: #666;" maxlength="500" bindinput="getCause" />
+      <view class="sale-problem-describe-num">{{returnCause.length}}/500</view>
+    </view>
+    <uploadImages bindmyevent="myEventListener" bindmyevent2="myEventListener2" count='{{countPic}}' showUrl="{{showImgUrl}}" uploadUrl="{{uploadImgUrl}}" id="upload"></uploadImages>
+  </view>
+  <view class="sale-return-mode">
+    <view class="sale-return-mode-title">退货方式</view>
+    <view class="sale-return-mode-btn-wrapper">
+      <view class="sale-return-mode-btn">快递寄回</view>
+    </view>
+    <view class="sale-shop-info-wrapper">
+      <view class="sale-return-mode-title">商家信息</view>
+      <view class="sale-shop-info">
+        <view class="sale-shop-info-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">收货人</text>
+          <view class="sale-shop-info-item-cont">{{daddressInfo.seller_name}}</view>
+        </view>
+        <view class="sale-shop-info-item flex">
+          <view class="sale-shop-info-item-name">联系电话</view>
+          <view class="sale-shop-info-item-cont">{{daddressInfo.telphone}}</view>
+        </view>
+        <view class="sale-shop-info-item flex">
+          <view class="sale-shop-info-item-name">退货地址</view>
+          <view class="sale-shop-info-item-cont text-more">{{daddressInfo.area_info}} {{daddressInfo.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-mailing-info-wrapper">
+      <view class="sale-return-mode-title">寄件信息</view>
+      <view class="sale-shop-info">
+        <view class="sale-shop-info-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">联系人</text>
+          <view class="sale-mailing-info-input">
+            <input value="{{memberInfo.true_name}}" bindinput="getUser"></input>
+          </view>
+        </view>
+        <view class="sale-shop-info-item flex">
+          <view class="sale-shop-info-item-name">联系方式</view>
+          <view class="sale-mailing-info-input">
+            <input type="number" value="{{memberInfo.mob_phone}}" bindinput="getPhone"></input>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="sale-submit-word flex-y-center">提交服务单后，售后专员可能于您电话沟通，请保持手机畅通</view>
+  <view class="sale-submit-btn-wrapper flex-right">
+    <view class="sale-submit-btn" bindtap="submitService">提交</view>
+  </view>
+</view>
+
+<!-- 审核 -->
+<view class="sale-examine-wrapper" wx:if="{{ showState.admin_state == 0 && showState.seller_state == 1 && showState.refund_state == 1 }}">
+  <view class="sale-progress flex-sw" data-refund="{{showState.service_info.refund_sn}}" bindtap="saleProgress">
+    <view>售后进度</view>
+    <image src="../../../images/cause_go.png"></image>
+  </view>
+
+  <view class="sale-detail-goods-wrapper flex">
+    <view class="sale-detail-goods-img">
+      <image src="{{showState.goods_info.goods_image}}"></image>
+    </view>
+    <view class="sale-detail-goods-word">
+      <view class="sale-detail-goods-name text-more-2">{{showState.goods_info.goods_name}}</view>
+      <view class="sale-detail-goods-price">￥{{showState.goods_info.goods_price}}</view>
+    </view>
+    <view class="sale-detail-goods-number">
+      <view>数量</view>
+      <view>×{{showState.goods_info.goods_num}}</view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-info-wrapper">
+    <view class="sale-examine-shop-one">
+      <view class="sale-examine-shop-one-title">商家信息</view>
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">收货人</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.receive_info.receive_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">联系电话</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.receive_info.telphone}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">退货地址</text>
+          <view class="sale-shop-info-item-cont text-more">{{showState.service_info.receive_info.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-mailing">
+      <view class="sale-examine-shop-one-title" style="margin: 20rpx 0;">寄件信息</view>
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">寄件人</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.send_info.user_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">联系方式</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.send_info.user_phone}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-time">
+    <view class="sale-examine-shop-time-top">
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请时间</text>
+          <view class="sale-shop-info-item-cont">{{showState.Traces[0].AcceptTime}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">服务类型</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.refund_type}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请原因</text>
+          <view class="sale-shop-info-item-cont">{{showState.service_info.reason_info}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">问题描述</text>
+          <view class="sale-shop-info-item-cont text-more-2">{{showState.service_info.buyer_question}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-returntype flex-y-center">
+      <view class="sale-shop-info-item-name">退款方式</view>
+      <view class="sale-shop-info-item-cont">原路返回</view>
+    </view>
+  </view>
+</view>
+
+<!-- 售后中 -->
+<view class="sale-examine-wrapper2" wx:if="{{ saleData.admin_state == 0 && saleData.seller_state == 2 && saleData.refund_state == 1 }}">
+  <view class="sale-progress flex-sw" data-refund="{{saleData.service_info.refund_sn}}" bindtap="saleProgress">
+    <view>售后进度</view>
+    <image src="../../../images/cause_go.png"></image>
+  </view>
+
+  <view class="sale-detail-goods-wrapper flex">
+    <view class="sale-detail-goods-img">
+      <image src="{{saleData.goods_info.goods_image}}"></image>
+    </view>
+    <view class="sale-detail-goods-word">
+      <view class="sale-detail-goods-name text-more-2">{{saleData.goods_info.goods_name}}</view>
+      <view class="sale-detail-goods-price">￥{{saleData.goods_info.goods_price}}</view>
+    </view>
+    <view class="sale-detail-goods-number">
+      <view>数量</view>
+      <view>×{{saleData.goods_info.goods_num}}</view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-info-wrapper">
+    <view class="sale-examine-shop-one">
+      <view class="sale-examine-shop-one-title">商家信息</view>
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">收货人</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.receive_info.receive_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">联系电话</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.receive_info.telphone}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">退货地址</text>
+          <view class="sale-shop-info-item-cont text-more">{{saleData.service_info.receive_info.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-mailing">
+      <view class="sale-examine-shop-one-title" style="margin: 20rpx 0;">寄件信息</view>
+      <view class="sale-examine-shop-one-content" wx:if="{{ isSpace }}">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流公司</text>
+          <view class="sale-shop-info-item-cont">
+            <input bindinput="getName"></input>
+          </view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流单号</text>
+          <view class="sale-shop-info-item-cont">
+            <input type="number" bindinput="getNumber"></input>
+          </view>
+        </view>
+      </view>
+
+      <view class="sale-examine-shop-one-content" wx:else>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流公司</text>
+          <view class="sale-shop-info-item-cont">{{saleData.express_info.express_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流单号</text>
+          <view class="sale-shop-info-item-cont">{{saleData.express_info.express_no}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系人</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.send_info.user_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系方式</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.send_info.user_phone}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-time">
+    <view class="sale-examine-shop-time-top">
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请时间</text>
+          <view class="sale-shop-info-item-cont">{{saleData.Traces[0].AcceptTime}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">服务类型</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.refund_type}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请原因</text>
+          <view class="sale-shop-info-item-cont">{{saleData.service_info.reason_info}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">问题描述</text>
+          <view class="sale-shop-info-item-cont text-more-2">{{saleData.service_info.buyer_question}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-returntype flex-y-center">
+      <view class="sale-shop-info-item-name">退款方式</view>
+      <view class="sale-shop-info-item-cont">原路返回</view>
+    </view>
+  </view>
+</view>
+<view class="sale-submit-btn-wrapper flex-right" wx:if="{{ saleData.admin_state == 0 && saleData.seller_state == 2 && saleData.refund_state == 1 && isSpace == true }}">
+  <view class="sale-submit-btn" bindtap="submitSale">提交</view>
+</view>
+
+<!-- 售后完成 -->
+<view class="sale-examine-wrapper2" wx:if="{{ saleFinish.admin_state == 0 && saleFinish.seller_state == 2 && saleFinish.refund_state == 3 }}">
+  <view class="sale-progress flex-sw" data-refund="{{saleFinish.service_info.refund_sn}}" bindtap="saleProgress">
+    <view>售后进度</view>
+    <image src="../../../images/cause_go.png"></image>
+  </view>
+  <view class="sale-progress flex-y-center" style="color: #fe6601;">
+    <view>已退款</view>
+    <view style="margin-left: 22rpx;">{{saleFinish.goods_info.refund_amount}}</view>
+  </view>
+
+  <view class="sale-detail-goods-wrapper flex">
+    <view class="sale-detail-goods-img">
+      <image src="{{saleFinish.goods_info.goods_image}}"></image>
+    </view>
+    <view class="sale-detail-goods-word">
+      <view class="sale-detail-goods-name text-more-2">{{saleFinish.goods_info.goods_name}}</view>
+      <view class="sale-detail-goods-price">￥{{saleFinish.goods_info.goods_price}}</view>
+    </view>
+    <view class="sale-detail-goods-number">
+      <view>数量</view>
+      <view>×{{saleFinish.goods_info.goods_num}}</view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-info-wrapper">
+    <view class="sale-examine-shop-one">
+      <view class="sale-examine-shop-one-title">商家信息</view>
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">收货人</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.receive_info.receive_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">联系电话</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.receive_info.telphone}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">退货地址</text>
+          <view class="sale-shop-info-item-cont text-more">{{saleFinish.service_info.receive_info.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-mailing">
+      <view class="sale-examine-shop-one-title" style="margin: 20rpx 0;">寄件信息</view>
+      <view class="sale-examine-shop-one-content" wx:if="{{ saleFinish.express_info == '' }}">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流公司</text>
+          <view class="sale-shop-info-item-cont">
+            <input bindinput="getName"></input>
+          </view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流单号</text>
+          <view class="sale-shop-info-item-cont">
+            <input type="number" bindinput="getNumber"></input>
+          </view>
+        </view>
+      </view>
+
+      <view class="sale-examine-shop-one-content" wx:else>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流公司</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.express_info.express_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">物流单号</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.express_info.express_no}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系人</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.send_info.user_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系方式</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.send_info.user_phone}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="sale-examine-shop-time">
+    <view class="sale-examine-shop-time-top">
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请时间</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.Traces[0].AcceptTime}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">服务类型</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.refund_type}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">申请原因</text>
+          <view class="sale-shop-info-item-cont">{{saleFinish.service_info.reason_info}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name">问题描述</text>
+          <view class="sale-shop-info-item-cont text-more-2">{{saleFinish.service_info.buyer_question}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="sale-examine-shop-returntype flex-y-center">
+      <view class="sale-shop-info-item-name">退款方式</view>
+      <view class="sale-shop-info-item-cont">原路返回</view>
+    </view>
+  </view>
+</view>
+
+<!-- 售后不通过 -->
+<view class="sale-examine-wrapper2" wx:if="{{ notSaleData.admin_state == 0 && notSaleData.seller_state == 3 && notSaleData.refund_state == 3 }}">
+  <view class="sale-progress flex-sw" data-refund="{{saleData.service_info.refund_sn}}" bindtap="saleProgress">
+    <view>售后进度</view>
+    <image src="../../../images/cause_go.png"></image>
+  </view>
+
+  <view class="sale-detail-goods-wrapper flex">
+    <view class="sale-detail-goods-img">
+      <image src="{{notSaleData.goods_info.goods_image}}"></image>
+    </view>
+    <view class="sale-detail-goods-word">
+      <view class="sale-detail-goods-name text-more-2">{{notSaleData.goods_info.goods_name}}</view>
+      <view class="sale-detail-goods-price">￥{{notSaleData.goods_info.goods_price}}</view>
+    </view>
+    <view class="sale-detail-goods-number">
+      <view>数量</view>
+      <view>×{{notSaleData.goods_info.goods_num}}</view>
+    </view>
+  </view>
+
+  <view class="sale-maling-wrapper">
+    <view class="sale-examine-shop-mailing">
+      <view class="sale-examine-shop-one-title">寄件信息</view>
+      <view class="sale-examine-shop-one-content">
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系人</text>
+          <view class="sale-shop-info-item-cont">{{notSaleData.service_info.send_info.user_name}}</view>
+        </view>
+        <view class="sale-examine-shop-one-item flex">
+          <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">联系方式</text>
+          <view class="sale-shop-info-item-cont">{{notSaleData.service_info.send_info.user_phone}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="sale-notsale-wrapper">
+    <view class="sale-examine-shop-one-content">
+      <view class="sale-examine-shop-one-item flex">
+        <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">申请时间</text>
+        <view class="sale-shop-info-item-cont">{{notSaleData.Traces[0].AcceptTime}}</view>
+      </view>
+      <view class="sale-examine-shop-one-item flex">
+        <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">服务类型</text>
+        <view class="sale-shop-info-item-cont">{{notSaleData.service_info.refund_type}}</view>
+      </view>
+      <view class="sale-examine-shop-one-item flex">
+        <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">申请原因</text>
+        <view class="sale-shop-info-item-cont">{{notSaleData.service_info.reason_info}}</view>
+      </view>
+      <view class="sale-examine-shop-one-item flex">
+        <text decode="{{true}}" space="{{true}}" class="sale-shop-info-item-name flex-y-center">问题描述</text>
+        <view class="sale-shop-info-item-cont text-more-2">{{notSaleData.service_info.buyer_question}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- <cover-view> -->
+  <view class="apply-cause-mask-wrapper" wx:if="{{isCause}}" bindtap="closeCause"></view>
+  <view class="apply-cause-mask" style="bottom: {{isApply}}">
+    <view class="apply-cause-mask-title flex-center">申请原因</view>
+    <view class="apply-cause-mask-subtitle">请选择取消订单的原因</view>
+    <view class="apply-cause-mask-content">
+      <radio-group class="radio-group" bindchange="radioChange">
+        <label class="radio" wx:for="{{refundReason}}" wx:key="{{index}}" data-name="{{item.reason_info}}">
+          <view class="apply-cause-mask-item flex-sw">
+            <view class="apply-cause-mask-word">{{item.reason_info}}</view>
+            <radio value="{{item.reason_id}}" />
+          </view>
+        </label>
+      </radio-group>
+      <view class="apply-cause-mask-btn-wrapper">
+        <view class="apply-cause-mask-btn flex-center" bindtap="closeCause">完成</view>
+      </view>
+    </view>
+  </view>
+<!-- </cover-view> -->

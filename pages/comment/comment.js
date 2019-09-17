@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    height: 0,
     currentIndex: 0,
     listCount: {}, //评论类型数量
     commentList: [], //评论条数
@@ -22,30 +23,42 @@ Page({
     _this.setData({
       goodsSku: options.sku
     });
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     wx.request({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
       method: 'POST',
       data: {
         user_token: wx.getStorageSync('user_token'),
         device_id: wx.getStorageSync('device_id'),
-        sku: 'ZY6ec8d9147c',
-        // sku: options.sku,
+        // sku: 'ZY6ec8d9147c',
+        sku: options.sku,
         order_state: 0,
         page: 1,
         per_page: 10
       },
       success(res) {
         var data = res.data.data;
-        if (res.data.code) {  
+        if (res.data.code == 200) {  
           _this.setData({
             listCount: data.listCount,
             commentList: data.list
           });
+        } else if (res.data.code == 1000001) {
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
         }
         wx.hideLoading();
       }
     });
+
+    wx.getSystemInfo({
+      success(res) {
+        _this.setData({
+          height: res.windowHeight
+        });
+      }
+    })
   },
 
   /**
@@ -58,18 +71,19 @@ Page({
   //选择评论类型
   checkType: function (e) {
     var _this = this;
-    wx.showLoading({ title: '加载中' });
     var _index = e.currentTarget.dataset.index;
     _this.setData({
       currentIndex: _index
     });
 
-    if(_index == 2) {
+    if (_index == 2) {
+      wx.showLoading({ title: '加载中', mask: true });
       _this.returnType(1);
       _this.setData({
         orderState: 1
       });
     } else if (_index == 4) {
+      wx.showLoading({ title: '加载中', mask: true });
       _this.returnType(2);
       _this.setData({
         orderState: 4
@@ -149,15 +163,15 @@ Page({
   onReachBottom: function () {
     var _this = this;
     _this.data.page++;
-    wx.showLoading({ title: '加载中' });
+    wx.showLoading({ title: '加载中', mask: true });
     wx.request({
       url: 'http://tapi.fulibuy.cn/Goods/getGoodsEvaluate',
       method: 'POST',
       data: {
         user_token: wx.getStorageSync('user_token'),
         device_id: wx.getStorageSync('device_id'),
-        sku: 'ZY6ec8d9147c',
-        // sku: options.sku,
+        // sku: 'ZY6ec8d9147c',
+        sku: options.sku,
         order_state: _this.data.orderState,
         page: _this.data.page,
         per_page: 10

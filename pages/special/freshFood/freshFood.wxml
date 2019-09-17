@@ -1,5 +1,10 @@
 <scroll-view scroll-y="true" style='height:{{winHeight}}px;' bindscroll='scroll' scroll-with-animation="true" scroll-into-view="{{toView}}">
-  <view class="casualSnacks-nav" style="position: {{posVal}}">
+  <view class="casualSnacks-nav">
+    <view wx:if="{{top < 90}}">
+      <text class="casualSnacks-nav-item {{currentData == index ? 'cactive' : ''}}" wx:for="{{navName}}" wx:key="index" data-index="{{index}}" bindtap="checkCurrent" data-curid="{{item.at_id}}">{{item.at_name}}</text>
+    </view>
+  </view>
+  <view class="casualSnacks-nav2" wx:if="{{top > 90}}">
     <text class="casualSnacks-nav-item {{currentData == index ? 'cactive' : ''}}" wx:for="{{navName}}" wx:key="index" data-index="{{index}}" bindtap="checkCurrent" data-curid="{{item.at_id}}">{{item.at_name}}</text>
   </view>
   <view class="fulimall">
@@ -39,6 +44,7 @@
     <view class="fulimall-special">
       <block wx:for="{{special}}" wx:for-index="idx" wx:for-item="itemName" wx:key="idx">
         <view class="j" id="{{'mao'+itemName.at_id}}">
+          <view class="fulimall-special-titlekong" wx:if="{{navName[idx].at_id == isid}}">aaa</view>
           <view class="fulimall-special-title">{{itemName.goodsName}}</view>
           <view class="fulimall-special-content">
             <block wx:for="{{itemName.data6.list}}" wx:key="index">

@@ -1,0 +1,75 @@
+<view class="record-wrapper">
+  <view class="record-head flex-sw">
+    <view class="record-tab flex-center {{ current == 1 ? 'record-tab-cur' : '' }}" data-index="1" bindtap="tabClick">待审核</view>
+    <view class="record-tab flex-center {{ current == 2 ? 'record-tab-cur' : '' }}" data-index="2" bindtap="tabClick">售后中</view>
+    <view class="record-tab flex-center {{ current == 3 ? 'record-tab-cur' : '' }}" data-index="3" bindtap="tabClick">已完成</view>
+  </view>
+
+  <view class="record-content" wx:if="{{ current == 1 }}">
+    <navigator url="/pages/afterSale/afterSaleDetail/afterSaleDetail?order={{item.order_sn}}&refund={{item.refund_sn}}&state=1" hover-class="none" class="record-service-wrapper" wx:for="{{audited}}" wx:key="index" wx:if="{{audited.length > 0}}">
+      <view class="record-service-head flex-sw">
+        <view class="record-service-number">服务单号：{{item.order_sn}}</view>
+        <view class="record-service-state">{{item.refund_desc}}</view>
+      </view>
+      <view class="record-service-content flex">
+        <view class="record-service-img">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+        <view class="record-service-word text-more-2">{{item.goods_name}}</view>
+        <view class="record-service-num">
+          <view>数量</view>
+          <view>×{{item.goods_num}}</view>
+        </view>
+      </view>
+    </navigator>
+    <view wx:if="{{audited.length == 0}}" class="not-record-order flex-center" style="height: {{height - 90}}px">
+      <image src="../../../images/alert_placeholder_orders.png"></image>
+      <view>您还没有申请</view>
+    </view>
+  </view>
+  <view class="record-content" wx:if="{{ current == 2 }}">
+    <navigator url="/pages/afterSale/afterSaleDetail/afterSaleDetail?order={{item.order_sn}}&refund={{item.refund_sn}}&state=2" hover-class="none" class="record-service-wrapper" wx:for="{{sending}}" wx:key="index" wx:if="{{sending.length > 0}}">
+      <view class="record-service-head flex-sw">
+        <view class="record-service-number">服务单号：{{item.order_sn}}</view>
+        <view class="record-service-state">{{item.refund_desc}}</view>
+      </view>
+      <view class="record-service-content flex">
+        <view class="record-service-img">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+        <view class="record-service-word text-more-2">{{item.goods_name}}</view>
+        <view class="record-service-num">
+          <view>数量</view>
+          <view>×{{item.goods_num}}</view>
+        </view>
+        <!-- <view class="record-service-btn flex-center">寄回售后</view> -->
+      </view>
+    </navigator>
+    <view wx:if="{{sending.length == 0}}" class="not-record-order flex-center" style="height: {{height - 90}}px">
+      <image src="../../../images/alert_placeholder_orders.png"></image>
+      <view>您还没有申请</view>
+    </view>
+  </view>
+  <view class="record-content" wx:if="{{ current == 3 }}">
+    <navigator url="/pages/afterSale/afterSaleDetail/afterSaleDetail?order={{item.order_sn}}&refund={{item.refund_sn}}&state=4" hover-class="none" class="record-service-wrapper" wx:for="{{done}}" wx:key="index" wx:if="{{done.length > 0}}">
+      <view class="record-service-head flex-sw">
+        <view class="record-service-number">服务单号：{{item.order_sn}}</view>
+        <view class="record-service-state">{{item.refund_desc}}</view>
+      </view>
+      <view class="record-service-content flex">
+        <view class="record-service-img">
+          <image src="{{item.goods_image}}"></image>
+        </view>
+        <view class="record-service-word text-more-2">{{item.goods_name}}</view>
+        <view class="record-service-num">
+          <view>数量</view>
+          <view>×{{item.goods_num}}</view>
+        </view>
+      </view>
+    </navigator>
+    <view wx:if="{{done.length == 0}}" class="not-record-order flex-center" style="height: {{height - 90}}px">
+      <image src="../../../images/alert_placeholder_orders.png"></image>
+      <view>您还没有申请</view>
+    </view>
+  </view>
+</view>

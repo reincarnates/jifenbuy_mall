@@ -31,7 +31,7 @@ Page({
 
     this.setData({
       userinfo: userinfo_model,
-      list_value: list_value_array
+      list_value: list_value_array,
     });
   },
 
@@ -69,19 +69,21 @@ Page({
           filePath: self.data.images_paths[0],
           name: 'file',
           data: {
-            "file": "avatar_img/" + Math.random(),
+           "file": "avatar_img/" + Math.random(),
            "type" : "headlog"
           },
           success(res) {
+            debugger
             console.log(res);
             var obj = JSON.parse(res.data);
-            console.log(obj);
             self.setData({
               member_avatar: obj.data.src
             });
+            debugger
             self.saveinfo();
           },
           fail(res) {
+            debugger
             wx.showToast({
               icon: 'none',
               title: '上传失败',
@@ -107,6 +109,7 @@ Page({
       },
       success(res) {
         console.log(res);
+        debugger
         let code = res.data.code;
         if (code == 200) {
           wx.showToast({

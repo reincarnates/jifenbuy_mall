@@ -46,14 +46,16 @@
 
       <!-- 0(已取消)10(默认):未付款;20:已付款;30:已发货;40:已收货;' -->
       <!-- 因各种状态问题, 直接判断描述为“已取消”隐藏 -->
-      <view class="function_view flex-row" wx:if="{{order.order_desc != '已取消'}}" style="height: {{order.order_desc != '已取消' ? '86rpx' : '1rpx'}} ;">
+      <!-- style="height: {{order.order_desc != '已取消' ? '86rpx' : '1rpx'}} ;" -->
+      <view class="function_view flex-row" style="height: 86rpx;">
         <!-- <view class="function_container" > -->
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 40 || order.order_desc == '已取消'}}" data-title="再次购买" data-order="{{order}}">再次购买</view>
           <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 30 || order.order_state == 40}}" data-title="查看物流" data-order="{{order}}">查看物流</view>
-          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 20 || order.order_state == 10}}" data-title="取消订单">取消订单</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{(order.order_state == 20 || order.order_state == 10 ) && order.order_desc != '已取消'}}" data-title="取消订单">取消订单</view>
           <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 30}}" data-title="确认收货" data-order="{{order}}">确认收货</view>
-          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 10}}" data-title="去支付" data-order="{{order}}">去支付</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 10 && order.order_desc != '已取消'}}" data-title="去支付" data-order="{{order}}">去支付</view>
           <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 40 && order.evaluation_state == false}}" data-title="评价" data-order="{{order}}">评价</view>
-          <view class="flex-center" catchtap="tapFuncwtionButton" wx:if="{{order.order_state == 40 && order.evaluation_state == true}}" data-title="查看评价" data-order="{{order}}">查看评价</view>
+          <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{order.order_state == 40 && order.evaluation_state == true}}" data-title="查看评价" data-order="{{order}}">查看评价</view>
         <!-- </view> -->
       </view>
 
@@ -66,6 +68,10 @@
     <view class="empty_title">您还没有订单</view>
   </view>
 
+</view>
+
+<view class="loading" wx:if="{{canLoadMore == true}}">
+    上拉加载更多
 </view>
 
 <!-- cancel reason -->

@@ -163,7 +163,7 @@ Page({
             }
             nowmch[i].price = mchmay;
             mchmay = Number(mchmay) + Number(nowmch[i].freight);
-            nowmch[i].total = mchmay;
+            nowmch[i].total = Number(mchmay).toFixed(2);
           }
           _this.setData({
             orderGoods: nowmch,

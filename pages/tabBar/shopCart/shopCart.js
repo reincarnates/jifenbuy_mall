@@ -24,6 +24,7 @@ Page({
     zonglength: 0, //总条目
     yixuanlength: 0, //已选条目
     invalidArr: [], //失效商品
+    invalidArrId: [], //失效商品id
     invState: true,
     isGoods: true,
     isShow: false, //登录后显示
@@ -493,6 +494,19 @@ Page({
 
   //清理失效商品
   clearInvalid: function() {
+    var _this = this;
+    wx.request({
+      url: 'http://tapi.fulibuy.cn/Cart/delCart',
+      method: 'POST',
+      data: {
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
+        cart_id: _this.data.invalidArrId.join(','),
+      },
+      success(res) {
+        console.log(res);
+      }
+    });
     this.setData({
       invalidArr: [],
       invState: false
@@ -591,6 +605,13 @@ Page({
     }
   },
 
+  //跳转商品详情
+  cartDetail: function(e) {
+    wx.navigateTo({
+      url: `/pages/goodsDetail/goodsDetail?id=${e.currentTarget.dataset.sku}`,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -668,6 +689,7 @@ Page({
                 var state = that.data.cardTeams[i].list[j].goods_state;
                 if (state != 1) {
                   arr2.push(that.data.cardTeams[i].list[j]);
+                  that.data.invalidArrId.push(that.data.cardTeams[i].list[j].cart_id);
                 }
 
                 if (that.data.cardTeams[i].list[j].stock && that.data.cardTeams[i].list[j].goods_state == 1) {
@@ -681,6 +703,7 @@ Page({
               cardTeams: arr3,
               newArr: arr,
               invalidArr: arr2,
+              invalidArrId: that.data.invalidArrId
             });
           }
         }

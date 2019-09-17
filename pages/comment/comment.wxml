@@ -1,4 +1,4 @@
-<view class="comment-wrapper">
+<view class="comment-wrapper" style="min-height: {{height}}px;" wx:if="{{commentList.length > 0}}">
   <view class="comment-type-wrapper">
     <text class="comment-type-btn {{currentIndex == 0 ? 'comment-type-btn-active' : ''}}" data-index="0" bindtap="checkType">全部({{listCount.all}})</text>
     <text class="comment-type-btn {{currentIndex == 1 ? 'comment-type-btn-active' : ''}}" data-index="1" bindtap="checkType">最新</text>
@@ -32,4 +32,9 @@
       </view>
     </block>
   </view>
+</view>
+
+<view class="not-comment-wrapper flex-center" style="height: {{height}}px" wx:else>
+  <image src="../../images/not_comment.png"></image>
+  <view>暂无评价</view>
 </view>

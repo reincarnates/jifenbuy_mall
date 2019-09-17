@@ -28,7 +28,7 @@
                 </label>
               </checkbox-group>
               <!-- 商品列表 -->
-              <view class=' row btm-box' bindtap='goDetails' id="{{cardTeams.store_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-key="{{key}}" data-index='{{index}}'>
+              <view class=' row btm-box' bindtap='cartDetail' id="{{cardTeams.store_id}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="drawEnd" data-key="{{key}}" data-index='{{index}}' data-sku="{{element.goods_sku}}">
                 <view class='c-cont-left'>
                   <view class='c-cont-icon'>
                     <image src='{{element.goods_image}}' mode='aspectFit'></image>
@@ -48,13 +48,9 @@
                     </view>
                     <view class='c-shoptrolley'>
                       <view class='c-carts-num row'>
-                        <view class='c-main' catchtap='getMain' data-key="{{key}}" data-index="{{index}}">
-                          -
-                        </view>
+                        <view class='c-main flex-center' catchtap='getMain' data-key="{{key}}" data-index="{{index}}">-</view>
                         <view class='c-num'>{{element.goods_num}}</view>
-                        <view class='c-plus' catchtap='getPlus' data-key="{{key}}" data-index="{{index}}">
-                          +
-                        </view>
+                        <view class='c-plus flex-center' catchtap='getPlus' data-key="{{key}}" data-index="{{index}}">+</view>
                       </view>
                     </view>
                   </view>
@@ -71,7 +67,7 @@
             </view>
           </view>
         </block>
-        <view class="invalid-goods-wrapper" wx:if="{{invState}}">
+        <view class="invalid-goods-wrapper" wx:if="{{invalidArr.length == 0 ? false : true}}">
           <view class="invalid-goods-title between">
             <view class="invalid-goods-title-left">
               失效商品
@@ -134,7 +130,7 @@
     </view>
   </view>
 
-  <view wx:if="{{cardTeams.length == 0 ? true : false}}" class="flex-center flex-col" style="height: 100%; margin-top: 320rpx;">
+  <view wx:if="{{cardTeams.length == 0 && invalidArr.length == 0 ? true : false}}" class="flex-center flex-col" style="height: 100%; margin-top: 320rpx;">
     <image class="not-cart-img" src="../../../images/not_cart_bg.png"></image>
     <view class="not-cart-word">购物车空了，快去添加宝贝吧！</view>
   </view>

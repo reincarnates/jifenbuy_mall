@@ -178,13 +178,13 @@
 }
 
 .shipped-made{
-  width: 69rpx;
-  height: 55rpx;
+  width: 61rpx;
+  height: 53rpx;
 }
 
 .received-made{
-  width: 54rpx;
-  height: 56rpx;
+  width: 57rpx;
+  height: 58rpx;
 }
 
 .comment-made{
@@ -390,9 +390,14 @@
 }
 
 .guess-you-like-item2{
-  width: 348rpx;
+  width: 350rpx;
   height: 278px;
   background-color: #fff;
-  margin: 0 6px 6px 0;
+  margin: 0 18rpx 18rpx 0;
   box-shadow: 2px 2px 2px #e4e4e2;
+  border-radius: 10rpx;
+}
+
+.guess-you-like-item2:nth-child(2n+2){
+  margin-right: 0;
 }

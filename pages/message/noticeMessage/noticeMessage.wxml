@@ -1,0 +1,12 @@
+<view class="notice-wrapper" wx:if="{{notice.length != 0}}">
+  <view class="notice-item">
+    <view class="notice-item-title">七夕充钱第一波</view>
+    <view class="notice-item-info text-more-2">ThinkPad笔记本899元起！Macbook air 低质4899， 更多低价爆款任意选择</view>
+    <view class="notice-item-time">2019/01/03  16:12:55</view>
+  </view>
+</view>
+
+<view class="no-record-wrapper flex-center" style="height: {{height}}px" wx:else>
+  <image src="../../../images/no_record.png"></image>
+  <view>暂无记录</view>
+</view>

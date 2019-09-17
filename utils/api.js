@@ -148,7 +148,7 @@ const uploadPicEvaluation = (params) => {
  
 // 保存个人信息设置
 const saveUserinfo = (params) => {
-  wxUpload(params, `${apiURL}/Member/editMemberInfo`);
+  wxRequest(params, `${apiURL}/Member/editMemberInfo`);
 }
 
 // 头像上传
@@ -166,7 +166,10 @@ module.exports = {
   preSaleCancel,
   applyWattingRefund,
   confirmOrders,
+  
   orderEvaluetion,
+  uploadPicEvaluation,
+  submitEvaluation,
 
   saveUserinfo,
   uploadAvatarimg

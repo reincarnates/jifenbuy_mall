@@ -23,11 +23,12 @@ Component({
    */
   data: {
     detailPics: [], //上传的结果图片集合
-    detailPics2: []
+    detailPics2: [],
+    option: {}
   },
 
   ready: function () {
-    console.log(this.data)
+    // console.log(this.data)
   },
 
   /**

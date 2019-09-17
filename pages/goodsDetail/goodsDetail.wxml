@@ -20,17 +20,14 @@
       <view class="goods-attr-name">
         {{goodsName}}
       </view>
-      <view class="flex" style="margin-top: 22rpx; align-items: center;">
-        <view class="goods-attr-price">
-          ￥
-          <text>{{goodsPrice}}</text>
-        </view>
-        <view class="goods-attr-discount">折扣{{goodsDiscount}}%</view>
+      <view class="goods-attr-old-price" style="margin-top: 22rpx;">
+        <text style="margin-right: 5rpx;">{{source}}</text>
+        <text style="text-decoration: line-through;">￥{{goodsMarketprice}}</text>
       </view>
-      <view class="flex-sw" style="margin-top: 10rpx;">
-        <view class="goods-attr-old-price">
-          <text style="margin-right: 5rpx;">{{source}}</text>
-          <text style="text-decoration: line-through;">￥{{goodsMarketprice}}</text>
+      <view class="flex-sw">
+        <view class="flex" style="align-items: center;">
+          <view class="goods-attr-price">￥<text>{{goodsPrice}}</text></view>
+          <view class="goods-attr-discount" wx:if="{{goodsDiscount > 0}}" style="padding-top: 6rpx; box-sizing: border-box;">优惠率{{goodsDiscount}}%</view>
         </view>
         <view class="goods-attr-sales">销量 {{goodsSalenum}}</view>
       </view>
@@ -135,7 +132,9 @@
   </view>
 
   <view class="goods-head flex" style="background: {{bgColor}}; top: {{statusBarHeight}}px">
-    <view class="goods-return" style="font-size: 60rpx; background: {{bgReturnColor}}; color: {{textColor}}" bindtap="returnUp">{{returnPage}}</view>
+    <view class="goods-return flex-center" style="font-size: 60rpx; background: {{bgReturnColor}}; color: {{textColor}}" bindtap="returnUp">
+      <image src="{{returnPage}}"></image>
+    </view>
     <view class="float-column-wrapper flex-sw" wx:if="{{columState}}">
       <view class="float-column-item flex-center {{currentData == 0 ? 'columnCur' : ''}}" data-current="0" bindtap="checkCurrent">宝贝</view>
       <view class="float-column-item flex-center {{currentData == 1 ? 'columnCur' : ''}}" data-current="1" bindtap="checkCurrent">评价</view>
@@ -172,8 +171,8 @@
     </view>
   </view>
   <view class="goods-operation-right flex">
-    <view class="goods-operation-plus-shopcart" bindtap="plusShopCart">加入购物车</view>
-    <view class="buy-immediately" bindtap="buyImdy">立即购买</view>
+    <view class="goods-operation-plus-shopcart" bindtap="plusShopCart" style="background: {{bgColorBtn}}">加入购物车</view>
+    <view class="buy-immediately" bindtap="buyImdy" style="background: {{bgColorBtn2}}">立即购买</view>
   </view>
 </view>
 <!-- 操作end -->

@@ -175,7 +175,7 @@
   border-radius: 33rpx;
   background-color: #fff;
   font-size: 28rpx;
-  border: 1rpx solid #999;
+  border: 1px solid #999;
   color: #999;
 }
 

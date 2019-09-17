@@ -16,7 +16,7 @@
     </view>
     <view class="bill-tab-content" wx:if="{{current == 1}}">
       <block wx:for="{{bill}}" wx:key="index">
-        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-price="{{item.balance_sum}}" bindtap="dealDetail">
+        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-price="{{item.balance_sum}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}"  bindtap="dealDetail">
           <view class="bill-item-left">
             <view class="bill-item-left-title">{{item.pay_type}}</view>
             <view style="margin-top: 12rpx;">{{item.create_time}}</view>
@@ -27,8 +27,7 @@
     </view>
     <view class="bill-tab-content" wx:if="{{current == 2}}">
       <block wx:for="{{paymentBill}}" wx:key="index">
-        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}"
-          bindtap="dealDetail">
+        <view class="bill-item-wrapper flex-sw" data-source="{{item.source}}" data-order="{{item.order_sn}}" data-paytype="{{item.pay_type}}" data-paydesc="{{item.pay_desc}}" data-balance="{{item.balance}}" data-createtime="{{item.create_time}}" data-state="{{item.state}}" bindtap="dealDetail">
           <view class="bill-item-left">
             <view class="bill-item-left-title">{{item.pay_type}}</view>
             <view style="margin-top: 12rpx;">{{item.create_time}}</view>

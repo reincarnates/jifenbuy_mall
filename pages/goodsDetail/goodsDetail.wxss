@@ -47,12 +47,17 @@
   margin-left: 24rpx;
 }
 
+.goods-return image{
+  width: 19rpx;
+  height: 33rpx;
+}
+
 .float-column-wrapper{
   width: 308rpx;
   height: 50rpx;
   color: #666;
   font-size: 26rpx;
-  margin-left: 90rpx;
+  margin-left: 130rpx;
 }
 
 .float-column-item{
@@ -109,15 +114,15 @@
 }
 
 .goods-attr-discount{
-  width: 125rpx;
+  /* width: 125rpx; */
   height: 35rpx;
-  border-radius: 2rpx;
-  color: #fff;
-  text-align: center;
+  /* border-radius: 2rpx; */
+  color: #fe9901;
+  /* text-align: center; */
   line-height: 35rpx;
   font-size: 20rpx;
   margin-left: 30rpx;
-  background-color: #fe9901;
+  /* background-color: #fe9901; */
 }
 
 .goods-attr-old-price{

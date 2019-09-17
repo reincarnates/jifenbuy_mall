@@ -1,0 +1,19 @@
+<view class="activity-wrapper" wx:if="{{activity.length != 0}}">
+  <view class="activity-item">
+    <view class="activity-item-time flex-center">
+      2019.02.03 10:10:10
+    </view>
+    <view class="activity-item-content">
+      <view class="activity-item-img"></view>
+      <view class="activity-item-word">
+        <view class="activity-item-word-title text-more">【上新】您关注的商品已经上新啦</view>
+        <view class="activity-item-word-mess text-more-2">ThinkPad笔记本899元起！Macbook air 低质4899，更多 低价爆款任意选择</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="no-record-wrapper flex-center" style="height: {{height}}px" wx:else>
+  <image src="../../../images/no_record.png"></image>
+  <view>暂无记录</view>
+</view>

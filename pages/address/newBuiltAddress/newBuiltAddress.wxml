@@ -9,7 +9,7 @@
   <view class="new-built-address-name flex-y-center">
     <view class="new-built-address-name-left">手机号</view>
     <view class="new-built-address-name-right">
-      <input bindinput="getUserPhone" value="{{phone}}" placeholder="请填写收货人手机号" type="number" placeholder-style="color: #999999;"></input>
+      <input bindinput="getUserPhone" value="{{phone}}" maxlength="11" placeholder="请填写收货人手机号" type="number" placeholder-style="color: #999999;"></input>
     </view>
   </view>
   <view class="new-built-address-name flex-y-center">

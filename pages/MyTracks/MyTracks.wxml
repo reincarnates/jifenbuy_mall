@@ -1,5 +1,6 @@
 <view class="mytracks-wrapper">
   <block wx:for="{{tracks}}" wx:key="index">
+    <view class="mytracks-item-time">{{item.time}}</view>
     <navigator url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none" class="mytracks-item flex">
       <view class="mytracks-item-img">
         <image src="{{item.goods_image}}"></image>

@@ -1,0 +1,122 @@
+.record-wrapper{
+  width: 100%;
+}
+
+.record-head{
+  width: 100%;
+  height: 90rpx;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  padding: 0 120rpx;
+  box-sizing: border-box;
+}
+
+.record-tab{
+  /* width: 77rpx; */
+  height: 100%;
+  color: #333;
+  font-size: 26rpx;
+  border-bottom: 3rpx solid #fff;
+  box-sizing: border-box;
+}
+
+.record-tab-cur{
+  border-color: #fe6601;
+  color: #fe6601;
+}
+
+.record-content{
+  width: 100%;
+  padding: 24rpx 12rpx;
+  box-sizing: border-box;
+}
+
+.record-service-wrapper{
+  width: 100%;
+  height: 278rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  margin-bottom: 12rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+}
+
+.record-service-head{
+  width: 100%;
+  height: 70rpx;
+}
+
+.record-service-number{
+  color: #333;
+  font-size: 22rpx;
+}
+
+.record-service-state{
+  color: #fe6601;
+  font-size: 22rpx;
+}
+
+.record-service-content{
+  width: 100%;
+  position: relative;
+  padding-top: 5rpx;
+  box-sizing: border-box;
+}
+
+.record-service-img{
+  width: 170rpx;
+  height: 170rpx;
+  border-radius: 10rpx;
+}
+
+.record-service-img image{
+  width: 100%;
+  height: 100%;
+}
+
+.record-service-word{
+  width: 407rpx;
+  height: 75rpx;
+  line-height: 35rpx;
+  padding: 10rpx 0 0 26rpx;
+  color: #333;
+  font-size: 24rpx;
+  box-sizing: border-box;
+}
+
+.record-service-num{
+  width: 107rpx;
+  color: #333;
+  font-size: 24rpx;
+  padding-top: 10rpx;
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.record-service-btn{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 129rpx;
+  height: 43rpx;
+  border: 1px solid #fe6601;
+  color: #fe6601;
+  font-size: 22rpx;
+  border-radius: 22rpx;
+}
+
+.not-record-order{
+  width: 100%;
+  flex-direction: column;
+  color: #666;
+  font-size: 24rpx;
+}
+
+.not-record-order image{
+  width: 254rpx;
+  height: 155rpx;
+}
+
+.not-record-order view{
+  margin-top: 23rpx;
+}

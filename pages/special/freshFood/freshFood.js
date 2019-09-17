@@ -13,6 +13,9 @@ Page({
     winHeight: 0, //设备高度
     toView: '', //跳转id
     posVal: '', //导航定位
+    isNav: false,
+    top: 0,
+    isid:0,
   },
 
   /**
@@ -26,7 +29,8 @@ Page({
       data: {
         user_token: wx.getStorageSync('user_token'),
         device_id: wx.getStorageSync('device_id'),
-        at_id: options.id
+        // at_id: options.id
+        at_id: 55
       },
       success(res) {
         console.log(res);
@@ -102,25 +106,32 @@ Page({
   scroll: function (e) {
     //页面滚动设置固定定位
     var _this = this;
+    _this.setData({
+      top: e.detail.scrollTop
+    });
     if (e.detail.scrollTop < 150) {
       _this.setData({
-        posVal: ''
+        posVal: '',
+        isNav: false
       });
     } else {
       _this.setData({
-        posVal: 'fixed'
+        posVal: 'fixed',
+        isNav: true
       });
     }
   },
 
   //点击切换，滑块index赋值
   checkCurrent: function (e) {
+    console.log(e)
     const _this = this;
     var _index = e.target.dataset.index;
 
     _this.setData({
       currentData: e.target.dataset.index,
       toView: 'mao' + e.target.dataset.curid,
+      isid: e.target.dataset.curid,
     });
   },
 

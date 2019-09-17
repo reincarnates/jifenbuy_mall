@@ -25,7 +25,7 @@ Page({
       success(res) {
         let code = res.data.code;
         if (code == 200) {
-          let shipping_array = res.data.data.shipping_info.reverse();
+          let shipping_array = res.data.data.shipping_info.reverse();//.reverse();
           var order_model = res.data.data;
           for (let i = 0; i < shipping_array.length; i++) {
             var shipping_item = shipping_array[i];

@@ -201,8 +201,9 @@ Page({
     var source = e.currentTarget.dataset.source;
     var order = e.currentTarget.dataset.order;
     if (source == 'order') {
+      console.log(e);
       wx.navigateTo({
-        url: `/pages/balance/dealDetailBalance/dealDetailBalance?order=${order}&paydesc=${e.currentTarget.dataset.paydesc}&paytype=${e.currentTarget.dataset.paytype}&price=${e.currentTarget.dataset.price}`
+        url: `/pages/balance/dealDetailBalance/dealDetailBalance?order=${order}&paydesc=${e.currentTarget.dataset.paydesc}&paytype=${e.currentTarget.dataset.paytype}&price=${e.currentTarget.dataset.price}&balance=${e.currentTarget.dataset.balance}&createtime=${e.currentTarget.dataset.createtime}&state=${e.currentTarget.dataset.state}`
       });
     } else {
       wx.navigateTo({

@@ -474,6 +474,7 @@
   background-color: #fff;
   margin: 0 12rpx 12rpx 0;
   box-shadow: 5rpx 5rpx 5rpx #e4e4e2;
+  border-radius: 10rpx;
 }
 
 .guess-you-like-item:nth-child(2n+2){
@@ -488,6 +489,8 @@
 .guess-you-like-item-img image{
   width: 100%;
   height: 100%;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
 }
 
 .guess-you-like-item-name{

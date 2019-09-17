@@ -1,0 +1,58 @@
+<view class="message-wrapper">
+  <view class="message-item flex-sw" bindtap="locationService">
+    <view class="flex">
+      <view class="message-item-img">
+        <image src="../../../images/service_icon2.png"></image>
+      </view>
+      <view class="message-item-word">
+        <view class="message-item-word-title">在线客服</view>
+        <view class="message-item-word-cont">点击联系客服</view>
+      </view>
+    </view>
+    <view class="message-item-go flex-center">
+      <image src="../../../images/mess_go.png"></image>
+    </view>
+  </view>
+  <view class="message-item flex-sw" bindtap="locationActivity">
+    <view class="flex">
+      <view class="message-item-img">
+        <image src="../../../images/shaky_icon.png"></image>
+      </view>
+      <view class="message-item-word">
+        <view class="message-item-word-title">活动</view>
+        <view class="message-item-word-cont">点击查看最新活动</view>
+      </view>
+    </view>
+    <view class="message-item-go flex-center">
+      <image src="../../../images/mess_go.png"></image>
+    </view>
+  </view>
+  <view class="message-item flex-sw" bindtap="tradeLogistics">
+    <view class="flex">
+      <view class="message-item-img">
+        <image src="../../../images/logistics_icon.png"></image>
+      </view>
+      <view class="message-item-word">
+        <view class="message-item-word-title">交易物流</view>
+        <view class="message-item-word-cont">点击查看物流信息</view>
+      </view>
+    </view>
+    <view class="message-item-go flex-center">
+      <image src="../../../images/mess_go.png"></image>
+    </view>
+  </view>
+  <view class="message-item flex-sw" bindtap="locationNotice">
+    <view class="flex">
+      <view class="message-item-img">
+        <image src="../../../images/message_icon.png"></image>
+      </view>
+      <view class="message-item-word">
+        <view class="message-item-word-title">通知消息</view>
+        <view class="message-item-word-cont">阳光福利专注活动</view>
+      </view>
+    </view>
+    <view class="message-item-go flex-center">
+      <image src="../../../images/mess_go.png"></image>
+    </view>
+  </view>
+</view>

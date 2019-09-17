@@ -1,0 +1,60 @@
+<view class="saletype-wrapper">
+  <!-- <view class="saletype-goods-wrapper">
+    <view class="flex">
+      <view class="saletype-goods-img"></view>
+      <view class="saletype-goods-word">
+        <view class="saletype-goods-name text-more-2">韩后花痴氨基酸洗面奶洁面补税保湿 温空还有深层清洁</view>
+        <view class="saletype-goods-price">￥153.00</view>
+      </view>
+    </view>
+    <view class="saletype-goods-operation flex-right">
+      <view class="saletype-goods-operation-word">申请数量</view>
+      <view class="saletype-goods-operation-number flex">
+        <view class="saletype-goods-operation-reduce">-</view>
+        <view class="saletype-goods-operation-num">1</view>
+        <view class="saletype-goods-operation-plus">+</view>
+      </view>
+    </view>
+  </view> -->
+  <view class="saletype-goods-wrapper">
+    <view class="flex">
+      <view class="saletype-goods-img">
+        <image src="{{goods.img}}"></image>
+      </view>
+      <view class="saletype-goods-word">
+        <view class="saletype-goods-name text-more-2">{{goods.name}}</view>
+        <view class="saletype-goods-price">￥{{goods.price}}</view>
+      </view>
+    </view>
+    <view class="saletype-goods-operation flex-right">
+      <view class="saletype-goods-operation-word">申请数量</view>
+      <view class="saletype-goods-operation-number flex">
+        <view class="saletype-goods-operation-reduce" bindtap="reduce">-</view>
+        <view class="saletype-goods-operation-num">{{goods.num}}</view>
+        <view class="saletype-goods-operation-plus" bindtap="plus">+</view>
+      </view>
+    </view>
+  </view>
+  <view class="saletype-return-wrapper flex-sw" bindtap="returnPrice">
+    <view class="flex-center">
+      <view class="saletype-return-img">
+        <image src="../../../images/return_goods.png"></image>
+      </view>
+      <view class="saletype-return-word">退款退货</view>
+    </view>
+    <view class="saletype-return-go flex-center">
+      <image src="../../../images/go_shop.png"></image>
+    </view>
+  </view>
+  <view class="saletype-return-wrapper flex-sw" bindtap="service">
+    <view class="flex-center">
+      <view class="saletype-return-img">
+        <image src="../../../images/renturn_service.png"></image>
+      </view>
+      <view class="saletype-return-word">在线客服</view>
+    </view>
+    <view class="saletype-return-go flex-center">
+      <image src="../../../images/go_shop.png"></image>
+    </view>
+  </view>
+</view>

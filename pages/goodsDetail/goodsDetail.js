@@ -8,7 +8,7 @@ Page({
    */
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
-    returnPage: '<',
+    returnPage: '../../images/detail_return.png',
     goodsImg: [],
     bgReturnColor: 'rgba(0, 0, 0, .3)',
     textColor: '#fff',
@@ -59,6 +59,8 @@ Page({
     checkSkuData: '', //跳转提交订单的goods_sku
     quantity: 1, //商品数量
     goodsState: '', //商品是否下架
+    bgColorBtn: '#fe9901', //商品下架按钮颜色
+    bgColorBtn2: '#fe6601', //商品下架按钮颜色
   },
 
   /**
@@ -97,8 +99,8 @@ Page({
             //循环处理参数内容，增加is_xuan
             res.spec_value_ar.forEach((element, key) => {
               element.forEach((item, index) => {
-                element[0].is_xuan = true;
                 item.is_xuan = false;
+                element[0].is_xuan = true;
               });
             });
 
@@ -123,11 +125,22 @@ Page({
             var imgs2 = res.mobile_body.match(/img30[^"]+g/g);
             var imgs3 = res.mobile_body.match(/img10[^"]+g/g);
 
+            //计算折扣率
+            var discount = (res.goods_marketprice - res.goods_price) / res.goods_marketprice;
+
+            //判断商品是否下架
+            if (res.goods_state == 0) {
+              _this.setData({
+                bgColor: '#ccc',
+                bgColor2: '#ccc',
+              });
+            }
+
             _this.setData({
               goodsName: res.goods_name,
               goodsPrice: res.goods_price,
               goodsSalenum: res.goods_salenum,
-              goodsDiscount: res.goods_discount,
+              goodsDiscount: parseInt(discount * 100),
               goodsMarketprice: res.goods_marketprice,
               goodsParams: res.spec_name,
               specName: res.spec_name,
@@ -144,7 +157,15 @@ Page({
               imgs: imgs,
               imgs2: imgs2 != undefined ? imgs2 : imgs3,
               confirmSku: res.sku,
-              goodsState: res.goods_state
+              goodsState: res.goods_state,
+              //如果是一条参数，默认取第一条数据
+              goodsImage: res.sku_data[0].goods_image,
+              paramsPrice: res.sku_data[0].goods_price,
+              goodsClass: res.sku_data[0].goods_spec,
+              checkWord: '已选择',
+              goodsStorage: res.sku_data[0].goods_storage + res.sku_data[0].goods_unit,
+              seleGoodsSku: res.sku_data[0].goods_sku,
+              checkSkuData: res.sku_data[0].goods_sku
             });
 
             if (_this.data.goodsParams.length == 0) {
@@ -194,14 +215,16 @@ Page({
         columState: true,
         bgReturnColor: '#fff',
         textColor: '#999',
-        bgColor: '#fff'
+        bgColor: '#fff',
+        returnPage: '../../images/detail_return2.png',
       });
     } else {
       _this.setData({
         columState: false,
         bgReturnColor: 'rgba(0, 0, 0, .3)',
         textColor: '#fff',
-        bgColor: 'none'
+        bgColor: 'none',
+        returnPage: '../../images/detail_return.png',
       });
     }
 
@@ -480,12 +503,6 @@ Page({
           url: '/pages/login/login'
         });
       }
-    }else {
-      wx.showToast({
-        title: '该商品已被商家下架',
-        icon: 'none',
-        duration: 2000
-      })
     }
   },
 
@@ -541,12 +558,6 @@ Page({
           url: '/pages/login/login'
         });
       }
-    }else {
-      wx.showToast({
-        title: '该商品已被商家下架',
-        icon: 'none',
-        duration: 2000
-      })
     }
   },
 
@@ -659,15 +670,6 @@ Page({
         });
       }
     }, 1000);
-    wx.loadFontFace({
-      family: 'tw',
-      source: 'url("https://reincarnation.oss-cn-beijing.aliyuncs.com/font/%E6%A5%B7%E4%BD%93_GB2312.ttf")',
-      desc: {
-        style: 'normal',
-        weight: 'normal',
-        variant: 'normal'
-      }
-    })
   },
 
   /**

@@ -5,8 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjE3MTgxMDcsImV4cCI6MzEyMzQzNjIxNCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjEsIm5pY2tuYW1lIjoiXHU1NGM4XHU1NGM4XHU1NGM4IiwiY29tcGFueV9pZCI6NCwidXNlcm5hbWUiOiIxMzQzNjE4NzcyMyIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNC0yNCAxMTozNToxMyIsImRldmljZV9pZCI6ImZmYmNiNWVmZmY2YWEyOTQiLCJtYWluX3VybCI6Imh0dHA6XC9cL3Rlc3QuZnVsaWJ1eS5jbiJ9fQ.WxNSAWdLRhXPUZI5ybtSTBm5QCK9zecIUhqJbRp1AOA',
-    deviceId: 'ffbcb5efff6aa294',
     brandArr: [], //品牌
     store: [], //店铺
     brandHeight: '141px',
@@ -22,6 +20,8 @@ Page({
     classId: '', //分类id
     keyWord: '',  //商品关键字
     election: '', //选中的品牌
+    thislength: 8,
+    height: 0
   },
 
   /**
@@ -47,8 +47,8 @@ Page({
         // ev: '',
         // brandId: '',
         // source: '',
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
       },
       method: "POST",
       success(res) {
@@ -61,7 +61,15 @@ Page({
         wx.hideLoading();
         // console.log(_this.data.brandArr, _this.data.store);
       }
-    })
+    });
+
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          height: res.windowHeight
+        });
+      }
+    });
   },
 
   //查看全部品牌
@@ -71,8 +79,9 @@ Page({
     var that = this;
     query.select('.screen-brand-item-wrapper').boundingClientRect(function (rect) {
       that.setData({
-        brandHeight: rect.height + 'px',
-        isShowCheck: false
+        // brandHeight: rect.height + 'px',
+        isShowCheck: false,
+        thislength:that.data.brandArr.length,
       });
     }).exec();
   },
@@ -150,6 +159,7 @@ Page({
       shopCurrent2: -1,
       minVal: '',
       maxVal: '',
+      election: ''
     });
   },
 
@@ -170,8 +180,8 @@ Page({
         ev: _this.data.minVal + '-' + _this.data.maxVal,
         brandId: _this.data.brandId,
         source: _this.data.source,
-        user_token: _this.data.userToken,
-        device_id: _this.data.deviceId
+        user_token: wx.getStorageSync('user_token'),
+        device_id: wx.getStorageSync('device_id'),
       },
       method: "POST",
       success(res) {
@@ -235,20 +245,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var query = wx.createSelectorQuery();
     var _this = this;
     setTimeout(function() {
-      query.select('.screen-brand-item-wrapper').boundingClientRect(function (rect) {
-        if (rect.height <= 141) {
-          _this.setData({
-            isShowCheck: false
-          });
-        } else {
-          _this.setData({
-            isShowCheck: true
-          });
-        }
-      }).exec();
+      if (_this.data.brandArr.length <= 9) {
+        _this.setData({
+          isShowCheck: false
+        });
+      } else {
+        _this.setData({
+          isShowCheck: true
+        });
+      }
     }, 1000);
 
     wx.getStorage({

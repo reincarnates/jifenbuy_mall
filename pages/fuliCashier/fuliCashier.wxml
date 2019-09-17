@@ -44,7 +44,7 @@
     <view class="cashier-mask-head-word">请输入密码</view>
   </view>
   <view class="cashier-mask-content">
-    <view class="cashier-mask-price">￥78.00</view>
+    <view class="cashier-mask-price">￥{{totalPrice}}</view>
     <paySix 
     bindvalueSix="valueSix" 
     input_value="{{inputData.input_value}}" 

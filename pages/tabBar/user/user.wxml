@@ -1,14 +1,14 @@
 <view class="user-header-wrapper" style="background: url(https://reincarnation.oss-cn-beijing.aliyuncs.com/images/personal_bg.png) no-repeat; background-size: 100% 100%; background-color: #f5f5f5;" wx:if="{{ isShow }}">
   <view class="user-header">
-    <image src="../../../images/use_msg.png" class="user-msg"></image>
+    <image src="../../../images/use_msg.png" class="user-msg" bindtap="serviceMessage"></image>
     <image src="../../../images/user_setting.png" class="user-setting" bindtap="setting"></image>
   </view>
   <view class="user-header-info">
     <view class="user-header-info-avtar">
-      <image src="{{userInfo.member_avatar}}"></image>
+      <image src="{{userInfo.member_avatar}}" style="object-fit: contain;"></image>
     </view>
     <view class="user-header-compeny-info">
-      <view class="user-header-name">{{userInfo.nickname != '' ? userInfo.nickname : userInfo.member_truename}}</view>
+      <view class="user-header-name">{{userInfo.nickname != '' ? userInfo.member_truename : userInfo.nickname}}</view>
       <view class="user-header-compeny-name">{{userInfo.company_name}}</view>
     </view>
     <view class="recharge-btn" bindtap="recharge">充值</view>
@@ -53,16 +53,16 @@
         <view class="user-order-operation-num" wx:if="{{orderNum.order_pay > 0}}">{{orderNum.order_pay}}</view>
       </view>
       <view class="user-order-operation-payment-made" bindtap="viewOrders" id="3">
-        <image class="received-made" src="../../../images/received_made.png"></image>
+        <image class="received-made" src="../../../images/mine_icon_Pending.png"></image>
         <view class="user-order-operation-word">待收货</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_recive > 0}}">{{orderNum.order_recive}}</view>
       </view>
-      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="5">
-        <image class="comment-made" src="../../../images/comment_made.png"></image>
-        <view class="user-order-operation-word">待评价</view>
+      <view class="user-order-operation-payment-made" bindtap="viewOrders" id="4">
+        <image class="comment-made" src="../../../images/received_made.png"></image>
+        <view class="user-order-operation-word">已完成</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_noeval > 0}}">{{orderNum.order_noeval}}</view>
       </view>
-      <navigator class="user-order-operation-payment-made" url="/pages/de/de" hover-class="none">
+      <navigator class="user-order-operation-payment-made" url="/pages/afterSale/applicationRecord/applicationRecord" hover-class="none">
         <image class="after-sale" src="../../../images/after_sale.png"></image>
         <view class="user-order-operation-word">售后/退款</view>
         <view class="user-order-operation-num" wx:if="{{orderNum.order_refund > 0}}">{{orderNum.order_refund}}</view>
@@ -92,7 +92,7 @@
       <view class="recommend-goods-head-word">为你推荐</view>
     </view>
     <view class="guess-you-like">
-      <view class="guess-you-like-content flex">
+      <view class="guess-you-like-content flex-y-center">
         <block wx:for="{{guessLikeArr}}" wx:key="{{index}}">
           <navigator  class="guess-you-like-item2" data-id="{{item.goods_id}}" url="/pages/goodsDetail/goodsDetail?id={{item.goods_sku}}" hover-class="none">
             <view class="guess-you-like-item-img">

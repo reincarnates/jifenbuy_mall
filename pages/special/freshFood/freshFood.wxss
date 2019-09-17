@@ -84,6 +84,14 @@
   color: #333;
   font-size: 28rpx;
 }
+.fulimall-special-titlekong{
+  width: 100%;
+  line-height: 90rpx;
+  text-align: center;
+  color: #333;
+  font-size: 28rpx;
+  display: block;
+}
 
 .fulimall-special-content{
   width: 100%;
@@ -162,6 +170,18 @@
   background-color: #fff;
   display: flex;
   align-items: center;
+}
+
+.casualSnacks-nav2{
+  width: 100%;
+  height: 49rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
 }
 
 .casualSnacks-nav-item{

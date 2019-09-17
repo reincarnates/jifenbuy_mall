@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "阳光福利优选",
   "usingComponents": {
     "dialog": "../../components/dialog/dialog"
   }

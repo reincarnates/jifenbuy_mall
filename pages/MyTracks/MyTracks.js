@@ -19,13 +19,19 @@ Page({
       url: 'http://tapi.fulibuy.cn/Browse/getGoodsBrowse',
       method: 'POST',
       data: {
-        user_token: wx.getStorageSync('user_token'),
-        device_id: wx.getStorageSync('device_id'),
+        // user_token: wx.getStorageSync('user_token'),
+        // device_id: wx.getStorageSync('device_id'),
+        user_token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKV1QiLCJpYXQiOjE1NjYyODk1NzAsImV4cCI6MzEzMjU3OTE0MCwiYXVkIjoiYXBpQmFzZSIsInN1YiI6IjExMTFhcGlCYXNlIiwiZGF0YSI6eyJtZW1iZXJfaWQiOjIwMDIyMiwibmlja25hbWUiOiJcdTc1MzBcdTRmMWYiLCJjb21wYW55X2lkIjoxOSwidXNlcm5hbWUiOiIxNzYxMTY0MDExOSIsImNyZWF0ZV90aW1lIjoiMjAxOS0wNi0yNCAxNjozNzo1OCIsImRldmljZV9pZCI6Im9rTE9hNWRNSThNVkthVUNGYXJkWGFQMHFVVWsiLCJhcGlfdXJsIjoiaHR0cDpcL1wvdGFwaS5mdWxpYnV5LmNuIn19.ldqA94qbhwLGcG9e4UjvbrKDvr4vt2TEUgPTbJ7fUaQ',
+        device_id: 'okLOa5dMI8MVKaUCFardXaP0qUUk',
         page: 1,
         per_page: 10
       },
       success(res) {
         if(res.data.code) {
+          console.log(res);
+          res.data.data.list.forEach(item => {
+            item.time = _this.getTime(item.browsetime);
+          });
           _this.setData({
             tracks: res.data.data.list
           });
@@ -33,6 +39,14 @@ Page({
         }
       }
     })
+  },
+
+  getTime: function timestampToTime(timestamp) {
+    var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear() + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+    var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    return Y + M + D;
   },
 
   /**
@@ -90,6 +104,9 @@ Page({
       success(res) {
         if (res.data.code) {
           if (res.data.data.list.length != 0) {
+            res.data.data.list.forEach(item => {
+              item.time = _this.getTime(item.browsetime);
+            });
             _this.setData({
               tracks: _this.data.tracks.concat(res.data.data.list)
             });

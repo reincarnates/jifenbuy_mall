@@ -63,3 +63,9 @@
   color: #fff;
   font-size: 24rpx;
 }
+
+.mytracks-item-time{
+  color: #666;
+  font-size: 26rpx;
+  line-height: 80rpx;
+}

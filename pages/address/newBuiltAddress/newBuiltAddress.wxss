@@ -38,6 +38,7 @@
 .new-built-address-name-right2 input{
   height: 100%;
   font-size: 24rpx;
+  color: #999;
 }
 
 .new-built-address-name-right2{

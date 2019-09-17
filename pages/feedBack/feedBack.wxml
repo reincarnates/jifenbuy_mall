@@ -9,8 +9,9 @@
     <input type="number" placeholder-style="color: #999;" placeholder="请填写手机号，方便我们于您联系" maxlength="11" bindinput="getPhone"></input>
   </view>
   <view class="feedback-check-remacks">
-    <textarea placeholder="对我们的小程序还有什么建议？" placeholder-style="color: #999;" maxlength="500" bindinput="getAdvise"></textarea>
-    <view class="feedback-number">1/500</view>
+    <textarea placeholder="对我们的小程序还有什么建议？" wx:if="{{isTextarea}}" placeholder-style="color: #999;" maxlength="500" bindinput="getAdvise"></textarea>
+    <view style="font-size: 24rpx; color: #999;" wx:else>对我们的小程序还有什么建议？</view>
+    <view class="feedback-number">{{adviseLen}}/500</view>
   </view>
   <view class="feedback-upload-img">
     <view class="feedback-upload-img-word">最多上传4张照片</view>

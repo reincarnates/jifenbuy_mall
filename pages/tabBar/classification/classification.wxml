@@ -8,10 +8,10 @@
       <input type="text" placeholder-style="color:#999;" disabled="true" placeholder="小鹿要飞2019春季新款" bindtap="jumpSearch" />
       <image src="../../../images/search_btn.png"></image>
     </view>
-    <view class="home-right">
+    <view class="home-right" bindtap="checkMessage">
       <image src="../../../images/classification_msg.png"></image>
       <text class="home-right-word">消息</text>
-      <view class="msg-num">7</view>
+      <!-- <view class="msg-num">7</view> -->
     </view>
   </view>
   <view class="cification-onemenu-wrapper flex">

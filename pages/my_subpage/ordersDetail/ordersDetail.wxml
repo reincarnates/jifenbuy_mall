@@ -48,7 +48,7 @@
       <image src="/images/order_go.png" style="width:9rpx;height:16rpx;"></image>
     </view>
     <block wx:for="{{orderModel.goods_info}}" wx:key="unique" wx:for-item="commodity">
-      <view class="commodity_item_view flex-col" style="padding-top:{{index == 0 ? '12rpx' : '37rpx'}}; padding-bottom: 41rpx;border-bottom: {{index == orderModel.goods_info.length - 1 ? '0' : '1rpx'}} #ddd solid;">
+      <view class="commodity_item_view flex-col" style="padding-top:{{index == 0 ? '12rpx' : '37rpx'}}; padding-bottom: 41rpx;border-bottom: {{index == orderModel.goods_info.length - 1 ? '0' : '1rpx'}} #ddd solid;" data-sku="{{commodity.goods_sku}}" bindtap="locDetail">
         <view class="flex-row">
           <image class="flex-grow-0" src="{{commodity.goods_image}}" style="width:170rpx;height:170rpx;"></image>
           <view class="commodity_item_center_view flex-col flex-grow-1"> 
@@ -61,7 +61,7 @@
           </view>
         </view>
         <view class="after-sale-view" wx:if="{{orderModel.order_state == 40 && commodity.is_refund == 1}}"> 
-          <view class="applyfor-button flex-center" catchtap="tapAftersaleButton">申请售后</view>
+          <view class="applyfor-button flex-center" data-img="{{commodity.goods_image}}" data-name="{{commodity.goods_name}}" data-price="{{commodity.goods_price}}" data-num="{{commodity.goods_num}}" data-order="{{orderModel.order_sn}}" data-sku="{{commodity.goods_sku}}" catchtap="tapAftersaleButton">申请售后</view>
         </view>
       </view>
     </block>
@@ -96,7 +96,7 @@
       <view>需支付：</view>
       <view style="font-size: 30rpx; color: #fe6601; font-weight: 600;">￥{{orderModel.order_amount}}</view>
     </view>
-    <view class="contact-service flex-center">
+    <view class="contact-service flex-center" bindtap="contactService">
       <image src="/images/order_service.png"></image>
       <view>联系客服</view>
     </view>
@@ -108,8 +108,8 @@
     <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 20 || orderModel.order_state == 10}}" data-title="取消订单">取消订单</view>
     <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 30}}" data-title="确认收货">确认收货</view>
     <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 10}}" data-title="去支付">去支付</view>
-    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == false}}" data-title="评价">评价</view>
-    <view class="flex-center" catchtap="tapFuncwtionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == true}}" data-title="查看评价">查看评价</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == false && orderModel.can_evaluation_state == true }}" data-title="评价">评价</view>
+    <view class="flex-center" catchtap="tapFunctionButton" wx:if="{{orderModel.order_state == 40 && orderModel.evaluation_state == true}}" data-title="查看评价">查看评价</view>
 </view>
 
 <!-- cancel reason -->

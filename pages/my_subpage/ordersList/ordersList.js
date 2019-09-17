@@ -2,7 +2,7 @@
 let api = require('../../../utils/api.js');
 const app = getApp();
 
-var canLoadMore = true;
+// var canLoadMore = true;
 var loding = false;
 var page_num = 1;
 
@@ -16,8 +16,9 @@ Page({
     sliderOffset: 0,
     sliderLeft: 22,
     sliderWidth: 64,
+    canLoadMore: true,
 
-    tabs: ['全部', '待付款', '待发货', '待收货', '待评价'],
+    tabs: ['全部', '待付款', '待发货', '待收货', '已完成'],
     orders_list: [],
     cancel_reason: [],
     reason_id: '',  // 取消原因id
@@ -66,16 +67,16 @@ Page({
 
   // 刷新
   onPullDownRefresh: function () {
-    // this.setData({
-    //   orders_list: []
-    // });
+    this.setData({
+      canLoadMore: true
+    });
     page_num = 1;
     this.ordersList();
   },
 
   // 加载更多 
   onReachBottom: function () {
-    if (loding || !canLoadMore) {
+    if (loding || !this.data.canLoadMore) {
       return;
     }
     page_num++;
@@ -100,7 +101,9 @@ Page({
         console.log(res);
         var order_list = res.data.data.list ? res.data.data.list : [];
         if (order_list.length < 10) {
-          canLoadMore = false;
+          self.setData({
+            canLoadMore: false
+          });
         }
         if (order_list.length > 0) {
           if (page_num > 1) {
@@ -129,9 +132,6 @@ Page({
   tabClick: function(e) {
     const self = this;
     var index = e.currentTarget.id;
-    if (index == 4) {
-      index = 5;
-    }
     this.setData({
       state_id: index,
       sliderWidth: e.currentTarget.id == '0' ? 64 : 96,
@@ -201,7 +201,7 @@ Page({
        wx.navigateTo({
          url: '/pages/my_subpage/logistics/logistics?order_sn=' + order_model.order_sn,
        })
-    } else if (title == '评价') {
+    } else if (title == '评价' || title == '查看评价') {
       wx.navigateTo({
         url: '/pages/my_subpage/orderEvaluetion/orderEvaluetion?order_sn=' + order_model.order_sn,
       })

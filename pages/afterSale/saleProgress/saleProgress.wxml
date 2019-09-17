@@ -1,0 +1,37 @@
+<view class="progress-wrapper" style='height: {{height}}px'>
+  <view class="wraper">
+    <!-- 物流跟踪 -->
+    <view class="kuaidi_follow">
+      <view class="follow_title"></view>
+      <view class="follow_satus">
+        <view class="follow_address" wx:for="{{traces}}" wx:key="index">
+          <view class="label {{index == 0 ? 'default' : ''}}"></view>
+          <view class="address">{{item.AcceptStation}}<text wx:if="{{item.alert_view}}" bindtap="checkTraces">查看物流</text></view>
+          <view class="date">{{item.AcceptTime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="progress-service flex-center" bindtap="phoneService">
+  <image src="../../../images/order_service.png"></image>
+  <view style="margin-left: 18rpx;">联系客服</view>
+</view>
+<view class="progress-mask-bg" wx:if="{{isTraces}}" bindtap="closeTraces"></view>
+<view class="progress-mask" wx:if="{{isTraces}}">
+  <view class="progress-mask-head">
+    <view class="progress-mask-head-title">物流详情</view>
+    <view class="progress-mask-head-number">京东物流：123456666</view>
+  </view>
+  <view class="progress-mask-content" wx:if="{{expressTraces != ''}}">
+    <block wx:for="{{expressTraces}}" wx:key="index">
+      <view class="progress-mask-item">
+        <view class="progress-mask-item-time">{{item.AcceptTime}}</view>
+        <view class="progress-mask-item-word">{{item.AcceptStation}}</view>
+      </view>
+    </block>
+  </view>
+  <view class="progress-mask-content flex-center" wx:else>
+    暂无轨迹信息
+  </view>
+</view>

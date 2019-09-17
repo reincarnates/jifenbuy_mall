@@ -4,17 +4,17 @@
       <view class="top-view flex-row flex-y-center">
         <image src="{{model.goods_image}}" style="width:100rpx; height:100rpx; margin-right:12rpx;" mode="aspectFit"></image>
         <block wx:for="{{[1,2,3,4,5]}}" wx:key="unique" wx:for-index="idx">
-          <image src="{{idx <= goods_star_index ? '/images/icon_star_whole.png' : '/images/icon_star_none.png' }}" style="width:44rpx; height:44rpx; margin-left:16rpx;" bindtap="tapStar" data-index="{{idx}}"></image>
+          <image src="{{idx <= goods_star[index] ? '/images/icon_star_whole.png' : '/images/icon_star_none.png' }}" style="width:44rpx; height:44rpx; margin-left:16rpx;" bindtap="tapStar" data-index="{{idx}}" data-itemIndex="{{index}}"></image>
         </block>
         <text class="flex-grow-1" style="font-size:26rpx; text-align:right; color:#FE9901;">{{level_titles[goods_star_index]}}</text>
       </view>
-      <textarea placeholder="写下您的评论分享给大家吧~"></textarea>
+      <textarea placeholder="写下您的评论分享给大家吧~" bindinput="textAreainput" data-index="{{index}}"></textarea>
       <view class="pic-container">
         <block wx:for="{{[1,2,3,4]}}" wx:key="unique" wx:for-index="imageIndex">
           <view class="pics-view">
             <!-- /images/icon_add_photo.png -->
-            <image src="{{imageIndex == images_paths.length ? '/images/icon_add_photo.png' : images_paths[imageIndex]}}" style="background: #fff; width:150rpx; height:150rpx;" bindtap="tapImage"></image>
-            <image class="close-button" src="/images/icon_pic_delete.png" style="width:48rpx; height:48rpx;" wx:if="{{images_paths[imageIndex]}}" bindtap="deletePic" data-index="{{imageIndex}}"></image>
+            <image src="{{imageIndex == images_paths[index].length ? '/images/icon_add_photo.png' : images_paths[index][imageIndex]}}" style="background: #fff; width:150rpx; height:150rpx;" bindtap="tapImage" data-itemIndex="{{index}}"></image>
+            <image class="close-button" src="/images/icon_pic_delete.png" style="width:48rpx; height:48rpx;" wx:if="{{images_paths[index][imageIndex]}}" bindtap="deletePic" data-index="{{imageIndex}}" data-itemIndex="{{index}}"></image>
           </view>
         </block>
       </view>

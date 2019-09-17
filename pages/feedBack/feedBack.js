@@ -16,6 +16,8 @@ Page({
     uploadImg: [], //上传服务器的图片地址
     phoneNumber: '', //手机号
     advise: '', //建议
+    adviseLen: 0, //输入的建议的长度
+    isTextarea: true, //选择类型让文本域隐藏
   },
 
   /**
@@ -29,7 +31,8 @@ Page({
   checkType: function() {
     this.setData({
       isShow: true,
-      maskPos: 0
+      maskPos: 0,
+      isTextarea: false
     });
   },
 
@@ -47,7 +50,8 @@ Page({
   closeFeedBack: function() {
     this.setData({
       isShow: false,
-      maskPos: '-100%'
+      maskPos: '-100%',
+      isTextarea: true
     });
   },
 
@@ -72,8 +76,13 @@ Page({
           wx.showToast({
             title: '提交成功',
             icon: 'success',
-            duration: 2000
-          })
+            duration: 1000
+          });
+          setTimeout(function() {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000);
         }
       }
     });
@@ -96,7 +105,8 @@ Page({
   //获取建议
   getAdvise: function(e) {
     this.setData({
-      advise: e.detail.value
+      advise: e.detail.value,
+      adviseLen: e.detail.value.length
     });
   },
 
@@ -155,12 +165,16 @@ Page({
         },
         success(res) {
           if (res.data.code == 0) {
-            console.log(res);
             wx.showToast({
               title: '提交成功',
               icon: 'success',
-              duration: 2000
-            })
+              duration: 1000
+            });
+            setTimeout(function() {
+              wx.navigateBack({
+                delta: 1
+              })
+            }, 1000);
           }
         }
       });

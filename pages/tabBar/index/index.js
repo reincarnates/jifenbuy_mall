@@ -12,6 +12,7 @@ Page({
     page: 1, //页数
     isLogin: false,
     user: {}, //用户信息
+    memberAvatar: '', //用户头像
   },
 
   //获取登陆状态
@@ -25,6 +26,21 @@ Page({
         });
       }
     }
+    var userInfor = wx.getStorageSync('userinfoModel');
+    var avatar = wx.getStorageSync('memberAvatar');
+    if (userInfor != '' && userInfor != undefined) {
+      _this.setData({
+        user: userInfor,
+        memberAvatar: avatar
+      });
+    }
+  },
+
+  //消息
+  serviceMessage: function () {
+    wx.navigateTo({
+      url: '/pages/message/messageCenter/messageCenter',
+    })
   },
 
   onLoad: function () {
@@ -115,12 +131,6 @@ Page({
       });
       wx.hideLoading();
     }, 1500);
-    var userInfor = wx.getStorageSync('userinfoModel');
-    if (userInfor != '' && userInfor != undefined) {
-      _this.setData({
-        user: userInfor
-      });
-    }
   },
 
   onReady: function () {

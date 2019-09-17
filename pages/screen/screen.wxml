@@ -1,4 +1,4 @@
-<view class="screen-wrapper">
+<view class="screen-wrapper" style="min-height: {{height}}px">
   <view class="screen-price-section">
     <view class="screen-price-section-title">价格区间</view>
     <view class="screen-price-section-input flex">
@@ -16,13 +16,20 @@
       <view>品牌</view>
       <view>{{election}}</view>
     </view>
-    <view class="screen-brand-content" style="height: {{brandHeight}}">
+    <!-- //获取高删了  查看全部放里面  通过控制for循环长度调节查看全部 
+    加了一个css
+    js data加了一个参数thislength  控制的长度  查看全部的时候改变参数
+
+    -->  
+    <view class="screen-brand-content" >
       <view class="screen-brand-item-wrapper">
-        <block wx:for="{{brandArr}}" wx:key="index">
+        <block wx:for="{{brandArr}}" wx:key="index" wx:if="{{ index < thislength }}">
           <view class="screen-brand-item {{currentData == index ? 'brandCur' : ''}} {{currentData2 == index ? 'brandCur' : ''}}" data-current="{{index}}" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="checkBrand">{{item.name}}</view>
         </block>
+        <view class="check-all2"  bindtap="checkAll" wx:if="{{isShowCheck}}">查看全部</view>
       </view>
-      <view class="check-all" bindtap="checkAll" wx:if="{{isShowCheck}}">查看全部</view>
+      <!-- 查看全部 -->
+      <!-- <view class="check-all" bindtap="checkAll" wx:if="{{isShowCheck}}">查看全部</view> -->
     </view>
   </view>
   <view class="screen-shop">

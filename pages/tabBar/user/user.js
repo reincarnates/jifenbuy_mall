@@ -239,6 +239,9 @@ Page({
             userInfo: res.data.data
           });
           wx.setStorageSync('userinfoModel', _this.data.userInfo);
+          if (_this.data.userInfo != undefined) {
+            wx.setStorageSync('memberAvatar', _this.data.userInfo.member_avatar);
+          }
         }
       }
     })
@@ -301,6 +304,13 @@ Page({
   viewOrders: function (e) {
     wx.navigateTo({
       url: '/pages/my_subpage/ordersList/ordersList?order_state=' + e.currentTarget.id +'&isSearchPage=0',
+    })
+  },
+
+  //消息
+  serviceMessage: function() {
+    wx.navigateTo({
+      url: '/pages/message/messageCenter/messageCenter',
     })
   },
 

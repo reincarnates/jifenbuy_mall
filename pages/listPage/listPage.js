@@ -31,6 +31,8 @@ Page({
     volumeFlag: 1,
     volume: 'icon-jiantou-copy', //销量
     notCart: 'none',
+    colorVal: 'fe6601', //选中未选中的颜色
+    colorVal2: '999', //选中未选中的颜色
   },
 
   /**
@@ -69,6 +71,8 @@ Page({
           } else if (item.source == 'wyyx') {
             item.source = '严选价';
           }
+          var discount = (item.goods_marketprice - item.goods_price) / item.goods_marketprice;
+          item.discount = parseInt(discount * 100);
         });
 
         if (res.data.data.goods_list.length == 0) {
@@ -107,7 +111,8 @@ Page({
         goods_marketprice: data[i].goods_marketprice,
         store_name: data[i].store_name,
         source: data[i].source,
-        spu: data[i].spu
+        spu: data[i].spu,
+        discount: data[i].discount
       });
     }
     return arr;
@@ -136,7 +141,8 @@ Page({
     if (_index == 0) {
       if (_this.data.rateFlag == 1) {
         _this.setData({
-          rate: 'icon-jiantou'
+          rate: 'icon-jiantou',
+          colorVal: 'fe6601'
         });
         _this.data.argum.sort = '';
         _this.data.argum.sort2 = '';
@@ -144,17 +150,26 @@ Page({
         _this.data.rateFlag = 2;
       } else {
         _this.setData({
-          rate: 'icon-jiantou-copy'
+          rate: 'icon-jiantou-copy',
+          colorVal: 'fe6601'
         });
         _this.data.argum.sort = '';
         _this.data.argum.sort2 = '';
         _this.requestList(_this.data.argum);
         _this.data.rateFlag = 1;
       }
-    } else if (_index == 1) {
+    } else {
+      _this.setData({
+        rate: 'icon-jiantou-copy',
+        colorVal: '999'
+      });
+    }
+
+    if (_index == 1) {
       if (_this.data.volumeFlag == 1) {
         _this.setData({
-          volume: 'icon-jiantou'
+          volume: 'icon-jiantou',
+          colorVal2: 'fe6601'
         });
         _this.data.argum.sort = 'salenum';
         _this.data.argum.sort2 = '';
@@ -162,13 +177,19 @@ Page({
         _this.data.volumeFlag = 2;
       } else {
         _this.setData({
-          volume: 'icon-jiantou-copy'
+          volume: 'icon-jiantou-copy',
+          colorVal2: 'fe6601'
         });
         _this.data.argum.sort = 'salenum';
         _this.data.argum.sort2 = '';
         _this.requestList(_this.data.argum);
         _this.data.volumeFlag = 1;
       }
+    } else {
+      _this.setData({
+        volume: 'icon-jiantou-copy',
+        colorVal2: '999'
+      });
     }
 
     if (_index == 2) {
@@ -248,6 +269,8 @@ Page({
           } else if (item.source == 'wyyx') {
             item.source = '严选价';
           }
+          var discount = (item.goods_marketprice - item.goods_price) / item.goods_marketprice;
+          item.discount = parseInt(discount * 100);
         });
         _this.setData({
           goodsList: _this.handleData(res.data.data.goods_list),
@@ -386,6 +409,9 @@ Page({
             } else if (item.source == 'wyyx') {
               item.source = '严选价';
             }
+
+            var discount = (item.goods_marketprice - item.goods_price) / item.goods_marketprice;
+            item.discount = parseInt(discount * 100);
           });
           _this.setData({
             goodsList: _this.data.goodsList.concat(_this.handleData(res.data.data.goods_list)),
